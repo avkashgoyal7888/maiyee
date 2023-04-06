@@ -3,7 +3,7 @@
       <!----------------- LOGO --------------->        
       <div class="d-flex">
          <div class="navbar-brand-box">
-            <a href="index.html" class="logo logo-light">
+            <a href="{{route('admin.dashboard')}}" class="logo logo-light">
             <span class="logo-sm"><img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="26"></span>
             <span class="logo-lg"><img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="26"></span>
             </a>
@@ -22,9 +22,9 @@
       <div class="d-flex">
          <div class="dropdown d-inline-block">
             <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="rounded-circle header-profile-user" src="{{asset('assets/images/users/avatar-3.jpg')}}" alt="Header Avatar">
+            <img class="rounded-circle header-profile-user" src="{{asset(Auth::guard('admin')->user()->image)}}" alt="Header Avatar">
             <span class="ms-2 d-none d-xl-inline-block user-item-desc">
-            <span class="user-name">Avkash Goyal<i class="mdi mdi-chevron-down"></i></span>
+            <span class="user-name">{{Auth::guard('admin')->user()->name}}<i class="mdi mdi-chevron-down"></i></span>
             </span>
             </button>
             <!----------------- LOGOUT SECTION --------------->
