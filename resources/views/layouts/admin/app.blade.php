@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
+      <meta content="Themesdesign" name="author" />
+      <!-- App favicon -->
+      <link rel="shortcut icon" href="assets/images/favicon.ico">
+      <!-- plugin css -->
+      <link href="{{asset('assets/libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />
+      <!-- swiper css -->
+      <link rel="stylesheet" href="{{asset('assets/libs/swiper/swiper-bundle.min.css')}}">
+      <!-- Bootstrap Css -->
+      <link href="{{asset('assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+      <!-- Icons Css -->
+      <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+      <!-- App Css-->
+      <link href="{{asset('assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+      <link href="{{asset('assets/libs/alertifyjs/build/css/alertify.min.css')}}" rel="stylesheet" type="text/css" />
+      <link href="{{asset('assets/libs/alertifyjs/build/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" />
+      <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
+      @yield('css')
+      @livewireStyles
+   </head>
+   <body>
+      <!---------- Begin page ------------------>
+      <div id="layout-wrapper">
+         @include('layouts.admin.include.nav')
+         <!-- ========== Left Sidebar Start ========== -->
+         @include('layouts.admin.include.side')
+         <!-- Left Sidebar End -->
+         <div class="main-content">
+            <div class="page-content">
+               <div class="container-fluid">
+                  @yield('content')
+               </div>
+            </div>
+         </div>
+         <footer class="footer">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-sm-6">
+                     <script>document.write(new Date().getFullYear())</script> &copy; Vuesy.
+                  </div>
+                  <div class="col-sm-6">
+                     <div class="text-sm-end d-none d-sm-block">
+                        Crafted with <i class="mdi mdi-heart text-danger"></i> by <a href="https://1.envato.market/themesdesign" target="_blank">Themesdesign</a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </footer>
+      </div>
+      <!-- end main content-->
+      </div>
+      <!-- END layout-wrapper -->
+      <!-- JAVASCRIPT -->
+      <script src="{{asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+      <script src="{{asset('assets/libs/metismenujs/metismenujs.min.js')}}"></script>
+      <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
+      <script src="{{asset('assets/libs/feather-icons/feather.min.js')}}"></script>
+      <!-- apexcharts -->
+      <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+      <!-- Vector map-->
+      <script src="{{asset('assets/libs/jsvectormap/js/jsvectormap.min.js')}}"></script>
+      <script src="{{asset('assets/libs/jsvectormap/maps/world-merc.js')}}"></script>
+      <!-- swiper js -->
+      <script src="{{asset('assets/libs/swiper/swiper-bundle.min.js')}}"></script>
+      <script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>
+      <script src="{{asset('assets/js/app.js')}}"></script>
+      <script src="{{asset('assets/js/jquery.min.js')}}"></script>
+      <script src="{{asset('assets/libs/alertifyjs/build/alertify.min.js')}}"></script>
+      <script src="{{asset('assets/js/pages/notification.init.js')}}"></script>
+      <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
+      @yield('js')
+      @livewireScripts
+      <script type="text/javascript">
+         window.livewire.on('closemodal', () => {
+             $('#add').modal('hide');
+             $('#edit').modal('hide');
+             $('#view').modal('hide');
+             $('#fund').modal('hide');
+             $('#addFund').modal('hide');
+             $('#supplierfund').modal('hide');
+         });
+      </script>
+   </body>
+</html>
