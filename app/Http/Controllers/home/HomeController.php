@@ -20,6 +20,26 @@ class HomeController extends Controller
         return view('front.auth.register');
     }
 
+    public function disclaimer()
+    {
+        return view('front.disclaimer');
+    }
+
+    public function policy()
+    {
+        return view('front.policy');
+    }
+
+    public function refund()
+    {
+        return view('front.refund');
+    }
+
+    public function shipping()
+    {
+        return view('front.shipping');
+    }
+
     public function registerSubmit(Request $req)
     {
     

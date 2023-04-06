@@ -32,10 +32,10 @@
 <h5 class="headin5_amrc col_white_amrc pt2">Important Links</h5>
 <!--headin5_amrc-->
 <ul class="footer_ul_amrc">
-<li><a href="policies.html">Policies</a></li>
-<li><a href="refund.html">Cancellation/Refund</a></li>
-<li><a href="shipping.html">Delivery/Shipping</a></li>
-<li><a href="disclaimer.html">Disclaimer</a></li>
+<li><a href="{{route('web.policy')}}">Policies</a></li>
+<li><a href="{{route('web.refund')}}">Cancellation/Refund</a></li>
+<li><a href="{{route('web.shipping')}}">Delivery/Shipping</a></li>
+<li><a href="{{route('web.disclaimer')}}">Disclaimer</a></li>
 <li><a href="http://webenlance.com">Hair Masking/Clipping</a></li>
 <li><a href="http://webenlance.com">Image Cropping</a></li>
 </ul>
