@@ -6,19 +6,19 @@
       <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
       <meta content="Themesdesign" name="author" />
       <!-- App favicon -->
-      <link rel="shortcut icon" href="assets/images/favicon.ico">
+      <link rel="shortcut icon" href="{{asset('admin/assets/images/favicon.ico')}}">
       <!-- plugin css -->
       <link href="{{asset('assets/libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />
       <!-- swiper css -->
-      <link rel="stylesheet" href="{{asset('assets/libs/swiper/swiper-bundle.min.css')}}">
+      <link rel="stylesheet" href="{{asset('admin/assets/libs/swiper/swiper-bundle.min.css')}}">
       <!-- Bootstrap Css -->
-      <link href="{{asset('assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
+      <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" id="bootstrap-style" rel="stylesheet" type="text/css" />
       <!-- Icons Css -->
-      <link href="{{asset('assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
+      <link href="{{asset('admin/assets/css/icons.min.css')}}" rel="stylesheet" type="text/css" />
       <!-- App Css-->
-      <link href="{{asset('assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
-      <link href="{{asset('assets/libs/alertifyjs/build/css/alertify.min.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('assets/libs/alertifyjs/build/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" />
+      <link href="{{asset('admin/assets/css/app.min.css')}}" id="app-style" rel="stylesheet" type="text/css" />
+      <link href="{{asset('admin/assets/libs/alertifyjs/build/css/alertify.min.css')}}" rel="stylesheet" type="text/css" />
+      <link href="{{asset('admin/assets/libs/alertifyjs/build/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" />
       <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.css" rel="stylesheet">
       @yield('css')
       @livewireStyles
@@ -56,22 +56,22 @@
       </div>
       <!-- END layout-wrapper -->
       <!-- JAVASCRIPT -->
-      <script src="{{asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-      <script src="{{asset('assets/libs/metismenujs/metismenujs.min.js')}}"></script>
-      <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
-      <script src="{{asset('assets/libs/feather-icons/feather.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/metismenujs/metismenujs.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/simplebar/simplebar.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/feather-icons/feather.min.js')}}"></script>
       <!-- apexcharts -->
-      <script src="assets/libs/apexcharts/apexcharts.min.js"></script>
+      <script src="{{asset('admin/assets/libs/apexcharts/apexcharts.min.js')}}"></script>
       <!-- Vector map-->
-      <script src="{{asset('assets/libs/jsvectormap/js/jsvectormap.min.js')}}"></script>
-      <script src="{{asset('assets/libs/jsvectormap/maps/world-merc.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/jsvectormap/js/jsvectormap.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/jsvectormap/maps/world-merc.js')}}"></script>
       <!-- swiper js -->
-      <script src="{{asset('assets/libs/swiper/swiper-bundle.min.js')}}"></script>
-      <script src="{{asset('assets/js/pages/dashboard.init.js')}}"></script>
-      <script src="{{asset('assets/js/app.js')}}"></script>
-      <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-      <script src="{{asset('assets/libs/alertifyjs/build/alertify.min.js')}}"></script>
-      <script src="{{asset('assets/js/pages/notification.init.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/swiper/swiper-bundle.min.js')}}"></script>
+      <script src="{{asset('admin/assets/js/pages/dashboard.init.js')}}"></script>
+      <script src="{{asset('admin/assets/js/app.js')}}"></script>
+      <script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/alertifyjs/build/alertify.min.js')}}"></script>
+      <script src="{{asset('admin/assets/js/pages/notification.init.js')}}"></script>
       <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
       @yield('js')
       @livewireScripts
