@@ -4,8 +4,8 @@
       <div class="d-flex">
          <div class="navbar-brand-box">
             <a href="index.html" class="logo logo-light">
-            <span class="logo-sm"><img src="{{asset('assets/images/logo.png')}}" alt="" height="26"></span>
-            <span class="logo-lg"><img src="{{asset('assets/images/logo.png')}}" alt="" height="26"></span>
+            <span class="logo-sm"><img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="26"></span>
+            <span class="logo-lg"><img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="26"></span>
             </a>
          </div>
          <button type="button" class="btn btn-sm px-3 header-item vertical-menu-btn noti-icon">
@@ -102,7 +102,7 @@
       </div>
    </div>
 </div>
-<script src="{{asset('assets/js/jquery.min.js')}}"></script>
+<script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
 <script>
    $(document).ready(function() {
          function readURL(input) {

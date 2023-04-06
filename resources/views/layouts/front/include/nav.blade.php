@@ -44,7 +44,7 @@
             <div class="row align-items-center">
                 <!--Desktop Logo-->
                 <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
-                    <a href="index.html">
+                    <a href="{{route('web.home')}}">
                         <img src="{{asset('front/assets/images/logo.png')}}" height="55" width="110"  alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                     </a>
                 </div>
@@ -59,7 +59,7 @@
                     <!--Desktop Menu-->
                     <nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
                         <ul id="siteNav" class="site-nav medium center hidearrow">
-                            <li class="lvl1"><a href="#">Home </a></li>
+                            <li class="lvl1"><a href="{{route('web.home')}}">Home </a></li>
                             <li class="lvl1 parent dropdown"><a href="#">Men's<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
                             <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>

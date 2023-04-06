@@ -5,11 +5,11 @@
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <title>Admin Login</title>
-      <link rel="stylesheet" href="{{asset('assets/css/adminlogin.css')}}" />
+      <link rel="stylesheet" href="{{asset('admin/assets/css/adminlogin.css')}}" />
       <!-- alertifyjs Css -->
-      <link href="{{asset('assets/libs/alertifyjs/build/css/alertify.min.css')}}" rel="stylesheet" type="text/css" />
+      <link href="{{asset('admin/assets/libs/alertifyjs/build/css/alertify.min.css')}}" rel="stylesheet" type="text/css" />
       <!-- alertifyjs default themes  Css -->
-      <link href="{{asset('assets/libs/alertifyjs/build/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" />
+      <link href="{{asset('admin/assets/libs/alertifyjs/build/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" />
       <style>
          /* Customize Alertify alert */
          .alertify-notifier .ajs-message {
@@ -39,7 +39,7 @@
                   <div>
                      <form id="adminLogin">
                         <div class="logo">
-                           <img src="{{asset('assets/images/logo.png')}}" alt="easyclass" height="40" width="90">
+                           <img src="{{asset('admin/assets/images/logo.png')}}" alt="easyclass" height="40" width="90">
                         </div>
                         <div class="heading">
                            <h3>Welcome Admin</h3>
@@ -62,9 +62,9 @@
                </div>
                <div class="carousel">
                   <div class="images-wrapper">
-                     <img src="{{asset('assets/images/image1.png')}}" class="image img-1 show" alt="" />
-                     <img src="{{asset('assets/images/image2.png')}}" class="image img-2" alt="" />
-                     <img src="{{asset('assets/images/image3.png')}}" class="image img-3" alt="" />
+                     <img src="{{asset('admin/assets/images/image1.png')}}" class="image img-1 show" alt="" />
+                     <img src="{{asset('admin/assets/images/image2.png')}}" class="image img-2" alt="" />
+                     <img src="{{asset('admin/assets/images/image3.png')}}" class="image img-3" alt="" />
                   </div>
                   <div class="text-slider">
                      <div class="text-wrap">
@@ -85,17 +85,17 @@
          </div>
       </main>
       <!-- Javascript file -->
-      <script src="{{asset('assets/js/adminlogin.js')}}"></script>
-      <script src="{{asset('assets/js/jquery.min.js')}}"></script>
-      <script src="{{asset('assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-      <script src="{{asset('assets/libs/metismenujs/metismenujs.min.js')}}"></script>
-      <script src="{{asset('assets/libs/simplebar/simplebar.min.js')}}"></script>
-      <script src="{{asset('assets/libs/feather-icons/feather.min.js')}}"></script>
+      <script src="{{asset('admin/assets/js/adminlogin.js')}}"></script>
+      <script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/metismenujs/metismenujs.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/simplebar/simplebar.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/feather-icons/feather.min.js')}}"></script>
       <!-- alertifyjs js -->
-      <script src="{{asset('assets/libs/alertifyjs/build/alertify.min.js')}}"></script>
+      <script src="{{asset('admin/assets/libs/alertifyjs/build/alertify.min.js')}}"></script>
       <!-- notification init -->
-      <script src="{{asset('assets/js/pages/notification.init.js')}}"></script>
-      <script src="{{asset('assets/js/app.js')}}"></script>
+      <script src="{{asset('admin/assets/js/pages/notification.init.js')}}"></script>
+      <script src="{{asset('admin/assets/js/app.js')}}"></script>
       <script>
          $(document).ready(function() {
               alertify.set('notifier','position', 'top-right');

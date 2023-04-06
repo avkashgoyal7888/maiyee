@@ -3,18 +3,18 @@
    <div class="navbar-brand-box">
       <a href="{{route('admin.dashboard')}}" class="logo logo-dark">
       <span class="logo-sm">
-      <img src="{{asset('assets/images/logo-sm.svg')}}" alt="" height="26">
+      <img src="{{asset('admin/assets/images/logo-sm.svg')}}" alt="" height="26">
       </span>
       <span class="logo-lg">
-      <img src="{{asset('assets/images/logo.png')}}" alt="" height="26">
+      <img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="26">
       </span>
       </a>
       <a href="{{route('admin.dashboard')}}" class="logo logo-light">
       <span class="logo-sm">
-      <img src="{{asset('assets/images/logo-sm.svg')}}" alt="" height="26">
+      <img src="{{asset('admin/assets/images/logo-sm.svg')}}" alt="" height="26">
       </span>
       <span class="logo-lg">
-      <img src="{{asset('assets/images/logo.png')}}" alt="" height="26">
+      <img src="{{asset('admin/assets/images/logo.png')}}" alt="" height="26">
       </span>
       </a>
    </div>
