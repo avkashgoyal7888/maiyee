@@ -5,8 +5,8 @@
 <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
 <!--headin5_amrc-->
 <p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-<p><i class="fa fa-location-arrow"></i>1/59 Darbar Nagar, Magob, Puna Patia Surat</p>
-<p><i class="fa fa-phone"></i>+91-8273028229</p>
+<p><i class="fa fa-location-arrow"></i>  1/59 Darbar Nagar, Magob, Puna Patia Surat</p>
+<p><i class="fa fa-phone"></i>  +91-8273028229</p>
 <p><i class="fa fa fa-envelope"></i> info@maiyee.in  </p>
 
 
