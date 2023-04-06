@@ -5,9 +5,9 @@
 <h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
 <!--headin5_amrc-->
 <p class="mb10">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
-<p><i class="fa fa-location-arrow"></i>  202 2nd Floor 5R/8 Neelam Chowk, Faridabad (121001)</p>
-<p><i class="fa fa-phone"></i>  0129-4889489</p>
-<p><i class="fa fa fa-envelope"></i> info@edusekart.com  </p>
+<p><i class="fa fa-location-arrow"></i>1/59 Darbar Nagar, Magob, Puna Patia Surat</p>
+<p><i class="fa fa-phone"></i>+91-8273028229</p>
+<p><i class="fa fa fa-envelope"></i> info@maiyee.in  </p>
 
 
 </div>
@@ -17,9 +17,9 @@
 <h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
 <!--headin5_amrc-->
 <ul class="footer_ul_amrc">
-<li><a href="cart.html">Shopping Cart</a></li>
-<li><a href="checkout.html">Checkout</a></li>
-<li><a href="order-success">Order-sucess</a></li>
+<li><a href="#">Shopping Cart</a></li>
+<li><a href="#">Checkout</a></li>
+<li><a href="#">Order-sucess</a></li>
 <li><a href="#">Ebay & Amazon</a></li>
 <li><a href="#">Hair Masking/Clipping</a></li>
 <li><a href="#">Image Cropping</a></li>
@@ -36,8 +36,8 @@
 <li><a href="{{route('web.refund')}}">Cancellation/Refund</a></li>
 <li><a href="{{route('web.shipping')}}">Delivery/Shipping</a></li>
 <li><a href="{{route('web.disclaimer')}}">Disclaimer</a></li>
-<li><a href="http://webenlance.com">Hair Masking/Clipping</a></li>
-<li><a href="http://webenlance.com">Image Cropping</a></li>
+<li><a href="#">Hair Masking/Clipping</a></li>
+<li><a href="#">Image Cropping</a></li>
 </ul>
 <!--footer_ul_amrc ends here-->
 </div>
@@ -60,13 +60,13 @@
 
 <div class="container">
 <!--foote_bottom_ul_amrc ends here-->
-<p class="text-center">Copyright @2017 At Eduse Marketing Pvt Ltd | Designed By <a href="#">EduTech</a></p>
+<p class="text-center">Copyright @2023 At Maiyee | Designed By <a href="#">EduTech</a></p>
 
 <ul class="social_footer_ul">
-<li><a href="https://www.facebook.com/Eduse-Marketing-Private-Limited-111468931445505"><i class="fab fa-facebook-f"></i></a></li>
-<li><a href="http://webenlance.com"><i class="fab fa-twitter"></i></a></li>
-<li><a href="http://webenlance.com"><i class="fab fa-linkedin"></i></a></li>
-<li><a href="https://instagram.com/edusemarketing?utm_medium=copy_link"><i class="fab fa-instagram"></i></a></li>
+<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+<li><a href="#"><i class="fab fa-instagram"></i></a></li>
 </ul>
 <!--social_footer_ul ends here-->
 </div>
