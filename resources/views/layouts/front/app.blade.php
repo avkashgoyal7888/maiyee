@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="x-ua-compatible" content="ie=edge">
-<title>EduseKart</title>
+<title>Welcome To Maiyee</title>
 <meta name="description" content="description">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Favicon -->
@@ -210,8 +210,8 @@
         <div class="home-slideshow">
             <div class="slide">
                 <div class="blur-up lazyload">
-                    <img class="blur-up lazyload" data-src="https://myshpl.com/spaces/banners/slider-4.jpg" src="https://myshpl.com/spaces/banners/slider-4.jpg" alt="Shop Our New Collection" title="Shop Our New Collection" />
-                    <div class="slideshow__text-wrap slideshow__overlay classic middle">
+                    <img class="blur-up lazyload" data-src="{{asset('front/assets/images/banner.jpg')}}" src="{{asset('front/assets/images/banner.jpg')}}" alt="Shop Our New Collection" title="Shop Our New Collection" />
+                    <!--<div class="slideshow__text-wrap slideshow__overlay classic middle">
                         <div class="slideshow__text-content middle">
                             <div class="container">
                                 <div class="wrap-caption right">
@@ -221,13 +221,13 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
             <div class="slide">
                 <div class="blur-up lazyload">
-                    <img class="blur-up lazyload" data-src="https://myshpl.com/spaces/banners/slider-4.jpg" src="https://myshpl.com/spaces/banners/slider-4.jpg" alt="Summer Bikini Collection" title="Summer Bikini Collection" />
-                    <div class="slideshow__text-wrap slideshow__overlay classic middle">
+                    <img class="blur-up lazyload" data-src="{{asset('front/assets/images/banner.jpg')}}" src="{{asset('front/assets/images/banner.jpg')}}" alt="Summer Bikini Collection" title="Summer Bikini Collection" />
+                   <!--<div class="slideshow__text-wrap slideshow__overlay classic middle">
                         <div class="slideshow__text-content middle">
                             <div class="container">
                                 <div class="wrap-caption center">
@@ -237,7 +237,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </div>
         </div>
