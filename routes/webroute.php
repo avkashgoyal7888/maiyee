@@ -11,6 +11,8 @@ use App\Http\Controllers\home\HomeController;
 		Route::get('/policy', 'policy')->name('web.policy');
 		Route::get('/refund', 'refund')->name('web.refund');
 		Route::get('/shipping', 'shipping')->name('web.shipping');
+		Route::post('/login-submit', 'loginSubmit')->name('web.login.submit');
+		Route::get('/logout', 'logOut')->name('web.logout');
 	});
 
 

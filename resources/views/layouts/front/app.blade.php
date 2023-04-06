@@ -18,6 +18,7 @@
 <!-- Footer Style CSS -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 @yield('css')
 
 </head>
@@ -191,6 +192,7 @@
                         <small class="or text-center">Or</small>
                         <div class="line"></div>
                     </div>
+                    <form id="login_user">
                     <div class="row px-3">
                         <label class="mb-1"><h6 class="mb-0 text-sm">Email Address</h6></label>
                         <input class="mb-4" type="text" name="email" placeholder="Enter a valid email address">
@@ -211,6 +213,7 @@
                     <div class="row mb-3 px-3">
                         <button type="submit" class="btn btn-blue text-center">Login</button>
                     </div>
+                    </form>
                     <div class="row mb-4 px-3">
                         <small class="font-weight-bold">Don't have an account? <a href="{{route('web.register')}}">Register</a></small>
                     </div>
@@ -234,10 +237,59 @@
      <script src="{{asset('front/assets/js/popper.min.js')}}"></script>
      <script src="{{asset('front/assets/js/lazysizes.js')}}"></script>
      <script src="{{asset('front/assets/js/main.js')}}"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
      @yield('js')
      <!--Footer Scripts-->
      
      <!--For Newsletter Popup-->
+     <script>
+$(document).ready(function(){
+    $('#login_user').on('submit', function(e) {
+        e.preventDefault(); // prevent default form submission
+        let fd = new FormData(this);
+        fd.append('_token', "{{ csrf_token() }}");
+ 
+        $.ajax({
+            url: "{{ route('web.login.submit') }}",
+            type: "POST",
+            data: fd,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            beforeSend: function() {
+                $('#addBtn').prop('disabled', true)
+            },
+            success: function(result) {
+                if (result.status === false) {
+                    toastr.error(result.msg, 'Error', {
+                        timeOut: 3000,
+                        progressBar: true,
+                        closeButton: true
+                    });
+                } else if (result.status === true) {
+                    toastr.success(result.msg, 'Success', {
+                        timeOut: 3000,
+                        progressBar: true,
+                        closeButton: true
+                    });
+                    window.location.reload();
+                }
+            },
+            error: function(jqXHR, exception) {
+                console.log(jqXHR.responseJSON);
+                toastr.error(result.msg, 'Error', {
+                    timeOut: 3000,
+                    progressBar: true,
+                    closeButton: true
+                });
+            },
+            complete: function() {
+                $('#addBtn').prop('disabled', false);
+            }
+        });
+    });
+});
+</script>
      <script>
 		jQuery(document).ready(function(){  
 		  jQuery('.closepopup').on('click', function () {

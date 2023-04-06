@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
 use Hash;
+use Auth;
+use Session;
 
 class HomeController extends Controller
 {
@@ -38,6 +40,23 @@ class HomeController extends Controller
     public function shipping()
     {
         return view('front.shipping');
+    }
+
+    public function loginSubmit(Request $req)
+    {
+        $val = Validator::make($req->all(), [
+            'email' => 'required',
+            'password' => 'required',
+        ]);
+        if ($val->fails()) {
+            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+        }
+        if (Auth::guard('web')->attempt(['email'=>$req->email, 'password'=>$req->password])) {
+            return response()->json(['status'=>true, 'msg'=>'Logged in Successfully.....']);
+        } else {
+            return response()->json(['status'=>false, 'msg'=>'Invalid User Id or password.....']);
+        }
+
     }
 
     public function registerSubmit(Request $req)
@@ -89,5 +108,12 @@ class HomeController extends Controller
                 return response()->json(['status' => 400, 'message' => 'Something went Wrong try again later....']);
             }
         }
+    }
+
+    public function logOut()
+    { 
+        Auth::guard('web')->logOut();
+        Session::flush();
+        return redirect()->route('web.home');
     }
 }

@@ -20,7 +20,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-10 col-sm-8 col-md-5 col-lg-4">
-                    <p class="phone-no">Welcome <b>Guest !!</b></p>
+                    @if(Auth::guard('web')->user() != '')
+                    <p class="phone-no">Welcome <b>{{Auth::guard('web')->user()->name}}</b></p>
+                    @endif
                 </div>
                 <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
                     <div class="text-center"><p class="top-header_middle-text">Free Shipping On order Above 1000/-</p></div>
@@ -33,7 +35,7 @@
                         <li><a href="{{route('web.register')}}">Create Account</a></li>
                         @else
                         <li><a href="wishlist.html">Account Profile</a></li>
-                        <li><a href="#">Logout</a></li>
+                        <li><a href="{{route('web.logout')}}">Logout</a></li>
                         @endif
                     </ul>
                 </div>

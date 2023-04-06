@@ -1,7 +1,6 @@
 @extends('layouts.front.app')
 @section('css')
 <title>Register</title>
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 @stop
 @section('content')
 <div class="page section-header text-center">
@@ -58,7 +57,6 @@
         </section>
 @stop
 @section('js')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 <script>
 	$(document).ready(function(){
 		$('#register_user').on('submit', function(e) {
