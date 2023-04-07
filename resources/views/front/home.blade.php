@@ -43,9 +43,9 @@
                                     <img class="grid-view-item__image hover variantImg" src="{{asset('front/assets/images/product-images/product-image3.jpg')}}" alt="image" title="product">
                                     <!-- Variant Image-->
                                     <!-- product label -->
-                                    <div class="product-labels rounded"><span class="lbl on-sale">Sale</span></div>
+                                    <!--<div class="product-labels rounded"><span class="lbl on-sale">Sale</span></div>-->
                                     <div class="product-labels rounded"><span class="lbl on-hot">Trend</span></div>
-                                    <div class="product-labels rounded"><span class="lbl on-sold">soldout</span></div>
+                                    <!--<div class="product-labels rounded"><span class="lbl on-sold">soldout</span></div>-->
                                     <!-- End product label -->
                                 </a>
                                 <!-- end product image -->
