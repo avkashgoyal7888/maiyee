@@ -54,7 +54,8 @@ return [
     |
     */
 
-    'asset_url' => env('LIVEWIRE_ASSET_URL', 'http://localhost/maiyee/public'),
+    'asset_url' => env('LIVEWIRE_ASSET_URL', env('APP_URL')),
+
 
 
     /*
