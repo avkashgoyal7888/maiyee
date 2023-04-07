@@ -24,9 +24,9 @@
 </head>
 <body class="template-index">
 <section class="home2-default">
-<!-- <div id="pre-loader">
-    <img src="{{asset('front/assets/images/loader.gif')}}" alt="Loading..." />
-</div> -->
+<div id="pre-loader">
+    <img src="{{asset('front/assets/images/logo.png')}}" alt="Loading..." />
+</div>
 <div class="pageWrapper">
 	<!--Promotion Bar-->
 	@include('layouts.front.include.nav')

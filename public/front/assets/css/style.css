@@ -495,7 +495,7 @@ a.quick-view { margin-bottom:5px !important; }
 
 .grid-products .item { margin:0 0 30px; text-align:center; }
 .tab_container .grid-products .item { margin-bottom:0; }
-.grid-products .item .product-name a { color:#000; font-size:14px; line-height:1.2; margin-bottom:0; }
+.grid-products .item .product-name a { color:#000; font-size:16px; line-height:1.2; margin-bottom:0; }
 .grid-products .item .product-name a:hover { opacity:0.8; }
 .grid-products .item .product-price { margin:5px 0; color:#000000; font-weight:600; }
 .product-price .old-price { color:#555; font-size:14px; opacity:0.8; text-decoration:line-through; }
