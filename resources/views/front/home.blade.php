@@ -44,6 +44,8 @@
                                     <!-- Variant Image-->
                                     <!-- product label -->
                                     <div class="product-labels rounded"><span class="lbl on-sale">Sale</span></div>
+                                    <div class="product-labels rounded"><span class="lbl on-hot">Trend</span></div>
+                                    <div class="product-labels rounded"><span class="lbl on-sold">soldout</span></div>
                                     <!-- End product label -->
                                 </a>
                                 <!-- end product image -->
