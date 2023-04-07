@@ -54,7 +54,7 @@ return [
     |
     */
 
-    'asset_url' => env('LIVEWIRE_ASSET_URL', env('APP_URL').'public/'),
+    'asset_url' => env('APP_ENV') === 'local' ? env('LIVEWIRE_ASSET_URL') : 'https://maiyee.in/public',
 
 
 
