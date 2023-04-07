@@ -112,7 +112,7 @@ class Index extends Component
     public function editProduct($id)
     {
         $product = Product::find($id);
-        if ($store) {
+        if ($product) {
             $this->pro_id = $product->id;
             $this->name = $product->name;
             $this->description = $product->description;

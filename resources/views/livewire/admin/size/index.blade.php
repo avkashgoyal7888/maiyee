@@ -104,7 +104,8 @@
                            <select class="form-control" wire:model="color_id">
                               <option>Select A Color</option>
                               @foreach($color as $products)
-                              <option value="{{ $products->id }}">{{ $products->code }}</option>
+                                      <option value="{{ $products->id }}" style="background-color: 
+                                      {{ $products->code }};">Color</option>
                               @endforeach
                            </select>
                            @error('color_id')<span class="text-danger">{{$message}}</span>@enderror
