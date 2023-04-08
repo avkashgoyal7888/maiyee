@@ -57,11 +57,13 @@ Table of Content:
 @import url('http://fonts.googleapis.com/css?family=Poppins:300,400,400i,500,600,700&amp;display=swap');
 @import url('http://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700&amp;display=swap');
 @import url('http://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800&amp;display=swap');
-
+body {
+	background-image: url("{{asset('front/assets/images/background.jpg')}}");
+   }
 /*======================================================================
   2. Basic Styles
 ========================================================================*/
-* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box;background-image: url("{{asset('front/assets/images/background.avif')}}"); }
+* { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 *, ::before, ::after { box-sizing:border-box; -webkit-box-sizing:border-box; }
 html { overflow:hidden; overflow-y:auto; }
 body { font-size:13px; line-height:1.5; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; font-family:"Poppins",Helvetica,Tahoma,Arial,serif; color:#424242; font-weight:400; margin:0; padding:0; }
