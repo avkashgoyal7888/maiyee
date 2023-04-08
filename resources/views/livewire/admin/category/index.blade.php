@@ -55,7 +55,7 @@
                <form wire:submit.prevent='store()'>
                   <div class="modal-body">
                      <div class="row">
-                        <div class="col-md-6 col-lg-12 col-sm-12 col-12 mb-3">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Category name</label>
                            <input type="text" class="form-control" placeholder="Enter Category Name" wire:model='cat_name'>
                            @error('cat_name')<span class="text-danger">{{$message}}</span>@enderror
@@ -83,7 +83,7 @@
                <form wire:submit.prevent='update()'>
                   <div class="modal-body">
                      <div class="row">
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Category name</label>
                            <input type="text" class="form-control" wire:model='cat_name'>
                            <input type="hidden" wire:model='cat_id'>

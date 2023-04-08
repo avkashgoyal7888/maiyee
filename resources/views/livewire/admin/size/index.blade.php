@@ -39,7 +39,7 @@
                      <tr>
                         <td width="10%">{{ ucwords($pros->product->name) }}</td>
                         <td width="10%">{{ strtoupper($pros->size) }}</td>
-                        <td width="60%"><img src="{{ asset('admin/image/' . $pros->image) }}" width="300" height="100" /></td>
+                        <td width="60%"><img src="{{ asset('admin/size/' . $pros->image) }}" width="300" height="100" /></td>
                         <td width="20%">
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editSize({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                            <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$pros->id}})"><i class="fas fa-trash"></i></button>
@@ -78,6 +78,7 @@
                               <option value="{{$categ->id}}">{{$categ->cat_name}}</option>
                               @endforeach
                            </select>
+                           @error('category_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Sub Categories</label>

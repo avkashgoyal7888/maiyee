@@ -31,7 +31,11 @@ class Index extends Component
     public function store()
     {   
             $validatedata = $this->validate([   
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Add image validation     rules
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+                'tag' => 'required'
+            ],[
+                'image.required' => 'Image can not be blank...',
+                'tag.required' => 'Remarks can not be blank...',
             ]);
 
             if ($this->image != '') {
@@ -50,13 +54,20 @@ class Index extends Component
     }
     public function delete($id)
     {
-        $banner = Banner::Where('id', $id)->first();
-        unlink(public_path('admin/banner/' . $banner->image));
+        $banner = Banner::where('id', $id)->first();
+    
+        if ($banner->image != null) {
+            $image_path = public_path('admin/banner/' . $banner->image);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+        }
+    
         $banner->delete();
         session()->flash('success', 'Congratulations !! Banner Deleted Successfully...');
         $this->emit('closemodal');
-
     }
+
     public function render()
     {
         $data = Banner::where('image', 'like', '%'.$this->search.'%')

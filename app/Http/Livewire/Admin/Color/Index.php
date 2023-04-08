@@ -64,8 +64,16 @@ class Index extends Component
 
     public function store()
     {
-        try {
-            $validatedata = $this->validate();
+            $validatedata = $this->validate([
+                'category_id' => 'required',
+                'subcategory_id' => 'required',
+                'product_id' => 'required',
+                'code' => 'required',
+            ],[
+                'category_id.required' => 'Select Category first.....',
+                'subcategory_id.required' => 'Select Sub-Category first.....',
+                'product_id.required' => 'Select Product first.....',
+                'code.required' => 'color Name is required',]);
             $clr = new Color;
             $clr->product_id = $this->product_id;
             $clr->code = $this->code;
@@ -75,11 +83,6 @@ class Index extends Component
             $this->resetinputfields();
             session()->flash('success', 'Congratulations !! Color Added Successfully...');
             $this->emit('closemodal');
-
-        } catch (\Exception $e) {
-            \Log::error($e->getMessage());
-            session()->flash('error', 'Oops!! Something went wrong. Please try again later.');
-        }
     }
 
     public function editColor($id)

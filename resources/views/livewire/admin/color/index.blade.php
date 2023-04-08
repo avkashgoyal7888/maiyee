@@ -76,6 +76,7 @@
                               <option value="{{$categ->id}}">{{$categ->cat_name}}</option>
                               @endforeach
                            </select>
+                           @error('category_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Sub Categories</label>

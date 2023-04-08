@@ -76,13 +76,24 @@ class Index extends Component
 
     public function store()
     {   
-            $validatedata = $this->validate([   
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Add image validation     rules
-            ]);
+            $validatedata = $this->validate([
+                'category_id' => 'required',
+                'subcategory_id' => 'required',
+                'product_id' => 'required',
+                'color_id' => 'required',   
+                'size' => 'required',
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+            ],[
+                'category_id.required' => 'Select Category first.....',
+                'subcategory_id.required' => 'Select Sub-Category first.....',
+                'product_id.required' => 'Select Product first.....',
+                'color_id.required' => 'color Name is required....',
+                'size.required' => 'Size is Required....',
+                'image.required' => 'Image is Required....']);
 
             if ($this->image != '') {
             $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/image', $image, 'real_public');
+            $this->image->storeAs('admin/size', $image, 'real_public');
         }
 
             $size = new Size;
@@ -122,8 +133,8 @@ class Index extends Component
         $image = $data->image;
         if ($this->image && $this->image !== $data->image) {
             $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/image', $image, 'real_public');
-            unlink(public_path('admin/image/' . $data->image));
+            $this->image->storeAs('admin/size', $image, 'real_public');
+            unlink(public_path('admin/size/' . $data->image));
         }
         Size::where('id', $this->pro_id)->update([
             'size' => $this->size,
@@ -138,10 +149,18 @@ class Index extends Component
 
     public function delete($id)
     {
-        Size::Where('id', $id)->delete();
-        session()->flash('success', 'Size Deleted Successfully...');
+        $size = Size::where('id', $id)->first();
+    
+        if ($size->image != null) {
+            $image_path = public_path('admin/size/' . $size->image);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+        }
+    
+        $size->delete();
+        session()->flash('success', 'Congratulations !! Banner Deleted Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function render()

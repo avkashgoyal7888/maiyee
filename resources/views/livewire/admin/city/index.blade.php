@@ -67,6 +67,7 @@
                               <option value="{{$states->id}}">{{$states->state_name}}</option>
                               @endforeach
                            </select>
+                           @error('state_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">City name</label>

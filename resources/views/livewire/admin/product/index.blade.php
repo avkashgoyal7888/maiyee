@@ -78,6 +78,7 @@
                               <option value="{{$categ->id}}">{{$categ->cat_name}}</option>
                               @endforeach
                            </select>
+                           @error('category_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Sub Categories</label>
@@ -114,7 +115,7 @@
                            <input type="text" class="form-control" placeholder="Enter discount" wire:model='discount'>
                            @error('discount')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div wire:ignore class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="address" class="form-label">Product Description</label>
                            <textarea class="form-control" placeholder="Product Description" wire:model='description'></textarea>
                            @error('description')<span class="text-danger">{{$message}}</span>@enderror
