@@ -30,6 +30,8 @@ use App\Http\Controllers\Admin\AdminController;
 	// accounts route
 	Route::get('/account', function(){ return view('admin.account.index'); })->name('admin.account');
 	Route::get('/account-statement/{id}', function() { return view('admin.account.statement'); })->name('admin.account.statement');
+	// banner routes
+	Route::get('/banner', function(){ return view('admin.banner.index'); })->name('admin.banner');
 });
 
 

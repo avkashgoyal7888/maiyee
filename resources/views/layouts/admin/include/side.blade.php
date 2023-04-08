@@ -34,6 +34,12 @@
                </a>
             </li>
             <li>
+               <a href="{{route('admin.banner')}}">
+               <i class="bx bx-home-circle nav-icon"></i>
+               <span class="menu-item" data-key="t-dashboard">Banner</span>
+               </a>
+            </li>
+            <li>
                <a href="javascript: void(0);" class="has-arrow">
                <i class="bx bxl-product-hunt nav-icon"></i>
                <span class="menu-item" data-key="t-ecommerce">Products</span>
