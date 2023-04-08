@@ -45,7 +45,7 @@
     <!--End Top Header-->
     <!--Header-->
     <div class="header-wrap animated d-flex border-bottom">
-        <div class="container-fluid" style="width:95%">        
+        <div class="container-fluid" style="width:100%">        
             <div class="row align-items-center">
                 <!--Desktop Logo-->
                 <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
