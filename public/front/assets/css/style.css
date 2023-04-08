@@ -170,7 +170,7 @@ th { font-family:"Roboto Slab",Helvetica,Tahoma,Arial,serif; font-weight:700; }
 .container-fluid:after { content:''; clear:both; display:block; }
 
 .grid { *zoom:1; list-style:none; margin:0; padding:0; margin-left:-30px; }
-.grid__item { float:left; padding-left:30px; width:100%; }
+.grid__item { float:left; padding-left:10px; width:100%; }
 .grid--no-gutters > .grid__item { padding-left:0; }
 
 /*======================================================================
@@ -289,14 +289,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder { opacity:1; -ms-fil
 .search .go-btn { position:absolute; left:0; top:10px; }
 .search .close-btn { position:absolute; right:0; top:1px; font-size:18px; line-height:normal; display:block; border:0; padding:5px; cursor:pointer; }
 
-#siteNav { position:relative; max-width:1100px; margin:0 auto; padding:0; list-style:none; }
+#siteNav { position:relative; max-width:100%; margin:0 auto; padding:0; list-style:none; }
 #siteNav.right { text-align:right; }
 #siteNav.left { text-align:left; }
 #siteNav.center { text-align:center; }
 #AccessibleNav { padding-left:0; }
 .mobile-nav-wrapper, .site-header__logo.mobileview { display:none; }
 @media (min-width:990px) {
-	#siteNav a { text-decoration:none; font-size:15px; display:block; opacity:1; -webkit-font-smoothing: antialiased; letter-spacing:0.05em; position:relative; }
+	#siteNav a { text-decoration:none; font-size:12px; display:block; opacity:1; -webkit-font-smoothing: antialiased; letter-spacing:0.05em; position:relative; }
 	#siteNav > li { display:inline-block; text-align:left; }
 	#siteNav > li > a { color:#000000; padding:0 20px; text-transform:uppercase; line-height:40px; }
 	#siteNav.medium > li a { font-weight:600; }
