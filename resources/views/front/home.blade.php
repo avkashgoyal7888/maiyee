@@ -5,16 +5,18 @@
 @section('content')
 <div class="slideshow slideshow-wrapper pb-section">
         <div class="home-slideshow">
+            @foreach($banner as $banners)
             <div class="slide">
                 <div class="blur-up lazyload">
-                    <img class="blur-up lazyload" data-src="{{asset('front/assets/images/banner.jpg')}}" src="{{asset('front/assets/images/banner.jpg')}}" alt="Shop Our New Collection" title="Shop Our New Collection" />
+                    <img class="blur-up lazyload" data-src="{{ asset('admin/banner/' . $banners->image) }}" src="{{ asset('admin/banner/' . $banners->image) }}" alt="{{$banners->tag}}" title="{{$banners->tag}}" />
                 </div>
             </div>
-            <div class="slide">
+            @endforeach
+            <!-- <div class="slide">
                 <div class="blur-up lazyload">
-                    <img class="blur-up lazyload" data-src="{{asset('front/assets/images/banner.jpg')}}" src="{{asset('front/assets/images/banner.jpg')}}" alt="Summer Bikini Collection" title="Summer Bikini Collection" />
+                    <img class="blur-up lazyload" data-src="{{asset('front/assets/images/logo.png')}}" src="{{asset('front/assets/images/logo.png')}}" alt="Summer Bikini Collection" title="Summer Bikini Collection" />
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
     <!--End Home slider-->

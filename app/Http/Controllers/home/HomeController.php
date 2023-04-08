@@ -5,6 +5,7 @@ namespace App\Http\Controllers\home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Banner;
 use Validator;
 use Hash;
 use Auth;
@@ -14,7 +15,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        return view('front.home');
+        $banner = Banner::get();
+        return view('front.home',compact('banner'));
     }
 
     public function register()

@@ -25,6 +25,7 @@ class Index extends Component
     public function resetinputfields()
     {
         $this->image = '';
+        $this->tag = '';
     }
 
     public function store()
@@ -59,7 +60,7 @@ class Index extends Component
     public function render()
     {
         $data = Banner::where('image', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(1);
+                        ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.banner.index', compact('data'));
     }
 }
