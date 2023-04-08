@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Banner;
+use App\Models\Product;
+use App\Models\Size;
 use Validator;
 use Hash;
 use Auth;
@@ -16,7 +18,9 @@ class HomeController extends Controller
     public function index()
     {
         $banner = Banner::get();
-        return view('front.home',compact('banner'));
+        $product = Product::get();
+        $size = Size::whereIn('product_id', $product->pluck('id'))->get();
+        return view('front.home',compact('banner','product', 'size'));
     }
 
     public function register()
