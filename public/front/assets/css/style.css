@@ -58,7 +58,6 @@ Table of Content:
 @import url('http://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700&amp;display=swap');
 @import url('http://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,800&amp;display=swap');
 
-
 /*======================================================================
   2. Basic Styles
 ========================================================================*/
@@ -296,7 +295,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder { opacity:1; -ms-fil
 #AccessibleNav { padding-left:0; }
 .mobile-nav-wrapper, .site-header__logo.mobileview { display:none; }
 @media (min-width:990px) {
-	#siteNav a { text-decoration:none; font-size:15px; display:block; opacity:1; -webkit-font-smoothing: antialiased; letter-spacing:0.05em; position:relative; }
+	#siteNav a { text-decoration:none; font-size:12px; display:block; opacity:1; -webkit-font-smoothing: antialiased; letter-spacing:0.05em; position:relative; }
 	#siteNav > li { display:inline-block; text-align:left; }
 	#siteNav > li > a { color:#000000; padding:0 20px; text-transform:uppercase; line-height:40px; }
 	#siteNav.medium > li a { font-weight:600; }

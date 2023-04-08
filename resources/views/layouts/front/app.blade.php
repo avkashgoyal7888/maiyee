@@ -22,7 +22,7 @@
 @yield('css')
 
 </head>
-<body class="template-index">
+<body class="template-index" style="background-image: url("{{asset('front/assets/images/background.jpg')}}");">
 <section class="home2-default">
 <div id="pre-loader">
     <img src="{{asset('front/assets/images/logo.png')}}" alt="Loading..." />
