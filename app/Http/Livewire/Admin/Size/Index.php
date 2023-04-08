@@ -77,7 +77,7 @@ class Index extends Component
     public function store()
     {   
             $validatedata = $this->validate([   
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation     rules
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Add image validation     rules
             ]);
 
             if ($this->image != '') {

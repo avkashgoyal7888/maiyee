@@ -19,12 +19,14 @@
             <thead>
                <tr>
                   <th>Image</th>
+                  <th>Remarks</th>
                   <th>Action</th>
                </tr>
             </thead>
             <tbody>
                @forelse($data as $cats)
                <tr>
+                <td> {{$cats->tag}} </td>
                   <td width="60%"><img src="{{ asset('admin/banner/' . $cats->image) }}" width="300" height="100" /></td>
                   <td style="font-size: 20px">&nbsp;&nbsp;
                      <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$cats->id}})"><i class="fas fa-trash"></i></button>
@@ -51,10 +53,16 @@
                   <div class="modal-body">
                      <div class="row">
                         <div class="col-md-6 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Remarks*</label>
+                           <input type="text" class="form-control" placeholder="Remarks*" wire:model='tag' accept="image/*">
+                           @error('tag')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-6 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Banner</label>
                            <input type="file" class="form-control" placeholder="Banner" wire:model='image' accept="image/*">
                            @error('image')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
+
                      </div>
                   </div>
                   <div class="modal-footer">

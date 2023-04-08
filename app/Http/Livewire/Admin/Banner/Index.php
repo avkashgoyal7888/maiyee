@@ -12,7 +12,7 @@ class Index extends Component
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
-    public $search, $image;
+    public $search, $image, $tag;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -30,7 +30,7 @@ class Index extends Component
     public function store()
     {   
             $validatedata = $this->validate([   
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Add image validation     rules
+                'image' => 'required|image|mimes:jpeg,png,jpg,gif', // Add image validation     rules
             ]);
 
             if ($this->image != '') {
@@ -38,11 +38,10 @@ class Index extends Component
             $this->image->storeAs('admin/banner', $image, 'real_public');
         }
 
-            $size = new Banner;
-            $size->image = $image;
-
-    
-            $size->save();
+            $banner = new Banner;
+            $banner->tag = $this->tag;
+            $banner->image = $image;
+            $banner->save();
     
             $this->resetinputfields();
             session()->flash('success', 'Congratulations !! Banner Added Successfully...');
