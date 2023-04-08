@@ -65,7 +65,11 @@
                     <nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
                         <ul id="siteNav" class="site-nav medium center hidearrow">
                             <li class="lvl1"><a href="{{route('web.home')}}">Home </a></li>
-                            <li class="lvl1 parent dropdown"><a href="#">Men's<i class="anm anm-angle-down-l"></i></a>
+                            <li class="lvl1"><a href="{{route('web.home')}}">Western Wear & Co-Ord Set </a></li>
+                            <li class="lvl1"><a href="{{route('web.home')}}">Ethnic wear </a></li>
+                            <li class="lvl1"><a href="{{route('web.home')}}">Special Price </a></li>
+                            <li class="lvl1"><a href="{{route('web.home')}}">Visitors Exhibition </a></li>
+                            <li class="lvl1 parent dropdown"><a href="#">Indo Western<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
                             <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
                             <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
@@ -73,7 +77,7 @@
                             <li><a href="blog-grid-view.html" class="site-nav">Gridview</a></li>
                             <li><a href="blog-article.html" class="site-nav">Article</a></li>
                           </ul>
-                        </li><li class="lvl1 parent dropdown"><a href="#">Women's<i class="anm anm-angle-down-l"></i></a>
+                        </li><li class="lvl1 parent dropdown"><a href="#">Kurti<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
                             <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
                             <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
@@ -81,7 +85,7 @@
                             <li><a href="blog-grid-view.html" class="site-nav">Gridview</a></li>
                             <li><a href="blog-article.html" class="site-nav">Article</a></li>
                           </ul>
-                        </li><li class="lvl1 parent dropdown"><a href="#">Kids<i class="anm anm-angle-down-l"></i></a>
+                        </li><li class="lvl1 parent dropdown"><a href="#">Bottom Wear<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
                             <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
                             <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
@@ -90,7 +94,7 @@
                             <li><a href="blog-article.html" class="site-nav">Article</a></li>
                           </ul>
                         </li>
-                        <li class="lvl1 parent dropdown"><a href="#">Personal Care<i class="anm anm-angle-down-l"></i></a>
+                        <li class="lvl1 parent dropdown"><a href="#">Spcial Price<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
                             <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
                             <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
@@ -99,7 +103,7 @@
                             <li><a href="blog-article.html" class="site-nav">Article</a></li>
                           </ul>
                         </li>
-                        <li class="lvl1 parent dropdown"><a href="#">Fitness<i class="anm anm-angle-down-l"></i></a>
+                        <li class="lvl1 parent dropdown"><a href="#">New Arrivals<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
                             <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
                             <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
