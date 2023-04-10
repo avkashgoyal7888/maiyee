@@ -23,6 +23,7 @@
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <thead>
                <tr>
+                  <th>S. No.</th>
                   <th>Supplier ID</th>
                   <th>Supplier Name</th>
                   <th>Created By</th>
@@ -33,8 +34,9 @@
                </tr>
             </thead>
             <tbody>
-               @forelse ($data as $supplier )
+               @forelse ($data as $key => $supplier )
                <tr>
+                  <td> {{ $key +1 }} </td>
                   <td>{{$supplier->supplier_id}}</td>
                   <td>{{$supplier->sname}}</td>
                   <td>{{Auth::guard('admin')->user()->name}}</td>

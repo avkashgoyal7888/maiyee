@@ -17,8 +17,7 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('color_id');
             $table->foreign('color_id')->references('id')->on('colors')->onUpdate('cascade')->onDelete('cascade');
-            $table->string('size',12);
-            $table->string('image');
+            $table->enum('size', ['XS', 'S', 'M', 'L', 'XL','2XL','3XL','4XL']);
             $table->timestamps();
         });
     }

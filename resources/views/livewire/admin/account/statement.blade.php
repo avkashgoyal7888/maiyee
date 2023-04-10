@@ -27,6 +27,7 @@
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <thead>
                <tr>
+                  <th>S. No.</th>
                   <th>Nickname</th>
                   <th>Order Id</th>
                   <th>Transection Date</th>
@@ -37,8 +38,9 @@
                </tr>
             </thead>
             <tbody>
-               @forelse($data as $accounts)
+               @forelse($data as $key => $accounts)
                <tr>
+                  <td> {{ $key +1 }} </td>
                   <td>{{ ucwords($accounts->account_name)}}</td>
                   <td>{{$accounts->order_id}}</td>
                   <td>{{ date('d-M-y', strtotime($accounts->transaction_date)) }}</td>

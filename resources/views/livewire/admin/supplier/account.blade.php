@@ -11,6 +11,7 @@
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <thead>
                <tr>
+                  <th>S. No.</th>
                   <th>Supplier ID</th>
                   <th>Perticular</th>
                   <th>Order Id</th>
@@ -20,8 +21,9 @@
                </tr>
             </thead>
             <tbody>
-               @forelse ($data as $supplier )
+               @forelse ($data as $key => $supplier )
                <tr>
+                  <td> {{ $key +1 }} </td>
                   <td>{{$supplier->supplier->supplier_id}}</td>
                   <td>{{$supplier->perticuler}}</td>
                   <td>{{$supplier->order_id}}</td>

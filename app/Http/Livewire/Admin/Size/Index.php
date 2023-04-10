@@ -18,6 +18,21 @@ class Index extends Component
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $size, $product_id,$product, $color, $color_id, $image;
+    public $fields = [
+        ['size' => ''],
+    ];
+
+    public function addField()
+    {
+        $this->fields[] = ['size' => ''];
+    }
+
+    public function removeField($index)
+    {
+        unset($this->size[$index]);
+        $this->size = array_values($this->size);
+    }
+
     public function updatingSearch()
     {
         $this->resetPage();
@@ -75,41 +90,29 @@ class Index extends Component
     ];
 
     public function store()
-    {   
-            $validatedata = $this->validate([
-                'category_id' => 'required',
-                'subcategory_id' => 'required',
-                'product_id' => 'required',
-                'color_id' => 'required',   
-                'size' => 'required',
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif',
-            ],[
-                'category_id.required' => 'Select Category first.....',
-                'subcategory_id.required' => 'Select Sub-Category first.....',
-                'product_id.required' => 'Select Product first.....',
-                'color_id.required' => 'color Name is required....',
-                'size.required' => 'Size is Required....',
-                'image.required' => 'Image is Required....']);
-
-            if ($this->image != '') {
-            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/size', $image, 'real_public');
+    {
+        $validatedData = $this->validate([
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'product_id' => 'required',
+            'color_id' => 'required',
+            'fields.*.size' => 'required',
+        ]);
+    
+        foreach ($validatedData['fields'] as $key => $value) {
+            $size = $value['size'];
+            $data = [
+                'product_id' => $validatedData['product_id'],
+                'color_id' => $validatedData['color_id'],
+                'size' => $size,
+            ];
+            Size::create($data);
         }
-
-            $size = new Size;
-            $size->product_id = $this->product_id;
-            $size->color_id = $this->color_id;
-            $size->size = $this->size;
-            $size->image = $image;
-
     
-            $size->save();
-    
-            $this->resetinputfields();
-            session()->flash('success', 'Congratulations !! Size Added Successfully...');
-            $this->emit('closemodal');
+        $this->reset(['category_id', 'subcategory_id', '    product_id', 'color_id', 'fields']);    
+        session()->flash('success', 'Congratulations !! Size Added Successfully...');   
+        $this->emit('closemodal');
     }
-
 
 
     public function editSize($id)
@@ -118,7 +121,7 @@ class Index extends Component
         if ($store) {
             $this->pro_id = $store->id;
             $this->size = $store->size;
-            $this->image = $store->image;
+            // $this->image = $store->image;
 
         } else {
             return redirect()->to('/admin/size');
@@ -130,15 +133,15 @@ class Index extends Component
     {
         $validatedata = $this->validate();
         $data = Size::find($this->pro_id);
-        $image = $data->image;
-        if ($this->image && $this->image !== $data->image) {
-            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/size', $image, 'real_public');
-            unlink(public_path('admin/size/' . $data->image));
-        }
+        // $image = $data->image;
+        // if ($this->image && $this->image !== $data->image) {
+        //     $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
+        //     $this->image->storeAs('admin/size', $image, 'real_public');
+        //     unlink(public_path('admin/size/' . $data->image));
+        // }
         Size::where('id', $this->pro_id)->update([
             'size' => $this->size,
-            'image' => $image,
+            // 'image' => $image,
         ]);
         $this->resetinputfields();
         session()->flash('success', 'Size Updated Successfully...');
@@ -151,22 +154,23 @@ class Index extends Component
     {
         $size = Size::where('id', $id)->first();
     
-        if ($size->image != null) {
-            $image_path = public_path('admin/size/' . $size->image);
-            if (file_exists($image_path)) {
-                unlink($image_path);
-            }
-        }
+        // if ($size->image != null) {
+        //     $image_path = public_path('admin/size/' . $size->image);
+        //     if (file_exists($image_path)) {
+        //         unlink($image_path);
+        //     }
+        // }
     
         $size->delete();
-        session()->flash('success', 'Congratulations !! Banner Deleted Successfully...');
+        session()->flash('success', 'Congratulations !! Size Deleted Successfully...');
         $this->emit('closemodal');
     }
 
     public function render()
     {
-        $data = Size::where('size', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
+        $data = Size::whereHas('product', function($query){
+            $query->where('name','like','%'.$this->search.'%');
+        })->orderByDesc('id')->paginate(10);
         return view('livewire.admin.size.index', ['data'=>$data]);
     }
 }

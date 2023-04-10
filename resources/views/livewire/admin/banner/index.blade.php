@@ -18,14 +18,16 @@
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <thead>
                <tr>
-                  <th>Image</th>
+                  <th>S. No.</th>
                   <th>Remarks</th>
+                  <th>Image</th>
                   <th>Action</th>
                </tr>
             </thead>
             <tbody>
-               @forelse($data as $cats)
+               @forelse($data as $key => $cats)
                <tr>
+                  <td> {{ $key +1 }} </td>
                 <td> {{$cats->tag}} </td>
                   <td width="60%"><img src="{{ asset('admin/banner/' . $cats->image) }}" width="300" height="100" /></td>
                   <td style="font-size: 20px">&nbsp;&nbsp;

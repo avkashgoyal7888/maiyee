@@ -22,13 +22,15 @@
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <thead>
                <tr>
+                  <th>S. No.</th>
                   <th>Category Name</th>
                   <th>Action</th>
                </tr>
             </thead>
             <tbody>
-               @forelse($data as $cats)
+               @forelse($data as $key => $cats)
                <tr>
+                  <td> {{ $key +1 }} </td>
                   <td>{{ ucwords($cats->cat_name) }}</td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editCategory({{$cats->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;

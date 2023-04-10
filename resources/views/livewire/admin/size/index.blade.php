@@ -28,19 +28,21 @@
                <table class="table table-sm table-bordered border-dark mb-0 text-center">
                   <thead>
                      <tr>
+                        <th>S. No.</th>
                         <th>Product</th>
                         <th>Size</th>
-                        <th>Image</th>
+                        <!-- <th>Image</th> -->
                         <th>Action</th>
                      </tr>
                   </thead>
                   <tbody>
-                     @forelse($data as $pros)
+                     @forelse($data as $key => $pros)
                      <tr>
-                        <td width="10%">{{ ucwords($pros->product->name) }}</td>
-                        <td width="10%">{{ strtoupper($pros->size) }}</td>
-                        <td width="60%"><img src="{{ asset('admin/size/' . $pros->image) }}" width="300" height="100" /></td>
-                        <td width="20%">
+                        <td> {{ $key +1 }} </td>
+                        <td>{{ ucwords($pros->product->name) }}</td>
+                        <td>{{ strtoupper($pros->size) }}</td>
+                        <!-- <td width="60%"><img src="{{ asset('admin/size/' . $pros->image) }}" width="300" height="100" /></td> -->
+                        <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editSize({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                            <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$pros->id}})"><i class="fas fa-trash"></i></button>
                         </td>
@@ -105,22 +107,42 @@
                            <select class="form-control" wire:model="color_id">
                               <option>Select A Color</option>
                               @foreach($color as $products)
-                                      <option value="{{ $products->id }}" style="background-color: 
-                                      {{ $products->code }};">Color</option>
+                              <option value="{{ $products->id }}" style="background-color: 
+                                 {{ $products->code }};">Color</option>
                               @endforeach
                            </select>
                            @error('color_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Size</label>
-                           <input type="text" class="form-control" placeholder="Enter Size" wire:model='size'>
+                           <div class="row">
+                              <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                                 @foreach($fields as $index => $field)
+                                 <select class="form-control" wire:model="fields.{{ $index }}.size">
+                                    <option>Select A Size</option>
+                                    <option value="XS">XS</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="2XL">2XL</option>
+                                    <option value="3XL">3XL</option>
+                                    <option value="4XL">4XL</option>
+                                 </select>
+                              </div>
+                              <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                                 <button class="btn btn-danger float-right" type="button" wire:click="removeField({{ $index }})">-</button>
+                                 @endforeach
+                                 <button class="btn btn-success float-right" type="button" wire:click="addField">+</button>
+                              </div>
+                           </div>
                            @error('size')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                        <!-- <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Image</label>
                            <input type="file" class="form-control" placeholder="Enter Size" wire:model='image' accept="image/*">
                            @error('image')<span class="text-danger">{{$message}}</span>@enderror
-                        </div>
+                           </div> -->
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -148,14 +170,24 @@
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Size</label>
                            <input type="hidden" wire:model='pro_id'>
-                           <input type="text" class="form-control" wire:model='size'>
+                           <select class="form-control" wire:model="size">
+                              <option>Select A Size</option>
+                              <option value="XS">XS</option>
+                              <option value="S">S</option>
+                              <option value="M">M</option>
+                              <option value="L">L</option>
+                              <option value="XL">XL</option>
+                              <option value="2XL">2XL</option>
+                              <option value="3XL">3XL</option>
+                              <option value="4XL">4XL</option>
+                           </select>
                            @error('size')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                        <!-- <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Image</label>
                            <input type="file" class="form-control" wire:model='image'>
                            @error('image')<span class="text-danger">{{$message}}</span>@enderror
-                        </div>
+                           </div> -->
                      </div>
                   </div>
                   <div class="modal-footer">

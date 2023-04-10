@@ -28,6 +28,7 @@
                <table class="table table-sm table-bordered border-dark mb-0 text-center">
                   <thead>
                      <tr>
+                        <th>S. No.</th>
                         <th>Product Name</th>
                         <th>Category</th>
                         <th>Sub Category</th>
@@ -35,8 +36,9 @@
                      </tr>
                   </thead>
                   <tbody>
-                     @forelse($data as $pros)
+                     @forelse($data as $key => $pros)
                      <tr>
+                        <td> {{ $key +1 }} </td>
                         <td>{{ ucwords($pros->name) }}</td>
                         <td>{{ ucwords($pros->category->cat_name) }}</td>
                         <td> {{ ucwords($pros->subcategory->sub_name) }} </td>

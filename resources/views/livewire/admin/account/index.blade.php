@@ -25,6 +25,7 @@
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <thead>
                <tr>
+                  <th>S. No.</th>
                   <th>Account Name</th>
                   <th>Nickname</th>
                   <th>Balance</th>
@@ -33,8 +34,9 @@
                </tr>
             </thead>
             <tbody>
-               @forelse($data as $accs)
+               @forelse($data as $key => $accs)
                <tr>
+                  <td> {{ $key +1 }} </td>
                   <td>{{ ucwords($accs->ac_name) }}</td>
                   <td>{{ ucwords($accs->nickname) }}</td>
                   <td>{{$accs->effective_balance}}</td>

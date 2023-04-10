@@ -22,14 +22,16 @@
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <thead>
                <tr>
+                  <th>S. No.</th>
                   <th>Category</th>
                   <th>Sub-Category</th>
                   <th>Action</th>
                </tr>
             </thead>
             <tbody>
-               @forelse($data as $cats)
+               @forelse($data as $key => $cats)
                <tr>
+                  <td> {{ $key +1 }} </td>
                   <td>{{ucwords($cats->category->cat_name)}}</td>
                   <td>{{ ucwords($cats->sub_name) }}</td>
                   <td style="font-size: 20px">
