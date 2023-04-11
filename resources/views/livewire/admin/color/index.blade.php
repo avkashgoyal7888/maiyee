@@ -31,6 +31,7 @@
                         <th>S. No.</th>
                         <th>Product</th>
                         <th>Color</th>
+                        <th>Image</th>
                         <th>Action</th>
                      </tr>
                   </thead>
@@ -40,6 +41,7 @@
                         <td> {{ $key +1 }} </td>
                         <td>{{ ucwords($pros->product->name) }}</td>
                         <td><button class="btn btn-lg" style="background-color: {{ $pros->code }};"></button></td>
+                        <td width="60%"><img src="{{ asset('admin/color/' . $pros->image) }}" width="300" height="100" /></td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editColor({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                            <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$pros->id}})"><i class="fas fa-trash"></i></button>
@@ -100,10 +102,21 @@
                            </select>
                            @error('product_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Color</label>
-                           <input type="color" class="form-control" placeholder="Enter Product Code" wire:model='code'>
-                           @error('code')<span class="text-danger">{{$message}}</span>@enderror
+                        <div>
+                           @foreach ($fields as $index => $field)
+                           <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                              <label for="nameExLarge{{$index}}" class="form-label">Color</label>
+                              <input type="color" class="form-control" placeholder="Enter Color" wire:model="fields.{{$index}}.code">
+                              @error("fields.{$index}.code")<span class="text-danger">{{$message}}</span>@enderror
+                           </div>
+                           <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                              <label for="image{{$index}}" class="form-label">Image</label>
+                              <input type="file" class="form-control" placeholder="Select Image" wire:model="fields.{{ $index }}.image" accept="image/*">
+                              @error("fields.{$index}.image")<span class="text-danger">{{$message}}</span>@enderror
+                              <button class="btn btn-danger float-right" type="button" wire:click="removeField({{ $index }})">-</button>
+                           </div>
+                           @endforeach
+                           <button class="btn btn-success float-right" type="button" wire:click="addField">+</button>
                         </div>
                      </div>
                   </div>
@@ -135,6 +148,11 @@
                            <input type="color" class="form-control" wire:model='code'>
                            @error('code')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Image</label>
+                           <input type="file" class="form-control" wire:model='image'>
+                           @error('image')<span class="text-danger">{{$message}}</span>@enderror
+                           </div>
                      </div>
                   </div>
                   <div class="modal-footer">

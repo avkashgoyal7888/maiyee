@@ -17,7 +17,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $size, $product_id,$product, $color, $color_id, $image;
+    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $size, $product_id,$product, $color, $color_id;
     public $fields = [
         ['size' => ''],
     ];
@@ -78,7 +78,7 @@ class Index extends Component
         $this->product_id = '';
         $this->color_id = '';
         $this->size = '';
-        $this->image = '';
+        $this->fields = [];
     }
 
     protected $rules = [
@@ -97,22 +97,29 @@ class Index extends Component
             'product_id' => 'required',
             'color_id' => 'required',
             'fields.*.size' => 'required',
+        ],[
+            'category_id.required' => 'Select Category first.....',
+            'color_id.required' => 'Select Color first.....',
+            'subcategory_id.required' => 'Select Sub-Category first.....',
+            'product_id.required' => 'Select Product first.....',
+            'fields.*.size.required' => 'Size Name is required',
         ]);
     
         foreach ($validatedData['fields'] as $key => $value) {
-            $size = $value['size'];
-            $data = [
-                'product_id' => $validatedData['product_id'],
-                'color_id' => $validatedData['color_id'],
-                'size' => $size,
-            ];
-            Size::create($data);
-        }
+                $data = [
+                    'product_id' => $validatedData['product_id'],
+                    'color_id' => $validatedData['color_id'],
+                    'size' => $value['size'],
+                ];
+                Size::create($data);
+            }
     
-        $this->reset(['category_id', 'subcategory_id', '    product_id', 'color_id', 'fields']);    
-        session()->flash('success', 'Congratulations !! Size Added Successfully...');   
+        $this->resetInputFields();
+        session()->flash('success', 'Congratulations !! Size Added Successfully...');
         $this->emit('closemodal');
     }
+
+
 
 
     public function editSize($id)
@@ -121,7 +128,6 @@ class Index extends Component
         if ($store) {
             $this->pro_id = $store->id;
             $this->size = $store->size;
-            // $this->image = $store->image;
 
         } else {
             return redirect()->to('/admin/size');
@@ -133,15 +139,8 @@ class Index extends Component
     {
         $validatedata = $this->validate();
         $data = Size::find($this->pro_id);
-        // $image = $data->image;
-        // if ($this->image && $this->image !== $data->image) {
-        //     $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-        //     $this->image->storeAs('admin/size', $image, 'real_public');
-        //     unlink(public_path('admin/size/' . $data->image));
-        // }
         Size::where('id', $this->pro_id)->update([
             'size' => $this->size,
-            // 'image' => $image,
         ]);
         $this->resetinputfields();
         session()->flash('success', 'Size Updated Successfully...');
@@ -153,14 +152,6 @@ class Index extends Component
     public function delete($id)
     {
         $size = Size::where('id', $id)->first();
-    
-        // if ($size->image != null) {
-        //     $image_path = public_path('admin/size/' . $size->image);
-        //     if (file_exists($image_path)) {
-        //         unlink($image_path);
-        //     }
-        // }
-    
         $size->delete();
         session()->flash('success', 'Congratulations !! Size Deleted Successfully...');
         $this->emit('closemodal');

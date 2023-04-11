@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\ColorController;
 
 	Route::get('/login', [AdminController::class, 'index'])->name('admin.login');
 	Route::post('/login-submit', [AdminController::class, 'loginSubmit'])->name('admin.login.submit');

@@ -8,13 +8,18 @@ use App\Models\Color;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Product;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
+
 
 class Index extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
     public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $code, $product_id, $startDate, $endDate,$product;
+    public $image;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -23,6 +28,24 @@ class Index extends Component
     public function closemodal()
     {
         $this->resetinputfields();
+    }
+
+    public $fields;
+
+    public function __construct()
+    {
+        $this->fields = [['code' => '', 'image' => '']];
+    }
+
+    public function addField()
+    {
+        $this->fields[] = ['code' => null, 'image' => null];
+    }
+
+    public function removeField($index)
+    {
+        unset($this->fields[$index]);
+        $this->fields = array_values($this->fields);
     }
 
     public function mount()
@@ -45,13 +68,13 @@ class Index extends Component
         }
     }
 
-
     public function resetinputfields()
     {
         $this->category_id = '';
         $this->subcategory_id = '';
         $this->product_id = '';
         $this->code = '';
+        $this->image = '';
     }
 
     protected $rules = [
@@ -62,27 +85,44 @@ class Index extends Component
         'code.required' => 'color Name is required',
     ];
 
-    public function store()
+       public function store()
     {
-            $validatedata = $this->validate([
-                'category_id' => 'required',
-                'subcategory_id' => 'required',
-                'product_id' => 'required',
-                'code' => 'required',
-            ],[
-                'category_id.required' => 'Select Category first.....',
-                'subcategory_id.required' => 'Select Sub-Category first.....',
-                'product_id.required' => 'Select Product first.....',
-                'code.required' => 'color Name is required',]);
-            $clr = new Color;
-            $clr->product_id = $this->product_id;
-            $clr->code = $this->code;
-
-            $clr->save();
-
-            $this->resetinputfields();
-            session()->flash('success', 'Congratulations !! Color Added Successfully...');
-            $this->emit('closemodal');
+        $validatedData = $this->validate([
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'product_id' => 'required',
+            'fields.*.code' => 'required',
+            'fields.*.image' => 'required|image', // limit to 1 MB
+        ], [
+            'category_id.required' => 'Select Category first.....',
+            'subcategory_id.required' => 'Select Sub-Category first.....',
+            'product_id.required' => 'Select Product first...',
+            'fields.*.code.required' => 'Color Name is required',
+            'fields.*.image.required' => 'Image is required',
+            'fields.*.image.image' => 'Only image files are allowed',
+        ]);
+    
+        foreach ($validatedData['fields'] as $key => $value) {
+            $image = $value['image'];
+    
+            if ($image) {
+                // Generate unique filename for each image
+                $filename = uniqid().'.'.$image->getClientOriginalExtension();
+    
+                // Store image in the same path with the unique filename
+                $image->storeAs('admin/color', $filename, 'real_public');
+    
+                $data = new Color;
+                $data->product_id = $validatedData['product_id'];
+                $data->code = $value['code'];
+                $data->image = $filename;
+                $data->save();
+            }
+        }
+    
+        $this->reset('category_id','subcategory_id','product_id','fields');
+        session()->flash('success', 'Congratulations!! Color Added Successfully...');
+        $this->emit('closemodal');
     }
 
     public function editColor($id)
@@ -91,6 +131,7 @@ class Index extends Component
         if ($clr) {
             $this->pro_id = $clr->id;
             $this->code = $clr->code;
+            $this->image = $clr->image;
 
         } else {
             return redirect()->to('/admin/products');
@@ -101,23 +142,38 @@ class Index extends Component
     public function updateColor()
     {
         $validatedata = $this->validate();
-        Color::Where('id', $this->pro_id)->update([
+        $data = Color::find($this->pro_id);
+        $image = $data->image;
+        if ($this->image && $this->image !== $data->image) {
+            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
+            $this->image->storeAs('admin/color', $image, 'real_public');
+            unlink(public_path('admin/color/' . $data->image));
+        }
+        Color::where('id', $this->pro_id)->update([
             'code' => $this->code,
+            'image' => $image,
         ]);
-
         $this->resetinputfields();
         session()->flash('success', 'Color Updated Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function delete($id)
     {
-        Color::Where('id', $id)->delete();
-        session()->flash('success', 'Color Deleted Successfully...');
+        $clr = Color::where('id', $id)->first();
+    
+        if ($clr->image != null) {
+            $image_path = public_path('admin/color/' . $clr->image);
+            if (file_exists($image_path)) {
+                unlink($image_path);
+            }
+        }
+    
+        $clr->delete();
+        session()->flash('success', 'Congratulations !! Color Deleted Successfully...');
         $this->emit('closemodal');
-
     }
+
     public function render()
     {
         $data = Color::whereHas('product', function($query) {
