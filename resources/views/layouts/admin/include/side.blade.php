@@ -40,6 +40,12 @@
                </a>
             </li>
             <li>
+               <a href="{{route('admin.coupon')}}">
+               <i class="bx bx-home-circle nav-icon"></i>
+               <span class="menu-item" data-key="t-dashboard">Coupon</span>
+               </a>
+            </li>
+            <li>
                <a href="javascript: void(0);" class="has-arrow">
                <i class="bx bxl-product-hunt nav-icon"></i>
                <span class="menu-item" data-key="t-ecommerce">Products</span>

@@ -33,6 +33,8 @@ use App\Http\Controllers\Admin\ColorController;
 	Route::get('/account-statement/{id}', function() { return view('admin.account.statement'); })->name('admin.account.statement');
 	// banner routes
 	Route::get('/banner', function(){ return view('admin.banner.index'); })->name('admin.banner');
+	// Coupon routes
+	Route::get('/coupon', function(){ return view('admin.coupon.index'); })->name('admin.coupon');
 });
 
 
