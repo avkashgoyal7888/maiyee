@@ -127,10 +127,17 @@
                 <!--Mobile Logo-->
                 <div class="col-3 col-sm-3 col-md-3 col-lg-2">
                     <div class="site-cart">
+                        @if(Auth::guard('web')->user() != '')
                         <a href="#" class="site-header__cart" title="Cart">
                             <i class="icon anm anm-bag-l"></i>
                             <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">2</span>
                         </a>
+                        @else
+                        <a href="#" data-toggle="modal" data-target="#myModal">
+                            <h2><i class="icon anm anm-bag-l"></i></h2>
+                            <span class="site-header__cart-count" data-cart-render="item_count"></span>
+                        </a>
+                        @endif
                         <!--Minicart Popup-->
                         <div id="header-cart" class="block block-cart">
                             <ul class="mini-products-list">
