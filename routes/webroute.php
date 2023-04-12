@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\home\HomeController;
+use App\Http\Controllers\home\CartController;
 
 	Route::controller(HomeController::class)->group(function(){
 		Route::get('/', 'index')->name('web.home');
@@ -13,6 +14,11 @@ use App\Http\Controllers\home\HomeController;
 		Route::get('/shipping', 'shipping')->name('web.shipping');
 		Route::post('/login-submit', 'loginSubmit')->name('web.login.submit');
 		Route::get('/logout', 'logOut')->name('web.logout');
+	});
+
+	Route::group(['middleware'=>'auth'], function() {
+		Route::get('/cart', [HomeController::class, 'cart'])->name('web.cart');
+		Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('web.add.cart');
 	});
 
 

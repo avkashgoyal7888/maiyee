@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\Color;
 use Validator;
 use Hash;
 use Auth;
@@ -19,8 +20,12 @@ class HomeController extends Controller
     {
         $banner = Banner::get();
         $product = Product::get();
-        $size = Size::whereIn('product_id', $product->pluck('id'))->get();
-        return view('front.home',compact('banner','product', 'size'));
+        $color = Color::whereIn('product_id', $product->pluck('id'))->get();
+        $size = Size::whereIn('product_id', $product->pluck('id'))
+        ->whereIn('color_id', $color->pluck('id'))
+        ->get();
+
+        return view('front.home',compact('banner','product', 'color','size'));
     }
 
     public function register()
@@ -46,6 +51,11 @@ class HomeController extends Controller
     public function shipping()
     {
         return view('front.shipping');
+    }
+
+    public function cart()
+    {
+        return view('front.cart');
     }
 
     public function loginSubmit(Request $req)
