@@ -9,8 +9,6 @@
       <link rel="shortcut icon" href="{{asset('admin/assets/images/favicon.ico')}}">
       <!-- plugin css -->
       <link href="{{asset('admin/assets/libs/jsvectormap/css/jsvectormap.min.css')}}" rel="stylesheet" type="text/css" />
-      <link href="{{asset('admin/assets/libs/choices.js/public/assets/styles/choices.min.css')}}" rel="stylesheet" type="text/css" />
-      <link rel="stylesheet" href="{{asset('admin/assets/libs/flatpickr/flatpickr.min.css')}}">
       <!-- swiper css -->
       <link rel="stylesheet" href="{{asset('admin/assets/libs/swiper/swiper-bundle.min.css')}}">
       <!-- Bootstrap Css -->
@@ -65,8 +63,6 @@
       <script src="{{asset('admin/assets/libs/jsvectormap/js/jsvectormap.min.js')}}"></script>
       <script src="{{asset('admin/assets/libs/jsvectormap/maps/world-merc.js')}}"></script>
       <!-- swiper js -->
-      <script src="{{asset('admin/assets/libs/choices.js/public/assets/scripts/choices.min.js')}}"></script>
-      <script src="{{asset('admin/assets/libs/flatpickr/flatpickr.min.js')}}"></script>
       <script src="{{asset('admin/assets/libs/swiper/swiper-bundle.min.js')}}"></script>
       <script src="{{asset('admin/assets/js/app.js')}}"></script>
       <script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
