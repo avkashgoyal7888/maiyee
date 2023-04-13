@@ -116,7 +116,7 @@
                            <div class="row">
                               <div class="col-md-6 col-lg-6 col-sm-6 col-6">
                                  @foreach($fields as $index => $field)
-                                 <select class="form-control" wire:model="fields.{{ $index }}.size">
+                                 <select class="form-control" wire:model="fields.{{ $index }}.size" data-trigger="" name="choices-single-default" id="choices-single-default">
                                     <option>Select A Size</option>
                                     <option value="XS">XS</option>
                                     <option value="S">S</option>
