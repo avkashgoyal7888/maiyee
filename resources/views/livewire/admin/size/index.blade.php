@@ -114,7 +114,7 @@
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Size</label>
                            <div class="row">
-                              <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                              <div class="col-md-6 col-lg-6 col-sm-6 col-6">
                                  @foreach($fields as $index => $field)
                                  <select class="form-control" wire:model="fields.{{ $index }}.size">
                                     <option>Select A Size</option>
@@ -128,7 +128,7 @@
                                     <option value="4XL">4XL</option>
                                  </select>
                               </div>
-                              <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                              <div class="col-md-6 col-lg-6 col-sm-6 col-6">
                                  <button class="btn btn-danger float-right" type="button" wire:click="removeField({{ $index }})">-</button>
                                  @endforeach
                                  <button class="btn btn-success float-right" type="button" wire:click="addField">+</button>
