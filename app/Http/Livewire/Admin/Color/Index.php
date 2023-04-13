@@ -30,24 +30,6 @@ class Index extends Component
         $this->resetinputfields();
     }
 
-    public $fields;
-
-    public function __construct()
-    {
-        $this->fields = [['code' => '', 'image' => '']];
-    }
-
-    public function addField()
-    {
-        $this->fields[] = ['code' => null, 'image' => null];
-    }
-
-    public function removeField($index)
-    {
-        unset($this->fields[$index]);
-        $this->fields = array_values($this->fields);
-    }
-
     public function mount()
     {
         $this->category = Category::all();
@@ -91,19 +73,17 @@ class Index extends Component
             'category_id' => 'required',
             'subcategory_id' => 'required',
             'product_id' => 'required',
-            'fields.*.code' => 'required',
-            'fields.*.image' => 'required|image', // limit to 1 MB
+            'code' => 'required',
+            'image' => 'required|image', // limit to 1 MB
         ], [
             'category_id.required' => 'Select Category first.....',
             'subcategory_id.required' => 'Select Sub-Category first.....',
             'product_id.required' => 'Select Product first...',
-            'fields.*.code.required' => 'Color Name is required',
-            'fields.*.image.required' => 'Image is required',
-            'fields.*.image.image' => 'Only image files are allowed',
+            'code.required' => 'Color Name is required',
+            'image.required' => 'Image is required',
+            'image.image' => 'Only image files are allowed',
         ]);
-    
-        foreach ($validatedData['fields'] as $key => $value) {
-            $image = $value['image'];
+            $image = $this->image;
     
             if ($image) {
                 // Generate unique filename for each image
@@ -113,14 +93,13 @@ class Index extends Component
                 $image->storeAs('admin/color', $filename, 'real_public');
     
                 $data = new Color;
-                $data->product_id = $validatedData['product_id'];
-                $data->code = $value['code'];
+                $data->product_id = $this->product_id;
+                $data->code = $this->code;
                 $data->image = $filename;
                 $data->save();
             }
-        }
     
-        $this->reset('category_id','subcategory_id','product_id','fields');
+        $this->resetinputfields();
         session()->flash('success', 'Congratulations!! Color Added Successfully...');
         $this->emit('closemodal');
     }

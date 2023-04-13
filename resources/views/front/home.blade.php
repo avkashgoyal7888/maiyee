@@ -36,7 +36,7 @@
                   <!-- start product image -->
                   <div class="product-image">
                      <!-- start product image -->
-                     <a href="#" class="grid-view-item__link">
+                     <a href="{{route('web.product.detail',$products->id)}}" class="grid-view-item__link">
                         <!-- image -->
                         <img class="primary blur-up lazyload" data-src="{{ asset('admin/color/' . $colors->image) }}" src="{{ asset('admin/color/' . $colors->image) }}" alt="image" title="product" />
                         <!-- End image -->

@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\ColorController;
 	Route::get('/product', function(){ return view('admin.product.index'); })->name('admin.product');
 	// color route
 	Route::get('/color', function(){ return view('admin.color.index'); })->name('admin.color');
+	Route::get('/color-image', function(){ return view('admin.color.image'); })->name('admin.color.image');
 	// size routes
 	Route::get('/sizes', function(){ return view('admin.size.index'); })->name('admin.size');
 	// accounts route

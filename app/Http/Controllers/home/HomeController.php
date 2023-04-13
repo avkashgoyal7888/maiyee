@@ -58,6 +58,15 @@ class HomeController extends Controller
         return view('front.cart');
     }
 
+    public function productDetail(Request $req)
+    {
+        $color = Color::where('product_id', $req->id)->get();
+        $product = Product::where('id', $req->id)->first();
+        $size = Size::where('product_id', $req->id)->get();
+        $colorzoom = Color::where('product_id', $req->id)->first();
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom'));
+    }
+
     public function loginSubmit(Request $req)
     {
         $val = Validator::make($req->all(), [

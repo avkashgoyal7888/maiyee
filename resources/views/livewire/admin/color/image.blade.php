@@ -40,7 +40,7 @@
                      <tr>
                         <td> {{ $key +1 }} </td>
                         <td>{{ ucwords($pros->product->name) }}</td>
-                        <td><button class="btn btn-lg" style="background-color: {{ $pros->code }};"></button></td>
+                        <td><button class="btn btn-lg" style="background-color: {{ $pros->color->code }};"></button></td>
                         <td width="60%"><img src="{{ asset('admin/color/' . $pros->image) }}" width="300" height="100" /></td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editColor({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
@@ -94,7 +94,7 @@
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Product</label>
-                           <select class="form-control" wire:model="product_id">
+                           <select class="form-control" wire:model="product_id" wire:change="viewColor()">
                               <option>Select A Sub-Category</option>
                               @foreach($product as $products)
                               <option value="{{ $products->id }}">{{ $products->name }}</option>
@@ -103,15 +103,25 @@
                            @error('product_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                            <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                              <label for="nameExLarge" class="form-label">Color</label>
-                              <input type="color" class="form-control" placeholder="Enter Color" wire:model="code">
-                              @error("code")<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
+                           <label for="nameExLarge" class="form-label">Color</label>
+                           <select class="form-control" wire:model="color_id">
+                              <option>Select A Color</option>
+                              @foreach($color as $products)
+                              <option value="{{ $products->id }}" style="background-color: 
+                                 {{ $products->code }};">Color</option>
+                              @endforeach
+                           </select>
+                           @error('color_id')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
                            <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                              <label for="image" class="form-label">Image</label>
-                              <input type="file" class="form-control" placeholder="Select Image" wire:model="image" accept="image/*">
-                              @error("image")<span class="text-danger">{{$message}}</span>@enderror
+                              @foreach ($fields as $index => $field)
+                              <label for="image{{$index}}" class="form-label">Image</label>
+                              <input type="file" class="form-control" placeholder="Select Image" wire:model="fields.{{ $index }}.image" accept="image/*">
+                              @error("fields.{$index}.image")<span class="text-danger">{{$message}}</span>@enderror
+                              <button class="btn btn-danger float-right" type="button" wire:click="removeField({{ $index }})">-</button>
+                           @endforeach
                            </div>
+                           <button class="btn btn-success float-right" type="button" wire:click="addField">+</button>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -136,12 +146,6 @@
                <form wire:submit.prevent='updateColor()'>
                   <div class="modal-body">
                      <div class="row">
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Color Name</label>
-                           <input type="hidden" wire:model='pro_id'>
-                           <input type="color" class="form-control" wire:model='code'>
-                           @error('code')<span class="text-danger">{{$message}}</span>@enderror
-                        </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Image</label>
                            <input type="file" class="form-control" wire:model='image'>

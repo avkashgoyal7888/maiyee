@@ -12,13 +12,15 @@ use App\Http\Controllers\home\CartController;
 		Route::get('/policy', 'policy')->name('web.policy');
 		Route::get('/refund', 'refund')->name('web.refund');
 		Route::get('/shipping', 'shipping')->name('web.shipping');
+		Route::get('/product-detail/{id}', 'productDetail')->name('web.product.detail');
 		Route::post('/login-submit', 'loginSubmit')->name('web.login.submit');
-		Route::get('/logout', 'logOut')->name('web.logout');
+		
 	});
 
 	Route::group(['middleware'=>'auth'], function() {
 		Route::get('/cart', [HomeController::class, 'cart'])->name('web.cart');
 		Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('web.add.cart');
+		Route::get('/logout', [HomeController::class, 'logOut'])->name('web.logout');
 	});
 
 
