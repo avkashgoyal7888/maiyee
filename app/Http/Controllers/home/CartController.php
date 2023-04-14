@@ -29,7 +29,7 @@ class CartController extends Controller
 
             $data = new Cart();
             $data->product_id = $req->product_id;
-            $data->size_id = null;
+            $data->size_id = $req->size_id;
             $data->color_id = $req->color_id;
             $data->price = $req->price;
             $data->gst = $req->gst;

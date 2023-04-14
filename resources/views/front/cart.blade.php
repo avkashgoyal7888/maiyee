@@ -26,21 +26,22 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach($cart as $carts)
                                 <tr class="cart__row border-bottom line1 cart-flex border-top">
                                     <td class="cart__image-wrapper cart-flex-item">
-                                        <a href="#"><img class="cart__image" src="{{asset('front/assets/images/product-images/product-image1.jpg')}}" alt="Elastic Waist Dress - Navy / Small"></a>
+                                        <a href="#"><img class="cart__image" src="{{asset('admin/color/'.$carts->color->image)}}" alt="Elastic Waist Dress - Navy / Small"></a>
                                     </td>
                                     <td class="cart__meta small--text-left cart-flex-item">
                                         <div class="list-view-item__title">
-                                            <a href="#">Elastic Waist Dress </a>
+                                            <a href="#">{{$carts->product->name}} </a>
                                         </div>
                                         
                                         <div class="cart__meta-text">
-                                            Color: Navy<br>Size: Small<br>
+                                            Color: Navy<br>Size: {{$carts->size->size}}<br>
                                         </div>
                                     </td>
                                     <td class="cart__price-wrapper">
-                                        <span class="money">$735.00</span>
+                                        <span class="money">${{$carts->price}}</span>
 
                                         <div class="cart__qty">
                                         <div class="qtyField">
@@ -53,6 +54,7 @@
                                         <a href="#" class="btn btn--secondary cart__remove" title="Remove tem"><i class="icon icon anm anm-times-l"></i></a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </tbody>
                     </table>
                 </div>

@@ -20,44 +20,16 @@
                                 <div class="product-details-img">
                                     <div class="product-thumb">
                                         <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big1.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big1.jpg')}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible0.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big2.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big2.jpg')}}" class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big3.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big3.jpg')}}" class="slick-slide slick-cloned" data-slick-index="-2" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible6.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible7-big.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible7-big.jpg')}}" class="slick-slide slick-cloned" data-slick-index="-1" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible7.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="assets/images/product-detail-page/camelia-reversible-big4.jpg" data-zoom-image="assets/images/product-detail-page/camelia-reversible-big4.jpg" class="slick-slide slick-cloned" data-slick-index="0" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible8.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big5.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big5.jpg')}}" class="slick-slide slick-cloned" data-slick-index="1" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible9.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big6.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big6.jpg')}}" class="slick-slide slick-cloned" data-slick-index="2" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible1.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big7.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big7.jpg')}}" class="slick-slide slick-cloned" data-slick-index="3" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible2.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big8.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big8.jpg')}}" class="slick-slide slick-cloned" data-slick-index="4" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible3.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big9.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big9.jpg')}}" class="slick-slide slick-cloned" data-slick-index="5" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible4.jpg')}}" alt="" />
-                                            </a>
-                                            <a data-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big10.jpg')}}" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big10.jpg')}}" class="slick-slide slick-cloned" data-slick-index="6" aria-hidden="true" tabindex="-1">
-                                                <img class="blur-up lazyload" src="{{asset('front/assets/images/product-detail-page/camelia-reversible5.jpg')}}" alt="" />
+                                        @foreach($proimage as $img)
+                                            <a data-image="{{asset('admin/color/'.$img->image)}}" data-zoom-image="{{asset('admin/color/'.$img->image)}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                                <img class="blur-up lazyload" src="{{asset('admin/color/'.$img->image)}}" alt="" />
+                                        @endforeach
                                             </a>
                                         </div>
                                     </div>
                                     <div class="zoompro-wrap product-zoom-right pl-20">
                                         <div class="zoompro-span">
-                                            <img class="blur-up lazyload zoompro" data-zoom-image="{{asset('front/assets/images/product-detail-page/camelia-reversible-big1.jpg')}}" alt="" src="{{asset('front/assets/images/product-detail-page/camelia-reversible-big1.jpg')}}" />
+                                            <img class="blur-up lazyload zoompro" data-zoom-image="{{asset('admin/color/'.$colorzoom->image)}}" alt="" src="{{asset('admin/color/'.$colorzoom->image)}}" />
                                         </div>
                                         <div class="product-labels"><span class="lbl on-sale">Sale</span><span class="lbl pr-label1">new</span></div>
                                         <div class="product-buttons">
@@ -66,17 +38,10 @@
                                         </div>
                                     </div>
                                     <div class="lightboximages">
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big1.jpg')}}" data-size="1462x2048"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big2.jpg')}}" data-size="1462x2048"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big3.jpg')}}" data-size="1462x2048"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible7-big.jpg')}}" data-size="1462x2048"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big4.jpg')}}" data-size="1462x2048"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big5.jpg')}}" data-size="1462x2048"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big6.jpg')}}" data-size="731x1024"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big7.jpg')}}" data-size="731x1024"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big8.jpg')}}" data-size="731x1024"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big9.jpg')}}" data-size="731x1024"></a>
-                                        <a href="{{asset('front/assets/images/product-detail-page/camelia-reversible-big10.jpg')}}" data-size="731x1024"></a>
+                                        <a href="{{asset('admin/color/'.$colorzoom->image)}}" data-size="1462x2048"></a>
+                                        @foreach($proimage as $img)
+                                        <a href="{{asset('admin/color'.$img->image)}}" data-size="1462x2048"></a>
+                                        @endforeach
                                     </div>
         
                                 </div>
