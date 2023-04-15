@@ -29,7 +29,7 @@
 </div> -->
 <div class="pageWrapper">
 	<!--Promotion Bar-->
-	@include('layouts.front.include.nav', ['cartNav' => $cartNav])
+	@include('layouts.front.include.nav')
 <!--------------------------End Header------------------------------------->
 <!--------------------------End Header------------------------------------->
 <!--------------------------End Header------------------------------------->
