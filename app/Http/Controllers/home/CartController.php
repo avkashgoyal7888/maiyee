@@ -46,6 +46,48 @@ class CartController extends Controller
             
 
         }
+    }
 
+    public function cartEdit(Request $req)
+    {
+        $val = Validator::make($req->all(), [
+            'id' => 'required|exists:carts,id',
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+        } else {
+            $data = Cart::findOrFail($req->id);
+            $data->quantity = $req->quantity;
+            $up = $data->update();
+
+            if ($up) {
+                return response()->json(['status'=>true, 'msg'=>'Updated Successfully....']);
+            } else {
+                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later.....']);
+            }
+        }
+    }
+
+    public function cartDelete(Request $req)
+    {
+        $val = Validator::make($req->all(), [
+            'id' => 'required|exists:carts,id',
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+        } else {
+
+            $rem = Cart::findOrFail($req->id);
+
+            $del = $rem->delete();
+
+            if ($del) {
+                return response()->json(['status'=>true,'msg'=>'deleted Successfully.....']);
+            } else {
+                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later....']);
+            }
+        }
     }
 }

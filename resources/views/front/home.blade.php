@@ -773,7 +773,10 @@
                            progressBar: true,
                            closeButton: true
                        });
-                       window.location.reload();
+                       $('#' + formID)[0].reset(); // use [0] to select DOM element from jQuery object
+                        $('#' + formID + ' button[type=submit]').prop('disabled', false);
+
+                       // window.location.reload();
                    }
                },
                error: function(jqXHR, exception) {

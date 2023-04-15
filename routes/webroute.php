@@ -20,6 +20,8 @@ use App\Http\Controllers\home\CartController;
 	Route::group(['middleware'=>'auth'], function() {
 		Route::get('/cart', [HomeController::class, 'cart'])->name('web.cart');
 		Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('web.add.cart');
+		Route::post('/cart-to-cart', [CartController::class, 'cartDelete'])->name('web.delete.cart');
+		Route::post('/cart-quantity-edit', [CartController::class, 'cartEdit'])->name('edit.cart');
 		Route::get('/logout', [HomeController::class, 'logOut'])->name('web.logout');
 	});
 
