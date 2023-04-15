@@ -28,10 +28,7 @@ class HomeController extends Controller
         ->get();
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)
-            ->latest()
-            ->limit(2)
-            ->get();
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         }
         return view('front.home',compact('banner','product', 'color','size','cartNav'));
     }
@@ -43,38 +40,56 @@ class HomeController extends Controller
 
     public function disclaimer()
     {
+        $cartNav = Cart::get();
+        if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        }
         return view('front.disclaimer', compact('cartNav'));
     }
 
     public function policy()
     {
+        $cartNav = Cart::get();
+        if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        }
         return view('front.policy',compact('cartNav'));
     }
 
     public function refund()
     {
+        $cartNav = Cart::get();
+        if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        }
         return view('front.refund', compact('cartNav'));
     }
 
     public function shipping()
     {
+        $cartNav = Cart::get();
+        if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        }
         return view('front.shipping',compact('cartNav'));
     }
 
     public function cart()
     {
+        $cartNav = Cart::get();
+        if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        }
         $cart = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
         return view('front.cart', compact('cart', 'cartNav'));
     }
 
     public function productDetail(Request $req)
     {
+        $cartNav = Cart::get();
+        if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        }
         $color = Color::where('product_id', $req->id)->get();
         $product = Product::where('id', $req->id)->first();
         $size = Size::where('product_id', $req->id)->get();
