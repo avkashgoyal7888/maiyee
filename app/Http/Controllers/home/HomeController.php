@@ -35,7 +35,11 @@ class HomeController extends Controller
 
     public function register()
     {
-        return view('front.auth.register');
+        $cartNav = Cart::get();
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        }
+        return view('front.auth.register', compact('cartNav'));
     }
 
     public function disclaimer()
