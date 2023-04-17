@@ -52,12 +52,17 @@ class CheckOutController extends Controller
             $upd = $data->update();
             $cartTotal = Cart::where('user_id', Auth::guard('web')->user()->id)->sum('total');
 
-            if ($data->coupon_type == 'amount') {
-                $newCartTotal = $cartTotal - $data->coupon_amount;
-            }
+             if($data->coupon_type == 'amount') {
+                $newCartTotal = $cartTotal - $data->coupon_price;
+                }
+
+                if($data->coupon_type == '%') {
+                $newCartTotal = $cartTotal - ($cartTotal * ($data->coupon_price / 100));
+                }
 
 
             if ($upd) {
+                return response()->json(['status'=>true, 'msg'=>'Coupon Applied Successfully....', 'newCartTotal' => $newCartTotal]);
                 return response()->json(['status'=>true, 'msg'=>'Coupon Applied Successfully....']);
             } else {
                 return response()->json(['status'=>false, 'msg'=>'Something went Wrong try again later....']);

@@ -153,7 +153,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="3" class="text-right">Total</td>
-                                            <td>${{$cartTotal}}</td>
+                                            <td id="cartTotal">${{$cartTotal}}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -204,21 +204,22 @@
                    $('#addBtn').prop('disabled', true)
                },
                success: function(result) {
-                   if (result.status === false) {
-                       toastr.error(result.msg, 'Error', {
-                           timeOut: 3000,
-                           progressBar: true,
-                           closeButton: true
-                       });
-                   } else if (result.status === true) {
-                       toastr.success(result.msg, 'Success', {
-                           timeOut: 3000,
-                           progressBar: true,
-                           closeButton: true
-                       });
-                       window.location.reload();
-                   }
-               },
+    			if (result.status === false) {
+        			toastr.error(result.msg, 'Error', {
+            		timeOut: 3000,
+            		progressBar: true,
+            		closeButton: true
+        		});
+    				} else if (result.status === true) {
+        			toastr.success(result.msg, 'Success', {
+            		timeOut: 3000,
+            		progressBar: true,
+            		closeButton: true
+        		});
+        		$('#cartTotal').text(result.newCartTotal); // Update table with new cart total
+        // window.location.reload();
+    }
+},
                error: function(jqXHR, exception) {
                    console.log(jqXHR.responseJSON);
                    toastr.error(result.msg, 'Error', {
