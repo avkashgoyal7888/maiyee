@@ -49,7 +49,7 @@ class CheckOutController extends Controller
             $data->coupon_code = $req->coupon_code;
             $data->status = '1';
             $data->used_date = date('Y-m-d');
-            $upd = $data->update();
+            $upd = $data;
             $cartTotal = Cart::where('user_id', Auth::guard('web')->user()->id)->sum('total');
 
              if($data->coupon_type == 'amount') {
