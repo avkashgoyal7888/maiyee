@@ -34,6 +34,7 @@ class CartController extends Controller
             $data->price = $req->price;
             $data->gst = $req->gst;
             $data->quantity = $req->quantity;
+            $data->total = $req->quantity*$req->price;
             $data->user_id = $uid;
 
             $ins = $data->save();
@@ -59,6 +60,7 @@ class CartController extends Controller
         } else {
             $data = Cart::findOrFail($req->id);
             $data->quantity = $req->quantity;
+            $data->total = $req->quantity*$data->price;
             $up = $data->update();
 
             if ($up) {

@@ -170,11 +170,11 @@
                             </ul>
                             <div class="total">
                                 <div class="total-in">
-                                    <span class="label">Cart Subtotal:</span><span class="product-price"><span class="money">₹748.00</span></span>
+                                    <span class="label">Cart Subtotal:</span><span class="product-price"><span class="money">₹{{$cartTotalnav}}</span></span>
                                 </div>
                                  <div class="buttonSet text-center">
                                     <a href="{{route('web.cart')}}" class="btn btn-secondary btn--small">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-secondary btn--small">Checkout</a>
+                                    <a href="{{route('web.checkout')}}" class="btn btn-secondary btn--small">Checkout</a>
                                 </div>
                             </div>
                         </div>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->double('price', 10,2)->default(0.00);
             $table->double('gst', 10,2)->default(0.00);
             $table->integer('quantity')->default(1);
+            $table->double('total', 10,2)->default(0.00);
             $table->timestamps();
         });
     }

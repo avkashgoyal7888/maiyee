@@ -29,8 +29,9 @@ class HomeController extends Controller
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.home',compact('banner','product', 'color','size','cartNav'));
+        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav'));
     }
 
     public function register()
@@ -38,8 +39,9 @@ class HomeController extends Controller
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.auth.register', compact('cartNav'));
+        return view('front.auth.register', compact('cartNav','cartTotalnav'));
     }
 
     public function disclaimer()
@@ -47,8 +49,9 @@ class HomeController extends Controller
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.disclaimer', compact('cartNav'));
+        return view('front.disclaimer', compact('cartNav','cartTotalnav'));
     }
 
     public function policy()
@@ -56,8 +59,9 @@ class HomeController extends Controller
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.policy',compact('cartNav'));
+        return view('front.policy',compact('cartNav','cartTotalnav'));
     }
 
     public function refund()
@@ -65,8 +69,9 @@ class HomeController extends Controller
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.refund', compact('cartNav'));
+        return view('front.refund', compact('cartNav','cartTotalnav'));
     }
 
     public function shipping()
@@ -74,8 +79,9 @@ class HomeController extends Controller
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.shipping',compact('cartNav'));
+        return view('front.shipping',compact('cartNav','cartTotalnav'));
     }
 
     public function cart()
@@ -83,9 +89,11 @@ class HomeController extends Controller
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartTotalnav = $cartNav->sum('total');
         }
         $cart = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
-        return view('front.cart', compact('cart', 'cartNav'));
+        $cartTotal = $cart->sum('total');
+        return view('front.cart', compact('cart', 'cartNav','cartTotal','cartTotalnav'));
     }
 
     public function productDetail(Request $req)
@@ -93,13 +101,14 @@ class HomeController extends Controller
         $cartNav = Cart::get();
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartTotalnav = $cartNav->sum('total');
         }
         $color = Color::where('product_id', $req->id)->get();
         $product = Product::where('id', $req->id)->first();
         $size = Size::where('product_id', $req->id)->get();
         $colorzoom = Color::where('product_id', $req->id)->first();
         $proimage = ProductImage::where('product_id', $req->id)->get();
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage'));
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav'));
     }
 
     public function loginSubmit(Request $req)

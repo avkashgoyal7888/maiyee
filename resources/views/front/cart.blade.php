@@ -64,7 +64,7 @@
          <div class="solid-border">
             <div class="row">
                <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Subtotal</strong></span>
-               <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">$735.00</span></span>
+               <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">${{$cartTotal}}</span></span>
             </div>
             <div class="cart__shipping">Shipping &amp; taxes calculated at checkout</div>
             <p class="cart_tearm">
@@ -72,7 +72,7 @@
                <input type="checkbox" name="tearm" id="cartTearm" class="checkbox" value="tearm" required="">
                I agree with the terms and conditions</label>
             </p>
-            <input type="submit" name="checkout" id="cartCheckout" class="btn btn--small-wide checkout" value="Checkout" disabled="disabled">
+            <a href="{{route('web.checkout')}}" name="checkout" id="cartCheckout" class="btn btn--small-wide checkout" value="Checkout" disabled="disabled">CheckOut</a>
             <div class="paymnet-img"><img src="{{asset('front/assets/images/payment-img.jpg')}}" alt="Payment"></div>
          </div>
       </div>
