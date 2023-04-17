@@ -27,6 +27,7 @@ class HomeController extends Controller
         ->whereIn('color_id', $color->pluck('id'))
         ->get();
         $cartNav = Cart::get();
+        $cartTotalnav = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartTotalnav = $cartNav->sum('total');
@@ -37,6 +38,7 @@ class HomeController extends Controller
     public function register()
     {
         $cartNav = Cart::get();
+        $cartTotalnav = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartTotalnav = $cartNav->sum('total');
@@ -47,6 +49,7 @@ class HomeController extends Controller
     public function disclaimer()
     {
         $cartNav = Cart::get();
+        $cartTotalnav = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartTotalnav = $cartNav->sum('total');
@@ -57,6 +60,7 @@ class HomeController extends Controller
     public function policy()
     {
         $cartNav = Cart::get();
+        $cartTotalnav = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartTotalnav = $cartNav->sum('total');
@@ -67,6 +71,7 @@ class HomeController extends Controller
     public function refund()
     {
         $cartNav = Cart::get();
+        $cartTotalnav = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartTotalnav = $cartNav->sum('total');
@@ -77,6 +82,7 @@ class HomeController extends Controller
     public function shipping()
     {
         $cartNav = Cart::get();
+        $cartTotalnav = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartTotalnav = $cartNav->sum('total');
@@ -87,6 +93,7 @@ class HomeController extends Controller
     public function cart()
     {
         $cartNav = Cart::get();
+        $cartTotalnav = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartTotalnav = $cartNav->sum('total');
@@ -99,6 +106,7 @@ class HomeController extends Controller
     public function productDetail(Request $req)
     {
         $cartNav = Cart::get();
+        $cartTotalnav = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartTotalnav = $cartNav->sum('total');
