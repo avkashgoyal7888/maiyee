@@ -34,6 +34,7 @@
                      <th colspan="2" class="text-center">Product</th>
                      <th class="text-center">Price</th>
                      <th class="text-center">Quantity</th>
+                     <th class="text-center">Remove</th>
                   </tr>
                </thead>
                <tbody>
@@ -61,9 +62,10 @@
                               <input class="cart__qty-input qty" type="text" name="quantity" id="qty_{{ $carts->id }}" value="{{ $carts->quantity }}" pattern="[0-9]*">
                               <a class="qtyBtn plus" href="javascript:void(0);" id="plusBtn" data-id="{{ $carts->id }}"><i class="icon icon-plus"></i></a>
                            </div>
-                           <button data-id="{{$carts->id}}" class="btn btn--secondary cart__remove deleteCart" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
                         </div>
-                        
+                     </td>
+                     <td class="cart__price-wrapper">
+                        <button data-id="{{$carts->id}}" class="btn btn--secondary cart__remove deleteCart" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
                      </td>
                   </tr>
                   @endforeach
