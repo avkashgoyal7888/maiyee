@@ -15,14 +15,16 @@ class CheckOutController extends Controller
     public function index()
     {
         $cartNav = Cart::get();
+        $cartCount = 0;
         if(Auth::guard('web')->check()) {
         $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
         $cart = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
         $cartTotal = $cart->sum('total');
         $user = UserAddress::where('user_id', Auth::guard('web')->user()->id)->get();
-        return view('front.checkout.index', compact('cartNav', 'cartTotalnav','cart','cartTotal','user'));
+        return view('front.checkout.index', compact('cartNav', 'cartTotalnav','cart','cartTotal','user','cartCount'));
     }
 
     public function applyCoupon(Request $req)
@@ -64,10 +66,22 @@ class CheckOutController extends Controller
 
 
             if ($upd) {
-                return response()->json(['status'=>true, 'msg'=>'Coupon Applied Successfully....', 'newCartTotal' => $newCartTotal]);
-                return response()->json(['status'=>true, 'msg'=>'Coupon Applied Successfully....']);
-            } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went Wrong try again later....']);
+                if($data->coupon_type == 'amount') {
+                    $newCartTotal = $cartTotal - $data->coupon_price;
+                    $discount = $data->coupon_price;
+                }
+                if($data->coupon_type == '%') {
+                    $discount = $cartTotal * ($data->coupon_price / 100);
+                    $newCartTotal = $cartTotal - $discount;
+                }
+                return response()->json([
+                    'status'=>true,
+                    'msg'=>'Coupon Applied Successfully....',
+                    'discount' => $discount,
+                    'newCartTotal' => $newCartTotal
+                ]);
+                } else {
+                    return response()->json(['status'=>false, 'msg'=>'Something went Wrong try again later....']);
             }
         }
     }

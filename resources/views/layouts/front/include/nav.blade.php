@@ -130,7 +130,7 @@
                         @if(Auth::guard('web')->user() != '')
                         <a href="#" class="site-header__cart" title="Cart">
                             <i class="icon anm anm-bag-l"></i>
-                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">2</span>
+                            <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">{{$cartCount}}</span>
                         </a>
                         @else
                         <a href="#" data-toggle="modal" data-target="#myModal">

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->string('state', 20);
             $table->string('city', 30);
             $table->string('pin_code',6);
-            $table->string('notes')->nullable();
             $table->timestamps();
         });
     }

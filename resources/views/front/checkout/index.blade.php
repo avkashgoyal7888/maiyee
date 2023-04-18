@@ -27,7 +27,7 @@
                            <select name="state_id" id="user-address">
                               <option value=""> --- Choose Address --- </option>
                               @foreach($user as $users)
-                              <option value="{{$users->id}}" data-name="{{$users->name}}" data-email="{{$users->email}}" data-contact="{{$users->contact}}" data-address="{{$users->address}}" data-landmark="{{$users->landmark}}" data-state="{{$users->state}}" data-city="{{$users->city}}" data-pin="{{$users->pin_code}}" data-notes="{{$users->notes}}">{{$users->address}} </option>
+                              <option value="{{$users->id}}" data-name="{{$users->name}}" data-email="{{$users->email}}" data-contact="{{$users->contact}}" data-address="{{$users->address}}" data-landmark="{{$users->landmark}}" data-state="{{$users->state}}" data-city="{{$users->city}}" data-pin="{{$users->pin_code}}">{{$users->name}}.{{$users->address}}</option>
                               @endforeach
                            </select>
                         </div>
@@ -152,7 +152,15 @@
                         </tr>
                         <tr>
                            <td colspan="3" class="text-right">Total</td>
-                           <td id="cartTotal">${{$cartTotal}}</td>
+                           <td>${{$cartTotal}}</td>
+                        </tr>
+                        <tr>
+                           <td colspan="3" class="text-right">Discount</td>
+                           <td id="cartDiscount"></td>
+                        </tr>
+                        <tr>
+                           <td colspan="3" class="text-right">Final Price</td>
+                           <td id="cartTotal"></td>
                         </tr>
                      </tfoot>
                   </table>
@@ -198,7 +206,6 @@
                   $('#state').val(selectedAddress.data('state')).prop('readonly', true);
                   $('#city').val(selectedAddress.data('city')).prop('readonly', true);
                   $('#pin').val(selectedAddress.data('pin')).prop('readonly', true);
-                  $('#notes').val(selectedAddress.data('notes')).prop('readonly', true);
               } else {
                   // Clear the input fields and make them editable
                   $('#name').val('').prop('readonly', false);
@@ -209,7 +216,6 @@
                   $('#state').val('').prop('readonly', false);
                   $('#city').val('').prop('readonly', false);
                   $('#pin').val('').prop('readonly', false);
-                  $('#notes').val('').prop('readonly', false);
               }
           });
    	$('#user-address').on('change', function() {
@@ -217,15 +223,14 @@
       var fullAddress = '';
       @foreach($user as $users)
         if ('{{$users->id}}' === selected) {
-          fullAddress += '{{$users->name}}\n';
-          fullAddress += '{{$users->email}}\n';
-          fullAddress += '{{$users->contact}}\n';
-          fullAddress += '{{$users->address}}\n';
-          fullAddress += '{{$users->landmark}}\n';
-          fullAddress += '{{$users->state}}\n';
-          fullAddress += '{{$users->city}}\n';
-          fullAddress += '{{$users->pincode}}\n';
-          fullAddress += '{{$users->notes}}\n';
+          fullAddress += '{{$users->name}} ';
+          fullAddress += '{{$users->email}} ';
+          fullAddress += '{{$users->contact}} ';
+          fullAddress += '{{$users->address}} ';
+          fullAddress += '{{$users->landmark}} ';
+          fullAddress += '{{$users->state}} ';
+          fullAddress += '{{$users->city}} ';
+          fullAddress += '{{$users->pin_code}} ';
         }
       @endforeach
       $('#fullAddress').val(fullAddress);
@@ -259,7 +264,8 @@
               		progressBar: true,
               		closeButton: true
           		});
-          		$('#cartTotal').text(result.newCartTotal); // Update table with new cart total
+          		$('#cartTotal').text(result.newCartTotal);
+               $('#cartDiscount').text(result.discount); // Update table with new cart total
           // window.location.reload();
       }
    },
