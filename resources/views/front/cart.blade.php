@@ -50,7 +50,7 @@
                         </div>
                      </td>
                      <td class="cart__price-wrapper">
-                        <span class="money">${{$carts->price}}</span>
+                        <span class="money">₹{{$carts->price}}</span>
                         <div class="cart style2">
                            <div class="qtyField">
                               <a class="qtyBtn minus" href="javascript:void(0);" id="minusBtn" data-id="{{ $carts->id }}"><i class="icon icon-minus"></i></a>
@@ -58,8 +58,9 @@
                               <input class="cart__qty-input qty" type="text" name="quantity" id="qty_{{ $carts->id }}" value="{{ $carts->quantity }}" pattern="[0-9]*">
                               <a class="qtyBtn plus" href="javascript:void(0);" id="plusBtn" data-id="{{ $carts->id }}"><i class="icon icon-plus"></i></a>
                            </div>
+                           <button data-id="{{$carts->id}}" class="btn btn--secondary cart__remove deleteCart" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
                         </div>
-                        <button data-id="{{$carts->id}}" class="btn btn--secondary cart__remove deleteCart" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
+                        
                      </td>
                   </tr>
                   @endforeach
