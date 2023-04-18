@@ -1,6 +1,12 @@
 @extends('layouts.front.app')
 @section('css')
 <title>Disclaimer</title>
+<style>
+   .block {
+   pointer-events: none;
+   opacity: 0.5;
+   }
+</style>
 @stop
 @section('content')
 <!--Page Title-->
@@ -13,6 +19,9 @@
 </div>
 <!--End Page Title-->
 <div class="container">
+    <div id="loader" style="display:none;">
+    @include('components.loader')
+   </div>
    <div class="row">
       <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col">
          <div class="alert alert-success text-uppercase" role="alert">
@@ -72,7 +81,7 @@
                <input type="checkbox" name="tearm" id="cartTearm" class="checkbox" value="tearm" required="">
                I agree with the terms and conditions</label>
             </p>
-            <a href="{{route('web.checkout')}}" name="checkout" id="cartCheckout" class="btn btn--small-wide checkout" value="Checkout" disabled="disabled">CheckOut</a>
+            <a href="{{route('web.checkout')}}" name="checkout" id="cartCheckout" class="btn btn--small-wide block" value="Checkout">CheckOut</a>
             <div class="paymnet-img"><img src="{{asset('front/assets/images/payment-img.jpg')}}" alt="Payment"></div>
          </div>
       </div>
@@ -108,6 +117,16 @@
 @section('js')
 <script>
    $(document).ready(function(){
+    const $checkbox = $('#cartTearm');
+   const $checkoutBtn = $('#cartCheckout');
+   
+   $checkbox.change(function() {
+    if (this.checked) {
+      $checkoutBtn.removeClass('block');
+    } else {
+      $checkoutBtn.addClass('block');
+    }
+   });
      // Get the initial quantity value
        $('.qtyBtn').click(function() {
        var action = $(this).attr('id').indexOf('plus') !== -1 ? 'plus' : 'minus';
@@ -140,6 +159,7 @@
    
        // Disable the button
        $(this).prop('disabled', true);
+       $('#loader').show(); // show the loader
    
        $.ajax({
            type: 'POST',
@@ -178,6 +198,7 @@
            complete: function() {
                // Re-enable the button
                $('.qtyBtn').prop('disabled', false);
+               $('#loader').hide(); // show the loader
            }
        });
    }
@@ -200,6 +221,8 @@
                contentType: false,
                beforeSend: function() {
                    $('#addBtn').prop('disabled', true)
+                   $('#loader').show(); // show the loader
+                   $('#deleteClient').modal('toggle');
                },
                success: function(result) {
                    if (result.status === false) {
@@ -227,6 +250,7 @@
                },
                complete: function() {
                    $('#addBtn').prop('disabled', false);
+                   $('#loader').hide(); // hide the loader when done
                }
            });
        });

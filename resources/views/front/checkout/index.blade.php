@@ -1,6 +1,11 @@
 @extends('layouts.front.app')
 @section('css')
 <title>Checkout</title>
+<style>
+   #cartDiscount, #cartTotal {
+        display: table-cell;
+    }
+</style>
 @stop
 @section('content')
 <!--Page Title-->
@@ -154,11 +159,11 @@
                            <td colspan="3" class="text-right">Total</td>
                            <td>${{$cartTotal}}</td>
                         </tr>
-                        <tr>
+                        <tr id="discount" style="display: none;">
                            <td colspan="3" class="text-right">Discount</td>
                            <td id="cartDiscount"></td>
                         </tr>
-                        <tr>
+                        <tr id="total" style="display: none;">
                            <td colspan="3" class="text-right">Final Price</td>
                            <td id="cartTotal"></td>
                         </tr>
@@ -264,8 +269,15 @@
               		progressBar: true,
               		closeButton: true
           		});
-          		$('#cartTotal').text(result.newCartTotal);
-               $('#cartDiscount').text(result.discount); // Update table with new cart total
+          		 if(result.discount) {
+        $('#cartDiscount').text(result.discount);
+        $('#discount').show();
+    }
+    if(result.newCartTotal) {
+        $('#cartTotal').text(result.newCartTotal);
+        $('#total').show();
+    } 
+         // table with new cart total
           // window.location.reload();
       }
    },
