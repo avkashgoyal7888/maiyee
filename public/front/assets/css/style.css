@@ -1137,7 +1137,7 @@ table { margin-bottom:15px; width:100%; border-collapse:collapse; border-spacing
 .cart th.cart__meta, .cart td.cart__meta { text-align:left; }
 .cart__image-wrapper a { display:block; }
 .cart .list-view-item__title { color:#000; font-size:1.15385em; min-width:100px; }
-.cart__image-wrapper { width:120px; }
+.cart__image-wrapper { width:60px; }
 .cart .qtyField a { height:36px; line-height:34px; padding:0; margin-top: 10px; }
 .cart .qtyField .cart__qty-input { height:36px; width:40px; float:left; margin-top: 10px; }
 .cart .qtyField a .icon { line-height:33px; font-size:10px; margin-top: 10px;}
