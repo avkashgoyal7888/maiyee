@@ -65,7 +65,7 @@
                         </div>
                      </td>
                      <td class="cart__price-wrapper">
-                        <button data-id="{{$carts->id}}" class="btn btn--secondary cart__remove deleteCart" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
+                        <button data-id="{{$carts->id}}" class="cart__remove deleteCart" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
                      </td>
                   </tr>
                   @endforeach
