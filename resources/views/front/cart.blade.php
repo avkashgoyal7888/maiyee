@@ -79,7 +79,7 @@
          <div class="solid-border">
             <div class="row">
                <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Subtotal</strong></span>
-               <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">${{$cartTotal}}</span></span>
+               <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">₹{{$cartTotal}}</span></span>
             </div>
             <div class="cart__shipping">Shipping &amp; taxes calculated at checkout</div>
             <p class="cart_tearm">
