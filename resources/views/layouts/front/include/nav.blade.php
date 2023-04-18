@@ -135,7 +135,6 @@
                         @else
                         <a href="#" data-toggle="modal" data-target="#myModal">
                             <h2><i class="icon anm anm-bag-l"></i></h2>
-                            <span class="site-header__cart-count" data-cart-render="item_count"></span>
                         </a>
                         @endif
                         <!--Minicart Popup-->
