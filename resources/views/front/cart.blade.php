@@ -33,6 +33,8 @@
                   <tr>
                      <th colspan="2" class="text-center">Product</th>
                      <th class="text-center">Price</th>
+                     <th class="text-center">Quantity</th>
+                     <th class="text-center">Remove</th>
                   </tr>
                </thead>
                <tbody>
@@ -50,7 +52,9 @@
                         </div>
                      </td>
                      <td class="cart__price-wrapper">
-                        <span class="money">${{$carts->price}}</span>
+                        <span class="money">₹{{$carts->price}}</span>
+                     </td>
+                     <td class="cart__price-wrapper">
                         <div class="cart style2">
                            <div class="qtyField">
                               <a class="qtyBtn minus" href="javascript:void(0);" id="minusBtn" data-id="{{ $carts->id }}"><i class="icon icon-minus"></i></a>
@@ -59,7 +63,9 @@
                               <a class="qtyBtn plus" href="javascript:void(0);" id="plusBtn" data-id="{{ $carts->id }}"><i class="icon icon-plus"></i></a>
                            </div>
                         </div>
-                        <button data-id="{{$carts->id}}" class="btn btn--secondary cart__remove deleteCart" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
+                     </td>
+                     <td class="cart__price-wrapper">
+                        <button data-id="{{$carts->id}}" class="cart__remove deleteCart" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
                      </td>
                   </tr>
                   @endforeach
@@ -73,7 +79,7 @@
          <div class="solid-border">
             <div class="row">
                <span class="col-12 col-sm-6 cart__subtotal-title"><strong>Subtotal</strong></span>
-               <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">${{$cartTotal}}</span></span>
+               <span class="col-12 col-sm-6 cart__subtotal-title cart__subtotal text-right"><span class="money">₹{{$cartTotal}}</span></span>
             </div>
             <div class="cart__shipping">Shipping &amp; taxes calculated at checkout</div>
             <p class="cart_tearm">

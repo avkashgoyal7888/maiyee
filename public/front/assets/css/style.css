@@ -1137,12 +1137,12 @@ table { margin-bottom:15px; width:100%; border-collapse:collapse; border-spacing
 .cart th.cart__meta, .cart td.cart__meta { text-align:left; }
 .cart__image-wrapper a { display:block; }
 .cart .list-view-item__title { color:#000; font-size:1.15385em; min-width:100px; }
-.cart__image-wrapper { width:120px; }
+.cart__image-wrapper { width:60px; }
 .cart .qtyField a { height:36px; line-height:34px; padding:0; margin-top: 10px; }
 .cart .qtyField .cart__qty-input { height:36px; width:40px; float:left; margin-top: 10px; }
 .cart .qtyField a .icon { line-height:33px; font-size:10px; margin-top: 10px;}
-.cart .cart__remove { border:0; margin-top:4px; font-size:14px; padding:0; color: red; height:25px; width:25px; vertical-align:middle; line-height:25px; }
-.cart .cart__remove .icon { line-height:24px; color: red; }
+.cart__remove { border:0; margin-top:4px; font-size:12px; padding:0; background-color: #efefef; height:20px; width:20px; vertical-align:middle; line-height:25px; }
+.cart__remove .icon { line-height:24px; color: red; }
 .cart table tfoot .icon { vertical-align:middle; }
 .style2 .cart__footer .cart-note { margin-bottom:30px; }
 .cart__footer .solid-border { border:1px solid #e8e9eb; padding:20px; margin-bottom:20px; }
