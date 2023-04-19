@@ -4,6 +4,7 @@ namespace App\Http\Controllers\home;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use App\Models\Banner;
 use App\Models\Product;
@@ -151,6 +152,52 @@ class HomeController extends Controller
         }
 
     }
+
+    public function redirectToGoogle()
+    {
+        return Socialite::driver('google')->redirect();
+    }
+
+    public function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->user();
+    
+        // insert user information into users table
+        User::updateOrCreate([
+            'email' => $user->getEmail(),
+        ], [
+            'name' => $user->getName(),
+            'password' => Hash::make(Str::random(24)),
+        ]);
+    
+        // log in the user  
+        auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
+    
+        return redirect()->route('web.home');
+    }
+
+    public function redirectToFacebook()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+
+    public function handleFacebookCallback()
+{
+    $user = Socialite::driver('facebook')->user();
+
+    // insert user information into users table
+    User::updateOrCreate([
+        'email' => $user->getEmail(),
+    ], [
+        'name' => $user->getName(),
+        'password' => Hash::make(Str::random(24)),
+    ]);
+
+    // log in the user
+    auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
+
+    return redirect()->route('web.home');
+}
 
     public function registerSubmit(Request $req)
     {

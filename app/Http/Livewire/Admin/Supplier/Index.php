@@ -197,11 +197,23 @@ class Index extends Component
 
     }
 
+    public function deleteSupplier($id)
+    {
+        $supplier = supplier::find($id);
+        if ($supplier) {
+            $this->supplier_id = $supplier->id;
+
+        } else {
+            return redirect()->to('/admin/state');
+        }
+    }
+
     //Function to delete record
 
-    public function delete($id)
+    public function delete()
     {
-        Supplier::Where('id', $id)->delete();
+        Supplier::Where('id', $this->supplier_id)->delete();
+        $this->resetinputfields();
         session()->flash('success', 'Supplier Deleted Successfully...');
         $this->emit('closemodal');
 

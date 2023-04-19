@@ -12,7 +12,7 @@ class Index extends Component
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
-    public $search, $image, $tag;
+    public $search, $image, $tag, $banner_id;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -52,9 +52,21 @@ class Index extends Component
             session()->flash('success', 'Congratulations !! Banner Added Successfully...');
             $this->emit('closemodal');
     }
-    public function delete($id)
+
+    public function deleteBanner($id)
     {
-        $banner = Banner::where('id', $id)->first();
+        $banner = Banner::find($id);
+        if ($banner) {
+            $this->banner_id = $banner->id;
+
+        } else {
+            return redirect()->to('/admin/banner');
+        }
+
+    }
+    public function delete()
+    {
+        $banner = Banner::where('id', $this->banner_id)->first();
     
         if ($banner->image != null) {
             $image_path = public_path('admin/banner/' . $banner->image);
@@ -62,7 +74,6 @@ class Index extends Component
                 unlink($image_path);
             }
         }
-    
         $banner->delete();
         session()->flash('success', 'Congratulations !! Banner Deleted Successfully...');
         $this->emit('closemodal');

@@ -66,8 +66,12 @@
                 <div class="card2 card border-0 px-4 py-5">
                     <div class="row mb-4 px-3" style="margin: auto;">
                         <h6 class="mb-0 mr-4 mt-2">Sign in with</h6>
-                        <div class="facebook text-center mr-3"><div class="fa fa-facebook"></div></div>
-                        <div class="google text-center mr-3"><div class="fa fa-google"></div></div>
+                        <div class="facebook text-center mr-3"><div class="fa fa-facebook">
+                            <a href="{{ route('auth.facebook.redirect') }}" class="fa fa-facebook"></a>
+                        </div></div>
+                        <div class="google text-center mr-3"><div class="fa fa-google">
+                            <a href="{{ route('auth.google.redirect') }}" class="fa fa-google"></a>
+                        </div></div>
                         <div class="instagram text-center mr-3"><div class="fa fa-instagram"></div></div>
                     </div>
                     <div class="row px-3 mb-4">

@@ -44,7 +44,7 @@
                         <td width="60%"><img src="{{ asset('admin/color/' . $pros->image) }}" width="300" height="100" /></td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editColor({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
-                           <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$pros->id}})"><i class="fas fa-trash"></i></button>
+                           <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteColor({{$pros->id}})"><i class="fas fa-trash"></i></button>
                         </td>
                      </tr>
                      @empty
@@ -102,7 +102,7 @@
                            </select>
                            @error('product_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                           <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Color</label>
                            <select class="form-control" wire:model="color_id">
                               <option>Select A Color</option>
@@ -113,15 +113,15 @@
                            </select>
                            @error('color_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                           <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                              @foreach ($fields as $index => $field)
-                              <label for="image{{$index}}" class="form-label">Image</label>
-                              <input type="file" class="form-control" placeholder="Select Image" wire:model="fields.{{ $index }}.image" accept="image/*">
-                              @error("fields.{$index}.image")<span class="text-danger">{{$message}}</span>@enderror
-                              <button class="btn btn-danger float-right" type="button" wire:click="removeField({{ $index }})">-</button>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           @foreach ($fields as $index => $field)
+                           <label for="image{{$index}}" class="form-label">Image</label>
+                           <input type="file" class="form-control" placeholder="Select Image" wire:model="fields.{{ $index }}.image" accept="image/*">
+                           @error("fields.{$index}.image")<span class="text-danger">{{$message}}</span>@enderror
+                           <button class="btn btn-danger float-right" type="button" wire:click="removeField({{ $index }})">-</button>
                            @endforeach
-                           </div>
-                           <button class="btn btn-success float-right" type="button" wire:click="addField">+</button>
+                        </div>
+                        <button class="btn btn-success float-right" type="button" wire:click="addField">+</button>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -150,7 +150,7 @@
                            <label for="nameExLarge" class="form-label">Image</label>
                            <input type="file" class="form-control" wire:model='image'>
                            @error('image')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -163,4 +163,24 @@
       </div>
    </div>
    <!-- End Here -->
+   <!-- Delete modal -->
+   <div wire:ignore.self class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myLargeModalLabel">Delete Image</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form wire:submit.prevent='delete()'>
+               <input type="hidden" wire:model='colordelete_id'>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark">Delete</button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>

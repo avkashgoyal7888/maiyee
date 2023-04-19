@@ -15,6 +15,11 @@ use App\Http\Controllers\home\CheckOutController;
 		Route::get('/shipping', 'shipping')->name('web.shipping');
 		Route::get('/product-detail/{id}', 'productDetail')->name('web.product.detail');
 		Route::post('/login-submit', 'loginSubmit')->name('web.login.submit');
+		Route::get('/auth/google','redirectToGoogle')->name('auth.google.redirect');
+		Route::get('/auth/google/callback','handleGoogleCallback');
+		Route::get('/auth/facebook', 'redirectToFacebook')->name('auth.facebook.redirect');
+		Route::get('/auth/facebook/callback', 'handleFacebookCallback');
+
 		
 	});
 

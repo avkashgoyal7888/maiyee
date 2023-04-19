@@ -61,6 +61,7 @@ class Index extends Component
         $this->gst_rate = '';
         $this->discount = '';
         $this->details = '';
+        $this->pro_id = '';
     }
 
     protected $rules = [
@@ -152,12 +153,23 @@ class Index extends Component
 
     }
 
-    public function delete($id)
+    public function deleteProduct($id)
     {
-        Product::Where('id', $id)->delete();
+        $product = Product::find($id);
+        if ($product) {
+            $this->pro_id = $product->id;
+
+        } else {
+            return redirect()->to('/admin/product');
+        }
+    }
+
+    public function delete()
+    {
+        Product::Where('id', $this->pro_id)->delete();
+        $this->resetinputfields();
         session()->flash('success', 'Product Deleted Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function render()

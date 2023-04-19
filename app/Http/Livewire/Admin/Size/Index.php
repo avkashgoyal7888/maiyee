@@ -17,7 +17,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $size, $product_id,$product, $color, $color_id;
+    public $size_id,$category_id, $subcategory_id, $subcategories, $category, $size, $product_id,$product, $color, $color_id;
     public $fields = [
         ['size' => ''],
     ];
@@ -79,6 +79,7 @@ class Index extends Component
         $this->color_id = '';
         $this->size = '';
         $this->fields = [];
+        $this->size_id = '';
     }
 
     protected $rules = [
@@ -126,7 +127,7 @@ class Index extends Component
     {
         $store = Size::find($id);
         if ($store) {
-            $this->pro_id = $store->id;
+            $this->size_id = $store->id;
             $this->size = $store->size;
 
         } else {
@@ -138,8 +139,7 @@ class Index extends Component
     public function updateSize()
     {
         $validatedata = $this->validate();
-        $data = Size::find($this->pro_id);
-        Size::where('id', $this->pro_id)->update([
+        Size::where('id', $this->size_id)->update([
             'size' => $this->size,
         ]);
         $this->resetinputfields();
@@ -147,12 +147,22 @@ class Index extends Component
         $this->emit('closemodal');
     }
 
-
-
-    public function delete($id)
+    public function deleteSize($id)
     {
-        $size = Size::where('id', $id)->first();
+        $size = Size::find($id);
+        if ($size) {
+            $this->size_id = $size->id;
+
+        } else {
+            return redirect()->to('/admin/size');
+        }
+    }
+
+    public function delete()
+    {
+        $size = Size::where('id', $this->size_id)->first();
         $size->delete();
+        $this->resetinputfields();
         session()->flash('success', 'Congratulations !! Size Deleted Successfully...');
         $this->emit('closemodal');
     }

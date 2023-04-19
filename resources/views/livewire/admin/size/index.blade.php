@@ -42,7 +42,7 @@
                         <td>{{ strtoupper($pros->size) }}</td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editSize({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
-                           <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$pros->id}})"><i class="fas fa-trash"></i></button>
+                           <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteSize({{$pros->id}})"><i class="fas fa-trash"></i></button>
                         </td>
                      </tr>
                      @empty
@@ -167,7 +167,7 @@
                      <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Size</label>
-                           <input type="hidden" wire:model='pro_id'>
+                           <input type="hidden" wire:model='size_id'>
                            <select class="form-control" wire:model="size">
                               <option>Select A Size</option>
                               <option value="XS">XS</option>
@@ -198,4 +198,24 @@
       </div>
    </div>
    <!-- End Here -->
+   <!-- Delete modal -->
+   <div wire:ignore.self class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myLargeModalLabel">Delete Size</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form wire:submit.prevent='delete()'>
+               <input type="hidden" wire:model='size_id'>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark">Delete</button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>

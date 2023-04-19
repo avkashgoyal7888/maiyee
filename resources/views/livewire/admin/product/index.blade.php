@@ -44,7 +44,7 @@
                         <td> {{ ucwords($pros->subcategory->sub_name) }} </td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editProduct({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
-                           <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$pros->id}})"><i class="fas fa-trash"></i></button>
+                           <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteProduct({{$pros->id}})"><i class="fas fa-trash"></i></button>
                         </td>
                      </tr>
                      @empty
@@ -215,5 +215,25 @@
       </div>
    </div>
    <!-- End Here -->
+   <!-- Delete modal -->
+   <div wire:ignore.self class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myLargeModalLabel">Delete Product</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form wire:submit.prevent='delete()'>
+               <input type="hidden" wire:model='pro_id'>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark">Delete</button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>
 <!-- end tab pane -->
