@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\home\HomeController;
 use App\Http\Controllers\home\CartController;
 use App\Http\Controllers\home\CheckOutController;
+use App\Http\Controllers\home\ForgetPasswordController;
 
 	Route::controller(HomeController::class)->group(function(){
 		Route::get('/', 'index')->name('web.home');
@@ -19,8 +20,15 @@ use App\Http\Controllers\home\CheckOutController;
 		Route::get('/auth/google/callback','handleGoogleCallback');
 		Route::get('/auth/facebook', 'redirectToFacebook')->name('auth.facebook.redirect');
 		Route::get('/auth/facebook/callback', 'handleFacebookCallback');
+	});
 
-		
+	Route::controller(ForgetPasswordController::class)->group(function(){
+		Route::get('/forget-password', 'index')->name('web.forget');
+		Route::post('/forget-password-submit', 'ForgetPasswordSubmit')->name('web.forget.submit');
+		Route::get('/otp-view', 'otpView')->name('web.otp.view');
+		Route::post('/verify-otp', 'otpVerify')->name('web.verify.otp');
+		Route::get('/reset-view', 'resetPasswordView')->name('web.reset.view');
+		Route::post('/reset-password-submit', 'resertPassword')->name('reset.password.submit');
 	});
 
 	Route::group(['middleware'=>'auth'], function() {

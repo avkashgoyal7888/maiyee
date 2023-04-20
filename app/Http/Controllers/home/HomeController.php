@@ -145,8 +145,8 @@ class HomeController extends Controller
         if ($val->fails()) {
             return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
         }
-        if (Auth::guard('web')->attempt(['email'=>$req->email, 'password'=>$req->password])) {
-            return response()->json(['status'=>true, 'msg'=>'Logged in Successfully.....']);
+            if (Auth::guard('web')->attempt(['email' => $req->email, 'password' => $req->password]) || Auth::guard('web')->attempt(['number' => $req->email, 'password' => $req->password])) {
+            return response()->json(['status' => true, 'msg' => 'Logged in Successfully.....']);
         } else {
             return response()->json(['status'=>false, 'msg'=>'Invalid User Id or password.....']);
         }
