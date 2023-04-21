@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\ColorController;
+use App\Http\Controllers\Admin\HomeController;
 
 	Route::get('/login', [AdminController::class, 'index'])->name('admin.login');
 	Route::post('/login-submit', [AdminController::class, 'loginSubmit'])->name('admin.login.submit');
@@ -11,6 +12,9 @@ use App\Http\Controllers\Admin\ColorController;
 	Route::post('/change-password', [AdminController::class, 'changePassword'])->name('admin.change.password');
 	Route::post('/update-image', [AdminController::class, 'updateImage'])->name('admin.update.image');
 	Route::get('/logout', [AdminController::class, 'logOut'])->name('admin.logout');
+	Route::controller(HomeController::class)->group(function(){
+		Route::post('/nav-edit', 'navEdit')->name('admin.nav.edit');
+	});
 	// state routes
 	Route::get('/states', function(){ return view('admin.state.index'); })->name('admin.state');
 	// city routes

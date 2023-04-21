@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
+use App\Models\Head;
 use Validator;
 use Session;
 use Auth;
@@ -23,7 +24,8 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard');
+        $nav = Head::first();
+        return view('admin.dashboard', compact('nav'));
     }
 
     public function loginSubmit(Request $req)

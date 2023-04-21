@@ -5,9 +5,9 @@
 /storage/*.key
 /vendor/*.key
 /.env/.*
-public/admin/color/
-public/admin/banner/
-public/admin/profile/
+public/admin/color
+public/admin/banner
+public/admin/profile
 .env.backup
 .env.production
 .phpunit.result.cache

@@ -18,7 +18,7 @@ class Image extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $color, $product_id, $color_id,$product;
+    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $color, $product_id, $color_id,$product,$colordelete_id;
     public $image;
     public function updatingSearch()
     {
@@ -165,9 +165,20 @@ class Image extends Component
         $this->emit('closemodal');
     }
 
-    public function delete($id)
+    public function deleteColor($id)
     {
-        $clr = ProductImage::where('id', $id)->first();
+        $image = ProductImage::find($id);
+        if ($image) {
+            $this->colordelete_id = $image->id;
+
+        } else {
+            return redirect()->to('/admin/color');
+        }
+    }
+
+    public function delete()
+    {
+        $clr = ProductImage::where('id', $this->colordelete_id)->first();
     
         if ($clr->image != null) {
             $image_path = public_path('admin/color/' . $clr->image);
@@ -177,6 +188,7 @@ class Image extends Component
         }
     
         $clr->delete();
+        $this->resetinputfields();
         session()->flash('success', 'Congratulations !! Color Deleted Successfully...');
         $this->emit('closemodal');
     }

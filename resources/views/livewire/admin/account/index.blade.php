@@ -6,6 +6,9 @@
       <div wire:loading wire:target="update">
          <x-loader/>
       </div>
+      <div wire:loading wire:target="delete">
+         <x-loader/>
+      </div>
       @if (session()->has('success'))
       <div class="alert alert-success alert-dismissible" role="alert">{{session('success')}}
          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -43,7 +46,7 @@
                   <td><a class="btn btn-success btn-sm" href="{{ route('admin.account.statement',$accs->id) }}">View</a></td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editStore({{$accs->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
-                     <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$accs->id}})"><i class="fas fa-trash"></i></button>
+                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteAccount({{$accs->id}})"><i class="fas fa-trash"></i></button>
                   </td>
                </tr>
                @empty
@@ -87,20 +90,20 @@
                            @error('to')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Amount</label>
-                              <input type="text" class="form-control" wire:model='amount' placeholder="0.00"/>
-                              @error('amount')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
-                           <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Date</label>
-                              <input type="date" class="form-control" wire:model='transaction_date'/>
-                              @error('transaction_date')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
-                           <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Remarks</label>
-                              <input type="text" class="form-control" wire:model='perticuler' placeholder="Remarks"/>
-                              @error('perticuler')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
+                           <label for="nameExLarge" class="form-label">Amount</label>
+                           <input type="text" class="form-control" wire:model='amount' placeholder="0.00"/>
+                           @error('amount')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
+                           <label for="nameExLarge" class="form-label">Date</label>
+                           <input type="date" class="form-control" wire:model='transaction_date'/>
+                           @error('transaction_date')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
+                           <label for="nameExLarge" class="form-label">Remarks</label>
+                           <input type="text" class="form-control" wire:model='perticuler' placeholder="Remarks"/>
+                           @error('perticuler')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -145,20 +148,20 @@
                            @error('to')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Amount</label>
-                              <input type="text" class="form-control" wire:model='amount' placeholder="0.00"/>
-                              @error('amount')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
-                           <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Date</label>
-                              <input type="date" class="form-control" wire:model='transaction_date'/>
-                              @error('transaction_date')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
-                           <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Remarks</label>
-                              <input type="text" class="form-control" wire:model='perticuler' placeholder="Remarks"/>
-                              @error('perticuler')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
+                           <label for="nameExLarge" class="form-label">Amount</label>
+                           <input type="text" class="form-control" wire:model='amount' placeholder="0.00"/>
+                           @error('amount')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
+                           <label for="nameExLarge" class="form-label">Date</label>
+                           <input type="date" class="form-control" wire:model='transaction_date'/>
+                           @error('transaction_date')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
+                           <label for="nameExLarge" class="form-label">Remarks</label>
+                           <input type="text" class="form-control" wire:model='perticuler' placeholder="Remarks"/>
+                           @error('perticuler')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -193,20 +196,20 @@
                            @error('to')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Amount</label>
-                              <input type="text" class="form-control" wire:model='amount' placeholder="0.00"/>
-                              @error('amount')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
-                           <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Date</label>
-                              <input type="date" class="form-control" wire:model='transaction_date'/>
-                              @error('transaction_date')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
-                           <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
-                              <label for="nameExLarge" class="form-label">Remarks</label>
-                              <input type="text" class="form-control" wire:model='perticuler' placeholder="Remarks"/>
-                              @error('perticuler')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
+                           <label for="nameExLarge" class="form-label">Amount</label>
+                           <input type="text" class="form-control" wire:model='amount' placeholder="0.00"/>
+                           @error('amount')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
+                           <label for="nameExLarge" class="form-label">Date</label>
+                           <input type="date" class="form-control" wire:model='transaction_date'/>
+                           @error('transaction_date')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="form-group col-md-6 col-lg-6 col-sm-6 col-6 mb-3">
+                           <label for="nameExLarge" class="form-label">Remarks</label>
+                           <input type="text" class="form-control" wire:model='perticuler' placeholder="Remarks"/>
+                           @error('perticuler')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -325,4 +328,24 @@
       </div>
    </div>
    <!-- End Here -->
+   <!-- Delete modal -->
+   <div wire:ignore.self class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myLargeModalLabel">Delete Banner</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form wire:submit.prevent='delete()'>
+               <input type="text" wire:model='ac_id'>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark">Delete</button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>

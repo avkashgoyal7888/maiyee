@@ -8,7 +8,9 @@
       @foreach($banner as $banners)
       <div class="slide">
          <div class="blur-up lazyload">
+            <a href=" {{route('front.sub',$banners->sub_id)}} ">
             <img class="blur-up lazyload" data-src="{{ asset('admin/banner/' . $banners->image) }}" src="{{ asset('admin/banner/' . $banners->image) }}" alt="{{$banners->tag}}" title="{{$banners->tag}}" />
+            </a>
          </div>
       </div>
       @endforeach

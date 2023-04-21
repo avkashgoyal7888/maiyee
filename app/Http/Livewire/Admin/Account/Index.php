@@ -270,9 +270,22 @@ class Index extends Component
         session()->flash('success', 'Account Updated Successfully...');
         $this->emit('closemodal');
     }
-    public function delete($id)
+
+    public function deleteAccount($id)
     {
-        Account::Where('id', $id)->delete();
+        $acc = Account::find($id);
+        if ($acc) {
+            $this->ac_id = $acc->id;
+
+        } else {
+            return redirect()->to('/admin/account');
+        }
+    }
+
+    public function delete()
+    {
+        Account::Where('id', $this->ac_id)->delete();
+        $this->resetinputfields();
         session()->flash('success', 'Account Deleted Successfully...');
         $this->emit('closemodal');
     }

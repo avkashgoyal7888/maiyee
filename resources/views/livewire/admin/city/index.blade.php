@@ -6,6 +6,9 @@
       <div wire:loading wire:target="update">
          <x-loader/>
       </div>
+      <div wire:loading wire:target="delete">
+         <x-loader/>
+      </div>
       @if (session()->has('success'))
       <div class="alert alert-success alert-dismissible" role="alert">{{session('success')}}
          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -36,7 +39,7 @@
                   <td>{{ ucwords($cats->city_name) }}</td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editCity({{$cats->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
-                     <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$cats->id}})"><i class="fas fa-trash"></i></button>
+                     <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteCity({{$cats->id}})"><i class="fas fa-trash"></i></button>
                   </td>
                </tr>
                @empty
@@ -120,6 +123,26 @@
                   </div>
                </form>
             </div>
+         </div>
+      </div>
+   </div>
+   <!-- Delete modal -->
+   <div wire:ignore.self class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myLargeModalLabel">Delete City</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form wire:submit.prevent='delete()'>
+               <input type="hidden" wire:model='city_id'>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark">Delete</button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+               </div>
+            </form>
          </div>
       </div>
    </div>

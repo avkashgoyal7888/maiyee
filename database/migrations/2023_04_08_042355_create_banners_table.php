@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('tag');
             $table->string('image');
+            $table->unsignedBigInteger('sub_id');
+            $table->foreign('sub_id')->references('id')->on('sub_categories')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

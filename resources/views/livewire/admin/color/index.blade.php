@@ -44,7 +44,7 @@
                         <td width="100%"><img src="{{ asset('admin/color/' . $pros->image) }}" width="100" height="200" /></td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editColor({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
-                           <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$pros->id}})"><i class="fas fa-trash"></i></button>
+                           <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteColor({{$pros->id}})"><i class="fas fa-trash"></i></button>
                         </td>
                      </tr>
                      @empty
@@ -102,16 +102,16 @@
                            </select>
                            @error('product_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                           <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                              <label for="nameExLarge" class="form-label">Color</label>
-                              <input type="color" class="form-control" placeholder="Enter Color" wire:model="code">
-                              @error("code")<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
-                           <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                              <label for="image" class="form-label">Image</label>
-                              <input type="file" class="form-control" placeholder="Select Image" wire:model="image" accept="image/*">
-                              @error("image")<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Color</label>
+                           <input type="color" class="form-control" placeholder="Enter Color" wire:model="code">
+                           @error("code")<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="image" class="form-label">Image</label>
+                           <input type="file" class="form-control" placeholder="Select Image" wire:model="image" accept="image/*">
+                           @error("image")<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -138,7 +138,7 @@
                      <div class="row">
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Color Name</label>
-                           <input type="hidden" wire:model='pro_id'>
+                           <input type="hidden" wire:model='color_id'>
                            <input type="color" class="form-control" wire:model='code'>
                            @error('code')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
@@ -146,7 +146,7 @@
                            <label for="nameExLarge" class="form-label">Image</label>
                            <input type="file" class="form-control" wire:model='image'>
                            @error('image')<span class="text-danger">{{$message}}</span>@enderror
-                           </div>
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -159,4 +159,24 @@
       </div>
    </div>
    <!-- End Here -->
+   <!-- Delete modal -->
+   <div wire:ignore.self class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myLargeModalLabel">Delete Color</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form wire:submit.prevent='delete()'>
+               <input type="hidden" wire:model='color_id'>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark">Delete</button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </div>

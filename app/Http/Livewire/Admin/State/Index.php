@@ -10,7 +10,7 @@ class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $search, $state_name;
+    public $search, $state_name, $state_id;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -31,6 +31,7 @@ class Index extends Component
     public function resetinputfields()
     {
         $this->state_name = '';
+        $this->state_id = '';
     }
 
     public function store()
@@ -74,9 +75,21 @@ class Index extends Component
 
     }
 
-    public function delete($id)
+    public function deleteState($id)
     {
-        State::Where('id', $id)->delete();
+        $state = State::find($id);
+        if ($state) {
+            $this->state_id = $state->id;
+
+        } else {
+            return redirect()->to('/admin/state');
+        }
+    }
+
+    public function delete()
+    {
+        State::Where('id', $this->state_id)->delete();
+        $this->resetinputfields();
         session()->flash('success', 'State Deleted Successfully...');
         $this->emit('closemodal');
 

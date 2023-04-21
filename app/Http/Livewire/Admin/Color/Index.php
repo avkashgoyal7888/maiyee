@@ -18,7 +18,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $code, $product_id, $startDate, $endDate,$product;
+    public $color_id,$category_id, $subcategory_id, $subcategories, $category, $code, $product_id, $startDate, $endDate,$product;
     public $image;
     public function updatingSearch()
     {
@@ -57,6 +57,7 @@ class Index extends Component
         $this->product_id = '';
         $this->code = '';
         $this->image = '';
+        $this->color_id = '';
     }
 
     protected $rules = [
@@ -108,7 +109,7 @@ class Index extends Component
     {
         $clr = Color::find($id);
         if ($clr) {
-            $this->pro_id = $clr->id;
+            $this->color_id = $clr->id;
             $this->code = $clr->code;
             $this->image = $clr->image;
 
@@ -121,14 +122,14 @@ class Index extends Component
     public function updateColor()
     {
         $validatedata = $this->validate();
-        $data = Color::find($this->pro_id);
+        $data = Color::find($this->color_id);
         $image = $data->image;
         if ($this->image && $this->image !== $data->image) {
             $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
             $this->image->storeAs('admin/color', $image, 'real_public');
             unlink(public_path('admin/color/' . $data->image));
         }
-        Color::where('id', $this->pro_id)->update([
+        Color::where('id', $this->color_id)->update([
             'code' => $this->code,
             'image' => $image,
         ]);
@@ -137,9 +138,20 @@ class Index extends Component
         $this->emit('closemodal');
     }
 
-    public function delete($id)
+    public function deleteColor($id)
     {
-        $clr = Color::where('id', $id)->first();
+        $color = Color::find($id);
+        if ($color) {
+            $this->color_id = $color->id;
+
+        } else {
+            return redirect()->to('/admin/color');
+        }
+    }
+
+    public function delete()
+    {
+        $clr = Color::where('id', $this->color_id)->first();
     
         if ($clr->image != null) {
             $image_path = public_path('admin/color/' . $clr->image);
@@ -149,6 +161,7 @@ class Index extends Component
         }
     
         $clr->delete();
+        $this->resetinputfields();
         session()->flash('success', 'Congratulations !! Color Deleted Successfully...');
         $this->emit('closemodal');
     }

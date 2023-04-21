@@ -74,6 +74,7 @@
              $('#add').modal('hide');
              $('#edit').modal('hide');
              $('#view').modal('hide');
+             $('#delete').modal('hide');
              $('#fund').modal('hide');
              $('#addFund').modal('hide');
              $('#supplierfund').modal('hide');

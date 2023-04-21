@@ -12,7 +12,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $city_name, $state_id;
+    public $city_name, $state_id, $city_id;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -41,6 +41,7 @@ class Index extends Component
     {
         $this->city_name = '';
         $this->state_id = '';
+        $this->city_id = '';
     }
 
     public function store()
@@ -87,12 +88,23 @@ class Index extends Component
 
     }
 
-    public function delete($id)
+    public function deleteCity($id)
     {
-        City::Where('id', $id)->delete();
+        $city = City::find($id);
+        if ($city) {
+            $this->city_id = $city->id;
+
+        } else {
+            return redirect()->to('/admin/city');
+        }
+    }
+
+    public function delete()
+    {
+        City::Where('id', $this->city_id)->delete();
+        $this->resetinputfields();
         session()->flash('success', 'City Deleted Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function render()

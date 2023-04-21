@@ -11,7 +11,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $cat_name, $startDate, $endDate;
+    public $cat_name, $startDate, $cat_id;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -32,6 +32,8 @@ class Index extends Component
     public function resetinputfields()
     {
         $this->cat_name = '';
+        $this->cat_id = '';
+
     }
 
     public function store()
@@ -57,7 +59,7 @@ class Index extends Component
             $this->cat_name = $cat->cat_name;
 
         } else {
-            return redirect()->to('/admin/categories');
+            return redirect()->to('/admin/category');
         }
 
     }
@@ -75,9 +77,21 @@ class Index extends Component
 
     }
 
-    public function delete($id)
+    public function deleteCategory($id)
     {
-        Category::Where('id', $id)->delete();
+        $cat = Category::find($id);
+        if ($cat) {
+            $this->cat_id = $cat->id;
+
+        } else {
+            return redirect()->to('/admin/category');
+        }
+    }
+
+    public function delete()
+    {
+        Category::Where('id', $this->cat_id)->delete();
+        $this->resetinputfields();
         session()->flash('success', 'Category Deleted Successfully...');
         $this->emit('closemodal');
 

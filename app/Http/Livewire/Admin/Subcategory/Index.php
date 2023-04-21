@@ -12,7 +12,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $sub_name, $cat_id, $catid, $startDate, $endDate;
+    public $sub_name, $cat_id, $catid, $sub_id;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -41,6 +41,7 @@ class Index extends Component
     {
         $this->sub_name = '';
         $this->cat_id = '';
+        $this->sub_id = '';
     }
 
     public function store()
@@ -87,9 +88,21 @@ class Index extends Component
 
     }
 
-    public function delete($id)
+    public function deleteSub($id)
     {
-        SubCategory::Where('id', $id)->delete();
+        $sub = SubCategory::find($id);
+        if ($sub) {
+            $this->sub_id = $sub->id;
+
+        } else {
+            return redirect()->to('/admin/sub-category');
+        }
+    }
+
+    public function delete()
+    {
+        SubCategory::Where('id', $this->sub_id)->delete();
+        $this->resetinputfields();
         session()->flash('success', 'Sub-Category Deleted Successfully...');
         $this->emit('closemodal');
 
