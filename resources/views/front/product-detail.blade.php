@@ -76,7 +76,7 @@
                                         </div>
                                     <div class="product-single__description rte">
                                         <ul>
-                                            <li>{{$product->detail}}</li>
+                                            <li>{{$product->description}}</li>
                                         </ul>
                                     </div>
                                     <div id="quantity_message">Hurry! Only  <span class="items">4</span>  left in stock.</div>
@@ -192,7 +192,7 @@
                         <div class="tab-container">
                             <div id="tab1" class="tab-content">
                                 <div class="product-description rte">
-                                    {{$product->description}}
+                                    {{$product->detail}}
                                 </div>
                             </div>
                             
