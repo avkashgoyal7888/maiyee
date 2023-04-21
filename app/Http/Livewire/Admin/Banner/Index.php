@@ -5,6 +5,8 @@ namespace App\Http\Livewire\Admin\Banner;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\Banner;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Livewire\WithFileUploads;
 
 class Index extends Component
@@ -12,10 +14,32 @@ class Index extends Component
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
-    public $search, $image, $tag, $banner_id;
+    public $search, $image, $tag, $banner_id, $category_id, $subcategory_id;
     public function updatingSearch()
     {
         $this->resetPage();
+    }
+
+    public function mount()
+    {
+        $this->category = Category::all();
+        $this->subcategories = collect();
+        $category_id = $this->category_id;
+
+    }
+
+    public function updateSubcategories()
+    {
+        $this->subcategories = SubCategory::where('cat_id', $this->category_id)->get();
+    }
+
+    public function viewSubcategories()
+    {
+        $this->subcategories = SubCategory::where('cat_id', $this->category_id)->get();
+        if (!$this->category_id || ($this->subcategories->count() > 0 && !$this->subcategories->contains('id', 
+            $this->subcategory_id))) {
+            $this->subcategory_id = null;
+        }
     }
 
     public function closemodal()
@@ -26,6 +50,8 @@ class Index extends Component
     {
         $this->image = '';
         $this->tag = '';
+        $this->category_id = '';
+        $this->subcategory_id = '';
     }
 
     public function store()
@@ -46,6 +72,7 @@ class Index extends Component
             $banner = new Banner;
             $banner->tag = $this->tag;
             $banner->image = $image;
+            $banner->sub_id = $this->subcategory_id;
             $banner->save();
     
             $this->resetinputfields();

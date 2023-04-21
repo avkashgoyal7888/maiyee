@@ -26,7 +26,8 @@ class ForgetPasswordController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.auth.forget', compact('cartNav','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.auth.forget', compact('cartNav','cartTotalnav','cartCount','nav'));
     }
 
     public function ForgetPasswordSubmit(Request $req)
@@ -83,8 +84,9 @@ class ForgetPasswordController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
+        $nav = Head::first();
         if(session()->has('token')) {
-        return view('front.auth.otp', compact('cartNav','cartTotalnav','cartCount'));
+        return view('front.auth.otp', compact('cartNav','cartTotalnav','cartCount','nav'));
         }else {
             return redirect()->route('web.home');
         }
@@ -125,8 +127,9 @@ class ForgetPasswordController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
+        $nav = Head::first();
         if(session()->has('token')) {
-        return view('front.auth.reset', compact('cartNav','cartTotalnav','cartCount'));
+        return view('front.auth.reset', compact('cartNav','cartTotalnav','cartCount','nav'));
         } else {
             return redirect()->route('web.home');
         }

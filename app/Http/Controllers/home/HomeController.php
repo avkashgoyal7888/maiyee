@@ -12,6 +12,7 @@ use App\Models\Size;
 use App\Models\Color;
 use App\Models\Cart;
 use App\Models\ProductImage;
+use App\Models\Head;
 use Validator;
 use Hash;
 use Auth;
@@ -24,9 +25,7 @@ class HomeController extends Controller
         $banner = Banner::get();
         $product = Product::get();
         $color = Color::whereIn('product_id', $product->pluck('id'))->get();
-        $size = Size::whereIn('product_id', $product->pluck('id'))
-        ->whereIn('color_id', $color->pluck('id'))
-        ->get();
+        $size = Size::whereIn('product_id', $product->pluck('id'))->whereIn('color_id', $color->pluck('id'))->get();
         $cartNav = Cart::get();
         $cartTotalnav = 0;
         $cartCount = 0;
@@ -35,7 +34,8 @@ class HomeController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav'));
     }
 
     public function register()
@@ -48,7 +48,8 @@ class HomeController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.auth.register', compact('cartNav','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.auth.register', compact('cartNav','cartTotalnav','cartCount','nav'));
     }
 
     public function disclaimer()
@@ -61,7 +62,24 @@ class HomeController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.disclaimer', compact('cartNav','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.disclaimer', compact('cartNav','cartTotalnav','cartCount','nav'));
+    }
+
+    public function subcategory(Request $req)
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $product = Product::where('sub_id',$req->id)->get();
+        $size = Size::whereIn('product_id', $product->pluck('id'))->get();
+        return view('front.sub', compact('cartNav','cartTotalnav','cartCount','nav','size','product'));
     }
 
     public function policy()
@@ -74,7 +92,8 @@ class HomeController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.policy',compact('cartNav','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.policy',compact('cartNav','cartTotalnav','cartCount','nav'));
     }
 
     public function refund()
@@ -87,7 +106,8 @@ class HomeController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.refund', compact('cartNav','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.refund', compact('cartNav','cartTotalnav','cartCount','nav'));
     }
 
     public function shipping()
@@ -100,7 +120,8 @@ class HomeController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
-        return view('front.shipping',compact('cartNav','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.shipping',compact('cartNav','cartTotalnav','cartCount','nav'));
     }
 
     public function cart()
@@ -115,7 +136,8 @@ class HomeController extends Controller
         }
         $cart = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
         $cartTotal = $cart->sum('total');
-        return view('front.cart', compact('cart', 'cartNav','cartTotal','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.cart', compact('cart', 'cartNav','cartTotal','cartTotalnav','cartCount','nav'));
     }
 
     public function productDetail(Request $req)
@@ -133,7 +155,8 @@ class HomeController extends Controller
         $size = Size::where('product_id', $req->id)->get();
         $colorzoom = Color::where('product_id', $req->id)->first();
         $proimage = ProductImage::where('product_id', $req->id)->get();
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount'));
+        $nav = Head::first();
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav'));
     }
 
     public function loginSubmit(Request $req)

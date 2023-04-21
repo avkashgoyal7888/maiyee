@@ -54,6 +54,26 @@
                <form wire:submit.prevent='store()'>
                   <div class="modal-body">
                      <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Categories</label>
+                           <select class="form-control" wire:model='category_id' wire:change="updateSubcategories()">
+                              <option>Select Category</option>
+                              @foreach($category as $categ)
+                              <option value="{{$categ->id}}">{{$categ->cat_name}}</option>
+                              @endforeach
+                           </select>
+                           @error('category_id')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Sub Categories</label>
+                           <select class="form-control" wire:model="subcategory_id">
+                              <option>Select A Sub-Category</option>
+                              @foreach($subcategories as $subcategory)
+                              <option value="{{ $subcategory->id }}">{{ $subcategory->sub_name }}</option>
+                              @endforeach
+                           </select>
+                           @error('subcategory_id')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
                         <div class="col-md-6 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Remarks*</label>
                            <input type="text" class="form-control" placeholder="Remarks*" wire:model='tag' accept="image/*">

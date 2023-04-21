@@ -1,6 +1,6 @@
 <!--Promotion Bar-->
 <div class="notification-bar mobilehide">
-    	<a href="#" class="notification-bar__message">20% off your very first purchase, use promo code: <b>WELCOME20</b></a>
+    	<a href="#" class="notification-bar__message">{{$nav->code}}</a>
         <span class="close-announcement">×</span>
     </div>
     <!--End Promotion Bar-->
@@ -25,7 +25,7 @@
                     @endif
                 </div>
                 <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
-                    <div class="text-center"><p class="top-header_middle-text">Free Shipping On order Above 1000/-</p></div>
+                    <div class="text-center"><p class="top-header_middle-text">{{$nav->order}}</p></div>
                 </div>
                 <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
                     <span class="user-menu d-block d-lg-none"><i class="anm anm-user-al" aria-hidden="true"></i></span>

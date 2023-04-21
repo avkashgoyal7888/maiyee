@@ -20,6 +20,7 @@ use App\Http\Controllers\home\ForgetPasswordController;
 		Route::get('/auth/google/callback','handleGoogleCallback');
 		Route::get('/auth/facebook', 'redirectToFacebook')->name('auth.facebook.redirect');
 		Route::get('/auth/facebook/callback', 'handleFacebookCallback');
+		Route::get('/sub-category/{id}', 'subcategory')->name('front.sub');
 	});
 
 	Route::controller(ForgetPasswordController::class)->group(function(){
