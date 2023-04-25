@@ -159,17 +159,26 @@ class HomeController extends Controller
         $nav = Head::first();
         $product = Product::where('sub_id',$req->id)->get();
         $size = Size::whereIn('product_id', $product->pluck('id'))->groupBy('size')->distinct()->get('size');
-        // $size = DB::select('SELECT DISTINCT size FROM sizes');
         $category = Category::get();
         $sub = SubCategory::get();
-        return view('front.sub', compact('cartNav','cartTotalnav','cartCount','nav','size','product','category','sub'));
+        $color = Color::whereIn('product_id', $product->pluck('id'))->groupBy('code')->distinct()->get('code');
+        $subimg = SubCategory::where('id',$req->id)->first();
+        return view('front.sub', compact('cartNav','cartTotalnav','cartCount','nav','size','product','category','sub','color','subimg'));
+    }
+
+    public function filterByColor(Request $request)
+    {
+        $selectedSizes = $request->input('selected_sizes');
+        $products = Color::join("products","colors.product_id","=","products.id")
+            ->select("colors.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.id as proid")->whereIn('code', $selectedSizes)->get();
+        return response()->json($products);
     }
 
     public function filterBySize(Request $request)
     {
         $selectedSizes = $request->input('selected_sizes');
         $products = Size::join("products","sizes.product_id","=","products.id")
-            ->select("sizes.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.image as images")->whereIn('size', $selectedSizes)->get();
+            ->select("sizes.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.image as images","products.id as proid")->whereIn('size', $selectedSizes)->get();
         return response()->json($products);
     }
 

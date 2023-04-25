@@ -23,6 +23,7 @@ use App\Http\Controllers\home\ForgetPasswordController;
 		Route::get('/sub-category/{id}', 'subcategory')->name('front.sub');
 		Route::get('/filterbyprice','filterByPrice')->name('filter.by.price');
 		Route::get('/filter-by-size','filterBySize')->name('filter.by.size');
+		Route::get('/filter-by-color','filterByColor')->name('filter.by.color');
 	});
 
 	Route::controller(ForgetPasswordController::class)->group(function(){

@@ -1,6 +1,15 @@
 @extends('layouts.front.app')
 @section('css')
 <title>Sub-Category</title>
+<style>
+    .swatch {
+        display: inline-block;
+        width: 30px;
+        height: 14px;
+        margin-right: 5px;
+
+    }
+</style>
 @stop
 @section('content')
 <!--Body Content-->
@@ -8,7 +17,7 @@
    <!--Collection Banner-->
    <div class="collection-header">
       <div class="collection-hero">
-         <div class="collection-hero__image"><img class="blur-up lazyload" data-src="{{asset('front/assets/images/cat-women.jpg')}}" src="{{asset('front/assets/images/cat-women.jpg')}}" alt="Women" title="Women" /></div>
+         <div class="collection-hero__image"><img class="blur-up lazyload" data-src="{{asset('admin/subcategory/' . $subimg->image)}}" src="{{asset('admin/subcategory/'.$subimg->image)}}" alt="Women" title="Women" /></div>
          <div class="collection-hero__title-wrapper">
             <h1 class="collection-hero__title page-width">Shop Grid 5 Column</h1>
          </div>
@@ -80,36 +89,31 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Filter</button>
                      </form>
-                     <ul id="products-list">
-                        <!-- Products will be added here -->
-                     </ul>
                   </div>
                </div>
                <!--End Size Swatches-->
                <!--Color Swatches-->
-               <div class="sidebar_widget filterBox filter-widget">
-                  <div class="widget-title">
-                     <h2>Color</h2>
-                  </div>
-                  <div class="filter-color swacth-list clearfix">
-                     <span class="swacth-btn black"></span>
-                     <span class="swacth-btn white checked"></span>
-                     <span class="swacth-btn red"></span>
-                     <span class="swacth-btn blue"></span>
-                     <span class="swacth-btn pink"></span>
-                     <span class="swacth-btn gray"></span>
-                     <span class="swacth-btn green"></span>
-                     <span class="swacth-btn orange"></span>
-                     <span class="swacth-btn yellow"></span>
-                     <span class="swacth-btn blueviolet"></span>
-                     <span class="swacth-btn brown"></span>
-                     <span class="swacth-btn darkGoldenRod"></span> 
-                     <span class="swacth-btn darkGreen"></span> 
-                     <span class="swacth-btn darkRed"></span> 
-                     <span class="swacth-btn dimGrey"></span>
-                     <span class="swacth-btn khaki"></span> 
-                  </div>
-               </div>
+               <div class="sidebar_widget filterBox filter-widget size-swacthes">
+    <div class="widget-title">
+        <h2>Color</h2>
+    </div>
+    <div class="filter-color swacth-list">
+        <form id="color-form">
+            <div id="size">
+                @foreach($color as $colors)
+                    <label>
+                        <input type="checkbox" class="color-checkbox" value="{{ $colors->code }}">
+                        <span class="swatch" style="background-color:{{ $colors->code }};"></span>
+                    </label>
+                    <br>
+                @endforeach
+            </div>
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
+    </div>
+</div>
+
+
                <!--End Color Swatches-->
                <!--Brand-->
                <div class="sidebar_widget filterBox filter-widget">
@@ -267,7 +271,6 @@
                            </a>
                         </div>
                         <div class="col-4 col-md-4 col-lg-4 text-center filters-toolbar__item filters-toolbar__item--count d-flex justify-content-center align-items-center">
-                           <span class="filters-toolbar__product-count">Showing: 22</span>
                         </div>
                         <div class="col-4 col-md-4 col-lg-4 text-right">
                            <div class="filters-toolbar__item">
@@ -296,7 +299,7 @@
                         <!-- start product image -->
                         <div class="product-image">
                            <!-- start product image -->
-                           <a href="#">
+                           <a href="{{route('web.product.detail',$products->id)}}">
                               <!-- image -->
                               <img class="primary blur-up lazyload" data-src="{{ asset('admin/product/' . $products->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product">
                               <!-- End image -->
@@ -373,6 +376,91 @@
 @section('js')
 <script>
    $(document).ready(function() {
+
+      $(".size-btn").click(function() {
+       $("#color-form").submit();
+     });
+     // Handle the form submission
+     $("#color-form").submit(function(e) {
+       e.preventDefault();
+       // Get the selected sizes
+       var selectedSizes = [];
+       $(".color-checkbox:checked").each(function() {
+         selectedSizes.push($(this).val());
+       });
+       // Make the AJAX request to filter products
+       $.ajax({
+         url: "{{route('filter.by.color')}}",
+         type: "GET",
+         data: {
+           selected_sizes: selectedSizes
+         },
+         success: function(result) {
+       let html = '';
+       result.forEach(function(products) {
+             url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
+           html += '<div class="grid-products grid--view-items" id="product_container">';
+           html += '<div class="row">';
+           html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
+           html += '<div class="product-image">';
+           html += '<a href="' + url + '">';
+           html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.image + '" src="{{ asset('admin/color/') }}/' + products.image + '" alt="image" title="product">';
+           html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.image + '" src="{{ asset('admin/color/') }}/' + products.image + '" alt="image" title="product">';
+           html += '<div class="product-labels rectangular">';
+           // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
+           html += '<span class="lbl pr-label1">new</span>';
+           html += '</div>';
+           html += '</a>';
+           html += '<form class="variants add" action="#" method="post">';
+           html += '<button class="btn btn-addto-cart" type="button">Select Options</button>';
+           html += '</form>';
+           html += '<div class="button-set">';
+           html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
+           html += '<i class="icon anm anm-search-plus-r"></i>';
+           html += '</a>';
+           html += '<div class="wishlist-btn">';
+           html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
+           html += '<i class="icon anm anm-heart-l"></i>';
+           html += '</a>';
+           html += '</div>';
+           html += '<div class="compare-btn">';
+           html += '<a class="compare add-to-compare" href="#" title="Add to Compare">';
+           html += '<i class="icon anm anm-random-r"></i>';
+           html += '</a>';
+           html += '</div>';
+           html += '</div>';
+           html += '</div>';
+           html += '<div class="product-details text-center">';
+           html += '<div class="product-name">';
+           html += '<a href="#">' + products.proname + '</a>';
+           html += '</div>';
+           html += '<div class="product-price">';
+           html += '<span class="old-price">$' + products.mrps + '</span>';
+           html += '<span class="price">$' + products.discounts + '</span>';
+           html += '</div>';
+           html += '<div class="product-review">';
+           html += '<i class="font-13 fa fa-star"></i>';
+           html +=        '<i class="font-13 fa fa-star"></i>';
+           html += '<i class="font-13 fa fa-star"></i>';
+           html +='<i class="font-13 fa fa-star"></i>';
+           html +='<i class="font-13 fa fa-star-o"></i>';
+           html +='<i class="font-13 fa fa-star-o"></i>';
+           html += '</div>';
+           html += '</div>';
+           html += '</div>';
+           html += '</div>';
+           html += '</div>';
+       });
+       $('#product_container').html(html);
+   },
+         error: function(jqXHR, textStatus, errorThrown) {
+           // Handle the error
+           console.error("Error filtering products:", errorThrown);
+         }
+       });
+     });
+
+      // Size FIlter
          $(".size-btn").click(function() {
        $("#filter-form").submit();
      });
@@ -394,11 +482,12 @@
          success: function(result) {
        let html = '';
        result.forEach(function(products) {
+         url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
            html += '<div class="grid-products grid--view-items" id="product_container">';
            html += '<div class="row">';
            html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
            html += '<div class="product-image">';
-           html += '<a href="#">';
+           html += '<a href="' + url + '">';
            html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.images + '" src="{{ asset('admin/product/') }}/' + products.images + '" alt="image" title="product">';
            html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.images + '" src="{{ asset('admin/product/') }}/' + products.images + '" alt="image" title="product">';
            html += '<div class="product-labels rectangular">';
@@ -486,11 +575,12 @@
                success: function(result) {
        let html = '';
        result.forEach(function(products) {
+         url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.id));
            html += '<div class="grid-products grid--view-items" id="product_container">';
            html += '<div class="row">';
            html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
            html += '<div class="product-image">';
-           html += '<a href="#">';
+           html += '<a href="' + url + '">';
            html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.image + '" src="{{ asset('admin/product/') }}/' + products.image + '" alt="image" title="product">';
            html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.image + '" src="{{ asset('admin/product/') }}/' + products.image + '" alt="image" title="product">';
            html += '<div class="product-labels rectangular">';
