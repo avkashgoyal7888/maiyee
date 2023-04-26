@@ -29,6 +29,7 @@
                   <th>Category</th>
                   <th>Sub-Category</th>
                   <th>Image</th>
+                  <th>Tile</th>
                   <th>Action</th>
                </tr>
             </thead>
@@ -38,7 +39,8 @@
                   <td> {{ $key +1 }} </td>
                   <td>{{ucwords($cats->category->cat_name)}}</td>
                   <td>{{ ucwords($cats->sub_name) }}</td>
-                  <td width="60%"><img src="{{ asset('admin/subcategory/' . $cats->image) }}" width="300" height="100" /></td>
+                  <td><img src="{{ asset('admin/subcategory/' . $cats->image) }}" width="300" height="100" /></td>
+                  <td><img src="{{ asset('admin/tile/' . $cats->tile) }}" width="300" height="100" /></td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editCategory({{$cats->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
                      <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteSub({{$cats->id}})"><i class="fas fa-trash"></i></button>
@@ -84,6 +86,11 @@
                            <input type="file" class="form-control" wire:model='image' accept="image/*">
                            @error('image')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Tile</label>
+                           <input type="file" class="form-control" wire:model='tile'>
+                           @error('tile')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -126,6 +133,11 @@
                            <label for="nameExLarge" class="form-label">Image</label>
                            <input type="file" class="form-control" wire:model='image' accept="image/*">
                            @error('image')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Tile</label>
+                           <input type="file" class="form-control" wire:model='tile'>
+                           @error('tile')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                      </div>
                   </div>

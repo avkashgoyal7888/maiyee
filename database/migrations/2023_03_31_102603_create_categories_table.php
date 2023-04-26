@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('cat_name');
             $table->string('image');
+            $table->string('tile');
             $table->timestamps();
         });
     }
