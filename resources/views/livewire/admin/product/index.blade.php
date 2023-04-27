@@ -102,20 +102,25 @@
                            <input type="text" class="form-control" placeholder="Enter HSN Code" wire:model='hsn_code'>
                            @error('hsn_code')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12 col-12 mb-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">GST Rate</label>
                            <input type="text" class="form-control" placeholder="0.00" wire:model='gst_rate'>
                            @error('gst_rate')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12 col-12 mb-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">MRP</label>
                            <input type="text" class="form-control" placeholder="0.00" wire:model='mrp'>
                            @error('mrp')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12 col-12 mb-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Discount</label>
                            <input type="text" class="form-control" placeholder="Enter discount" wire:model='discount'>
                            @error('discount')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Image</label>
+                           <input type="file" class="form-control" placeholder="Enter discount" wire:model='image' accept="image/*">
+                           @error('image')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="address" class="form-label">Product Description</label>
@@ -178,20 +183,25 @@
                            <input type="text" class="form-control" wire:model='hsn_code'>
                            @error('hsn_code')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12 col-12 mb-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">MRP</label>
                            <input type="text" class="form-control" wire:model='mrp'>
                            @error('mrp')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12 col-12 mb-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">GST Rate</label>
                            <input type="text" class="form-control" wire:model='gst_rate'>
                            @error('gst_rate')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <div class="col-md-4 col-lg-4 col-sm-12 col-12 mb-3">
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Discount</label>
                            <input type="text" class="form-control" wire:model='discount'>
                            @error('discount')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Image</label>
+                           <input type="file" class="form-control" wire:model='image' accept="image/*">
+                           @error('image')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="address" class="form-label">Product Description</label>

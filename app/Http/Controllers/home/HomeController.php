@@ -13,10 +13,13 @@ use App\Models\Color;
 use App\Models\Cart;
 use App\Models\ProductImage;
 use App\Models\Head;
+use App\Models\Category;
+use App\Models\SubCategory;
 use Validator;
 use Hash;
 use Auth;
 use Session;
+use DB;
 
 class HomeController extends Controller
 {
@@ -64,22 +67,6 @@ class HomeController extends Controller
         }
         $nav = Head::first();
         return view('front.disclaimer', compact('cartNav','cartTotalnav','cartCount','nav'));
-    }
-
-    public function subcategory(Request $req)
-    {
-        $cartNav = Cart::get();
-        $cartTotalnav = 0;
-        $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
-        }
-        $nav = Head::first();
-        $product = Product::where('sub_id',$req->id)->get();
-        $size = Size::whereIn('product_id', $product->pluck('id'))->get();
-        return view('front.sub', compact('cartNav','cartTotalnav','cartCount','nav','size','product'));
     }
 
     public function policy()
@@ -157,6 +144,51 @@ class HomeController extends Controller
         $proimage = ProductImage::where('product_id', $req->id)->get();
         $nav = Head::first();
         return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav'));
+    }
+
+    public function subcategory(Request $req)
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $product = Product::where('sub_id',$req->id)->get();
+        $size = Size::whereIn('product_id', $product->pluck('id'))->groupBy('size')->distinct()->get('size');
+        $category = Category::get();
+        $sub = SubCategory::get();
+        $color = Color::whereIn('product_id', $product->pluck('id'))->groupBy('code')->distinct()->get('code');
+        $subimg = SubCategory::where('id',$req->id)->first();
+        return view('front.sub', compact('cartNav','cartTotalnav','cartCount','nav','size','product','category','sub','color','subimg'));
+    }
+
+    public function filterByColor(Request $request)
+    {
+        $selectedSizes = $request->input('selected_sizes');
+        $products = Color::join("products","colors.product_id","=","products.id")
+            ->select("colors.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.id as proid")->whereIn('code', $selectedSizes)->get();
+        return response()->json($products);
+    }
+
+    public function filterBySize(Request $request)
+    {
+        $selectedSizes = $request->input('selected_sizes');
+        $products = Size::join("products","sizes.product_id","=","products.id")
+            ->select("sizes.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.image as images","products.id as proid")->whereIn('size', $selectedSizes)->get();
+        return response()->json($products);
+    }
+
+    public function filterByPrice(Request $request)
+    {
+        $minPrice = $request->input('min_price');
+        $maxPrice = $request->input('max_price');
+        
+        $products = Product::whereBetween('discount', [$minPrice, $maxPrice])->get();
+        return response()->json($products);
     }
 
     public function loginSubmit(Request $req)

@@ -8,13 +8,15 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Auth;
+use Livewire\WithFileUploads;
 
 class Index extends Component
 {
     use WithPagination;
+    use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $name, $description, $mrp, $hsn_code, $gst_rate, $adminid, $discount, $details;
+    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $name, $description, $mrp, $hsn_code, $gst_rate, $adminid, $discount, $details,$image;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -62,6 +64,7 @@ class Index extends Component
         $this->discount = '';
         $this->details = '';
         $this->pro_id = '';
+        $this->image = '';
     }
 
     protected $rules = [
@@ -74,6 +77,7 @@ class Index extends Component
         'gst_rate' => 'required',
         'discount' => 'required',
         'details' => 'required',
+        'image' => 'required',
     ];
 
     protected $messages = [
@@ -86,12 +90,17 @@ class Index extends Component
         'gst_rate.required' => 'GST is required',
         'adp.required' => 'ADP is required',
         'details.required' => 'Product Detail is required',
+        'image.required' => 'Image is required',
     ];
 
     public function store()
     {
             $validatedata = $this->validate();
 
+            if ($this->image != '') {
+            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
+            $this->image->storeAs('admin/product', $image, 'real_public');
+        }
             $product = new Product;
             $product->name = $this->name;
             $product->description = $this->description;
@@ -102,7 +111,7 @@ class Index extends Component
             $product->gst_rate = $this->gst_rate;
             $product->discount = $this->discount;
             $product->detail = $this->details;
-
+            $product->image = $image;
             $product->save();
 
             $this->resetinputfields();
@@ -124,6 +133,7 @@ class Index extends Component
             $this->gst_rate = $product->gst_rate;
             $this->discount = $product->discount;
             $this->details = $product->detail;
+            $this->image = $product->image;
             $this->viewSubcategories();
 
         } else {
@@ -135,6 +145,12 @@ class Index extends Component
     public function updateProduct()
     {
         $validatedata = $this->validate();
+            if ($this->image != '') {
+            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
+            $this->image->storeAs('admin/product', $image, 'real_public');
+        } else {
+            $this->image = $image;
+        }
         Product::Where('id', $this->pro_id)->update([
             'name' => $this->name,
             'description' => $this->description,
@@ -145,6 +161,7 @@ class Index extends Component
             'gst_rate' => $this->gst_rate,
             'discount' => $this->discount,
             'detail' => $this->details,
+            'image' => $image,
         ]);
 
         $this->resetinputfields();

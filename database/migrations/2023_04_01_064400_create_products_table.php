@@ -24,6 +24,7 @@ return new class extends Migration
             $table->double('discount', 10,2)->default(0.00);
             $table->longText('detail');
             $table->longText('description');
+            $table->string('image');
             $table->timestamps();
         });
     }
