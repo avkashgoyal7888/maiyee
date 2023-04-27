@@ -15,6 +15,7 @@ use App\Models\ProductImage;
 use App\Models\Head;
 use App\Models\Category;
 use App\Models\SubCategory;
+use App\Models\Review;
 use Validator;
 use Hash;
 use Auth;
@@ -38,7 +39,8 @@ class HomeController extends Controller
         $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
-        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav'));
+        $sub = SubCategory::get();
+        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub'));
     }
 
     public function register()
@@ -143,7 +145,11 @@ class HomeController extends Controller
         $colorzoom = Color::where('product_id', $req->id)->first();
         $proimage = ProductImage::where('product_id', $req->id)->get();
         $nav = Head::first();
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav'));
+        $review = Review::where('product_id',$req->id)->get();
+        $rating = DB::table("reviews")->where("product_id", $req->id)->sum("rating");
+        $count = DB::table("reviews")->where("product_id", $req->id)->count();
+        $avg = $count > 0 ? $rating / $count : 0; // calculate the average rating
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg'));
     }
 
     public function subcategory(Request $req)
