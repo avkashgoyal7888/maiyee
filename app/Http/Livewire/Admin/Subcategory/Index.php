@@ -59,13 +59,13 @@ class Index extends Component
         }
         if ($this->tile != '') {
             $tile = substr(uniqid(), 0, 9) . '.' . $this->tile->extension();
-            $this->tile->storeAs('admin/subcategory', $tile, 'real_public');
+            $this->tile->storeAs('admin/tile', $tile, 'real_public');
         }
         $sub_cat = new SubCategory;
         $sub_cat->cat_id = $this->cat_id;
         $sub_cat->sub_name = $this->sub_name;
         $sub_cat->image = $image;
-        $cat->tile = $tile;
+        $sub_cat->tile = $tile;
         $sub_cat->save();
         $this->resetinputfields();
         session()->flash('success', 'Sub-Category Added Successfully...');
