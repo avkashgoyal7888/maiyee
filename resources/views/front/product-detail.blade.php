@@ -320,6 +320,10 @@
                                     <input class="spr-form-input spr-form-input-text " type="text" name="title" placeholder="Give your review a title">
                                     <input type="hidden" name="product_id" value="{{$product->id}}">
                                  </div>
+                                 <div class="spr-form-review-title">
+                                    <label class="spr-form-label" for="review_title_10508262282">Image</label>
+                                    <input class="spr-form-input spr-form-input-text " type="file" name="image[]" multiple>
+                                 </div>
                                  <div class="spr-form-review-body">
                                     <label class="spr-form-label" for="review_body_10508262282">Body of Review</label>
                                     <div class="spr-form-input">
@@ -336,6 +340,10 @@
                             @foreach($review as $reviews)
                            <div class="spr-review">
                               <div class="spr-review-header">
+                                 @foreach($rim->where('review_id', $reviews->id) as $rims)
+                                 <img src="{{ asset('admin/review/' . $rims->image) }}" width="300" height="100" />
+                                 @endforeach
+                                 <br>
                                  <span class="product-review spr-starratings spr-review-header-starratings">
   <span class="reviewLink">
     @for($i = 1; $i <= $reviews->rating; $i++)

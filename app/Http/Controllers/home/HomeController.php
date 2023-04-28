@@ -16,6 +16,7 @@ use App\Models\Head;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Review;
+use App\Models\ReviewImage;
 use Validator;
 use Hash;
 use Auth;
@@ -148,8 +149,9 @@ class HomeController extends Controller
         $review = Review::where('product_id',$req->id)->get();
         $rating = DB::table("reviews")->where("product_id", $req->id)->sum("rating");
         $count = DB::table("reviews")->where("product_id", $req->id)->count();
-        $avg = $count > 0 ? $rating / $count : 0; // calculate the average rating
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg'));
+        $avg = $count > 0 ? $rating / $count : 0;
+        $rim = ReviewImage::where('product_id',$req->id)->get();
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim'));
     }
 
     public function subcategory(Request $req)
@@ -228,7 +230,7 @@ class HomeController extends Controller
             'email' => $user->getEmail(),
         ], [
             'name' => $user->getName(),
-            'password' => Hash::make(Str::random(24)),
+            'password' => Hash::make(Str::random(8)),
         ]);
     
         // log in the user  
