@@ -37,6 +37,7 @@ class Index extends Component
         $this->cat_id = '';
         $this->image = '';
         $this->tile = '';
+        $this->reset('image', 'tile');
 
     }
 
@@ -52,7 +53,7 @@ class Index extends Component
         }
         if ($this->tile != '') {
             $tile = substr(uniqid(), 0, 9) . '.' . $this->tile->extension();
-            $this->tile->storeAs('admin/category', $tile, 'real_public');
+            $this->tile->storeAs('admin/tile', $tile, 'real_public');
         }
         $cat = new Category;
         $cat->cat_name = $this->cat_name;

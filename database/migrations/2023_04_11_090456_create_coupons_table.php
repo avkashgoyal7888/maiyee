@@ -17,6 +17,8 @@ return new class extends Migration
             $table->enum('coupon_type', ['amount', '%']);
             $table->double('coupon_price', 10,2)->default(0.00);
             $table->date('used_date')->nullable();
+            $table->date('exp_date')->nullable();
+            $table->double('order_value', 10,2)->default(0.00);
             $table->enum('status', ['0', '1'])->default('0');
             $table->bigInteger('created_by')->unsigned();
             $table->foreign('created_by')->references('id')->on('admins');

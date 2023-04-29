@@ -130,23 +130,24 @@
                   </ul>
                </div>
                <div id="quantity_message">Hurry! Only  <span class="items">4</span>  left in stock.</div>
-               <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
+               <form class="product-form product-form-product-template hidedropdown" id="addToCart">
                   <div class="swatch clearfix swatch-0 option1" data-option-index="0">
                      <div class="product-form__item">
-                        <label class="header">Color:</label>
-                        @foreach($color as $colors)
-                        <div data-value="Black" class="swatch-element color black available">
-                           <input class="swatchInput" id="swatch-0-black" type="radio" name="{{$colors->code}}" value="{{$colors->code}}"><label class="swatchLbl color small" for="swatch-0-black" style="background-color:{{$colors->code}}" title="{{$colors->code}}"></label>
-                        </div>
-                        @endforeach
-                     </div>
+   <label class="header">Color:</label>
+   @foreach($color as $colors)
+   <div data-value="{{$colors->code}}" class="swatch-element available" data-color="{{$colors->id}}">
+      <input class="swatchInput" id="{{$colors->id}}" type="radio" name="color_id" value="{{$colors->id}}" @if($colors->id == 1) checked @endif>
+      <label class="swatchLbl color small" for="{{$colors->id}}" style="background-color:{{$colors->code}}" title="{{$colors->code}}"></label>
+   </div>
+   @endforeach
+</div>
                   </div>
                   <div class="swatch clearfix swatch-1 option2" data-option-index="1">
                      <div class="product-form__item">
                         <label class="header">Size: <span class="slVariant">XS</span></label>
                         @foreach($size as $sizes)
-                        <div data-value="{{$sizes->size}}" class="swatch-element xs available">
-                           <input class="swatchInput" id="{{$sizes->id}}" type="radio" name="option-1" value="{{$sizes->size}}">
+                        <div data-value="{{$sizes->size}}" data-size="{{$sizes->id}}" class="swatch-element xs available">
+                           <input class="swatchInput" id="{{$sizes->id}}" type="radio" name="size_id" value="{{$sizes->id}}">
                            <label class="swatchLbl medium rectangle" for="{{$sizes->id}}" title="XS">{{$sizes->size}}</label>
                         </div>
                         @endforeach
@@ -165,9 +166,17 @@
                         </div>
                      </div>
                      <div class="product-form__item--submit">
-                        <button type="button" name="add" class="btn product-form__cart-submit">
-                        <span>Add to cart</span>
-                        </button>
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                        <input type="hidden" name="color_id" id="productColorId">
+                        <input type="hidden" name="size_id" id="productSizeId">
+                        <input type="hidden" name="price" value="{{$product->discount}}">
+                        <input type="hidden" name="gst" value="{{$product->gst_rate}}">
+                        <input type="hidden" name="quantity" value="1">
+                        @if(Auth::guard('web')->user() == '')
+                        <button class="btn btn-addto-cart" data-toggle="modal" data-target="#myModal" tabindex="0">Add To Cart</button>
+                        @else
+                        <button class="btn btn-addto-cart" type="submit" tabindex="0">Add To Cart</button>
+                        @endif
                      </div>
                      <div class="shopify-payment-button" data-shopify="payment-button">
                         <button type="button" class="shopify-payment-button__button shopify-payment-button__button--unbranded">Buy it now</button>
@@ -1128,7 +1137,57 @@
 @section('js')
 <script>
    $(document).ready(function(){
+      $('input[name="color_id"]').on('click', function() {
+         var selectedColor = $(this).val();
+         $('#productColorId').val(selectedColor);
+      });
+      $('input[name="size_id"]').on('click', function() {
+      var selectedSize = $(this).val();
+      $('#productSizeId').val(selectedSize);
+   });
+      // addtocart
+      $('#addToCart').submit(function(e){
 
+            e.preventDefault();
+            var fd = new FormData(this);
+            fd.append('_token',"{{ csrf_token() }}");
+
+            $.ajax({
+                url: "{{ route('web.add.cart') }}",
+                type: "post",
+                data: fd,
+                dataType: "JSON",
+                processData: false,
+                contentType: false,
+                success: function (result) {
+
+                    if(result.status===true){
+                        toastr.success(result.msg, "Message", {
+                            timeOut: 500,
+                            closeButton: !0,
+                            progressBar: !0,
+                            onclick: null,
+                            showMethod: "fadeIn",
+                            hideMethod: "fadeOut",
+                            tapToDismiss: 0
+                        });
+                        window.location.reload();
+                    }
+                    else{
+                        toastr.error(result.msg, "Message", {
+                            timeOut: 500,
+                            closeButton: !0,
+                            progressBar: !0,
+                            onclick: null,
+                            showMethod: "fadeIn",
+                            hideMethod: "fadeOut",
+                            tapToDismiss: 0
+                        })
+                    }
+                }
+            });
+        });
+      // Review Form
       $('#review-form').submit(function(e){
 
             e.preventDefault();

@@ -32,21 +32,20 @@
                <p>Our most popular products based on sales</p>
             </div>
             <div class="productSlider grid-products">
-               @foreach($size as $colors)
-               @foreach($product->where('id', $colors->product_id) as $products)
+               @foreach($product as $products)
                <div class="col-12 item">
                   <!-- start product image -->
                   <div class="product-image">
                      <!-- start product image -->
                      <a href="{{route('web.product.detail',$products->id)}}" class="grid-view-item__link">
                         <!-- image -->
-                        <img class="primary blur-up lazyload" data-src="{{ asset('admin/color/' . $colors->color->image) }}" src="{{ asset('admin/color/' . $colors->color->image) }}" alt="image" title="product" />
+                        <img class="primary blur-up lazyload" data-src="{{ asset('admin/product/' . $products->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product" />
                         <!-- End image -->
                         <!-- Hover image -->
-                        <img class="hover blur-up lazyload" data-src="{{ asset('admin/color/' . $colors->color->image) }}" src="{{ asset('admin/color/' . $colors->color->image) }}" alt="image" title="product" />
+                        <img class="hover blur-up lazyload" data-src="{{ asset('admin/product/' . $products->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product" />
                         <!-- End hover image -->
                         <!-- Variant Image-->
-                        <img class="grid-view-item__image hover variantImg" src="{{ asset('admin/color/' . $colors->color->image) }}" alt="image" title="product">
+                        <img class="grid-view-item__image hover variantImg" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product">
                         <!-- Variant Image-->
                         <!-- product label -->
                         <div class="product-labels rounded"><span class="lbl on-sale">Sale</span></div>
@@ -54,7 +53,7 @@
                      </a>
                      <!-- end product image -->
                      <!-- Start product button -->
-                     <form class="variants add" id="addToCart_{{$products->id}}_{{$colors->color->id}}">
+                     <!-- <form class="variants add" id="addToCart">
                         <input type="hidden" name="product_id" value="{{$products->id}}">
                         <input type="hidden" name="color_id" value="{{$colors->color->id}}">
                         <input type="hidden" name="size_id" value="{{$colors->id}}">
@@ -66,7 +65,7 @@
                         @else
                         <button class="btn btn-addto-cart" type="submit" tabindex="0">Add To Cart</button>
                         @endif
-                     </form>
+                     </form> -->
                      <div class="button-set">
                         <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
                         <i class="icon anm anm-search-plus-r"></i>
@@ -97,7 +96,6 @@
                         <span class="old-price">${{$products->mrp}}</span>
                         <span class="price">${{$products->discount}}</span>
                      </div>
-                     <div> {{$colors->size}} </div>
                      <!-- End product price -->
                      <!-- Color Variant -->
                      <ul class="swatches">
@@ -110,7 +108,6 @@
                   </div>
                   <!-- End product details -->
                </div>
-               @endforeach
                @endforeach
             </div>
          </div>
