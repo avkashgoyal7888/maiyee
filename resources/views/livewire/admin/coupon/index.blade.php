@@ -22,16 +22,6 @@
          <form>
             <div class="row">
                <div class="form-group col-md-3 col-lg-3 col-sm-12 col-12 mb-3">
-                  <label for="start_date">Start Date</label>
-                  <input type="date" wire:model="startDate" class="form-control" id="start_date">
-               </div>
-               <div class="form-group col-md-3 col-lg-3 col-sm-12 col-12 mb-3">
-                  <label for="end_date">End Date</label>
-                  <input type="date" wire:model="endDate" class="form-control" id="end_date">
-               </div>
-               <div class="form-group col-md-3 col-lg-3 col-sm-12 col-12 mb-3">
-               </div>
-               <div class="form-group col-md-3 col-lg-3 col-sm-12 col-12 mb-3">
                   <label for="search">Search</label>
                   <input type="text" wire:model="search" class="form-control" id="search">
                </div>
@@ -39,15 +29,14 @@
          </form>
       </div>
       <div class="table-responsive" style="margin-top: 20px;">
-         <button type="button" class="btn btn-sm btn-success mb-3" wire:click="exportExcel">
-            <h4 class="text-white m-0"><i class="fas fa-file-excel"></i></h4>
-         </button>
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <thead>
                <tr>
                   <th>Coupon Code</th>
                   <th>Value</th>
                   <th>Type</th>
+                  <th>Order Value</th>
+                  <th>Expiary Date</th>
                   <th>Action</th>
                </tr>
             </thead>
@@ -61,6 +50,8 @@
                   @else
                   <td>{{$coupon->coupon_type}}</td>
                   @endif
+                  <td>{{$coupon->order_value}}</td>
+                  <td>{{$coupon->exp_date}}</td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editStore({{$coupon->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                      <button type="button" class="btn btn-sm btn-danger" wire:click="delete({{$coupon->id}})"><i class="fas fa-trash"></i></button>
@@ -101,6 +92,16 @@
                            @error('type')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Order Value</label>
+                           <input type="number" class="form-control" placeholder="00" wire:model='order_value'>
+                           @error('order_value')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Expiery Date</label>
+                           <input type="date" class="form-control"  wire:model='exp_date'>
+                           @error('exp_date')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Quantity</label>
                            <input type="number" class="form-control" placeholder="00" wire:model='quantity'>
                            @error('quantity')<span class="text-danger">{{$message}}</span>@enderror
@@ -129,6 +130,11 @@
                   <input type="hidden" wire:model="ac_id">
                   <div class="modal-body">
                      <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                        <label for="nameExLarge" class="form-label">Coupon Code</label>
+                        <input type="text" class="form-control" placeholder="00" wire:model='coupon_code'>
+                        @error('coupon_codes')<span class="text-danger">{{$message}}</span>@enderror
+                     </div>
+                     <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                         <label for="nameExLarge" class="form-label">Coupon Value</label>
                         <input type="text" class="form-control" placeholder="00" wire:model='coupon_value'>
                         @error('coupon_value')<span class="text-danger">{{$message}}</span>@enderror
@@ -141,6 +147,16 @@
                            <option value="%">%</option>
                         </select>
                         @error('type')<span class="text-danger">{{$message}}</span>@enderror
+                     </div>
+                     <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                        <label for="nameExLarge" class="form-label">Order Value</label>
+                        <input type="text" class="form-control" placeholder="00" wire:model='order_value'>
+                        @error('order_value')<span class="text-danger">{{$message}}</span>@enderror
+                     </div>
+                     <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                        <label for="nameExLarge" class="form-label">Expiary Date</label>
+                        <input type="text" class="form-control"  wire:model='exp_date'>
+                        @error('exp_date')<span class="text-danger">{{$message}}</span>@enderror
                      </div>
                   </div>
             </div>

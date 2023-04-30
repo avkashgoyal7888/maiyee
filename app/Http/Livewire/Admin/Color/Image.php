@@ -100,7 +100,7 @@ class Image extends Component
                 'subcategory_id' => 'required',
                 'product_id' => 'required',
                 'color_id' => 'required',
-                'fields.*.image' => 'required|image|max:1024', // limit to 1 MB
+                'fields.*.image' => 'required|image', // limit to 1 MB
             ], [
                 'category_id.required' => 'Select Category first.....',
                 'subcategory_id.required' => 'Select Sub-Category first.....',
@@ -108,7 +108,6 @@ class Image extends Component
                 'color_id.required' => 'Color Name is required',
                 'fields.*.image.required' => 'Image is required',
                 'fields.*.image.image' => 'Only image files are allowed',
-                'fields.*.image.max' => 'The image must be less than 1 MB',
             ]);
 
             foreach ($validatedData['fields'] as $key => $value) {

@@ -5,6 +5,7 @@ use App\Http\Controllers\home\HomeController;
 use App\Http\Controllers\home\CartController;
 use App\Http\Controllers\home\CheckOutController;
 use App\Http\Controllers\home\ForgetPasswordController;
+use App\Http\Controllers\home\ReviewController;
 
 	Route::controller(HomeController::class)->group(function(){
 		Route::get('/', 'index')->name('web.home');
@@ -34,6 +35,8 @@ use App\Http\Controllers\home\ForgetPasswordController;
 		Route::get('/reset-view', 'resetPasswordView')->name('web.reset.view');
 		Route::post('/reset-password-submit', 'resertPassword')->name('reset.password.submit');
 	});
+
+	Route::post('/review-submit', [ReviewController::class, 'reviewSubmit'])->name('web.review.submit');
 
 	Route::group(['middleware'=>'auth'], function() {
 		Route::controller(HomeController::class)->group(function(){

@@ -13,7 +13,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search = '';
-    public $ac_id, $coupon_code, $coupon_value, $type, $user_id, $quantity, $startDate, $endDate;
+    public $ac_id, $coupon_code, $coupon_value, $type, $user_id, $quantity,$exp_date,$order_value;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -38,6 +38,8 @@ class Index extends Component
         $this->coupon_value = '';
         $this->type = '';
         $this->quantity = '';
+        $this->exp_date = '';
+        $this->order_value = '';
     }
 
     public function stores()
@@ -52,6 +54,8 @@ class Index extends Component
             $store->coupon_code = $couponCode;
             $store->coupon_type = $this->type;
             $store->coupon_price = $this->coupon_value;
+            $store->exp_date = $this->exp_date;
+            $store->order_value = $this->order_value;
             $store->created_by = $create;
             $store->save();
 
@@ -66,8 +70,11 @@ class Index extends Component
         $acc = Coupon::find($id);
         if ($acc) {
             $this->ac_id = $acc->id;
+            $this->coupon_code = $acc->coupon_code;
             $this->coupon_value = $acc->coupon_price;
             $this->type = $acc->coupon_type;
+            $this->exp_date = $acc->exp_date;
+            $this->order_value = $acc->order_value;
 
         } else {
             return redirect()->to('/admin/coupon');
@@ -79,8 +86,11 @@ class Index extends Component
     {
         $validatedata = $this->validate();
         Coupon::Where('id', $this->ac_id)->update([
+            'coupon_code' => $this->coupon_code,
             'coupon_price' => $this->coupon_value,
             'coupon_type' => $this->type,
+            'exp_date' => $this->exp_date,
+            'order_value' => $this->order_value,
         ]);
 
         $this->resetinputfields();
