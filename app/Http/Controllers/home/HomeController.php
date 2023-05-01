@@ -263,7 +263,7 @@ class HomeController extends Controller
         return Socialite::driver('google')->stateless()->redirect();
     }
 
-    public  function handleGoogleCallback()
+    public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->stateless()->user();
 
