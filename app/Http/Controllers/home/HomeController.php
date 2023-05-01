@@ -264,22 +264,23 @@ class HomeController extends Controller
     }
 
     public function handleGoogleCallback()
-    {
-        $user = Socialite::driver('google')->user();
+{
+    $user = Socialite::driver('google')->user();
 
-        // insert user information into users table
-        User::updateOrCreate([
-            'email' => $user->getEmail(),
-        ], [
-            'name' => $user->getName(),
-            'password' => Hash::make(Str::random(8)),
-        ]);
+    // insert user information into users table
+    User::updateOrCreate([
+        'email' => $user->getEmail(),
+    ], [
+        'name' => $user->getName(),
+        'password' => Hash::make(Str::random(8)),
+    ]);
 
-        // log in the user  
-        auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
+    // log in the user  
+    auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
 
-        return redirect('https://maiyee.in/home');
-    }
+    return redirect()->route('web.home');
+}
+
 
 
     public function redirectToFacebook()
