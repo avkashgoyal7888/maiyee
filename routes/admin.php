@@ -12,6 +12,8 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::post('/change-password', [AdminController::class, 'changePassword'])->name('admin.change.password');
 	Route::post('/update-image', [AdminController::class, 'updateImage'])->name('admin.update.image');
 	Route::get('/logout', [AdminController::class, 'logOut'])->name('admin.logout');
+	Route::get('/delete-expired-coupons', [AdminController::class, 'deleteExpiredCoupons'])->name('delete_expired_coupons');
+
 	Route::controller(HomeController::class)->group(function(){
 		Route::post('/nav-edit', 'navEdit')->name('admin.nav.edit');
 	});

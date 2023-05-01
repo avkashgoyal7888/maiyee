@@ -12,15 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->string('number', '13')->unique();
-            $table->rememberToken();
-            $table->timestamps();
-        });
+        $table->id();   
+        $table->string('name'); 
+        $table->string('email')->unique();  
+        $table->timestamp('email_verified_at')->nullable(); 
+        $table->string('password')->nullable(); 
+        $table->rememberToken();    
+        $table->string('provider_name')->nullable(); // the social media provider (e.g. Google, Facebook)   
+        $table->string('provider_id')->nullable(); // the ID of the user on the social media platform
+        $table->string('number', '13')->unique()->nullable();
+        $table->timestamps();
+    });
+
     }
 
     /**

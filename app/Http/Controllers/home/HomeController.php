@@ -154,25 +154,67 @@ class HomeController extends Controller
         return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim'));
     }
 
-    public function subcategory(Request $req)
-    {
-        $cartNav = Cart::get();
-        $cartTotalnav = 0;
-        $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+    public function subcategory(Request $request)
+{
+    // Get cart data
+    $cartNav = Cart::get();
+    $cartTotalnav = 0;
+    $cartCount = 0;
+    if (Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)
+            ->latest()
+            ->limit(2)
+            ->get();
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
-        }
-        $nav = Head::first();
-        $product = Product::where('sub_id',$req->id)->get();
-        $size = Size::whereIn('product_id', $product->pluck('id'))->groupBy('size')->distinct()->get('size');
-        $category = Category::get();
-        $sub = SubCategory::get();
-        $color = Color::whereIn('product_id', $product->pluck('id'))->groupBy('code')->distinct()->get('code');
-        $subimg = SubCategory::where('id',$req->id)->first();
-        return view('front.sub', compact('cartNav','cartTotalnav','cartCount','nav','size','product','category','sub','color','subimg'));
     }
+
+    // Get navigation data
+    $nav = Head::first();
+
+    // Get subcategory data
+    $productsQuery = Product::where('sub_id', $request->id);
+    $size = Size::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('size')->distinct()->get('size');
+    $category = Category::get();
+    $sub = SubCategory::get();
+    $color = Color::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('code')->distinct()->get('code');
+    $subimg = SubCategory::where('id', $request->id)->first();
+
+    // Apply sorting to the query
+    $sortBy = $request->input('SortBy', 'name-ascending');
+    switch ($sortBy) {
+        // case 'Best Selling':
+        //     $productsQuery->orderBy('sales_count', 'desc');
+        //     break;
+        case 'Alphabetically, A-Z':
+            $productsQuery->orderBy('name', 'asc');
+            break;
+        case 'Alphabetically, Z-A':
+            $productsQuery->orderBy('name', 'desc');
+            break;
+        case 'Price, low to high':
+            $productsQuery->orderBy('discount', 'asc');
+            break;
+        case 'Price, high to low':
+            $productsQuery->orderBy('discount', 'desc');
+            break;
+        case 'Date, new to old':
+            $productsQuery->orderBy('created_at', 'desc');
+            break;
+        case 'Date, old to new':
+            $productsQuery->orderBy('created_at', 'asc');
+            break;
+        default:
+            $productsQuery->orderBy('name', 'asc');
+            break;
+    }
+
+    // Get the sorted products
+    $product = $productsQuery->get();
+
+    return view('front.sub', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'subimg', 'product', 'sortBy'));
+}
+
 
     public function filterByColor(Request $request)
     {
@@ -224,7 +266,7 @@ class HomeController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->user();
-    
+
         // insert user information into users table
         User::updateOrCreate([
             'email' => $user->getEmail(),
@@ -232,12 +274,13 @@ class HomeController extends Controller
             'name' => $user->getName(),
             'password' => Hash::make(Str::random(8)),
         ]);
-    
+
         // log in the user  
         auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
-    
-        return redirect()->route('web.home');
+
+        return redirect('https://maiyee.in/home');
     }
+
 
     public function redirectToFacebook()
     {

@@ -274,19 +274,20 @@
                         </div>
                         <div class="col-4 col-md-4 col-lg-4 text-right">
                            <div class="filters-toolbar__item">
-                              <label for="SortBy" class="hidden">Sort</label>
-                              <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
-                                 <option value="title-ascending" selected="selected">Sort</option>
-                                 <option>Best Selling</option>
-                                 <option>Alphabetically, A-Z</option>
-                                 <option>Alphabetically, Z-A</option>
-                                 <option>Price, low to high</option>
-                                 <option>Price, high to low</option>
-                                 <option>Date, new to old</option>
-                                 <option>Date, old to new</option>
-                              </select>
-                              <input class="collection-header__default-sort" type="hidden" value="manual">
-                           </div>
+    <label for="SortBy" class="hidden">Sort</label>
+    <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
+        <option value="title-ascending" @if($sortBy === 'title-ascending') selected @endif>Sort</option>
+        <option value="Best Selling" @if($sortBy === 'Best Selling') selected @endif>Best Selling</option>
+        <option value="Alphabetically, A-Z" @if($sortBy === 'Alphabetically, A-Z') selected @endif>Alphabetically, A-Z</option>
+        <option value="Alphabetically, Z-A" @if($sortBy === 'Alphabetically, Z-A') selected @endif>Alphabetically, Z-A</option>
+        <option value="Price, low to high" @if($sortBy === 'Price, low to high') selected @endif>Price, low to high</option>
+        <option value="Price, high to low" @if($sortBy === 'Price, high to low') selected @endif>Price, high to low</option>
+        <option value="Date, new to old" @if($sortBy === 'Date, new to old') selected @endif>Date, new to old</option>
+        <option value="Date, old to new" @if($sortBy === 'Date, old to new') selected @endif>Date, old to new</option>
+    </select>
+</div>
+
+
                         </div>
                      </div>
                   </div>
@@ -376,6 +377,19 @@
 @section('js')
 <script>
    $(document).ready(function() {
+  $('#SortBy').on('change', function() {
+    var sortBy = $(this).val();
+    var currentUrl = window.location.href;
+    var url = new URL(currentUrl);
+    var searchParams = new URLSearchParams(url.search);
+    searchParams.set('SortBy', sortBy);
+    url.search = searchParams.toString();
+    var newUrl = url.toString().replace(/,+|%2C/g, '');
+    window.location.href = newUrl;
+  });
+
+
+
 
       $(".size-btn").click(function() {
        $("#color-form").submit();

@@ -81,37 +81,39 @@ class AdminController extends Controller
     }
 
     public function updateImage(Request $req)
-{
-    $adminId = Auth::guard('admin')->user()->id;
+    {
+        $adminId = Auth::guard('admin')->user()->id;
+        $val = Validator::make($req->all(), [
+            'image' => 'required',
+        ]);
 
-    $val = Validator::make($req->all(), [
-        'image' => 'required',
-    ]);
-
-    if ($val->fails()) {
-        return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
-    } else {
-        $image = null;
-        if ($req->hasFile('image')) {
-            $ext = $req->file('image')->getClientOriginalExtension();
-            $name = substr(uniqid(), 0, 9) . '.' . $ext;
-            $image = 'admin/profile/' . $name;
-            $req->file('image')->move(public_path() . '/admin/profile', $name);
-        }
-
-        $data = Admin::where('id', $adminId)->first();
-
-        $data->image = $image;
-
-        $up = $data->update();
-
-        if (!$up) {
-            return response()->json(['status' => false, 'msg' => 'Something went wrong. Try again later...']);
+        if ($val->fails()) {
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
-            return response()->json(['status' => true, 'msg' => 'Profile Image Updated Successfully.....']);
+            $image = null;
+            if ($req->hasFile('image')) {
+                $ext = $req->file('image')->getClientOriginalExtension();
+                $name = substr(uniqid(), 0, 9) . '.' . $ext;
+                $image = 'admin/profile/' . $name;
+                $req->file('image')->move(public_path() . '/admin/profile', $name);
+            }
+
+            $data = Admin::where('id', $adminId)->first();
+            $data->image = $image;
+            $up = $data->update();
+
+            if (!$up) {
+                return response()->json(['status' => false, 'msg' => 'Something went wrong. Try again later...']);
+            } else {
+                return response()->json(['status' => true, 'msg' => 'Profile Image Updated Successfully.....']);
+            }
         }
     }
-}
+
+    public function deleteExpiredCoupons()
+    {
+        Artisan::call('coupons:delete-expired');
+    }
 
 
     public function logOut()
