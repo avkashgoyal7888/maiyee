@@ -51,21 +51,6 @@
                         <div class="product-labels rounded"><span class="lbl on-sale">Sale</span></div>
                         <!-- End product label -->
                      </a>
-                     <!-- end product image -->
-                     <!-- Start product button -->
-                     <!-- <form class="variants add" id="addToCart">
-                        <input type="hidden" name="product_id" value="{{$products->id}}">
-                        <input type="hidden" name="color_id" value="{{$colors->color->id}}">
-                        <input type="hidden" name="size_id" value="{{$colors->id}}">
-                        <input type="hidden" name="price" value="{{$products->discount}}">
-                        <input type="hidden" name="gst" value="{{$products->gst_rate}}">
-                        <input type="hidden" name="quantity" value="1">
-                        @if(Auth::guard('web')->user() == '')
-                        <button class="btn btn-addto-cart" data-toggle="modal" data-target="#myModal" tabindex="0">Add To Cart</button>
-                        @else
-                        <button class="btn btn-addto-cart" type="submit" tabindex="0">Add To Cart</button>
-                        @endif
-                     </form> -->
                      <div class="button-set">
                         <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
                         <i class="icon anm anm-search-plus-r"></i>
