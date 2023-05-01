@@ -266,9 +266,9 @@ class HomeController extends Controller
     public function handleGoogleCallback()
     {
         $user = Socialite::driver('google')->stateless()->user();
-
+    
         $authUser = User::where('email', $user->getEmail())->first();
-
+    
         if ($authUser) {
             Auth::login($authUser, true);
         } else {
@@ -277,10 +277,10 @@ class HomeController extends Controller
                 'email' => $user->getEmail(),
                 'password' => Hash::make(Str::random(24)),
             ]);
-
+    
             Auth::login($authUser, true);
         }
-
+    
         return redirect()->route('web.home');
     }
 

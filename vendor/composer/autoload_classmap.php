@@ -18,6 +18,7 @@ return array(
     'App\\Http\\Controllers\\home\\ForgetPasswordController' => $baseDir . '/app/Http/Controllers/home/ForgetPasswordController.php',
     'App\\Http\\Controllers\\home\\HomeController' => $baseDir . '/app/Http/Controllers/home/HomeController.php',
     'App\\Http\\Controllers\\home\\ReviewController' => $baseDir . '/app/Http/Controllers/home/ReviewController.php',
+    'App\\Http\\Controllers\\home\\ShiprocketController' => $baseDir . '/app/Http/Controllers/home/ShiprocketController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Livewire\\Admin\\Account\\Index' => $baseDir . '/app/Http/Livewire/Admin/Account/Index.php',
     'App\\Http\\Livewire\\Admin\\Account\\Statement' => $baseDir . '/app/Http/Livewire/Admin/Account/Statement.php',

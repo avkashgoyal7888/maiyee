@@ -533,6 +533,7 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
         'App\\Http\\Controllers\\home\\ForgetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/home/ForgetPasswordController.php',
         'App\\Http\\Controllers\\home\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/home/HomeController.php',
         'App\\Http\\Controllers\\home\\ReviewController' => __DIR__ . '/../..' . '/app/Http/Controllers/home/ReviewController.php',
+        'App\\Http\\Controllers\\home\\ShiprocketController' => __DIR__ . '/../..' . '/app/Http/Controllers/home/ShiprocketController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Livewire\\Admin\\Account\\Index' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Account/Index.php',
         'App\\Http\\Livewire\\Admin\\Account\\Statement' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Account/Statement.php',
