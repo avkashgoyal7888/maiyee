@@ -17,6 +17,7 @@ return new class extends Migration
         $table->string('email')->unique();  
         $table->timestamp('email_verified_at')->nullable(); 
         $table->string('password')->nullable(); 
+        $table->string('avatar')->nullable(); 
         $table->rememberToken();    
         $table->string('provider_name')->nullable(); // the social media provider (e.g. Google, Facebook)   
         $table->string('provider_id')->nullable(); // the ID of the user on the social media platform

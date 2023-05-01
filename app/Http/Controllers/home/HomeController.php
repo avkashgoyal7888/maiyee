@@ -260,26 +260,29 @@ class HomeController extends Controller
 
     public function redirectToGoogle()
     {
-        return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->stateless()->redirect();
     }
 
-    public function handleGoogleCallback()
-{
-    $user = Socialite::driver('google')->user();
+    public  function handleGoogleCallback()
+    {
+        $user = Socialite::driver('google')->stateless()->user();
 
-    // insert user information into users table
-    User::updateOrCreate([
-        'email' => $user->getEmail(),
-    ], [
-        'name' => $user->getName(),
-        'password' => Hash::make(Str::random(8)),
-    ]);
+        $authUser = User::where('email', $user->getEmail())->first();
 
-    // log in the user  
-    auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
+        if ($authUser) {
+            Auth::login($authUser, true);
+        } else {
+            $authUser = User::create([
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'password' => Hash::make(Str::random(24)),
+            ]);
 
-    return redirect()->route('web.home');
-}
+            Auth::login($authUser, true);
+        }
+
+        return redirect()->route('web.home');
+    }
 
 
 

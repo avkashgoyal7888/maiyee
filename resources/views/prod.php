@@ -2,7 +2,7 @@ APP_NAME=Laravel
 APP_ENV=production
 APP_KEY=base64:av2RH2JrVIvukPwGfAnFYsMOVyU4nc4X8Gk0KBsuciQ=
 APP_DEBUG=true
-APP_URL=http://localhost
+APP_URL=https://maiyee.in
 LIVEWIRE_ASSET_URL=http://localhost/maiyee/public
 
 LOG_CHANNEL=stack

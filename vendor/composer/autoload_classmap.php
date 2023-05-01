@@ -6,6 +6,7 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
+    'App\\Console\\Commands\\DeleteExpiredCoupons' => $baseDir . '/app/Console/Commands/DeleteExpiredCoupons.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Http\\Controllers\\Admin\\AdminController' => $baseDir . '/app/Http/Controllers/Admin/AdminController.php',
@@ -55,6 +56,7 @@ return array(
     'App\\Models\\Product' => $baseDir . '/app/Models/Product.php',
     'App\\Models\\ProductImage' => $baseDir . '/app/Models/ProductImage.php',
     'App\\Models\\Review' => $baseDir . '/app/Models/Review.php',
+    'App\\Models\\ReviewImage' => $baseDir . '/app/Models/ReviewImage.php',
     'App\\Models\\Size' => $baseDir . '/app/Models/Size.php',
     'App\\Models\\State' => $baseDir . '/app/Models/State.php',
     'App\\Models\\SubCategory' => $baseDir . '/app/Models/SubCategory.php',

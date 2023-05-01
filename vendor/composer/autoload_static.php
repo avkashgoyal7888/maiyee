@@ -521,6 +521,7 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
     );
 
     public static $classMap = array (
+        'App\\Console\\Commands\\DeleteExpiredCoupons' => __DIR__ . '/../..' . '/app/Console/Commands/DeleteExpiredCoupons.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\AdminController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminController.php',
@@ -570,6 +571,7 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
         'App\\Models\\Product' => __DIR__ . '/../..' . '/app/Models/Product.php',
         'App\\Models\\ProductImage' => __DIR__ . '/../..' . '/app/Models/ProductImage.php',
         'App\\Models\\Review' => __DIR__ . '/../..' . '/app/Models/Review.php',
+        'App\\Models\\ReviewImage' => __DIR__ . '/../..' . '/app/Models/ReviewImage.php',
         'App\\Models\\Size' => __DIR__ . '/../..' . '/app/Models/Size.php',
         'App\\Models\\State' => __DIR__ . '/../..' . '/app/Models/State.php',
         'App\\Models\\SubCategory' => __DIR__ . '/../..' . '/app/Models/SubCategory.php',
