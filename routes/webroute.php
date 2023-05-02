@@ -7,8 +7,6 @@ use App\Http\Controllers\home\CheckOutController;
 use App\Http\Controllers\home\ForgetPasswordController;
 use App\Http\Controllers\home\ReviewController;
 use App\Http\Controllers\home\ShiprocketController;
-	
-	Route::any('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
 	Route::controller(HomeController::class)->group(function(){
 		Route::get('/', 'index')->name('web.home');
 		Route::get('/register', 'register')->name('web.register');
@@ -41,6 +39,7 @@ use App\Http\Controllers\home\ShiprocketController;
 	Route::post('/review-submit', [ReviewController::class, 'reviewSubmit'])->name('web.review.submit');
 
 	Route::group(['middleware'=>'auth'], function() {
+		Route::post('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
 		Route::controller(HomeController::class)->group(function(){
 			Route::get('/cart', 'cart')->name('web.cart');
 			Route::get('/logout', 'logOut')->name('web.logout');

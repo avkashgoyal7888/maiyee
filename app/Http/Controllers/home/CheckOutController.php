@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\UserAddress;
+use App\Models\Head;
 use Auth;
 use Validator;
 
@@ -25,7 +26,7 @@ class CheckOutController extends Controller
         $cartTotal = $cart->sum('total');
         $user = UserAddress::where('user_id', Auth::guard('web')->user()->id)->get();
         $nav = Head::first();
-        return view('front.checkout.index', compact('cartNav', 'cartTotalnav','cart','cartTotal','user','cartCount','nav'));
+        return view('front.checkout.index', compact('cartNav', 'cartTotalnav','cart','cartTotal','user','cartCount','nav','nav'));
     }
 
     public function applyCoupon(Request $req)

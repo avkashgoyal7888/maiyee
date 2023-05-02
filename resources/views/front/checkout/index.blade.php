@@ -173,9 +173,11 @@
             </div>
             <hr />
             <div class="your-payment">
+               <form id="place">
                <h2 class="payment-title mb-3">payment method</h2>
                <div class="payment-method">
                   <div class="row">
+                     <input type="text" id="addressid" name="addressid"/>
                      <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
                         <input type="radio" id="radio-six" name="notaswitch-one" value="yes" checked/>
                         <label for="radio-six" style="font-size:14px"> Cash On Delivery</label>
@@ -189,8 +191,8 @@
                      <button class="btn" value="Place order" type="submit">Place order</button>
                   </div>
                </div>
-            </div>
             </form>
+            </div>
          </div>
       </div>
    </div>
@@ -199,6 +201,54 @@
 @section('js')
 <script>
    $(document).ready(function(){
+      $('#user-address').change(function() {
+      var selectedAddressId = $(this).val();
+      $('#addressid').val(selectedAddressId);
+   });
+      $('#place').on('submit', function(e) {
+           e.preventDefault(); // prevent default form submission
+           let fd = new FormData(this);
+           fd.append('_token', "{{ csrf_token() }}");
+    
+           $.ajax({
+               url: "{{ route('web.order.create') }}",
+               type: "POST",
+               data: fd,
+               dataType: 'json',
+               processData: false,
+               contentType: false,
+               beforeSend: function() {
+                   $('#addBtn').prop('disabled', true)
+               },
+               success: function(result) {
+                   if (result.status === false) {
+                       toastr.error(result.msg, 'Error', {
+                           timeOut: 3000,
+                           progressBar: true,
+                           closeButton: true
+                       });
+                   } else if (result.status === true) {
+                       toastr.success(result.msg, 'Success', {
+                           timeOut: 3000,
+                           progressBar: true,
+                           closeButton: true
+                       });
+                       // window.location.reload();
+                   }
+               },
+               error: function(jqXHR, exception) {
+                   console.log(jqXHR.responseJSON);
+                   toastr.error(result.msg, 'Error', {
+                       timeOut: 3000,
+                       progressBar: true,
+                       closeButton: true
+                   });
+               },
+               complete: function() {
+                   $('#addBtn').prop('disabled', false);
+               }
+           });
+       });
    	$('#user-address').on('change', function() {
               var  selectedAddress = $(this).find(':selected');
                if(selectedAddress.val() !== '') {

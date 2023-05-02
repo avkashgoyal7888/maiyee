@@ -5,10 +5,17 @@ namespace App\Http\Controllers\home;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use GuzzleHttp\Client;
+use App\Models\OrderDetail;
+use App\Models\Order;
+use App\Models\Cart;
+use App\Models\UserAddress;
+use Auth;
+use Validator;
+use DB;
 
 class ShiprocketController extends Controller
 {
-    public function createOrder()
+    public function createOrder(Request $req)
 {
     $client = new Client([
         'base_uri' => 'https://apiv2.shiprocket.in/v1/',
@@ -30,30 +37,80 @@ class ShiprocketController extends Controller
         $result = json_decode($response->getBody()->getContents());
         $access_token = $result->token;
 
+        $user_id = Auth::guard('web')->user()->id;
+        $cart = Cart::where('user_id', $user_id)->get();
+        $order_id = mt_rand(11111111, 99999999);
+        
+        $order_details = [];
+        foreach($cart->pluck('id') as $cart_id) {
+            $cart = Cart::find($cart_id);
+            $order_detail = OrderDetail::make([
+                'order_id' => $order_id,
+                'user_id' => $user_id,
+                'product_id' => $cart->product_id,
+                'color_id' => $cart->color_id,
+                'size_id' => $cart->size_id,
+                'price' => $cart->price,
+                'gst' => $cart->gst,
+                'quantity' => $cart->quantity,
+                'total' => $cart->total
+            ]);
+            $order_detail->save();
+        
+            $order_details[] = $order_detail;
+        }
+        
+        $order = new Order();
+        $order->order_id = $order_id;
+        $order->user_id = $user_id;
+        $order->name = Auth::guard('web')->user()->name;
+        $order->contact = Auth::guard('web')->user()->number;
+        $order->email = Auth::guard('web')->user()->email;
+        $order->order_date = now()->format('Y-m-d');
+        $order->taxable = 0.00;
+        $order->discount = 0.00;
+        $order->coupon_code = 'ORD1234';
+        // $order->cgst = $order_detail->cgst;
+        // $order->sgst = $order_detail->sgst;
+        // $order->igst = $order_detail->igst;
+        // $order->total = $order_detail->total;
+        // $order->shipping_charges = $order_detail->shipping_charges;
+        $order->payment_method = 'CASH';
+        $order->order_status = 'placed';
+        $order->save();
+        
         // Define the order data
+        // $order_id = uniqid('ORD'); // Generate a unique order ID
+        $order_items = [];
+        foreach ($order_details as $order_detail) {
+            $order_items[] = [
+                'name' => $order_detail->product_id,
+                'sku' => $order_detail->quantity,
+                'units' => $order_detail->quantity,
+                'selling_price' => $order_detail->price,
+                'discount' => 0.00,
+                'tax' => 0.00,
+            ];
+        }
+
+        if ($req->addressid != '') {
+            $useradd = UserAddress::where('id', $req->addressid)->first();
+        }
+        
         $orderData = [
-            'order_id' => 'ORD123456',
-            'billing_customer_name' => 'John Doe',
-            'order_date' => '2023-05-01',
-            'billing_last_name' => 'Doe',
-            'billing_address' => '123 Main St',
-            'billing_city' => 'Los Angeles',
-            'billing_pincode' => '90001',
-            'billing_state' => 'CA',
-            'billing_country' => 'USA',
-            'billing_email' => 'johndoe@example.com',
-            'billing_phone' => '1234567890',
+            'order_id' => $order->order_id,
+            'order_date' => $order->order_date,
+            'billing_customer_name' => $order->name,
+            'billing_last_name' => '',
+            'billing_address' => $useradd->address,
+            'billing_city' => $useradd->city,
+            'billing_pincode' => $useradd->pin_code,
+            'billing_state' => $useradd->state,
+            'billing_country' => 'INDIA',
+            'billing_email' => $order->email,
+            'billing_phone' => $order->contact,
             'shipping_is_billing' => true,
-            'order_items' => [
-                [
-                    'name' => 'Product 1',
-                    'sku' => 'PROD123',
-                    'units' => 1,
-                    'selling_price' => 100.00,
-                    'discount' => 0.00,
-                    'tax' => 0.00,
-                ],
-            ],
+            'order_items' => $order_items,
             'payment_method' => 'COD',
             'shipping_charges' => 50.00,
             'giftwrap_charges' => 0.00,
@@ -63,9 +120,8 @@ class ShiprocketController extends Controller
             'length' => 10.00,
             'breadth' => 10.00,
             'height' => 10.00,
-            'weight' => 1.00,
+            'weight' => 10.00,
         ];
-
         // Create the order
         $response = $client->post('external/orders/create/adhoc', [
             'headers' => [
@@ -78,12 +134,19 @@ class ShiprocketController extends Controller
         if ($response->getStatusCode() == 200) {
             $result = json_decode($response->getBody()->getContents());
             // Handle the successful order placement
+            echo "Order created with ID: " . $order_id;
         } else {
             $result = json_decode($response->getBody()->getContents());
             $error_message = $result->message;
             // Handle the error
+            echo "Error creating order: " . $error_message;
         }
+    } else {
+        // Handle the authentication error
+        echo "Error authenticating with Shiprocket API";
     }
 }
+
+
 
 }
