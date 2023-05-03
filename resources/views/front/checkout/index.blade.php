@@ -3,8 +3,8 @@
 <title>Checkout</title>
 <style>
    #cartDiscount, #cartTotal {
-        display: table-cell;
-    }
+   display: table-cell;
+   }
 </style>
 @stop
 @section('content')
@@ -74,35 +74,35 @@
                   <div class="row">
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-firstname">First Name <span class="required-f">*</span></label>
-                        <input name="firstname" value="" id="name" type="text">
+                        <input name="name" id="name" type="text" class="input-field">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-email">E-Mail </label>
-                        <input name="email" value="" id="email" type="email">
+                        <input name="email" id="email" type="email" class="input-field">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-telephone">Telephone <span class="required-f">*</span></label>
-                        <input name="telephone" value="" id="contact" type="tel">
+                        <input name="contact" id="contact" type="tel" class="input-field">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-address-1">Address <span class="required-f">*</span></label>
-                        <input name="address_1" value="" id="address" type="text">
+                        <input name="address" id="address" type="text" class="input-field">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-address-1">Landmark</label>
-                        <input name="address_1" value="" id="landmark" type="text">
+                        <input name="landmark" id="landmark" type="text" class="input-field">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-country">State<span class="required-f">*</span></label>
-                        <input name="address_1" value="" id="state" type="text">
+                        <input name="state" id="state" type="text" class="input-field">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-country">City<span class="required-f">*</span></label>
-                        <input name="address_1" value="" id="city" type="text">
+                        <input name="city" id="city" type="text" class="input-field">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-postcode">Post Code <span class="required-f">*</span></label>
-                        <input name="postcode" value="" id="pin" type="text">
+                        <input name="pin" id="pin" type="text" class="input-field">
                      </div>
                   </div>
                </fieldset>
@@ -110,7 +110,7 @@
                   <div class="row">
                      <div class="form-group form-check col-md-12 col-lg-12 col-xl-12">
                         <label class="form-check-label padding-15px-left">
-                        <input type="checkbox" class="form-check-input" value=""><strong>Save Address For Future?</strong>
+                        <input type="checkbox" class="form-check-input" name="saved" ><strong>Save Address For Future?</strong>
                         </label>
                      </div>
                   </div>
@@ -119,7 +119,7 @@
                   <div class="row">
                      <div class="form-group col-md-12 col-lg-12 col-xl-12">
                         <label for="input-company">Order Notes (If there are special instructions for your order)</label>
-                        <textarea class="form-control resize-both" rows="3" id="notes"></textarea>
+                        <textarea name="notes" class="form-control resize-both input-field" rows="3" id="notes"></textarea>
                      </div>
                   </div>
                </fieldset>
@@ -174,24 +174,34 @@
             <hr />
             <div class="your-payment">
                <form id="place">
-               <h2 class="payment-title mb-3">payment method</h2>
-               <div class="payment-method">
-                  <div class="row">
-                     <input type="text" id="addressid" name="addressid"/>
-                     <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
-                        <input type="radio" id="radio-six" name="notaswitch-one" value="yes" checked/>
-                        <label for="radio-six" style="font-size:14px"> Cash On Delivery</label>
+                  <h2 class="payment-title mb-3">payment method</h2>
+                  <div class="payment-method">
+                     <div class="row">
+                        <input type="hidden" id="addressid" name="addressid"/>
+                        <input type="hidden" id="namea" name="name"/>
+                        <input type="hidden" name="email" id="emaila" type="email">
+                        <input type="hidden" name="contact" id="contacta" type="tel">
+                        <input type="hidden" name="address" id="addressa" type="text">
+                        <input type="hidden" name="landmark" id="landmarka" type="text">
+                        <input type="hidden" name="state" id="statea" type="text">
+                        <input type="hidden" name="city" id="citya" type="text">
+                        <input type="hidden" name="pin_code" id="pina" type="text">
+                        <input type="hidden" name="order_notes" id="notesa" type="text">
+                        <input type="hidden" type="checkbox" name="saveaddress" class="form-check-input" id="check" >
+                        <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
+                           <input type="radio" id="radio-six" name="notaswitch-one" value="yes" checked/>
+                           <label for="radio-six" style="font-size:14px"> Cash On Delivery</label>
+                        </div>
+                        <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
+                           <input type="radio" id="radio-six" name="notaswitch-one" value="yes" checked/>
+                           <label for="radio-six" style="font-size:14px"> Pay Now</label>
+                        </div>
                      </div>
-                     <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
-                        <input type="radio" id="radio-six" name="notaswitch-one" value="yes" checked/>
-                        <label for="radio-six" style="font-size:14px"> Pay Now</label>
+                     <div class="order-button-payment">
+                        <button class="btn" value="Place order" type="submit">Place order</button>
                      </div>
                   </div>
-                  <div class="order-button-payment">
-                     <button class="btn" value="Place order" type="submit">Place order</button>
-                  </div>
-               </div>
-            </form>
+               </form>
             </div>
          </div>
       </div>
@@ -201,6 +211,17 @@
 @section('js')
 <script>
    $(document).ready(function(){
+
+      $('input[name="saved"]').change(function() {
+  $('#check').prop('checked', $(this).prop('checked'));
+});
+
+      $('.input-field').on('input', function() {
+   var fieldName = $(this).attr('name');
+   $('#' + fieldName + 'a').val($(this).val());
+});
+
+
       $('#user-address').change(function() {
       var selectedAddressId = $(this).val();
       $('#addressid').val(selectedAddressId);
@@ -249,7 +270,7 @@
                }
            });
        });
-   	$('#user-address').on('change', function() {
+      $('#user-address').on('change', function() {
               var  selectedAddress = $(this).find(':selected');
                if(selectedAddress.val() !== '') {
                   // Fill in the input fields with the address details and make them readonly
@@ -273,7 +294,7 @@
                   $('#pin').val('').prop('readonly', false);
               }
           });
-   	$('#user-address').on('change', function() {
+      $('#user-address').on('change', function() {
       var selected = $(this).val();
       var fullAddress = '';
       @foreach($user as $users)
@@ -307,19 +328,19 @@
                      $('#addBtn').prop('disabled', true)
                  },
                  success: function(result) {
-      			if (result.status === false) {
-          			toastr.error(result.msg, 'Error', {
-              		timeOut: 3000,
-              		progressBar: true,
-              		closeButton: true
-          		});
-      				} else if (result.status === true) {
-          			toastr.success(result.msg, 'Success', {
-              		timeOut: 3000,
-              		progressBar: true,
-              		closeButton: true
-          		});
-          		 if(result.discount) {
+               if (result.status === false) {
+                  toastr.error(result.msg, 'Error', {
+                  timeOut: 3000,
+                  progressBar: true,
+                  closeButton: true
+               });
+                  } else if (result.status === true) {
+                  toastr.success(result.msg, 'Success', {
+                  timeOut: 3000,
+                  progressBar: true,
+                  closeButton: true
+               });
+                if(result.discount) {
         $('#cartDiscount').text(result.discount);
         $('#discount').show();
     }

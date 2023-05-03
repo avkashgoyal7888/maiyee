@@ -20,6 +20,11 @@ return new class extends Migration
             $table->string('contact', 13);
             $table->string('email', 50);
             $table->date('order_date');
+            $table->string('address');
+            $table->string('landmark');
+            $table->string('state');
+            $table->string('city');
+            $table->longText('order_notes')->nullable();
             $table->double('taxable', 10,2)->default(0.00);
             $table->double('discount', 10,2)->default(0.00);
             $table->string('coupon_code');

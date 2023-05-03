@@ -66,10 +66,24 @@ class ShiprocketController extends Controller
         $order->name = Auth::guard('web')->user()->name;
         $order->contact = Auth::guard('web')->user()->number;
         $order->email = Auth::guard('web')->user()->email;
-        $order->order_date = now()->format('Y-m-d');
+        $order->order_date = date('Y-m-d');
         $order->taxable = 0.00;
         $order->discount = 0.00;
         $order->coupon_code = 'ORD1234';
+        if ($req->addressid != '') {
+            $useradd = UserAddress::where('id', $req->addressid)->first();
+            $order->address = $useradd->address;
+        $order->landmark = $useradd->landmark;
+        $order->state = $useradd->state;
+        $order->city = $useradd->city;
+        $order->order_notes = $req->order_notes;
+        } else {
+        $order->address = $req->address;
+        $order->landmark = $req->landmark;
+        $order->state = $req->state;
+        $order->city = $req->city;
+        $order->order_notes = $req->order_notes;
+        }
         // $order->cgst = $order_detail->cgst;
         // $order->sgst = $order_detail->sgst;
         // $order->igst = $order_detail->igst;
@@ -95,20 +109,36 @@ class ShiprocketController extends Controller
 
         if ($req->addressid != '') {
             $useradd = UserAddress::where('id', $req->addressid)->first();
+        } else {
+            $useradd = new UserAddress();
+            $useradd->user_id = Auth::guard('web')->user()->id;
+            $useradd->name = $req->name;
+            $useradd->email = $req->email;
+            $useradd->contact = $req->contact;
+            $useradd->address = $req->address;
+            $useradd->landmark = $req->landmark;
+            $useradd->state = $req->state;
+            $useradd->city = $req->city;
+            $useradd->pin_code = $req->pin_code;
+            if (isset($req->saveaddress) && $req->saveaddress == 'checked') {
+                $useradd->save();
+            }
+
         }
+
         
         $orderData = [
             'order_id' => $order->order_id,
             'order_date' => $order->order_date,
-            'billing_customer_name' => $order->name,
+            'billing_customer_name' => $useradd->name,
             'billing_last_name' => '',
             'billing_address' => $useradd->address,
             'billing_city' => $useradd->city,
             'billing_pincode' => $useradd->pin_code,
             'billing_state' => $useradd->state,
             'billing_country' => 'INDIA',
-            'billing_email' => $order->email,
-            'billing_phone' => $order->contact,
+            'billing_email' => $useradd->email,
+            'billing_phone' => $useradd->contact,
             'shipping_is_billing' => true,
             'order_items' => $order_items,
             'payment_method' => 'COD',
