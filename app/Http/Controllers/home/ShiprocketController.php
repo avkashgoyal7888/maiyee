@@ -53,7 +53,9 @@ class ShiprocketController extends Controller
         
         $taxable = $cart_item->quantity * $cart_item->price;
         $tax = $taxable * $cart_item->gst / 100;
-        $price = $cart_item->product->discount *100 /100+$cart_item->product->gst_rate;
+        $var1 = $cart_item->product->discount *100;
+        $var2 = 100+$cart_item->product->gst_rate;
+        $price =  $var1/$var2;
         
         if ($state == "Gujarat") {
             $cgst = $tax / 2;
