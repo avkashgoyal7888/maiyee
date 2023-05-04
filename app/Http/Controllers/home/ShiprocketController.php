@@ -51,11 +51,12 @@ class ShiprocketController extends Controller
             $state = $req->state;
         }
         
-        $taxable = $cart_item->quantity * $cart_item->price;
+        
         $tax = $taxable * $cart_item->gst / 100;
         $var1 = $cart_item->product->discount *100;
         $var2 = 100+$cart_item->product->gst_rate;
         $price =  $var1/$var2;
+        $taxable = $cart_item->quantity * $price;
         
         if ($state == "Gujarat") {
             $cgst = $tax / 2;
