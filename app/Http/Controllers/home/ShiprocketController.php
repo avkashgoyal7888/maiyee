@@ -39,83 +39,89 @@ class ShiprocketController extends Controller
         $access_token = $result->token;
 
         $user_id = Auth::guard('web')->user()->id;
-$cart = Cart::where('user_id', $user_id)->get();
-$order_id = mt_rand(11111111, 99999999);
-
-$order_details = [];
-foreach ($cart as $cart_item) {
-    if ($req->addressid != '') {
-    $useradd = UserAddress::where('id', $req->addressid)->first();
-    $state = $useradd->state;
-} else {
-    $state = $req->state;
-}
-
-$taxable = $cart_item->quantity * $cart_item->price;
-$tax = $taxable * $cart_item->gst / 100;
-
-if ($state == "Gujarat") {
-    $cgst = $tax / 2;
-    $sgst = $tax / 2;
-    $igst = 0;
-} else {
-    $cgst = 0;
-    $sgst = 0;
-    $igst = $tax;
-}
-
-$total = $taxable + $tax;
-
-    $order_detail = new OrderDetail([
-        'order_id' => $order_id,
-        'user_id' => $user_id,
-        'product_id' => $cart_item->product_id,
-        'color_id' => $cart_item->color_id,
-        'size_id' => $cart_item->size_id,
-        'taxable' => $taxable,
-        'price' => $cart_item->price,
-        'gst' => $cart_item->gst,
-        'quantity' => $cart_item->quantity,
-        'total' => $total,
-        'cgst' => $cgst,
-        'sgst' => $sgst,
-        'igst' => $igst,
-    ]);
-
-    $order_detail->save();
-
-    $order_details[] = $order_detail;
-}
+        $cart = Cart::where('user_id', $user_id)->get();
+        $order_id = mt_rand(11111111, 99999999);
+        
+        $order_details = [];
+        foreach ($cart as $cart_item) {
+            if ($req->addressid != '') {
+            $useradd = UserAddress::where('id', $req->addressid)->first();
+            $state = $useradd->state;
+        } else {
+            $state = $req->state;
+        }
+        
+        $taxable = $cart_item->quantity * $cart_item->price;
+        $tax = $taxable * $cart_item->gst / 100;
+        $price = $cart_item->product->discount *100 /100+$cart_item->product->gst_rate;
+        
+        if ($state == "Gujarat") {
+            $cgst = $tax / 2;
+            $sgst = $tax / 2;
+            $igst = 0;
+        } else {
+            $cgst = 0;
+            $sgst = 0;
+            $igst = $tax;
+        }
+        
+        $total = $taxable + $tax;
+        
+            $order_detail = new OrderDetail([
+                'order_id' => $order_id,
+                'user_id' => $user_id,
+                'product_id' => $cart_item->product_id,
+                'color_id' => $cart_item->color_id,
+                'size_id' => $cart_item->size_id,
+                'taxable' => $taxable,
+                'price' => $price,
+                'gst' => $cart_item->gst,
+                'quantity' => $cart_item->quantity,
+                'total' => $total,
+                'cgst' => $cgst,
+                'sgst' => $sgst,
+                'igst' => $igst,
+            ]);
+        
+            $order_detail->save();
+        
+            $order_details[] = $order_detail;
+        }
 
 
         if ($req->coupon_code != '') {
-    $data = Coupon::where('coupon_code', $req->coupon_code)->first();
+            $data = Coupon::where('coupon_code', $req->coupon_code)->first();
 
-    if ($data->status == 1) {
-        $val->errors()->add('status', 'Coupon Code is already used.');
-        return response()->json(['status' => false,'msg' => 'Coupon Code is already used....',]);
-    }
-
-    $cartTotal = Cart::where('user_id', Auth::guard('web')->user()->id)->sum('total');
-
-    if ($data->coupon_type == 'amount') {
-        $discount = $data->coupon_price;
-        $newCartTotal = max($cartTotal - $discount, 0);
-    }
-
-    if ($data->coupon_type == '%') {
-        $discount = $cartTotal * ($data->coupon_price / 100);
-        $newCartTotal = max($cartTotal - $discount, 0);
-    }
-} else {
-    $discount = 0;
-    $newCartTotal = Cart::where('user_id', Auth::guard('web')->user()->id)->sum('total');
-}
+        if ($data->status == 1) {
+            $val->errors()->add('status', 'Coupon Code is already used.');
+            return response()->json(['status' => false,'msg' => 'Coupon Code is already used....',]);
+        }
+        
+            $cartTotal = Cart::where('user_id', Auth::guard('web')->user()->id)->sum('total');
+        
+            if ($data->coupon_type == 'amount') {
+                $discount = $data->coupon_price;
+                $newCartTotal = max($cartTotal - $discount, 0);
+            }
+        
+            if ($data->coupon_type == '%') {
+                $discount = $cartTotal * ($data->coupon_price / 100);
+                $newCartTotal = max($cartTotal - $discount, 0);
+            }
+        } else {
+            $discount = 0;
+            $total = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('total');
+            $newCGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('cgst');
+            $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
+            $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
+            $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
+            $payable = $total - $discount + 100;
+        }
             
 
 //                 product = hsn
 
-// price = discount *100 /100+gst_rate 
+// price = discount_price *100 /100+gst_rate 
 
 // taxable = quantity * price
 // tax = taxable*gst_rate/100
@@ -136,7 +142,7 @@ $total = $taxable + $tax;
         $order->contact = Auth::guard('web')->user()->number;
         $order->email = Auth::guard('web')->user()->email;
         $order->order_date = date('Y-m-d');
-        $order->taxable = $newCartTotal;
+        $order->taxable = $taxable;
         $order->discount = $discount;
         $order->coupon_code = $req->coupon_code;;
         if ($req->addressid != '') {
@@ -153,17 +159,17 @@ $total = $taxable + $tax;
         $order->city = $req->city;
         $order->order_notes = $req->order_notes;
         }
-        // $order->cgst = $order_detail->cgst;
-        // $order->sgst = $order_detail->sgst;
-        // $order->igst = $order_detail->igst;
-        // $order->total = $order_detail->total;
+        $order->cgst = $newCGST;
+        $order->sgst = $newSGST;
+        $order->igst = $newIGST;
+        $order->total = $total;
+        $order->payable = $payable;
         // $order->shipping_charges = $order_detail->shipping_charges;
         $order->payment_method = 'CASH';
         $order->order_status = 'placed';
         $order->save();
-        
-        // Define the order data
-        // $order_id = uniqid('ORD'); // Generate a unique order ID
+
+        print_r($order); exit();
         $order_items = [];
         foreach ($order_details as $order_detail) {
             $order_items[] = [

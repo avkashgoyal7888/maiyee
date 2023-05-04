@@ -34,6 +34,7 @@ return new class extends Migration
             $table->double('total', 10,2)->default(0.00);
             $table->double('shipping_charges', 10,2)->default(0.00);
             $table->string('payment_method');
+            $table->double('payable', 10,2)->default(0.00);
             $table->enum('order_status', ['placed', 'dispatched', 'delivered']);
             $table->timestamps();
         });
