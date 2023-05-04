@@ -99,15 +99,32 @@ class ShiprocketController extends Controller
         }
         
             $cartTotal = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('total');
+            $total = 0.00;
+            $newCGST = 0.00;
+            $newSGST = 0.00;
+            $newIGST = 0.00;
+            $taxable = 0.00;
+            $payable = 0.00;
+
         
             if ($data->coupon_type == 'amount') {
                 $discount = $data->coupon_price;
-                $newCartTotal = max($cartTotal - $discount, 0);
+                $total = max($cartTotal - $discount, 0);
+                $newCGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('cgst');
+            $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
+            $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
+            $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
+            $payable = $total - $discount + 100;
             }
         
-            if ($data->coupon_type == '%') {
+            elseif($data->coupon_type == '%') {
                 $discount = $cartTotal * ($data->coupon_price / 100);
-                $newCartTotal = max($cartTotal - $discount, 0);
+                $total = max($cartTotal - $discount, 0);
+                $newCGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('cgst');
+            $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
+            $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
+            $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
+            $payable = $total + 100;
             }
         } else {
             $discount = 0;
@@ -118,23 +135,6 @@ class ShiprocketController extends Controller
             $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
             $payable = $total - $discount + 100;
         }
-            
-
-//                 product = hsn
-
-// price = discount_price *100 /100+gst_rate 
-
-// taxable = quantity * price
-// tax = taxable*gst_rate/100
-// cgst = tax/2
-// sgst = tax/2
-// igst = tax
-
-// total = taxable + tax
-
-// cart = taxable cgst sgst igst
-
-// coupon amount will - from taxable  in %
         
         $order = new Order();
         $order->order_id = $order_id;
