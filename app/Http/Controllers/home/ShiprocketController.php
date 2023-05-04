@@ -97,7 +97,7 @@ class ShiprocketController extends Controller
             return response()->json(['status' => false,'msg' => 'Coupon Code is already used....',]);
         }
         
-            $cartTotal = Cart::where('user_id', Auth::guard('web')->user()->id)->sum('total');
+            $cartTotal = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('total');
         
             if ($data->coupon_type == 'amount') {
                 $discount = $data->coupon_price;
