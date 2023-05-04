@@ -26,15 +26,15 @@ return new class extends Migration
             $table->string('city');
             $table->longText('order_notes')->nullable();
             $table->double('taxable', 10,2)->default(0.00);
-            $table->double('discount', 10,2)->default(0.00);
-            $table->string('coupon_code')->nullable();
             $table->double('cgst', 10,2)->default(0.00);
             $table->double('sgst', 10,2)->default(0.00);
             $table->double('igst', 10,2)->default(0.00);
             $table->double('total', 10,2)->default(0.00);
+            $table->double('discount', 10,2)->default(0.00);
+            $table->string('coupon_code')->nullable();
             $table->double('shipping_charges', 10,2)->default(0.00);
-            $table->string('payment_method');
             $table->double('payable', 10,2)->default(0.00);
+            $table->string('payment_method');
             $table->enum('order_status', ['placed', 'dispatched', 'delivered']);
             $table->timestamps();
         });

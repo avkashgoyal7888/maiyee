@@ -23,13 +23,13 @@ return new class extends Migration
             $table->unsignedBigInteger('size_id');
             $table->foreign('size_id')->references('id')->on('sizes')->onUpdate('cascade')->onDelete('cascade');
             $table->double('price', 10,2)->default(0.00);
-            $table->double('gst', 10,2)->default(0.00);
             $table->integer('quantity')->default(1);
-            $table->double('total', 10,2)->default(0.00);
+            $table->double('taxable', 10,2)->default(0.00);
+            $table->double('gst', 10,2)->default(0.00);
             $table->double('cgst', 10,2)->default(0.00);
             $table->double('sgst', 10,2)->default(0.00);
             $table->double('igst', 10,2)->default(0.00);
-            $table->double('taxable', 10,2)->default(0.00);
+            $table->double('total', 10,2)->default(0.00);
             $table->timestamps();
         });
     }
