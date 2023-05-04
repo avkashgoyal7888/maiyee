@@ -56,7 +56,7 @@
                      <p class="margin-10px-bottom">Enter your coupon code if you have one.</p>
                      <label class="required get" for="coupon-code"><span class="required-f">*</span> Coupon</label>
                      <form id="applyCoupon">
-                        <input name="coupon_code" id="coupon-code" type="text" class="mb-3">
+                        <input name="coupon_code" id="coupon-code" type="text" class="mb-3 input-field">
                         <button class="coupon-btn btn" type="submit">Apply Coupon</button>
                      </form>
                   </div>
@@ -177,6 +177,7 @@
                   <h2 class="payment-title mb-3">payment method</h2>
                   <div class="payment-method">
                      <div class="row">
+                        <input name="coupon_code" id="coupon_codea" type="text" >
                         <input type="hidden" id="addressid" name="addressid"/>
                         <input type="hidden" id="namea" name="name"/>
                         <input type="hidden" name="email" id="emaila" type="email">

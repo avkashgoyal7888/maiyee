@@ -27,7 +27,7 @@ return new class extends Migration
             $table->longText('order_notes')->nullable();
             $table->double('taxable', 10,2)->default(0.00);
             $table->double('discount', 10,2)->default(0.00);
-            $table->string('coupon_code');
+            $table->string('coupon_code')->nullable();
             $table->double('cgst', 10,2)->default(0.00);
             $table->double('sgst', 10,2)->default(0.00);
             $table->double('igst', 10,2)->default(0.00);
