@@ -160,7 +160,7 @@
                         </tr>
                         <tr>
                            <td colspan="3" class="text-right">Total</td>
-                           <td>${{$cartTotal}}</td>
+                           <td id="sval">${{$cartTotal}}</td>
                         </tr>
                         <tr id="discount" style="display: none;">
                            <td colspan="3" class="text-right">Discount</td>
@@ -374,6 +374,12 @@
                  }
              });
          });
+
+   if($('#sval').val() < 2000) {
+    $('#shipping').show();
+}
+
+
    })
 </script>
 @stop
