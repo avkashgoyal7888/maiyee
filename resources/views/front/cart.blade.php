@@ -24,9 +24,6 @@
    </div>
    <div class="row">
       <div class="col-12 col-sm-12 col-md-8 col-lg-8 main-col">
-         <div class="alert alert-success text-uppercase" role="alert">
-            <i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
-         </div>
          <div class=".table-responsive{-sm|-md|-lg|-xl}">
             <table id="cart-table">
                <thead class="cart__row cart__header">

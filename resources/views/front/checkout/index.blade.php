@@ -16,6 +16,9 @@
       </div>
    </div>
 </div>
+<div class="alert alert-success text-uppercase" role="alert" id="shipping" style="display: none;">
+            <i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
+         </div>
 <!--End Page Title-->
 <div class="container">
    <div class="row">
@@ -348,6 +351,11 @@
     if(result.newCartTotal) {
         $('#cartTotal').text(result.newCartTotal);
         $('#total').show();
+    } 
+
+    if(result.newCartTotal < 2000) {
+        $('#cartTotal').text(result.newCartTotal);
+        $('#shipping').show();
     } 
          // table with new cart total
           // window.location.reload();

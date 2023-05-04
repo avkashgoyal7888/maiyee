@@ -105,6 +105,7 @@ class ShiprocketController extends Controller
             $newIGST = 0.00;
             $taxable = 0.00;
             $payable = 0.00;
+            $shipping = 0.00;
 
         
             if ($data->coupon_type == 'amount') {
@@ -114,7 +115,11 @@ class ShiprocketController extends Controller
             $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
             $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
             $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
-            $payable = $total - $discount + 100;
+            $payable = $total - $discount;
+                if ($payable > 2000) {
+                    $shipping = 100;
+                    $payable = $total - $discount + $shipping;
+                }
             }
         
             elseif($data->coupon_type == '%') {
@@ -124,7 +129,11 @@ class ShiprocketController extends Controller
             $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
             $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
             $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
-            $payable = $total + 100;
+            $payable = $total;
+            if ($payable > 2000) {
+                    $shipping = 100;
+                    $payable = $total - $discount + $shipping;
+                }
             }
         } else {
             $discount = 0;
@@ -133,7 +142,11 @@ class ShiprocketController extends Controller
             $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
             $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
             $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
-            $payable = $total - $discount + 100;
+            $payable = $total - $discount;
+            if ($payable > 2000) {
+                    $shipping = 100;
+                    $payable = $total - $discount + $shipping;
+                }
         }
         
         $order = new Order();
@@ -165,7 +178,7 @@ class ShiprocketController extends Controller
         $order->igst = $newIGST;
         $order->total = $total;
         $order->payable = $payable;
-        // $order->shipping_charges = $order_detail->shipping_charges;
+        $order->shipping_charges = $shipping;
         $order->payment_method = 'CASH';
         $order->order_status = 'placed';
         $order->save();
