@@ -65,40 +65,32 @@
                     <nav class="grid__item" id="AccessibleNav"><!-- for mobile -->
                         <ul id="siteNav" class="site-nav medium center hidearrow">
                             <li class="lvl1"><a href="{{route('web.home')}}">Home </a></li>
-                            <li class="lvl1 parent dropdown"><a href="#">Indo Western<i class="anm anm-angle-down-l"></i></a>
+                            <li class="lvl1"><a href="{{route('web.home')}}">About Us </a></li>
+                            <li class="lvl1 parent dropdown"><a href="#">Indian wear<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
-                            <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-                            <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
-                            <li><a href="blog-grid-view.html" class="site-nav">Gridview</a></li>
-                            <li><a href="blog-article.html" class="site-nav">Article</a></li>
+                            <li><a href="blog-left-sidebar.html" class="site-nav">Kurti</a></li>
+                            <li><a href="blog-right-sidebar.html" class="site-nav">Tunning</a></li>
+                            <li><a href="blog-fullwidth.html" class="site-nav">Bottom wear</a></li>
+                            <li><a href="blog-grid-view.html" class="site-nav">Ethnic Wear</a></li>
                           </ul>
-                        </li><li class="lvl1 parent dropdown"><a href="#">Kurti<i class="anm anm-angle-down-l"></i></a>
+                        </li><li class="lvl1 parent dropdown"><a href="#">Western wear<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
-                            <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-                            <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
-                            <li><a href="blog-grid-view.html" class="site-nav">Gridview</a></li>
-                            <li><a href="blog-article.html" class="site-nav">Article</a></li>
-                          </ul>
-                        </li><li class="lvl1 parent dropdown"><a href="#">Bottom Wear<i class="anm anm-angle-down-l"></i></a>
-                          <ul class="dropdown">
-                            <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-                            <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
-                            <li><a href="blog-grid-view.html" class="site-nav">Gridview</a></li>
-                            <li><a href="blog-article.html" class="site-nav">Article</a></li>
+                            <li><a href="blog-left-sidebar.html" class="site-nav">Dresses(Long & Short)</a></li>
+                            <li><a href="blog-right-sidebar.html" class="site-nav">Top</a></li>
+                            <li><a href="blog-fullwidth.html" class="site-nav">Shirt</a></li>
+                            <li><a href="blog-grid-view.html" class="site-nav">Bottom Wear</a></li>
+                            <li><a href="blog-article.html" class="site-nav">Co-Ord Sets</a></li>
+                            <li><a href="blog-article.html" class="site-nav">Kaftan(Long & Short)</a></li>
                           </ul>
                         </li>
-                        <li class="lvl1 parent dropdown"><a href="#">New Arrivals<i class="anm anm-angle-down-l"></i></a>
+                        <li class="lvl1 parent dropdown"><a href="#">Special category<i class="anm anm-angle-down-l"></i></a>
                           <ul class="dropdown">
-                            <li><a href="blog-left-sidebar.html" class="site-nav">Left Sidebar</a></li>
-                            <li><a href="blog-right-sidebar.html" class="site-nav">Right Sidebar</a></li>
-                            <li><a href="blog-fullwidth.html" class="site-nav">Fullwidth</a></li>
-                            <li><a href="blog-grid-view.html" class="site-nav">Gridview</a></li>
-                            <li><a href="blog-article.html" class="site-nav">Article</a></li>
+                            <li><a href="blog-left-sidebar.html" class="site-nav">Maternity wear</a></li>
+                            <li><a href="blog-right-sidebar.html" class="site-nav">Night Wear</a></li>
                           </ul>
                         </li>
+                        
+                        <li class="lvl1"><a href="{{route('web.home')}}">Exhibition </a></li>
                       </ul>
                     </nav>
                     <!--End Desktop Menu-->
