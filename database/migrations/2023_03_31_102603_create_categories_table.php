@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('cat_name');
             $table->string('image');
             $table->string('tile');
+            $table->enum('menu', ['indian', 'western', 'special']);
             $table->timestamps();
         });
     }

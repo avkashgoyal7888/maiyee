@@ -70,6 +70,15 @@
                            @error('cat_name')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                                 <select class="form-control" wire:model="menu">
+                                    <option>Select Menu</option>
+                                    <option value="indian">INDIAN</option>
+                                    <option value="western">WESTERN</option>
+                                    <option value="special">SPECIAL</option>
+                                 </select>
+                                 @error('menu')<span class="text-danger">{{$message}}</span>@enderror
+                              </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Image</label>
                            <input type="file" class="form-control" wire:model='image' accept="image/*">
                            @error('image')<span class="text-danger">{{$message}}</span>@enderror
@@ -108,6 +117,14 @@
                            <input type="hidden" wire:model='cat_id'>
                            @error('cat_name')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                                 <select class="form-control" wire:model="menu">
+                                    <option value="indian">INDIAN</option>
+                                    <option value="western">WESTERN</option>
+                                    <option value="special">SPECIAL</option>
+                                 </select>
+                                 @error('menu')<span class="text-danger">{{$message}}</span>@enderror
+                              </div>
                         <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Image</label>
                            <input type="file" class="form-control" wire:model='image'>

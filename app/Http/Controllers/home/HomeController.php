@@ -41,7 +41,8 @@ class HomeController extends Controller
         }
         $nav = Head::first();
         $sub = SubCategory::get();
-        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub'));
+        $cat = Category::get();
+        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub', 'cat'));
     }
 
     public function register()
@@ -55,7 +56,8 @@ class HomeController extends Controller
         $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
-        return view('front.auth.register', compact('cartNav','cartTotalnav','cartCount','nav'));
+        $cat = Category::get();
+        return view('front.auth.register', compact('cartNav','cartTotalnav','cartCount','nav','cat'));
     }
 
     public function disclaimer()
@@ -69,7 +71,8 @@ class HomeController extends Controller
         $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
-        return view('front.disclaimer', compact('cartNav','cartTotalnav','cartCount','nav'));
+        $cat = Category::get();
+        return view('front.disclaimer', compact('cartNav','cartTotalnav','cartCount','nav','cat'));
     }
 
     public function policy()
@@ -83,7 +86,8 @@ class HomeController extends Controller
         $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
-        return view('front.policy',compact('cartNav','cartTotalnav','cartCount','nav'));
+        $cat = Category::get();
+        return view('front.policy',compact('cartNav','cartTotalnav','cartCount','nav','cat'));
     }
 
     public function refund()
@@ -97,7 +101,8 @@ class HomeController extends Controller
         $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
-        return view('front.refund', compact('cartNav','cartTotalnav','cartCount','nav'));
+        $cat = Category::get();
+        return view('front.refund', compact('cartNav','cartTotalnav','cartCount','nav','cat'));
     }
 
     public function shipping()
@@ -111,7 +116,8 @@ class HomeController extends Controller
         $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
-        return view('front.shipping',compact('cartNav','cartTotalnav','cartCount','nav'));
+        $cat = Category::get();
+        return view('front.shipping',compact('cartNav','cartTotalnav','cartCount','nav','cat'));
     }
 
     public function cart()
@@ -127,7 +133,8 @@ class HomeController extends Controller
         $cart = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
         $cartTotal = $cart->sum('total');
         $nav = Head::first();
-        return view('front.cart', compact('cart', 'cartNav','cartTotal','cartTotalnav','cartCount','nav'));
+        $cat = Category::get();
+        return view('front.cart', compact('cart', 'cartNav','cartTotal','cartTotalnav','cartCount','nav','cat'));
     }
 
     public function productDetail(Request $req)
@@ -151,41 +158,90 @@ class HomeController extends Controller
         $count = DB::table("reviews")->where("product_id", $req->id)->count();
         $avg = $count > 0 ? $rating / $count : 0;
         $rim = ReviewImage::where('product_id',$req->id)->get();
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim'));
+        $cat = Category::get();
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat'));
     }
 
     public function subcategory(Request $request)
+    {
+        // Get cart data
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
+        }
+        // Get navigation data
+        $nav = Head::first();
+        // Get subcategory data
+        $productsQuery = Product::where('sub_id', $request->id);
+        $size = Size::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('size')->distinct()->get('size');
+        $category = Category::get();
+        $sub = SubCategory::get();
+        $color = Color::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('code')->distinct()->get('code');
+        $subimg = SubCategory::where('id', $request->id)->first();
+        // Apply sorting to the query
+        $sortBy = $request->input('SortBy', 'name-ascending');
+        switch ($sortBy) {
+            // case 'Best Selling':
+            //     $productsQuery->orderBy('sales_count', 'desc');
+            //     break;
+            case 'Alphabetically, A-Z':
+                $productsQuery->orderBy('name', 'asc');
+                break;
+            case 'Alphabetically, Z-A':
+                $productsQuery->orderBy('name', 'desc');
+                break;
+            case 'Price, low to high':
+                $productsQuery->orderBy('discount', 'asc');
+                break;
+            case 'Price, high to low':
+                $productsQuery->orderBy('discount', 'desc');
+                break;
+            case 'Date, new to old':
+                $productsQuery->orderBy('created_at', 'desc');
+                break;
+            case 'Date, old to new':
+                $productsQuery->orderBy('created_at', 'asc');
+                break;
+            default:
+                $productsQuery->orderBy('name', 'asc');
+                break;
+        }
+        // Get the sorted products
+        $product = $productsQuery->get();
+        $cat = Category::get();
+        return view('front.sub', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'subimg', 'product', 'sortBy','cat'));
+    }
+
+    public function category(Request $request)
 {
     // Get cart data
     $cartNav = Cart::get();
     $cartTotalnav = 0;
     $cartCount = 0;
     if (Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)
-            ->latest()
-            ->limit(2)
-            ->get();
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
     }
-
     // Get navigation data
     $nav = Head::first();
-
     // Get subcategory data
-    $productsQuery = Product::where('sub_id', $request->id);
+    $productsQuery = Product::where('cat_id', $request->id);
     $size = Size::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('size')->distinct()->get('size');
     $category = Category::get();
     $sub = SubCategory::get();
     $color = Color::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('code')->distinct()->get('code');
-    $subimg = SubCategory::where('id', $request->id)->first();
-
+    $catimg = Category::where('id', $request->id)->first();
     // Apply sorting to the query
-    $sortBy = $request->input('SortBy', 'name-ascending');
+    $sortBy = $request->input('SortBy', 'Alphabetically, A-Z');
     switch ($sortBy) {
-        // case 'Best Selling':
-        //     $productsQuery->orderBy('sales_count', 'desc');
-        //     break;
+        case 'Best Selling':
+            $productsQuery->orderBy('sales_count', 'desc');
+            break;
         case 'Alphabetically, A-Z':
             $productsQuery->orderBy('name', 'asc');
             break;
@@ -211,9 +267,10 @@ class HomeController extends Controller
 
     // Get the sorted products
     $product = $productsQuery->get();
-
-    return view('front.sub', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'subimg', 'product', 'sortBy'));
+    $cat = Category::get();
+    return view('front.cat', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'catimg', 'product', 'sortBy','cat'));
 }
+
 
 
     public function filterByColor(Request $request)

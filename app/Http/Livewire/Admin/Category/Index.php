@@ -13,7 +13,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $cat_name, $cat_id,$image,$tile;
+    public $cat_name, $cat_id,$image,$tile, $menu;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -37,6 +37,7 @@ class Index extends Component
         $this->cat_id = '';
         $this->image = '';
         $this->tile = '';
+        $this->menu = '';
         $this->reset('image', 'tile');
 
     }
@@ -46,6 +47,7 @@ class Index extends Component
         $validatedata = $this->validate([
             'image' => 'required',
             'tile' => 'required',
+            'menu' => 'required',
         ]);
         if ($this->image != '') {
             $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
@@ -57,6 +59,7 @@ class Index extends Component
         }
         $cat = new Category;
         $cat->cat_name = $this->cat_name;
+        $cat->menu = $this->menu;
         $cat->image = $image;
         $cat->tile = $tile;
         $cat->save();
@@ -73,6 +76,7 @@ class Index extends Component
             $this->cat_name = $cat->cat_name;
             $this->image = $cat->image;
             $this->tile = $cat->tile;
+            $this->menu = $cat->menu;
 
         } else {
             return redirect()->to('/admin/category');
@@ -107,6 +111,7 @@ class Index extends Component
         }
     
         $sub->cat_name = $this->cat_name;
+        $sub->menu = $this->menu;
         $sub->tile = $tile;
         $sub->image = $image;
         $sub->update();

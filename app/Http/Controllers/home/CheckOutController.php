@@ -26,7 +26,8 @@ class CheckOutController extends Controller
         $cartTotal = $cart->sum('total');
         $user = UserAddress::where('user_id', Auth::guard('web')->user()->id)->get();
         $nav = Head::first();
-        return view('front.checkout.index', compact('cartNav', 'cartTotalnav','cart','cartTotal','user','cartCount','nav','nav'));
+        $cat = Category::get();
+        return view('front.checkout.index', compact('cartNav', 'cartTotalnav','cart','cartTotal','user','cartCount','nav','nav','cat'));
     }
 
     public function applyCoupon(Request $req)
