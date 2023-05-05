@@ -38,6 +38,32 @@ class ShiprocketController extends Controller
         $result = json_decode($response->getBody()->getContents());
         $access_token = $result->token;
 
+        $val = Validator::make($req->all(), [
+        'name' => 'required',
+        'email' => 'required',
+        'contact' => 'required|min:10',
+        'address' => 'required',
+        'landmark' => 'required',
+        'state' => 'required',
+        'city' => 'required',
+        'pin_code' => 'required|min:6',
+        ],[
+            'name.required' => 'Name Can not be blank...',
+            'email.required' => 'Email Can not be blank...',
+            'contact.required' => 'Contact Can not be blank...',
+            'contact.min' => 'Enter Correct contact number....',
+            'address.required' => 'Address Can not be blank...',
+            'landmark.required' => 'Landmark Can not be blank...',
+            'state.required' => 'State Can not be blank...',
+            'city.required' => 'City Can not be blank...',
+            'pin_code.required' => 'Pin Code Can not be blank...',
+            'pin_code.min' => 'Enter Correct Pin Code....',
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+        }
+
         $user_id = Auth::guard('web')->user()->id;
         $cart = Cart::where('user_id', $user_id)->get();
         $order_id = mt_rand(11111111, 99999999);
@@ -95,10 +121,22 @@ class ShiprocketController extends Controller
 
         if ($data->status == 1) {
             $val->errors()->add('status', 'Coupon Code is already used.');
+            $req->coupon_code = '';
             return response()->json(['status' => false,'msg' => 'Coupon Code is already used....',]);
         }
-        
+
+        if (strtotime($data->exp_date) < strtotime(date('Y-m-d'))) {
+            $val->errors()->add('status', 'Coupon Code has expired.');
+            $req->coupon_code = '';
+            return response()->json(['status' => false, 'msg' => 'Coupon Code has expired.']);
+            }
+
             $cartTotal = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('total');
+            if ($data->order_value < $cartTotal) {
+            $val->errors()->add('status', 'Coupon Code Value is less your total.');
+            $req->coupon_code = '';
+            return response()->json(['status' => false,'msg' => 'Coupon Code Value is less your total.',]);
+        }
             $total = 0.00;
             $newCGST = 0.00;
             $newSGST = 0.00;
@@ -135,6 +173,9 @@ class ShiprocketController extends Controller
                     $payable = $total - $discount + $shipping;
                 }
             }
+            $data->status = '1';
+                $data->exp_date = date('y-m-d');
+                $data->update();
         } else {
             $discount = 0;
             $total = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('total');
@@ -182,8 +223,6 @@ class ShiprocketController extends Controller
         $order->payment_method = 'CASH';
         $order->order_status = 'placed';
         $order->save();
-
-        print_r($order); exit();
         $order_items = [];
         foreach ($order_details as $order_detail) {
             $order_items[] = [
@@ -249,6 +288,12 @@ class ShiprocketController extends Controller
             ],
             'json' => $orderData,
         ]);
+
+        if ($orderData) {
+                return response()->json(['status'=>true, 'msg'=>'Order Successfully....']);
+            } else {
+                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later.....']);
+            }
 
         if ($response->getStatusCode() == 200) {
             $result = json_decode($response->getBody()->getContents());

@@ -77,35 +77,35 @@
                   <div class="row">
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-firstname">First Name <span class="required-f">*</span></label>
-                        <input name="name" id="name" type="text" class="input-field">
+                        <input name="name" type="text" class="input-field name">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-email">E-Mail </label>
-                        <input name="email" id="email" type="email" class="input-field">
+                        <input name="email" type="email" class="input-field email">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-telephone">Telephone <span class="required-f">*</span></label>
-                        <input name="contact" id="contact" type="tel" class="input-field">
+                        <input name="contact" type="tel" class="input-field contact">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-address-1">Address <span class="required-f">*</span></label>
-                        <input name="address" id="address" type="text" class="input-field">
+                        <input name="address" type="text" class="input-field address">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-address-1">Landmark</label>
-                        <input name="landmark" id="landmark" type="text" class="input-field">
+                        <input name="landmark" type="text" class="input-field landmark">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-country">State<span class="required-f">*</span></label>
-                        <input name="state" id="state" type="text" class="input-field">
+                        <input name="state" type="text" class="input-field state">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-country">City<span class="required-f">*</span></label>
-                        <input name="city" id="city" type="text" class="input-field">
+                        <input name="city" type="text" class="city input-field">
                      </div>
                      <div class="form-group col-md-6 col-lg-6 col-xl-6 required">
                         <label for="input-postcode">Post Code <span class="required-f">*</span></label>
-                        <input name="pin" id="pin" type="text" class="input-field">
+                        <input name="pin" type="text" class="input-field pin">
                      </div>
                   </div>
                </fieldset>
@@ -180,17 +180,17 @@
                   <h2 class="payment-title mb-3">payment method</h2>
                   <div class="payment-method">
                      <div class="row">
-                        <input name="coupon_code" id="coupon_codea" type="text" >
+                        <input name="coupon_code" id="coupon_codea" type="hidden" >
                         <input type="hidden" id="addressid" name="addressid"/>
-                        <input type="hidden" id="namea" name="name"/>
-                        <input type="hidden" name="email" id="emaila" type="email">
-                        <input type="hidden" name="contact" id="contacta" type="tel">
-                        <input type="hidden" name="address" id="addressa" type="text">
-                        <input type="hidden" name="landmark" id="landmarka" type="text">
-                        <input type="hidden" name="state" id="statea" type="text">
-                        <input type="hidden" name="city" id="citya" type="text">
-                        <input type="hidden" name="pin_code" id="pina" type="text">
-                        <input type="hidden" name="order_notes" id="notesa" type="text">
+                        <input type="hidden" class="name" name="name"/>
+                        <input type="hidden" name="email" class="email" type="email">
+                        <input type="hidden" name="contact" class="contact" type="tel">
+                        <input type="hidden" name="address" class="address">
+                        <input type="hidden" name="landmark" class="landmark" type="text">
+                        <input type="hidden" name="state" class="state" type="text">
+                        <input type="hidden" name="city" class="city" type="text">
+                        <input type="hidden" name="pin_code" class="pin" type="text">
+                        <input type="hidden" name="order_notes" class="notes" type="text">
                         <input type="hidden" type="checkbox" name="saveaddress" class="form-check-input" id="check" >
                         <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
                            <input type="radio" id="radio-six" name="notaswitch-one" value="yes" checked/>
@@ -222,7 +222,7 @@
 
       $('.input-field').on('input', function() {
    var fieldName = $(this).attr('name');
-   $('#' + fieldName + 'a').val($(this).val());
+   $('.' + fieldName).val($(this).val());
 });
 
 
@@ -278,24 +278,24 @@
               var  selectedAddress = $(this).find(':selected');
                if(selectedAddress.val() !== '') {
                   // Fill in the input fields with the address details and make them readonly
-                  $('#name').val(selectedAddress.data('name')).prop('readonly', true);
-                  $('#email').val(selectedAddress.data('email')).prop('readonly', true);
-                  $('#contact').val(selectedAddress.data('contact')).prop('readonly', true);
-                  $('#address').val(selectedAddress.data('address')).prop('readonly', true);
-                  $('#landmark').val(selectedAddress.data('landmark')).prop('readonly', true);
-                  $('#state').val(selectedAddress.data('state')).prop('readonly', true);
-                  $('#city').val(selectedAddress.data('city')).prop('readonly', true);
-                  $('#pin').val(selectedAddress.data('pin')).prop('readonly', true);
+                  $('.name').val(selectedAddress.data('name')).prop('readonly', true);
+                  $('.email').val(selectedAddress.data('email')).prop('readonly', true);
+                  $('.contact').val(selectedAddress.data('contact')).prop('readonly', true);
+                  $('.address').val(selectedAddress.data('address')).prop('readonly', true);
+                  $('.landmark').val(selectedAddress.data('landmark')).prop('readonly', true);
+                  $('.state').val(selectedAddress.data('state')).prop('readonly', true);
+                  $('.city').val(selectedAddress.data('city')).prop('readonly', true);
+                  $('.pin').val(selectedAddress.data('pin')).prop('readonly', true);
               } else {
                   // Clear the input fields and make them editable
-                  $('#name').val('').prop('readonly', false);
-                  $('#email').val('').prop('readonly', false);
-                  $('#contact').val('').prop('readonly', false);
-                  $('#address').val('').prop('readonly', false);
-                  $('#landmark').val('').prop('readonly', false);
-                  $('#state').val('').prop('readonly', false);
-                  $('#city').val('').prop('readonly', false);
-                  $('#pin').val('').prop('readonly', false);
+                  $('.name').val('').prop('readonly', false);
+                  $('.email').val('').prop('readonly', false);
+                  $('.contact').val('').prop('readonly', false);
+                  $('.address').val('').prop('readonly', false);
+                  $('.landmark').val('').prop('readonly', false);
+                  $('.state').val('').prop('readonly', false);
+                  $('.city').val('').prop('readonly', false);
+                  $('.pin').val('').prop('readonly', false);
               }
           });
       $('#user-address').on('change', function() {

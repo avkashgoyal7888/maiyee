@@ -48,13 +48,26 @@ class CheckOutController extends Controller
             $data = Coupon::where('coupon_code',$req->coupon_code)->first();
             if ($data->status == 1) {
             $val->errors()->add('status', 'Coupon Code is already used.');
+            $req->coupon_code = '';
             return response()->json(['status' => false,'msg' => 'Coupon Code is already used....',]);
         }
+
+        if (strtotime($data->exp_date) < strtotime(date('Y-m-d'))) {
+            $val->errors()->add('status', 'Coupon Code has expired.');
+            $req->coupon_code = '';
+            return response()->json(['status' => false, 'msg' => 'Coupon Code has expired.']);
+            }
 
 
             $data->coupon_code = $req->coupon_code;
             $upd = $data;
             $cartTotal = Cart::where('user_id', Auth::guard('web')->user()->id)->sum('total');
+
+            if ($data->order_value < $cartTotal) {
+            $val->errors()->add('status', 'Coupon Code Value is less your total.');
+            $req->coupon_code = '';
+            return response()->json(['status' => false,'msg' => 'Coupon Code Value is less your total.',]);
+        }
 
              if($data->coupon_type == 'amount') {
                 $newCartTotal = $cartTotal - $data->coupon_price;
