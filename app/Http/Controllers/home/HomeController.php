@@ -17,6 +17,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Review;
 use App\Models\ReviewImage;
+use App\Models\ProductDetail;
 use Validator;
 use Hash;
 use Auth;
@@ -149,6 +150,7 @@ class HomeController extends Controller
         }
         $color = Color::where('product_id', $req->id)->get();
         $product = Product::where('id', $req->id)->first();
+        $productdetail = ProductDetail::where('product_id', $req->id)->first();
         $size = Size::where('product_id', $req->id)->get();
         $colorzoom = Color::where('product_id', $req->id)->first();
         $proimage = ProductImage::where('product_id', $req->id)->get();
@@ -159,7 +161,7 @@ class HomeController extends Controller
         $avg = $count > 0 ? $rating / $count : 0;
         $rim = ReviewImage::where('product_id',$req->id)->get();
         $cat = Category::get();
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat'));
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail'));
     }
 
     public function subcategory(Request $request)

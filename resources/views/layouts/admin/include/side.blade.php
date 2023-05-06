@@ -57,6 +57,7 @@
                   <li><a href="{{route('admin.color')}}" data-key="t-colors"><i class="bx bx-hash nav-icon"></i>Colors</a></li>
                   <li><a href="{{route('admin.size')}}" data-key="t-size"><i class="bx bx-hash nav-icon"></i>Size</a></li>
                   <li><a href="{{route('admin.color.image')}}" data-key="t-size"><i class="bx bx-hash nav-icon"></i>Product Image</a></li>
+                  <li><a href="{{route('admin.product.detail')}}" data-key="t-size"><i class="bx bx-hash nav-icon"></i>Product Details</a></li>
                </ul>
             </li>
             <li>

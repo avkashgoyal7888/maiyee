@@ -262,7 +262,62 @@
          <div class="tab-container">
             <div id="tab1" class="tab-content">
                <div class="product-description rte">
-                  {{$product->detail}}
+                  <table class="table" style="width:30% !important;">
+                        <tr>
+                          <th>Ideal For :</th>
+                          <td>{{ $productdetail->ideal }}</td>
+                        </tr>
+                        <tr>
+                          <th>Length Type :</th>
+                          <td>{{ $productdetail->length_type }}</td>
+                        </tr>
+                        <tr>
+                          <th>Brand Color :</th>
+                          <td>{{ $productdetail->brand_color }}</td>
+                        </tr>
+                        <tr>
+                          <th>Ocassion :</th>
+                          <td>{{ $productdetail->ocassion }}</td>
+                        </tr>
+                        <tr>
+                          <th>Pattern :</th>
+                          <td>{{ $productdetail->pattern }}</td>
+                        </tr>
+                        <tr>
+                          <th>Type :</th>
+                          <td>{{ $productdetail->type }}</td>
+                        </tr>
+                        <tr>
+                          <th>Fabric :</th>
+                          <td>{{ $productdetail->fabric }}</td>
+                        </tr>
+                        <tr>
+                          <th>Neck :</th>
+                          <td>{{ $productdetail->neck }}</td>
+                        </tr>
+                        <tr>
+                          <th>Sleeve :</th>
+                          <td>{{ $productdetail->sleeve }}</td>
+                        </tr>
+                        <tr>
+                          <th>Color :</th>
+                          <td>{{ $productdetail->color }}</td>
+                        </tr>
+                        <tr>
+                          <th>Number of Contents in Sales Package :</th>
+                          <td>{{ $productdetail->sale_package }}</td>
+                        </tr>
+                        <tr>
+                          <th>Fabric Care :</th>
+                          <td>{{ $productdetail->fabric_care }}</td>
+                        </tr>
+                        <tr>
+                          <th>Style Code :</th>
+                          <td>{{ $productdetail->style_code }}</td>
+                        </tr>
+                      </table>
+                  
+                   
                </div>
             </div>
             <div id="tab2" class="tab-content">

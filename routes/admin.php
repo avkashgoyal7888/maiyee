@@ -42,6 +42,8 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::get('/banner', function(){ return view('admin.banner.index'); })->name('admin.banner');
 	// Coupon routes
 	Route::get('/coupon', function(){ return view('admin.coupon.index'); })->name('admin.coupon');
+	// Product Detail Routes
+	Route::get('/product-detail', function(){ return view('admin.product.detail'); })->name('admin.product.detail');
 });
 
 
