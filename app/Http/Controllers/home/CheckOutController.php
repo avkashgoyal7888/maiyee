@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Coupon;
 use App\Models\UserAddress;
 use App\Models\Head;
+use App\Models\Category;
 use Auth;
 use Validator;
 

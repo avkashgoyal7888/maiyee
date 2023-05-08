@@ -193,11 +193,11 @@
                         <input type="hidden" name="order_notes" class="notes" type="text">
                         <input type="hidden" type="checkbox" name="saveaddress" class="form-check-input" id="check" >
                         <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
-                           <input type="radio" id="radio-six" name="notaswitch-one" value="yes" checked/>
+                           <input type="radio" id="cash" name="cash" value="yes" />
                            <label for="radio-six" style="font-size:14px"> Cash On Delivery</label>
                         </div>
                         <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
-                           <input type="radio" id="radio-six" name="notaswitch-one" value="yes" checked/>
+                           <input type="radio" id="payu" name="payu" value="yes" />
                            <label for="radio-six" style="font-size:14px"> Pay Now</label>
                         </div>
                      </div>
@@ -246,21 +246,28 @@
                    $('#addBtn').prop('disabled', true)
                },
                success: function(result) {
-                   if (result.status === false) {
-                       toastr.error(result.msg, 'Error', {
-                           timeOut: 3000,
-                           progressBar: true,
-                           closeButton: true
-                       });
-                   } else if (result.status === true) {
-                       toastr.success(result.msg, 'Success', {
-                           timeOut: 3000,
-                           progressBar: true,
-                           closeButton: true
-                       });
-                       // window.location.reload();
-                   }
-               },
+    if (result.status === false) {
+        toastr.error(result.msg, 'Error', {
+            timeOut: 3000,
+            progressBar: true,
+            closeButton: true
+        });
+    } else if (result.status === true) {
+        toastr.success(result.msg, 'Success', {
+            timeOut: 3000,
+            progressBar: true,
+            closeButton: true,
+            onHidden: function() {
+                if ($('#cash').prop('checked')) {
+                    window.location.href = "{{ route('web.success') }}";
+                } else if ($('#payu').prop('checked')) {
+                    window.location.href = "{{ route('web.pay.view') }}";
+                }
+            }
+        });
+    }
+},
+
                error: function(jqXHR, exception) {
                    console.log(jqXHR.responseJSON);
                    toastr.error(result.msg, 'Error', {

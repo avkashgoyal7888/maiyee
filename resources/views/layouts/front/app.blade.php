@@ -8,7 +8,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{asset('front/assets/images/logo.png')}}" />
+<link rel="shortcut icon" href="{{asset('front/assets/images/logos.jpg')}}" />
 <!-- Plugins CSS -->
 <link rel="stylesheet" href="{{asset('front/assets/css/plugins.css')}}">
 <!-- Bootstap CSS -->
@@ -26,7 +26,7 @@
 <body class="template-index">
 <section class="home2-default">
 <!-- <div id="pre-loader">
-    <img src="{{asset('front/assets/images/logo.png')}}" alt="Loading..." />
+    <img src="{{asset('front/assets/images/logos.jpg')}}" alt="Loading..." />
 </div> -->
 <div class="pageWrapper">
 	<!--Promotion Bar-->

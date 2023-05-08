@@ -289,25 +289,23 @@ class ShiprocketController extends Controller
             'json' => $orderData,
         ]);
 
-        if ($orderData) {
-                return response()->json(['status'=>true, 'msg'=>'Order Successfully....']);
-            } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later.....']);
-            }
-
         if ($response->getStatusCode() == 200) {
-            $result = json_decode($response->getBody()->getContents());
-            // Handle the successful order placement
-            echo "Order created with ID: " . $order_id;
+            return response()->json(['status'=>true, 'msg'=>'Order Successfully....']);
+            if ($req->cash == 'yes') {
+                return redirect()->route('web.success');
+            } elseif($req->payu == 'yes') {
+                return redirect()->route('web.home');
+            }
+            // $result = json_decode($response->getBody()->getContents());
+            // // Handle the successful order placement
+            // echo "Order created with ID: " . $order_id;
         } else {
-            $result = json_decode($response->getBody()->getContents());
-            $error_message = $result->message;
+            return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later.....']);
+            // $result = json_decode($response->getBody()->getContents());
+            // $error_message = $result->message;
             // Handle the error
-            echo "Error creating order: " . $error_message;
+            // echo "Error creating order: " . $error_message;
         }
-    } else {
-        // Handle the authentication error
-        echo "Error authenticating with Shiprocket API";
     }
 }
 
