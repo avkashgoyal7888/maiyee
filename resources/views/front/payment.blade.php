@@ -1,1 +1,7 @@
-<h1>BHG BHSDK</h1>
+<form method="post" action="{{ $payuEndpoint }}">
+    @csrf
+    @foreach ($params as $key => $value)
+        <input type="hidden" name="{{ $key }}" value="{{ $value }}">
+    @endforeach
+    <button type="submit">Pay Now</button>
+</form>

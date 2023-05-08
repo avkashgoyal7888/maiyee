@@ -43,9 +43,9 @@ use App\Http\Controllers\home\PaymentController;
 
 	Route::group(['middleware'=>'auth'], function() {
 		Route::any('/pay', [PaymentController::class, 'pay'])->name('payment.pay');
-		Route::get('/success', [PaymentController::class, 'success'])->name('payment.success');
-		Route::get('/failure', [PaymentController::class, 'failure'])->name('payment.failure');
-		Route::get('/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
+		Route::any('/success', [PaymentController::class, 'success'])->name('payment.success');
+		Route::any('/failure', [PaymentController::class, 'failure'])->name('payment.failure');
+		Route::any('/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 
 		Route::post('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
 		Route::controller(HomeController::class)->group(function(){

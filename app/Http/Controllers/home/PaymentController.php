@@ -21,20 +21,20 @@ class PaymentController extends Controller
 
     public function pay()
 {
-    $amount = 10.00;
-    $product = 'product';
-    $email = 'a@a.com';
-    $phone = '0123456789';
-    $firstName = 'first_name';
-    $lastName = 'last_name';
-    $address = 'address';
-    $city = 'gurgaon';
-    $state = 'haryana';
-    $zip = '122017';
+    $payment = Order::where('user_id', Auth::guard('web')->user()->id)->first();
+    $amount = $payment->payable;
+    $product = 'product'; // You should set this to an appropriate value
+    $email = $payment->email;
+    $phone = $payment->contact;
+    $firstName = $payment->name;
+    $address = $payment->address;
+    $city = $payment->city;
+    $state = $payment->state;
+    $zip = $payment->zip;
 
-    $merchantKey = 'cSATia';
-    $merchantId = 'e0312d0497eb3362b17ac4e324ac2c5669486b2c4db4ec0c51dbb906e4fbe225';
-    $payuEndpoint = 'https://test.payumoney.com/';
+    $merchantKey = 'cSATia'; // Your merchant key
+    $merchantSalt = 'h4l22zSM'; // Your merchant salt
+    $payuEndpoint = 'https://secure.payu.in/_payment/';
 
     $params = [
         'key' => $merchantKey,
@@ -44,21 +44,19 @@ class PaymentController extends Controller
         'firstname' => $firstName,
         'email' => $email,
         'phone' => $phone,
-        'surl' => 'http://localhost/success',
-        'furl' => 'http://localhost/failure',
+        'surl' => route('payment.success'),
+        'furl' => route('payment.failure'),
+        'curl' => route('payment.cancel'),
         'hash' => '',
     ];
 
     // Calculate hash
-    $hashSequence = $merchantKey . '|' . $params['txnid'] . '|' . $params['amount'] . '|' . $params['productinfo'] . '|' . $params['firstname'] . '|' . $params['email'] . '|||||||||||' . $merchantKey;
+    $hashSequence = $merchantKey . '|' . $params['txnid'] . '|' . $params['amount'] . '|' . $params['productinfo'] . '|' . $params['firstname'] . '|' . $params['email'] . '|||||||||||' . $merchantSalt;
     $hash = strtolower(hash('sha512', $hashSequence));
     $params['hash'] = $hash;
 
-    $paymentUrl = $payuEndpoint . '?' . http_build_query($params);
-    return redirect($paymentUrl);
+    return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint]);
 }
-
-
 
 
     public function success(Request $request)
