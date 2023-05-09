@@ -18,6 +18,7 @@ use App\Models\SubCategory;
 use App\Models\Review;
 use App\Models\ReviewImage;
 use App\Models\ProductDetail;
+use App\Models\Exhibition;
 use Validator;
 use Hash;
 use Auth;
@@ -89,6 +90,22 @@ class HomeController extends Controller
         $nav = Head::first();
         $cat = Category::get();
         return view('front.policy',compact('cartNav','cartTotalnav','cartCount','nav','cat'));
+    }
+
+    public function exhibition()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        $ex = Exhibition::get();
+        return view('front.exhibition', compact('cartNav','cartTotalnav','cartCount','nav','cat','ex'));
     }
 
     public function orderSuccess()

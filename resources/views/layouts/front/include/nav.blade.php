@@ -70,7 +70,7 @@
                         <li class="lvl1 parent dropdown"><a href="#">Special category<i class="anm anm-angle-down-l"></i></a>
                             <ul class="dropdown"> @foreach($cat as $cats) @if($cats->menu == 'special') <li><a href="{{route('front.cat',$cats->id)}}" class="site-nav">{{$cats->cat_name}}</a></li> @endif @endforeach </ul>
                         </li>
-                        <li class="lvl1"><a href="{{route('web.home')}}">Exhibition </a></li>
+                        <li class="lvl1"><a href="{{route('web.exhibition')}}">Exhibition </a></li>
                     </ul>
                 </nav>
                 <!--End Desktop Menu-->

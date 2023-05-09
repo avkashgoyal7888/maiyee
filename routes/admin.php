@@ -44,6 +44,10 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::get('/coupon', function(){ return view('admin.coupon.index'); })->name('admin.coupon');
 	// Product Detail Routes
 	Route::get('/product-detail', function(){ return view('admin.product.detail'); })->name('admin.product.detail');
+	// Exhibition Routes
+	Route::get('/exhibition', function(){ return view('admin.exhibition.index'); })->name('admin.exhibition');
+	// Exhibition Routes
+	Route::get('/bash', function(){ return view('admin.bash.index'); })->name('admin.bash');
 });
 
 

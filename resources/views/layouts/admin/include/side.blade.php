@@ -74,6 +74,24 @@
             </li>
             <li>
                <a href="javascript: void(0);" class="has-arrow">
+               <i class="bx bx-map nav-icon"></i>
+               <span class="menu-item" data-key="t-ecommerce">Bash</span>
+               </a>
+               <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="{{route('admin.bash')}}" data-key="t-state"> <i class="bx bx-hash nav-icon"></i>Bash</a></li>
+                  <li><a href="{{route('admin.city')}}" data-key="t-city">
+                     <i class="bx bx-hash nav-icon"></i>Bash Product</a>
+                  </li>
+               </ul>
+            </li>
+            <li>
+               <a href="{{route('admin.exhibition')}}">
+               <i class="bx bx-home-circle nav-icon"></i>
+               <span class="menu-item" data-key="t-dashboard">Exhibition</span>
+               </a>
+            </li>
+            <li>
+               <a href="javascript: void(0);" class="has-arrow">
                <i class="bx bxs-user-detail nav-icon"></i>
                <span class="menu-item" data-key="t-ecommerce">Suppliers</span>
                </a>
