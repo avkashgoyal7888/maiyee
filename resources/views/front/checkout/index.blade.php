@@ -261,7 +261,7 @@
                 if ($('#cash').prop('checked')) {
                     window.location.href = "{{ route('web.success') }}";
                 } else if ($('#payu').prop('checked')) {
-                    window.location.href = "{{ route('web.pay.view') }}";
+                    window.location.href = "{{ route('payment.pay') }}";
                 }
             }
         });
