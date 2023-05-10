@@ -20,6 +20,7 @@
       <link href="{{asset('admin/assets/libs/alertifyjs/build/css/alertify.min.css')}}" rel="stylesheet" type="text/css" />
       <link href="{{asset('admin/assets/libs/alertifyjs/build/css/themes/default.min.css')}}" rel="stylesheet" type="text/css" />
       @yield('css')
+      @stack('css')
       @livewireStyles
    </head>
    <body>
@@ -68,6 +69,7 @@
       <script src="{{asset('admin/assets/js/jquery.min.js')}}"></script>
       <script src="{{asset('admin/assets/libs/alertifyjs/build/alertify.min.js')}}"></script>
       @yield('js')
+      @stack('js')
       @livewireScripts
       <script type="text/javascript">
          window.livewire.on('closemodal', () => {

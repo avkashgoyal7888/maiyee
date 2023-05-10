@@ -66,6 +66,18 @@
                <form wire:submit.prevent='store()'>
                   <div class="modal-body">
                      <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="choices-multiple-remove-button" class="form-label font-size-13 text-muted">With
+                                                            remove button</label>
+                                                        <select class="form-control" name="choices-multiple-remove-button" id="choices-multiple-remove-button" multiple="">
+                                                            <option value="Choice 1" selected="">Choice 1</option>
+                                                            <option value="Choice 2">Choice 2</option>
+                                                            <option value="Choice 3">Choice 3</option>
+                                                            <option value="Choice 4">Choice 4</option>
+                                                        </select>
+                                                    </div>
+                                                </div><!-- end col -->
                         <div class="col-md-6 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Bash name</label>
                            <input type="text" class="form-control" placeholder="Enter Bash Name" wire:model='name'>

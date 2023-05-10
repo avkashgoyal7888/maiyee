@@ -23,7 +23,7 @@
          <div class="card-header justify-content-between d-flex align-items-center">
             <h4 class="card-title">Bash-Product List</h4>
          </div>
-         <livewire:admin.bash.product>
+         <livewire:admin.bash.bashproducts>
       </div>
    </div>
 </div>

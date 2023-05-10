@@ -161,7 +161,7 @@
                                  </div>
                                  <div class="details">
                                     <a class="grid-view-item__title" href="#">Cena Skirt</a>
-                                    <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">$173.60</span></span></div>
+                                    <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">₹173.60</span></span></div>
                                  </div>
                               </div>
                            </div>
@@ -170,7 +170,7 @@
                                  <div class="mini-view_image"> <a class="grid-view-item__link" href="#"><img class="grid-view-item__image" src="{{asset('front/assets/images/product-images/mini-product-img1.jpg')}}" alt="" /></a> </div>
                                  <div class="details">
                                     <a class="grid-view-item__title" href="#">Block Button Up</a>
-                                    <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">$378.00</span></span></div>
+                                    <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">₹378.00</span></span></div>
                                  </div>
                               </div>
                            </div>
@@ -179,7 +179,7 @@
                                  <div class="mini-view_image"> <a class="grid-view-item__link" href="#"><img class="grid-view-item__image" src="{{asset('front/assets/images/product-images/mini-product-img2.jpg')}}" alt="" /></a> </div>
                                  <div class="details">
                                     <a class="grid-view-item__title" href="#">Balda Button Pant</a>
-                                    <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">$278.60</span></span></div>
+                                    <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">₹278.60</span></span></div>
                                  </div>
                               </div>
                            </div>
@@ -188,7 +188,7 @@
                                  <div class="mini-view_image"> <a class="grid-view-item__link" href="#"><img class="grid-view-item__image" src="{{asset('front/assets/images/product-images/mini-product-img3.jpg')}}" alt="" /></a> </div>
                                  <div class="details">
                                     <a class="grid-view-item__title" href="#">Border Dress in Black/Silver</a>
-                                    <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">$228.00</span></span></div>
+                                    <div class="grid-view-item__meta"><span class="product-price__price"><span class="money">₹228.00</span></span></div>
                                  </div>
                               </div>
                            </div>
@@ -219,9 +219,9 @@
                   </div>
                   <div class="widget-content">
                      <ul class="product-tags">
-                        <li><a href="#" title="Show products matching tag $100 - $400">$100 - $400</a></li>
-                        <li><a href="#" title="Show products matching tag $400 - $600">$400 - $600</a></li>
-                        <li><a href="#" title="Show products matching tag $600 - $800">$600 - $800</a></li>
+                        <li><a href="#" title="Show products matching tag $100 - $400">₹100 - ₹400</a></li>
+                        <li><a href="#" title="Show products matching tag $400 - $600">₹400 - ₹600</a></li>
+                        <li><a href="#" title="Show products matching tag $600 - $800">₹600 - ₹800</a></li>
                         <li><a href="#" title="Show products matching tag Above $800">Above $800</a></li>
                         <li><a href="#" title="Show products matching tag Allen Vela">Allen Vela</a></li>
                         <li><a href="#" title="Show products matching tag Black">Black</a></li>
@@ -343,8 +343,8 @@
                            <!-- End product name -->
                            <!-- product price -->
                            <div class="product-price">
-                              <span class="old-price">${{$products->mrp}}</span>
-                              <span class="price">${{$products->discount}}</span>
+                              <span class="old-price">₹{{$products->mrp}}</span>
+                              <span class="price">₹{{$products->discount}}</span>
                            </div>
                            <!-- End product price -->
                            <div class="product-review">
@@ -449,8 +449,8 @@
            html += '<a href="#">' + products.proname + '</a>';
            html += '</div>';
            html += '<div class="product-price">';
-           html += '<span class="old-price">$' + products.mrps + '</span>';
-           html += '<span class="price">$' + products.discounts + '</span>';
+           html += '<span class="old-price">₹' + products.mrps + '</span>';
+           html += '<span class="price">₹' + products.discounts + '</span>';
            html += '</div>';
            html += '<div class="product-review">';
            html += '<i class="font-13 fa fa-star"></i>';
@@ -533,8 +533,8 @@
            html += '<a href="#">' + products.proname + '</a>';
            html += '</div>';
            html += '<div class="product-price">';
-           html += '<span class="old-price">$' + products.mrps + '</span>';
-           html += '<span class="price">$' + products.discounts + '</span>';
+           html += '<span class="old-price">₹' + products.mrps + '</span>';
+           html += '<span class="price">₹' + products.discounts + '</span>';
            html += '</div>';
            html += '<span class="price">' + products.size + '</span>';
            html += '<div class="product-review">';
@@ -567,11 +567,11 @@
                max: 10000,
                values: [0, 10000],
                slide: function(event, ui) {
-                   $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                   $("#amount").val("₹" + ui.values[0] + " - ₹" + ui.values[1]);
                }
            });
-           $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-           " - $" + $("#slider-range").slider("values", 1));
+           $("#amount").val("₹" + $("#slider-range").slider("values", 0) +
+           " - ₹" + $("#slider-range").slider("values", 1));
        }
        price_slider();
        $('#price_filter').on('submit', function(e) {
@@ -626,8 +626,8 @@
            html += '<a href="#">' + products.name + '</a>';
            html += '</div>';
            html += '<div class="product-price">';
-           html += '<span class="old-price">$' + products.mrp + '</span>';
-           html += '<span class="price">$' + products.discount + '</span>';
+           html += '<span class="old-price">₹' + products.mrp + '</span>';
+           html += '<span class="price">₹' + products.discount + '</span>';
            html += '</div>';
            html += '<div class="product-review">';
            html += '<i class="font-13 fa fa-star"></i>';

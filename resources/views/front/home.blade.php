@@ -78,8 +78,8 @@
                      <!-- End product name -->
                      <!-- product price -->
                      <div class="product-price">
-                        <span class="old-price">${{$products->mrp}}</span>
-                        <span class="price">${{$products->discount}}</span>
+                        <span class="old-price">₹{{$products->mrp}}</span>
+                        <span class="price">₹{{$products->discount}}</span>
                      </div>
                      <!-- End product price -->
                      <!-- Color Variant -->

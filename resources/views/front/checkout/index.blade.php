@@ -17,8 +17,8 @@
    </div>
 </div>
 <div class="alert alert-success text-uppercase" role="alert" id="shipping" style="display: none;">
-            <i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
-         </div>
+   <i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
+</div>
 <!--End Page Title-->
 <div class="container">
    <div class="row">
@@ -147,9 +147,9 @@
                         @foreach($cart as $carts)
                         <tr>
                            <td class="text-left">{{$carts->product->name}}</td>
-                           <td>${{$carts->price}}</td>
+                           <td>₹{{$carts->price}}</td>
                            <td>{{$carts->quantity}}</td>
-                           <td>${{$carts->price}}</td>
+                           <td>₹{{$carts->price}}</td>
                         </tr>
                         @endforeach
                      </tbody>
@@ -160,7 +160,7 @@
                         </tr>
                         <tr>
                            <td colspan="3" class="text-right">Total</td>
-                           <td id="sval">${{$cartTotal}}</td>
+                           <td id="sval">₹{{$cartTotal}}</td>
                         </tr>
                         <tr id="discount" style="display: none;">
                            <td colspan="3" class="text-right">Discount</td>
@@ -192,13 +192,13 @@
                         <input type="hidden" name="pin_code" class="pin" type="text">
                         <input type="hidden" name="order_notes" class="notes" type="text">
                         <input type="hidden" type="checkbox" name="saveaddress" class="form-check-input" id="check" >
-                        <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
-                           <input type="radio" id="cash" name="cash" value="yes" />
-                           <label for="radio-six" style="font-size:14px"> Cash On Delivery</label>
+                        <div class="form-group col-md-4 col-lg-4 col-xl-4 ">
+                           <input type="radio" id="cash" name="payment_method" value="cash" />
+                           <label for="cash" style="font-size:14px"> Cash On Delivery</label>
                         </div>
-                        <div class="form-group col-md-4 col-lg-4 col-xl-4 required">
-                           <input type="radio" id="payu" name="payu" value="yes" />
-                           <label for="radio-six" style="font-size:14px"> Pay Now</label>
+                        <div class="form-group col-md-4 col-lg-4 col-xl-4 ">
+                           <input type="radio" id="payu" name="payment_method" value="payu" />
+                           <label for="payu" style="font-size:14px"> Pay Now</label>
                         </div>
                      </div>
                      <div class="order-button-payment">
@@ -215,17 +215,40 @@
 @section('js')
 <script>
    $(document).ready(function(){
-
+   
+      $('input[type="radio"]').click(function() {
+      if($(this).attr('id') == 'cash') {
+         $('#payu').prop('checked', false);
+      } else if($(this).attr('id') == 'payu') {
+         $('#cash').prop('checked', false);
+      }
+   });
+   
+   const cashRadio = $('#cash');
+   const payuRadio = $('#payu');
+   
+   cashRadio.click(function() {
+      if (cashRadio.is(':checked')) {
+         payuRadio.prop('checked', false);
+      }
+   });
+   
+   payuRadio.click(function() {
+      if (payuRadio.is(':checked')) {
+         cashRadio.prop('checked', false);
+      }
+   });
+   
       $('input[name="saved"]').change(function() {
-  $('#check').prop('checked', $(this).prop('checked'));
-});
-
+   $('#check').prop('checked', $(this).prop('checked'));
+   });
+   
       $('.input-field').on('input', function() {
    var fieldName = $(this).attr('name');
    $('.' + fieldName).val($(this).val());
-});
-
-
+   });
+   
+   
       $('#user-address').change(function() {
       var selectedAddressId = $(this).val();
       $('#addressid').val(selectedAddressId);
@@ -266,8 +289,8 @@
             }
         });
     }
-},
-
+   },
+   
                error: function(jqXHR, exception) {
                    console.log(jqXHR.responseJSON);
                    toastr.error(result.msg, 'Error', {
@@ -359,7 +382,7 @@
         $('#cartTotal').text(result.newCartTotal);
         $('#total').show();
     } 
-
+   
     if(result.newCartTotal < 2000) {
         $('#cartTotal').text(result.newCartTotal);
         $('#shipping').show();
@@ -381,12 +404,12 @@
                  }
              });
          });
-
+   
    if($('#sval').val() < 2000) {
     $('#shipping').show();
-}
-
-
+   }
+   
+   
    })
 </script>
 @stop

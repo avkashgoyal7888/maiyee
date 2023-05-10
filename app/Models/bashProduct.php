@@ -16,7 +16,7 @@ class bashProduct extends Model
 
     public function bash()
     {
-        return $this->belongsTo(Bash::class, 'product_id');
+        return $this->belongsTo(Bash::class, 'bash_id');
     }
 
     public function product()
