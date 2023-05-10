@@ -48,6 +48,7 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::get('/exhibition', function(){ return view('admin.exhibition.index'); })->name('admin.exhibition');
 	// Exhibition Routes
 	Route::get('/bash', function(){ return view('admin.bash.index'); })->name('admin.bash');
+	Route::get('/bash-product', function(){ return view('admin.bash.product'); })->name('admin.bash.product');
 });
 
 

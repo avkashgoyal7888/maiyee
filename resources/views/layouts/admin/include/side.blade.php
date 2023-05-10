@@ -79,7 +79,7 @@
                </a>
                <ul class="sub-menu" aria-expanded="false">
                   <li><a href="{{route('admin.bash')}}" data-key="t-state"> <i class="bx bx-hash nav-icon"></i>Bash</a></li>
-                  <li><a href="{{route('admin.city')}}" data-key="t-city">
+                  <li><a href="{{route('admin.bash.product')}}" data-key="t-city">
                      <i class="bx bx-hash nav-icon"></i>Bash Product</a>
                   </li>
                </ul>
