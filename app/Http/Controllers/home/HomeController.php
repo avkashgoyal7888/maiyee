@@ -19,6 +19,8 @@ use App\Models\Review;
 use App\Models\ReviewImage;
 use App\Models\ProductDetail;
 use App\Models\Exhibition;
+use App\Models\BashProduct;
+use App\Models\Bash;
 use Validator;
 use Hash;
 use Auth;
@@ -44,7 +46,9 @@ class HomeController extends Controller
         $nav = Head::first();
         $sub = SubCategory::get();
         $cat = Category::get();
-        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub', 'cat'));
+        $bashpr = BashProduct::get();
+        $bash = Bash::get();
+        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub', 'cat', 'bash', 'bashpr'));
     }
 
     public function register()

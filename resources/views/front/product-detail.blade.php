@@ -52,12 +52,12 @@
                <div class="product-details-img">
                   <div class="product-thumb">
                      <div id="gallery" class="product-dec-slider-2 product-tab-left">
-                        @foreach($proimage as $img)
-                        <a data-image="{{asset('admin/color/'.$img->image)}}" data-zoom-image="{{asset('admin/color/'.$img->image)}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
-                        <img class="blur-up lazyload" src="{{asset('admin/color/'.$img->image)}}" alt="" />
-                        @endforeach
-                        </a>
-                     </div>
+    @foreach($proimage as $img)
+        <a data-color-id="{{$img->color_id}}" data-image="{{asset('admin/color/'.$img->image)}}" data-zoom-image="{{asset('admin/color/'.$img->image)}}" class="product-image slick-slide slick-cloned color-image" aria-hidden="true" tabindex="-1">
+            <img class="blur-up lazyload" src="{{asset('admin/color/'.$img->image)}}" alt="" />
+        </a>
+    @endforeach
+</div>
                   </div>
                   <div class="zoompro-wrap product-zoom-right pl-20">
                      <div class="zoompro-span">
@@ -132,14 +132,14 @@
                <div id="quantity_message">Hurry! Only  <span class="items">4</span>  left in stock.</div>
                <form class="product-form product-form-product-template hidedropdown" id="addToCart">
                   <div class="swatch clearfix swatch-0 option1" data-option-index="0">
-                     <div class="product-form__item">
-   <label class="header">Color:</label>
-   @foreach($color as $colors)
-   <div data-value="{{$colors->code}}" class="swatch-element available" data-color="{{$colors->id}}">
-      <input class="swatchInput" id="{{$colors->id}}" type="radio" name="color_id" value="{{$colors->id}}" @if($colors->id == 1) checked @endif>
-      <label class="swatchLbl color small" for="{{$colors->id}}" style="background-color:{{$colors->code}}" title="{{$colors->code}}"></label>
-   </div>
-   @endforeach
+      <div class="product-form__item">
+    <label class="header">Color:</label>
+    @foreach($color as $colors)
+        <div data-value="{{$colors->code}}" class="swatch-element available" data-color="{{$colors->id}}">
+            <input class="swatchInput" id="{{$colors->id}}" type="radio" name="color_id" value="{{$colors->id}}" @if($colors->id == 1) checked @endif>
+            <label class="swatchLbl color small" for="{{$colors->id}}" style="background-color:{{$colors->code}}" title="{{$colors->code}}"></label>
+        </div>
+    @endforeach
 </div>
                   </div>
                   <div class="swatch clearfix swatch-1 option2" data-option-index="1">
@@ -1192,6 +1192,16 @@
 @section('js')
 <script>
    $(document).ready(function(){
+      $('input[name=color_id]').change(function() {
+            // Get the selected color ID
+            var selectedColorId = $(this).val();
+
+            // Hide all product images
+            $('.product-image').hide();
+
+            // Show the product images with the selected color ID
+            $('.color-image[data-color-id="' + selectedColorId + '"]').show();
+        });
       $('input[name="color_id"]').on('click', function() {
          var selectedColor = $(this).val();
          $('#productColorId').val(selectedColor);

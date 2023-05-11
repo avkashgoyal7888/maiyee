@@ -34,10 +34,16 @@
                </a>
             </li>
             <li>
-               <a href="{{route('admin.banner')}}">
+               <a href="javascript: void(0);" class="has-arrow">
                <i class="bx bx-home-circle nav-icon"></i>
-               <span class="menu-item" data-key="t-dashboard">Banner</span>
+               <span class="menu-item" data-key="t-ecommerce">Banner</span>
                </a>
+               <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="{{route('admin.banner')}}" data-key="t-state"> <i class="bx bx-hash nav-icon"></i>Banner</a></li>
+                  <li><a href="{{route('admin.home.banner')}}" data-key="t-city">
+                     <i class="bx bx-hash nav-icon"></i>Home Banner</a>
+                  </li>
+               </ul>
             </li>
             <li>
                <a href="{{route('admin.coupon')}}">
@@ -88,6 +94,12 @@
                <a href="{{route('admin.exhibition')}}">
                <i class="bx bx-home-circle nav-icon"></i>
                <span class="menu-item" data-key="t-dashboard">Exhibition</span>
+               </a>
+            </li>
+            <li>
+               <a href="{{route('admin.order')}}">
+               <i class="bx bx-home-circle nav-icon"></i>
+               <span class="menu-item" data-key="t-dashboard">Orders</span>
                </a>
             </li>
             <li>

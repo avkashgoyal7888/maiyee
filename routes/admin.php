@@ -40,15 +40,18 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::get('/account-statement/{id}', function() { return view('admin.account.statement'); })->name('admin.account.statement');
 	// banner routes
 	Route::get('/banner', function(){ return view('admin.banner.index'); })->name('admin.banner');
+	Route::get('/home-banner', function(){ return view('admin.banner.home'); })->name('admin.home.banner');
 	// Coupon routes
 	Route::get('/coupon', function(){ return view('admin.coupon.index'); })->name('admin.coupon');
 	// Product Detail Routes
 	Route::get('/product-detail', function(){ return view('admin.product.detail'); })->name('admin.product.detail');
 	// Exhibition Routes
 	Route::get('/exhibition', function(){ return view('admin.exhibition.index'); })->name('admin.exhibition');
-	// Exhibition Routes
+	// Bash Routes
 	Route::get('/bash', function(){ return view('admin.bash.index'); })->name('admin.bash');
 	Route::get('/bash-product', function(){ return view('admin.bash.product'); })->name('admin.bash.product');
+	// Order Routes
+	Route::get('/order', function(){ return view('admin.order.index'); })->name('admin.order');
 });
 
 
