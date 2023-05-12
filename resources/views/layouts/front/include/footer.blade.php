@@ -63,10 +63,10 @@
 <p class="text-center">Copyright @2023 At Maiyee | Designed By <a href="#">EduTech</a></p>
 
 <ul class="social_footer_ul">
-<li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-<li><a href="#"><i class="fab fa-twitter"></i></a></li>
-<li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-<li><a href="#"><i class="fab fa-instagram"></i></a></li>
+<li><a href="https://www.facebook.com/profile.php?id=100070799291176&mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+<li><a href="https://pin.it/2kbR7xN" target="_blank"><i class="fab fa-pinterest"></i></a></li>
+<li><a href="https://youtube.com/@Maiyee_collection" target="_blank"><i class="fab fa-youtube"></i></a></li>
+<li><a href="https://instagram.com/maiyee.in?igshid=ZDdkNTZiNTM=" target="_blank"><i class="fab fa-instagram"></i></a></li>
 </ul>
 <!--social_footer_ul ends here-->
 </div>
