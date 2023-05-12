@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('gst_rate');
             $table->double('mrp', 10,2)->default(0.00);
             $table->double('discount', 10,2)->default(0.00);
-            $table->longText('detail');
+            $table->string('style_code');
             $table->longText('description');
             $table->string('image');
             $table->timestamps();

@@ -14,7 +14,7 @@ class Detail extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category,$product_id,$ideal,$length_type,$brand_color,$ocassion,$pattern,$type,$fabric,$neck,$sleeve,$color,$sale_package,$fabric_care,$style_code;
+    public $pro_id,$category_id, $subcategory_id, $subcategories, $category,$product_id,$ideal,$length_type,$brand_color,$ocassion,$pattern,$type,$fabric,$neck,$sleeve,$sale_package,$fabric_care;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -72,10 +72,8 @@ class Detail extends Component
         $this->fabric = '';
         $this->neck = '';
         $this->sleeve = '';
-        $this->color = '';
         $this->sale_package = '';
         $this->fabric_care = '';
-        $this->style_code = '';
         $this->pro_id = '';
     }
 
@@ -90,10 +88,8 @@ class Detail extends Component
         'fabric' => 'required',
         'neck' => 'required',
         'sleeve' => 'required',
-        'color' => 'required',
         'sale_package' => 'required',
         'fabric_care' => 'required',
-        'style_code' => 'required',
     ];
 
     protected $messages = [
@@ -107,10 +103,8 @@ class Detail extends Component
         'fabric.required' => 'Fabric is required',
         'neck.required' => 'Neck Detail is required',
         'sleeve.required' => 'Sleeve is required',
-        'color.required' => 'Color is required',
         'sale_package.required' => 'Sale is required',
         'fabric_care.required' => 'Fabric is required',
-        'style_code.required' => 'Style Code is required',
     ];
 
     public function store()
@@ -128,10 +122,8 @@ class Detail extends Component
             $product->fabric = $this->fabric;
             $product->neck = $this->neck;
             $product->sleeve = $this->sleeve;
-            $product->color = $this->color;
             $product->sale_package = $this->sale_package;
             $product->fabric_care = $this->fabric_care;
-            $product->style_code = $this->style_code;
             $product->save();
 
             $this->resetinputfields();
@@ -154,10 +146,8 @@ class Detail extends Component
             $this->fabric = $product->fabric;
             $this->neck = $product->neck;
             $this->sleeve = $product->sleeve;
-            $this->color = $product->color;
             $this->sale_package = $product->sale_package;
             $this->fabric_care = $product->fabric_care;
-            $this->style_code = $product->style_code;
 
         } else {
             return redirect()->to('/admin/product-detail');
@@ -180,10 +170,8 @@ class Detail extends Component
             $this->fabric = $product->fabric;
             $this->neck = $product->neck;
             $this->sleeve = $product->sleeve;
-            $this->color = $product->color;
             $this->sale_package = $product->sale_package;
             $this->fabric_care = $product->fabric_care;
-            $this->style_code = $product->style_code;
 
         } else {
             return redirect()->to('/admin/product-detail');
@@ -204,10 +192,8 @@ class Detail extends Component
             'fabric' => $this->fabric,
             'neck' => $this->neck,
             'sleeve' => $this->sleeve,
-            'color' => $this->color,
             'sale_package' => $this->sale_package,
             'fabric_care' => $this->fabric_care,
-            'style_code' => $this->style_code,
         ]);
 
         $this->resetinputfields();

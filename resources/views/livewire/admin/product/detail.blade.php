@@ -148,11 +148,6 @@
                            @error('sleeve')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Color</label>
-                           <input type="text" class="form-control" placeholder="Color" wire:model='color'>
-                           @error('color')<span class="text-danger">{{$message}}</span>@enderror
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Sale Package</label>
                            <input type="text" class="form-control" placeholder="Sale Package" wire:model='sale_package'>
                            @error('sale_package')<span class="text-danger">{{$message}}</span>@enderror
@@ -161,11 +156,6 @@
                            <label for="nameExLarge" class="form-label">Fabrick Care</label>
                            <input type="text" class="form-control" placeholder="Fabrick Care" wire:model='fabric_care'>
                            @error('fabric_care')<span class="text-danger">{{$message}}</span>@enderror
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Style Code</label>
-                           <input type="text" class="form-control" placeholder="Style Code" wire:model='style_code'>
-                           @error('style_code')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                      </div>
                   </div>
@@ -237,11 +227,6 @@
                            @error('sleeve')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Color</label>
-                           <input type="text" class="form-control" placeholder="Color" wire:model='color'>
-                           @error('color')<span class="text-danger">{{$message}}</span>@enderror
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Sale Package</label>
                            <input type="text" class="form-control" placeholder="Sale Package" wire:model='sale_package'>
                            @error('sale_package')<span class="text-danger">{{$message}}</span>@enderror
@@ -250,11 +235,6 @@
                            <label for="nameExLarge" class="form-label">Fabrick Care</label>
                            <input type="text" class="form-control" placeholder="Fabrick Care" wire:model='fabric_care'>
                            @error('fabric_care')<span class="text-danger">{{$message}}</span>@enderror
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Style Code</label>
-                           <input type="text" class="form-control" placeholder="Style Code" wire:model='style_code'>
-                           @error('style_code')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                      </div>
                   </div>
@@ -317,20 +297,12 @@
                            <input type="text" class="form-control" wire:model='sleeve' readonly>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Color</label>
-                           <input type="text" class="form-control" wire:model='color' readonly>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Sale Package</label>
                            <input type="text" class="form-control" wire:model='sale_package' readonly>
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Fabrick Care</label>
                            <input type="text" class="form-control" wire:model='fabric_care' readonly>
-                        </div>
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Style Code</label>
-                           <input type="text" class="form-control" wire:model='style_code' readonly>
                         </div>
                      </div>
                   </div>

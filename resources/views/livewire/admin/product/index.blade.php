@@ -32,6 +32,7 @@
                         <th>Product Name</th>
                         <th>Category</th>
                         <th>Sub Category</th>
+                        <th>Style Code</th>
                         <th>Action</th>
                      </tr>
                   </thead>
@@ -42,6 +43,7 @@
                         <td>{{ ucwords($pros->name) }}</td>
                         <td>{{ ucwords($pros->category->cat_name) }}</td>
                         <td> {{ ucwords($pros->subcategory->sub_name) }} </td>
+                        <td> {{ ucwords($pros->style_code) }} </td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editProduct({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteProduct({{$pros->id}})"><i class="fas fa-trash"></i></button>
@@ -128,9 +130,9 @@
                            @error('description')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
-                           <label for="address" class="form-label">Product Detail</label>
-                           <textarea class="form-control" placeholder="Product Detail" wire:model='details'></textarea>
-                           @error('details')<span class="text-danger">{{$message}}</span>@enderror
+                           <label for="address" class="form-label">Style Code</label>
+                           <textarea class="form-control" placeholder="Style Code" wire:model='style_code'></textarea>
+                           @error('style_code')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                      </div>
                   </div>
@@ -209,9 +211,9 @@
                            @error('description')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
-                           <label for="address" class="form-label">Product Detail</label>
-                           <textarea class="form-control" wire:model='details'></textarea>
-                           @error('details')<span class="text-danger">{{$message}}</span>@enderror
+                           <label for="address" class="form-label">Style Code</label>
+                           <textarea class="form-control" wire:model='style_code'></textarea>
+                           @error('style_code')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                      </div>
                   </div>

@@ -16,7 +16,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $name, $description, $mrp, $hsn_code, $gst_rate, $adminid, $discount, $details,$image;
+    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $name, $description, $mrp, $hsn_code, $gst_rate, $adminid, $discount, $style_code,$image;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -62,7 +62,7 @@ class Index extends Component
         $this->hsn_code = '';
         $this->gst_rate = '';
         $this->discount = '';
-        $this->details = '';
+        $this->style_code = '';
         $this->pro_id = '';
         $this->image = '';
     }
@@ -76,7 +76,7 @@ class Index extends Component
         'hsn_code' => 'required',
         'gst_rate' => 'required',
         'discount' => 'required',
-        'details' => 'required',
+        'style_code' => 'required',
         'image' => 'required',
     ];
 
@@ -89,7 +89,7 @@ class Index extends Component
         'hsn_code.required' => 'HSN is required',
         'gst_rate.required' => 'GST is required',
         'adp.required' => 'ADP is required',
-        'details.required' => 'Product Detail is required',
+        'style_code.required' => 'Style Code is required',
         'image.required' => 'Image is required',
     ];
 
@@ -110,7 +110,7 @@ class Index extends Component
             $product->hsn_code = $this->hsn_code;
             $product->gst_rate = $this->gst_rate;
             $product->discount = $this->discount;
-            $product->detail = $this->details;
+            $product->style_code = $this->style_code;
             $product->image = $image;
             $product->save();
 
@@ -132,7 +132,7 @@ class Index extends Component
             $this->hsn_code = $product->hsn_code;
             $this->gst_rate = $product->gst_rate;
             $this->discount = $product->discount;
-            $this->details = $product->detail;
+            $this->style_code = $product->style_code;
             $this->image = $product->image;
             $this->viewSubcategories();
 
@@ -160,7 +160,7 @@ class Index extends Component
             'hsn_code' => $this->hsn_code,
             'gst_rate' => $this->gst_rate,
             'discount' => $this->discount,
-            'detail' => $this->details,
+            'style_code' => $this->style_code,
             'image' => $image,
         ]);
 
@@ -191,7 +191,7 @@ class Index extends Component
 
     public function render()
     {
-        $data = Product::where('name', 'like', '%'.$this->search.'%')
+        $data = Product::where('name', 'like', '%'.$this->search.'%')->orWhere('style_code','like','%'.$this->search.'%')
                         ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.product.index', ['data'=>$data]);
     }
