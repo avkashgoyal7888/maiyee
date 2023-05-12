@@ -84,12 +84,21 @@
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Coupon Type</label>
-                           <select class="form-control" wire:model='type'>
+                           <select class="form-control" wire:model='coupon_type'>
                               <option>Select Type</option>
                               <option value="amount">Amount</option>
                               <option value="%">%</option>
                            </select>
-                           @error('type')<span class="text-danger">{{$message}}</span>@enderror
+                           @error('coupon_type')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Type</label>
+                           <select class="form-control" wire:model='type'>
+                              <option>Select Type</option>
+                              <option value="user">User</option>
+                              <option value="admin">Admin</option>
+                           </select>
+                           @error('coupon_type')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Order Value</label>
@@ -141,10 +150,19 @@
                      </div>
                      <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                         <label for="nameExLarge" class="form-label">Coupon Type</label>
-                        <select class="form-control" wire:model='type'>
+                        <select class="form-control" wire:model='coupon_type'>
                            <option>Select Type</option>
                            <option value="amount">Amount</option>
                            <option value="%">%</option>
+                        </select>
+                        @error('coupon_type')<span class="text-danger">{{$message}}</span>@enderror
+                     </div>
+                     <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                        <label for="nameExLarge" class="form-label">Type</label>
+                        <select class="form-control" wire:model='type'>
+                           <option>Select Type</option>
+                           <option value="user">User</option>
+                           <option value="admin">Admin</option>
                         </select>
                         @error('type')<span class="text-danger">{{$message}}</span>@enderror
                      </div>

@@ -13,7 +13,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search = '';
-    public $ac_id, $coupon_code, $coupon_value, $type, $user_id, $quantity,$exp_date,$order_value;
+    public $ac_id, $coupon_code, $coupon_value, $coupon_type, $user_id, $quantity,$exp_date,$order_value,$type;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -26,16 +26,19 @@ class Index extends Component
 
     protected $rules = [
         'coupon_value' => 'required',
+        'coupon_type' => 'required',
         'type' => 'required',
     ];
     protected $messages = [
         'coupon_value.required' => 'Coupon Value is required',
-        'type.required' => 'Coupon Type is required',
+        'coupon_type.required' => 'Coupon Type is required',
+        'type.required' => 'Type is required',
     ];
 
     public function resetinputfields()
     {
         $this->coupon_value = '';
+        $this->coupon_type = '';
         $this->type = '';
         $this->quantity = '';
         $this->exp_date = '';
@@ -52,7 +55,8 @@ class Index extends Component
             $couponCode = Str::random(10);
 
             $store->coupon_code = $couponCode;
-            $store->coupon_type = $this->type;
+            $store->coupon_type = $this->coupon_type;
+            $store->type = $this->type;
             $store->coupon_price = $this->coupon_value;
             $store->exp_date = $this->exp_date;
             $store->order_value = $this->order_value;
@@ -72,7 +76,8 @@ class Index extends Component
             $this->ac_id = $acc->id;
             $this->coupon_code = $acc->coupon_code;
             $this->coupon_value = $acc->coupon_price;
-            $this->type = $acc->coupon_type;
+            $this->coupon_type = $acc->coupon_type;
+            $this->type = $acc->type;
             $this->exp_date = $acc->exp_date;
             $this->order_value = $acc->order_value;
 
@@ -88,7 +93,8 @@ class Index extends Component
         Coupon::Where('id', $this->ac_id)->update([
             'coupon_code' => $this->coupon_code,
             'coupon_price' => $this->coupon_value,
-            'coupon_type' => $this->type,
+            'coupon_type' => $this->coupon_type,
+            'type' => $this->type,
             'exp_date' => $this->exp_date,
             'order_value' => $this->order_value,
         ]);

@@ -57,6 +57,12 @@
                <div class="discount-coupon">
                   <div id="coupon" class="coupon-dec tab-pane active">
                      <p class="margin-10px-bottom">Enter your coupon code if you have one.</p>
+                     <select name="state_id" id="couponCode">
+                              <option value=""> --- Choose Code --- </option>
+                              @foreach($coupon as $coupons)
+                              <option value="{{$coupons->id}}" data-code="{{$coupons->coupon_code}}">Use {{$coupons->coupon_code}} ** and get flat {{$coupons->coupon_price}} @if($coupons->coupon_type == 'amount') Rupees @else % @endif on order above {{$coupons->order_value}}</option>
+                              @endforeach
+                           </select>
                      <label class="required get" for="coupon-code"><span class="required-f">*</span> Coupon</label>
                      <form id="applyCoupon">
                         <input name="coupon_code" id="coupon-code" type="text" class="mb-3 input-field">
@@ -215,6 +221,14 @@
 @section('js')
 <script>
    $(document).ready(function(){
+
+      $('#couponCode').on('change', function() {
+              var  selectedCoupon = $(this).find(':selected');
+               if(selectedCoupon.val() !== '') {
+                  // Fill in the input fields with the address details and make them readonly
+                  $('#coupon-code').val(selectedCoupon.data('code')).prop('readonly', true);
+              }
+          });
    
       $('input[type="radio"]').click(function() {
       if($(this).attr('id') == 'cash') {
@@ -383,7 +397,7 @@
         $('#total').show();
     } 
    
-    if(result.newCartTotal < 2000) {
+    if(result.newCartTotal > 2000) {
         $('#cartTotal').text(result.newCartTotal);
         $('#shipping').show();
     } 
@@ -405,7 +419,7 @@
              });
          });
    
-   if($('#sval').val() < 2000) {
+   if($('#sval').val() > 2000) {
     $('#shipping').show();
    }
    
