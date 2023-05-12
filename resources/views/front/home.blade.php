@@ -112,6 +112,7 @@
             </div>
             <div class="productSlider grid-products">
             @foreach($bashpr->where('bash_id', $bashes->id) as $products)
+            @if($products != '')
                <div class="col-12 item">
                   <!-- start product image -->
                   <div class="product-image">
@@ -172,6 +173,7 @@
                   </div>
                   <!-- End product details -->
                </div>
+               @endif
                @endforeach
             </div>
                @endforeach

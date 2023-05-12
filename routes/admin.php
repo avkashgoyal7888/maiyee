@@ -52,6 +52,7 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::get('/bash-product', function(){ return view('admin.bash.product'); })->name('admin.bash.product');
 	// Order Routes
 	Route::get('/order', function(){ return view('admin.order.index'); })->name('admin.order');
+	Route::get('/order-detail/{id}', function() { return view('admin.order.detail'); })->name('admin.order.detail');
 });
 
 
