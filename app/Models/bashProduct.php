@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Bash;
 use App\Models\Product;
 
-class bashProduct extends Model
+class BashProduct extends Model
 {
     use HasFactory;
     protected $table = "bash_products";
