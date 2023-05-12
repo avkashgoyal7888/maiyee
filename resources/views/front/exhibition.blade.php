@@ -12,7 +12,7 @@
 <!--Parallax Section-->
 	@foreach($ex as $exh)
 <div class="section">
-   <div class="hero hero--large hero__overlay bg-size">
+   <div class="hero hero--medium hero__overlay bg-size">
       <img class="bg-img" src="{{asset('admin/exhibition/'. $exh->image)}}" alt="" />
       <div class="hero__inner">
          <div class="container">

@@ -18,9 +18,10 @@ use App\Models\SubCategory;
 use App\Models\Review;
 use App\Models\ReviewImage;
 use App\Models\ProductDetail;
-use App\Models\Exhibition;
-use App\Models\BashProduct;
+use App\Models\BadgeProduct;
 use App\Models\Bash;
+use App\Models\HomeBanner;
+use App\Models\exhibition;
 use Validator;
 use Hash;
 use Auth;
@@ -46,9 +47,10 @@ class HomeController extends Controller
         $nav = Head::first();
         $sub = SubCategory::get();
         $cat = Category::get();
-        $bashpr = BashProduct::get();
+        $bashpr = BadgeProduct::get();
+        $hbanner = HomeBanner::get();
         $bash = Bash::get();
-        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub', 'cat', 'bash', 'bashpr'));
+        return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub', 'cat', 'bash', 'bashpr','hbanner'));
     }
 
     public function register()
@@ -108,7 +110,7 @@ class HomeController extends Controller
         }
         $nav = Head::first();
         $cat = Category::get();
-        $ex = Exhibition::get();
+        $ex = exhibition::get();
         return view('front.exhibition', compact('cartNav','cartTotalnav','cartCount','nav','cat','ex'));
     }
 

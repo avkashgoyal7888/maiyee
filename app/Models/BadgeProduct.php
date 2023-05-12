@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Bash;
 use App\Models\Product;
 
-class BashProduct extends Model
+class BadgeProduct extends Model
 {
     use HasFactory;
-    protected $table = "bash_products";
+    protected $table = "badge_products";
     protected $primaryKey = "id";
     protected $fillable = ['bash_id','product_id'];
 

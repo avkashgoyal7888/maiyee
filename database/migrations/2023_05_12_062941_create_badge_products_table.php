@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('bash_products', function (Blueprint $table) {
+        Schema::create('badge_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('bash_id');
             $table->foreign('bash_id')->references('id')->on('bashes')->onUpdate('cascade')->onDelete('cascade');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('bash_products');
+        Schema::dropIfExists('badge_products');
     }
 };

@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Admin\Bash;
 
 use Livewire\WithPagination;
 use Livewire\Component;
-use App\Models\BashProduct;
+use App\Models\BadgeProduct;
 use App\Models\Bash;
 use App\Models\Product;
 
@@ -65,7 +65,7 @@ class Bashproducts extends Component
         ]);
     
         foreach ($this->selectedProducts as $productId) {
-            BashProduct::create([
+            BadgeProduct::create([
                 'bash_id' => $this->bash_id,
                 'product_id' => $productId
             ]);
@@ -78,7 +78,7 @@ class Bashproducts extends Component
 
     public function deleteBashProduct($id)
     {
-        $state = BashProduct::find($id);
+        $state = BadgeProduct::find($id);
         if ($state) {
             $this->bash_id = $state->id;
 
@@ -89,7 +89,7 @@ class Bashproducts extends Component
 
     public function delete()
     {
-        BashProduct::Where('id', $this->bash_id)->delete();
+        BadgeProduct::Where('id', $this->bash_id)->delete();
         $this->resetinputfields();
         session()->flash('success', 'Bash Deleted Successfully...');
         $this->emit('closemodal');
@@ -98,7 +98,7 @@ class Bashproducts extends Component
 
     public function render()
     {
-        $data = BashProduct::where('bash_id', 'like', '%'.$this->search.'%')->orderByDesc('id')->paginate(10);
+        $data = BadgeProduct::where('bash_id', 'like', '%'.$this->search.'%')->orderByDesc('id')->paginate(10);
         $products = Product::get();
         $bash = Bash::get();
         return view('livewire.admin.bash.bashproducts', compact('data','products','bash'));
