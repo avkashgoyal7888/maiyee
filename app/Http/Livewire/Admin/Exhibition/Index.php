@@ -4,7 +4,7 @@ namespace App\Http\Livewire\Admin\Exhibition;
 
 use Livewire\WithPagination;
 use Livewire\Component;
-use App\Models\Exhibition;
+use App\Models\exhibition;
 use Livewire\WithFileUploads;
 
 class Index extends Component
@@ -53,7 +53,7 @@ class Index extends Component
             $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
             $this->image->storeAs('admin/exhibition', $image, 'real_public');
         }
-        $cat = new Exhibition;
+        $cat = new exhibition;
         $cat->title = $this->title;
         $cat->ex_date = $this->ex_date;
         $cat->image = $image;
@@ -65,7 +65,7 @@ class Index extends Component
 
     public function editCategory($id)
     {
-        $cat = Exhibition::find($id);
+        $cat = exhibition::find($id);
         if ($cat) {
             $this->ex_id = $cat->id;
             $this->title = $cat->title;
@@ -80,7 +80,7 @@ class Index extends Component
     public function update()
     {
         $validatedata = $this->validate();
-        $sub = Exhibition::find($this->ex_id);
+        $sub = exhibition::find($this->ex_id);
     
         if ($this->image instanceof \Illuminate\Http\UploadedFile) {
             $ext = $this->image->getClientOriginalExtension();
@@ -105,7 +105,7 @@ class Index extends Component
 
     public function deleteCategory($id)
     {
-        $exhibition = Exhibition::find($id);
+        $exhibition = exhibition::find($id);
         if ($exhibition) {
             $this->ex_id = $exhibition->id;
 
@@ -116,7 +116,7 @@ class Index extends Component
 
     public function delete()
     {
-        $exhibition = Exhibition::where('id', $this->ex_id)->first();
+        $exhibition = exhibition::where('id', $this->ex_id)->first();
         if ($exhibition->image != null) {
             $image_path = public_path('admin/exhibition/' . $exhibition->image);
             if (file_exists($image_path)) {
@@ -129,7 +129,7 @@ class Index extends Component
     } 
     public function render()
     {
-        $data = Exhibition::where('title', 'like', '%'.$this->search.'%')
+        $data = exhibition::where('title', 'like', '%'.$this->search.'%')
                         ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.exhibition.index',compact('data'));
     }
