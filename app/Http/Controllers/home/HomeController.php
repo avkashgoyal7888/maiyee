@@ -22,6 +22,7 @@ use App\Models\BadgeProduct;
 use App\Models\Bash;
 use App\Models\HomeBanner;
 use App\Models\exhibition;
+use App\Models\WishList;
 use Validator;
 use Hash;
 use Auth;
@@ -52,6 +53,18 @@ class HomeController extends Controller
         $bash = Bash::get();
         return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub', 'cat', 'bash', 'bashpr','hbanner'));
     }
+
+    public function getProductData($id)
+    {
+        $product = Product::find($id);
+        $colors = Color::where('product_id', $product->id)->get();
+        $size = size::where('product_id', $product->id)->get();
+        $product->colors = $colors;
+        $product->size = $size;
+        return response()->json($product);
+    }
+
+
 
     public function register()
     {
@@ -174,6 +187,22 @@ class HomeController extends Controller
         $nav = Head::first();
         $cat = Category::get();
         return view('front.cart', compact('cart', 'cartNav','cartTotal','cartTotalnav','cartCount','nav','cat'));
+    }
+
+    public function wish()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $wish = WishList::where('user_id', Auth::guard('web')->user()->id)->get();
+        $nav = Head::first();
+        $cat = Category::get();
+        return view('front.wish', compact('wish', 'cartNav','cartTotalnav','cartCount','nav','cat'));
     }
 
     public function productDetail(Request $req)

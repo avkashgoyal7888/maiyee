@@ -160,7 +160,7 @@
                         @endforeach
                      </tbody>
                      <tfoot class="font-weight-600">
-                        <tr>
+                        <tr id="charge" style="display: none;">
                            <td colspan="3" class="text-right">Shipping </td>
                            <td>$50.00</td>
                         </tr>
@@ -400,6 +400,11 @@
     if(result.newCartTotal > 2000) {
         $('#cartTotal').text(result.newCartTotal);
         $('#shipping').show();
+    } 
+
+    if(result.newCartTotal > 2000) {
+        $('#cartTotal').text(result.newCartTotal);
+        $('#charge').show();
     } 
          // table with new cart total
           // window.location.reload();

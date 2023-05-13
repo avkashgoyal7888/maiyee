@@ -29,6 +29,8 @@ use App\Http\Controllers\home\PaymentController;
 		Route::get('/filterbyprice','filterByPrice')->name('filter.by.price');
 		Route::get('/filter-by-size','filterBySize')->name('filter.by.size');
 		Route::get('/filter-by-color','filterByColor')->name('filter.by.color');
+		Route::get('/product/{id}', 'getProductData')->name('web.product.data');
+
 	});
 
 	Route::controller(ForgetPasswordController::class)->group(function(){
@@ -51,12 +53,14 @@ use App\Http\Controllers\home\PaymentController;
 		Route::post('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
 		Route::controller(HomeController::class)->group(function(){
 			Route::get('/cart', 'cart')->name('web.cart');
+			Route::get('/wish', 'wish')->name('web.wish');
 			Route::get('/logout', 'logOut')->name('web.logout');
 		});
 		Route::controller(CartController::class)->group(function(){
 		Route::post('/add-to-cart', 'addToCart')->name('web.add.cart');
 		Route::post('/cart-to-cart', 'cartDelete')->name('web.delete.cart');
 		Route::post('/cart-quantity-edit', 'cartEdit')->name('edit.cart');
+		Route::post('/add-to-wish', 'addToWishList')->name('web.add.wishlist');
 		});
 		Route::controller(CheckOutController::class)->group(function(){
 			Route::get('/checkout','index')->name('web.checkout');
