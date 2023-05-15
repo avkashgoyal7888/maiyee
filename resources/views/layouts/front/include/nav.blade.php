@@ -2,7 +2,7 @@
 <style>
     body  {
       background-image: url("https://img.freepik.com/premium-vector/ethnic-ornament-decorative-seamless-pattern_97378-1598.jpg");
-      background-color: #cccccc;
+      filter: grayscale(100%);
     }
     </style>
 <div class="notification-bar mobilehide">
