@@ -1,8 +1,7 @@
 <!--Promotion Bar-->
 <style>
     body  {
-      background-image: url("https://img.freepik.com/premium-vector/ethnic-ornament-decorative-seamless-pattern_97378-1598.jpg");
-      filter: grayscale(100%);
+      background-image: url("{{asset('front/assets/images/background.jpg')}}");
     }
     </style>
 <div class="notification-bar mobilehide">
