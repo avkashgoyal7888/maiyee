@@ -44,7 +44,7 @@ class PaymentController extends Controller
         'firstname' => $firstName,
         'email' => $email,
         'phone' => $phone,
-        'surl' => route('payment.success'),
+        'surl' => route('web.success'),
         'furl' => route('payment.failure'),
         'curl' => route('payment.cancel'),
         'hash' => '',

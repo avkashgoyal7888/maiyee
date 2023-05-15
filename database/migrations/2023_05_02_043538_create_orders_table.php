@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('landmark');
             $table->string('state');
             $table->string('city');
+            $table->string('pin_code',6);
             $table->longText('order_notes')->nullable();
             $table->double('taxable', 10,2)->default(0.00);
             $table->double('cgst', 10,2)->default(0.00);

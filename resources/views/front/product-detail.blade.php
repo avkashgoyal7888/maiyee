@@ -115,9 +115,9 @@
                      <span class="discount-badge"> <span class="devider">|</span>&nbsp;
                      <span>You Save</span>
                      <span id="SaveAmount-product-template" class="product-single__save-amount">
-                     <span class="money">₹100.00</span>
+                     <span class="money">₹{{$discount}}</span>
                      </span>
-                     <span class="off">(<span>16</span>%)</span>
+                     <span class="off">({{ number_format($discount * 100 / $product->mrp, 0) }}%)</span>
                      </span>  
                   </p>
                   <div class="orderMsg" data-user="23" data-time="24">

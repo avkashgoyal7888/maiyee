@@ -28,9 +28,11 @@
             <thead>
                <tr>
                   <th>S. No.</th>
-                  <th>Name</th>
+                  <th>Order Date</th>
                   <th>Order ID</th>
-                  <th>Total</th>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Order Value</th>
                   <th>Order Detail</th>
                   <th>Action</th>
                </tr>
@@ -39,8 +41,10 @@
                @forelse($data as $key => $order)
                <tr>
                   <td>{{ $key + 1 }}</td>
-                  <td>{{ ucwords($order->user->name) }}</td>
+                  <td> {{ date('d-M-y', strtotime($order->order_date)) }} </td>
                   <td>{{ ucwords($order->order_id) }}</td>
+                  <td>{{ ucwords($order->name) }}</td>
+                  <td>{{ucwords($order->address)}} {{ucwords($order->landmark)}} {{ucwords($order->state)}} {{ucwords($order->city)}} {{ucwords($order->pin_code)}}</td>
                   <td>{{ ucwords($order->payable) }}</td>
                   <td><a class="btn btn-success btn-sm" href="{{ route('admin.order.detail',$order->order_id) }}">View</a></td>
                   <td><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#view" wire:click="viewDetailProduct({{$order->id}})"><i class="fas fa-eye"></i></button></td>

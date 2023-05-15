@@ -347,11 +347,15 @@
                            </div>
                            <!-- End product price -->
                            <div class="product-review">
-                              <i class="font-13 fa fa-star"></i>
-                              <i class="font-13 fa fa-star"></i>
-                              <i class="font-13 fa fa-star"></i>
-                              <i class="font-13 fa fa-star-o"></i>
-                              <i class="font-13 fa fa-star-o"></i>
+                              @for($i = 1; $i <= 5; $i++)
+    @if($i <= floor($avg))
+      <i class="font-13 fa fa-star"></i>
+    @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
+      <i class="font-13 fa fa-star-half-o"></i>
+    @else
+      <i class="font-13 fa fa-star-o"></i>
+    @endif
+  @endfor
                            </div>
                         </div>
                         <!-- End product details -->

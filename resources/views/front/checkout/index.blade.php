@@ -119,7 +119,7 @@
                   <div class="row">
                      <div class="form-group form-check col-md-12 col-lg-12 col-xl-12">
                         <label class="form-check-label padding-15px-left">
-                        <input type="checkbox" class="form-check-input" name="saved" ><strong>Save Address For Future?</strong>
+                        <input type="checkbox" class="form-check-input" name="saved"><strong>Save Address For Future?</strong>
                         </label>
                      </div>
                   </div>
@@ -197,7 +197,7 @@
                         <input type="hidden" name="city" class="city" type="text">
                         <input type="hidden" name="pin_code" class="pin" type="text">
                         <input type="hidden" name="order_notes" class="notes" type="text">
-                        <input type="hidden" type="checkbox" name="saveaddress" class="form-check-input" id="check" >
+                        <input type="hidden" type="checkbox" name="saveaddress" class="form-check-input" id="check" value="1">
                         <div class="form-group col-md-4 col-lg-4 col-xl-4 ">
                            <input type="radio" id="cash" name="payment_method" value="cash" />
                            <label for="cash" style="font-size:14px"> Cash On Delivery</label>

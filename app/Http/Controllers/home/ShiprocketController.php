@@ -154,8 +154,8 @@ class ShiprocketController extends Controller
             $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
             $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
             $payable = $total - $discount;
-                if ($payable > 2000) {
-                    $shipping = 100;
+                if ($payable < 2000) {
+                    $shipping = 99;
                     $payable = $total - $discount + $shipping;
                 } else {
                     $shipping = 0;
@@ -171,8 +171,8 @@ class ShiprocketController extends Controller
             $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
             $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
             $payable = $total;
-            if ($payable > 2000) {
-                    $shipping = 100;
+            if ($payable < 2000) {
+                    $shipping = 99;
                     $payable = $total - $discount + $shipping;
                 } else {
                     $shipping = 0;
@@ -190,21 +190,30 @@ class ShiprocketController extends Controller
             $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
             $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
             $payable = $total - $discount;
-            if ($payable > 2000) {
-                    $shipping = 100;
+            if ($payable < 2000) {
+                    $shipping = 99;
                     $payable = $total - $discount + $shipping;
                 } else {
                     $shipping = 0;
                     $payable = $total - $discount + $shipping;
                 }
         }
+
+            $payment_method = '';
+            if (request()->has('payment_method')) {
+                $payment_method = request()->input('payment_method');
+            }
+
+            $payment = '';
+            if ($payment_method == 'cash') {
+                $payment = 'COD';
+            } elseif ($payment_method == 'payu') {
+                $payment = 'ONLINE';
+            }
         
         $order = new Order();
         $order->order_id = $order_id;
         $order->user_id = $user_id;
-        $order->name = Auth::guard('web')->user()->name;
-        $order->contact = Auth::guard('web')->user()->number;
-        $order->email = Auth::guard('web')->user()->email;
         $order->order_date = date('Y-m-d');
         $order->taxable = $taxable;
         $order->discount = $discount;
@@ -212,31 +221,39 @@ class ShiprocketController extends Controller
         if ($req->addressid != '') {
             $useradd = UserAddress::where('id', $req->addressid)->first();
             $order->address = $useradd->address;
-        $order->landmark = $useradd->landmark;
-        $order->state = $useradd->state;
-        $order->city = $useradd->city;
-        $order->order_notes = $req->order_notes;
+            $order->landmark = $useradd->landmark;
+            $order->state = $useradd->state;
+            $order->city = $useradd->city;
+            $order->pin_code = $useradd->pin_code;
+            $order->name = $useradd->name;
+            $order->contact = $useradd->contact;
+            $order->email = $useradd->email;
+            $order->order_notes = $req->order_notes;
         } else {
-        $order->address = $req->address;
-        $order->landmark = $req->landmark;
-        $order->state = $req->state;
-        $order->city = $req->city;
-        $order->order_notes = $req->order_notes;
+            $order->name = $req->name;
+            $order->contact = $req->contact;
+            $order->email = $req->email;
+            $order->address = $req->address;
+            $order->landmark = $req->landmark;
+            $order->state = $req->state;
+            $order->city = $req->city;
+            $order->pin_code = $req->pin_code;
+            $order->order_notes = $req->order_notes;
         }
-        $order->cgst = $newCGST;
-        $order->sgst = $newSGST;
-        $order->igst = $newIGST;
-        $order->total = $total;
-        $order->payable = $payable;
-        $order->shipping_charges = $shipping;
-        $order->payment_method = 'CASH';
-        $order->order_status = 'placed';
-        $order->save();
-        $order_items = [];
+            $order->cgst = $newCGST;
+            $order->sgst = $newSGST;
+            $order->igst = $newIGST;
+            $order->total = $total;
+            $order->payable = $payable;
+            $order->shipping_charges = $shipping;
+            $order->payment_method = $payment;
+            $order->order_status = 'placed';
+            $order->save();
+            $order_items = [];
         foreach ($order_details as $order_detail) {
             $order_items[] = [
                 'name' => $order_detail->product_id,
-                'sku' => $order_detail->quantity,
+                'sku' => $order_detail->product->style_code,
                 'units' => $order_detail->quantity,
                 'selling_price' => $order_detail->price,
                 'discount' => 0.00,
@@ -257,9 +274,10 @@ class ShiprocketController extends Controller
             $useradd->state = $req->state;
             $useradd->city = $req->city;
             $useradd->pin_code = $req->pin_code;
-            if (isset($req->saveaddress) && $req->saveaddress == 'checked') {
+            if (isset($req->saveaddress) && $req->saveaddress == '1') {
                 $useradd->save();
             }
+
 
         }
 
@@ -278,16 +296,16 @@ class ShiprocketController extends Controller
             'billing_phone' => $useradd->contact,
             'shipping_is_billing' => true,
             'order_items' => $order_items,
-            'payment_method' => 'COD',
-            'shipping_charges' => 50.00,
+            'payment_method' => $payment,
+            'shipping_charges' => 99,
             'giftwrap_charges' => 0.00,
             'transaction_charges' => 0.00,
             'total_discount' => 0.00,
             'sub_total' => 100.00,
-            'length' => 10.00,
+            'length' => 12.00,
             'breadth' => 10.00,
-            'height' => 10.00,
-            'weight' => 10.00,
+            'height' => 1.00,
+            'weight' => 0.300,
         ];
         // Create the order
         $response = $client->post('external/orders/create/adhoc', [
@@ -299,6 +317,7 @@ class ShiprocketController extends Controller
         ]);
 
         if ($response->getStatusCode() == 200) {
+            Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
             return response()->json(['status'=>true, 'msg'=>'Order Successfully....']);
             if ($req->cash == 'yes') {
                 return redirect()->route('web.success');

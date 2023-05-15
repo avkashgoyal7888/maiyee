@@ -145,29 +145,34 @@ class Index extends Component
     public function updateProduct()
     {
         $validatedata = $this->validate();
-            if ($this->image != '') {
-            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/product', $image, 'real_public');
+        $sub = Product::find($this->pro_id);
+    
+        if ($this->image instanceof \Illuminate\Http\UploadedFile) {
+            $ext = $this->image->getClientOriginalExtension();
+            $name = substr(uniqid(), 0, 9) . '.' . $ext;
+            $image = $name;
+            $this->image->storeAs('admin/product', $name, 'real_public');
+            $image_path = public_path('admin/product/' . $sub->image);
+            unlink($image_path);
         } else {
-            $this->image = $image;
+            $image = $sub->image;
         }
-        Product::Where('id', $this->pro_id)->update([
-            'name' => $this->name,
-            'description' => $this->description,
-            'cat_id' => $this->category_id,
-            'sub_id' => $this->subcategory_id,
-            'mrp' => $this->mrp,
-            'hsn_code' => $this->hsn_code,
-            'gst_rate' => $this->gst_rate,
-            'discount' => $this->discount,
-            'style_code' => $this->style_code,
-            'image' => $image,
-        ]);
 
+        $sub->name = $this->name;
+        $sub->description = $this->description;
+        $sub->cat_id = $this->category_id;
+        $sub->sub_id = $this->subcategory_id;
+        $sub->mrp = $this->mrp;
+        $sub->hsn_code = $this->hsn_code;
+        $sub->gst_rate = $this->gst_rate;
+        $sub->discount = $this->discount;
+        $sub->style_code = $this->style_code;
+        $sub->image = $image;
+        $sub->update();
+    
         $this->resetinputfields();
         session()->flash('success', 'Product Updated Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function deleteProduct($id)

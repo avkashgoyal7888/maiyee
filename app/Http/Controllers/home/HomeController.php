@@ -228,7 +228,8 @@ class HomeController extends Controller
         $avg = $count > 0 ? $rating / $count : 0;
         $rim = ReviewImage::where('product_id',$req->id)->get();
         $cat = Category::get();
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail'));
+        $discount = $product->mrp - $product->discount;
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount'));
     }
 
     public function subcategory(Request $request)
@@ -282,7 +283,14 @@ class HomeController extends Controller
         // Get the sorted products
         $product = $productsQuery->get();
         $cat = Category::get();
-        return view('front.sub', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'subimg', 'product', 'sortBy','cat'));
+        $count = 0;
+        $rating = 0;
+        foreach ($product as $p) {
+        $count += DB::table("reviews")->where("product_id", $p->id)->count();
+        $rating += DB::table("reviews")->where("product_id", $p->id)->sum('rating');
+        }
+        $avg = $count > 0 ? $rating / $count : 0;
+        return view('front.sub', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'subimg', 'product', 'sortBy','cat', 'avg'));
     }
 
     public function category(Request $request)
@@ -337,7 +345,14 @@ class HomeController extends Controller
     // Get the sorted products
     $product = $productsQuery->get();
     $cat = Category::get();
-    return view('front.cat', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'catimg', 'product', 'sortBy','cat'));
+    $count = 0;
+    $rating = 0;
+    foreach ($product as $p) {
+        $count += DB::table("reviews")->where("product_id", $p->id)->count();
+        $rating += DB::table("reviews")->where("product_id", $p->id)->sum('rating');
+    }
+    $avg = $count > 0 ? $rating / $count : 0;
+    return view('front.cat', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'catimg', 'product', 'sortBy','cat', 'avg'));
 }
 
 
