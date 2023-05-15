@@ -1,7 +1,7 @@
 <!--Promotion Bar-->
 <style>
     body  {
-      background-image: url("{{asset('front/assets/images/background.jpg')}}");
+      background-image: url("{{asset('front/assets/images/background.jpeg')}}");
     }
     </style>
 <div class="notification-bar mobilehide">
