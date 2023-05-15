@@ -1,4 +1,10 @@
 <!--Promotion Bar-->
+<style>
+    body  {
+      background-image: url("https://img.freepik.com/free-vector/decorative-background-with-detailed-pattern_1048-6587.jpg?w=2000");
+      background-color: #cccccc;
+    }
+    </style>
 <div class="notification-bar mobilehide">
     <a href="#" class="notification-bar__message">{{$nav->code}}</a>
     <span class="close-announcement">×</span>
