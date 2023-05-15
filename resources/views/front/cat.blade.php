@@ -307,7 +307,7 @@
                               <img class="hover blur-up lazyload" data-src="{{ asset('admin/product/' . $products->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product">
                               <!-- End hover image -->
                               <!-- product label -->
-                              <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div>
+                              <!--<div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div>-->
                               <!-- End product label -->
                            </a>
                            <!-- end product image -->
