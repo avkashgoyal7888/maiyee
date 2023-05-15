@@ -1,7 +1,7 @@
 <!--Promotion Bar-->
 <style>
     body  {
-      background-image: url("https://img.freepik.com/free-vector/decorative-background-with-detailed-pattern_1048-6587.jpg?w=2000");
+      background-image: url("https://img.freepik.com/premium-vector/ethnic-ornament-decorative-seamless-pattern_97378-1598.jpg");
       background-color: #cccccc;
     }
     </style>
