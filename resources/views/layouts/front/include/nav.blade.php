@@ -1,4 +1,9 @@
 <!--Promotion Bar-->
+<style>
+    body  {
+      background-image: url("{{asset('front/assets/images/background.jpeg')}}");
+    }
+    </style>
 <div class="notification-bar mobilehide">
     <a href="#" class="notification-bar__message">{{$nav->code}}</a>
     <span class="close-announcement">×</span>
@@ -132,6 +137,9 @@
                 </div>
                 <div class="site-header__search">
                     <button type="button" class="search-trigger"><i class="icon anm anm-search-l"></i></button>
+                </div>
+                <div class="site-header__search">
+                    <button type="button" class="search-trigger"><i class="icon anm anm-heart-l"></i></button>
                 </div>
             </div>
         </div>
