@@ -23,11 +23,13 @@ use App\Models\Bash;
 use App\Models\HomeBanner;
 use App\Models\exhibition;
 use App\Models\WishList;
+use App\Models\Order;
 use Validator;
 use Hash;
 use Auth;
 use Session;
 use DB;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -139,7 +141,40 @@ class HomeController extends Controller
         }
         $nav = Head::first();
         $cat = Category::get();
-        return view('front.success',compact('cartNav','cartTotalnav','cartCount','nav','cat'));
+        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
+        return view('front.success',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
+    }
+
+    public function orderFail()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
+        return view('front.fail',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
+    }
+
+    public function orderCancel()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
+        return view('front.cancel',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
     }
 
     public function refund()
@@ -229,7 +264,13 @@ class HomeController extends Controller
         $rim = ReviewImage::where('product_id',$req->id)->get();
         $cat = Category::get();
         $discount = $product->mrp - $product->discount;
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount'));
+        $startDate = Carbon::today();
+        $endDate = $startDate->copy()->addDays(7);
+        
+        // Format the start and end dates
+        $startFormatted = $startDate->format('D. M j');
+        $endFormatted = $endDate->format('D. M j');
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount','startFormatted','endFormatted'));
     }
 
     public function subcategory(Request $request)

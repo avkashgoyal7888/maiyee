@@ -55,7 +55,12 @@
                   <div class="zoompro-wrap product-zoom-right pl-20">
                      <
                      <div class="zoompro-span">
-                        <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ asset('admin/color/'.$proimage[0]->image) }}" />
+                        @if($proimage[0]->image ?? null)
+    <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ asset('admin/color/'.$proimage[0]->image) }}" />
+@else
+    <p>No image available</p>
+@endif
+
                      </div>
                      <div class="product-labels"><span class="lbl on-sale">Sale</span><span class="lbl pr-label1">new</span></div>
                      <div class="product-buttons">
@@ -65,9 +70,17 @@
                   </div>
                   <div class="lightboximages">
                      <a href="{{asset('admin/color/'.$colorzoom->image)}}" data-size="1462x2048"></a>
-                     @foreach($proimage as $img)
-                     <a href="{{asset('admin/color'.$img->image)}}" data-size="1462x2048"></a>
-                     @endforeach
+                     @if(!is_null($proimage) && count($proimage) > 0)
+    @foreach($proimage as $img)
+        @if(!is_null($img) && property_exists($img, 'image'))
+            <a href="{{ asset('admin/color/'.$img->image) }}" data-size="1462x2048"></a>
+        @endif
+    @endforeach
+@else
+    <p>No images available</p>
+@endif
+
+
                   </div>
                </div>
             </div>
@@ -198,7 +211,7 @@
                   </div>
                </div>
                <p id="freeShipMsg" class="freeShipMsg" data-price="199"><i class="fa fa-truck" aria-hidden="true"></i> GETTING CLOSER! ONLY <b class="freeShip"><span class="money" data-currency-usd="$199.00" data-currency="USD">₹199.00</span></b> AWAY FROM <b>FREE SHIPPING!</b></p>
-               <p class="shippingMsg"><i class="fa fa-clock-o" aria-hidden="true"></i> ESTIMATED DELIVERY BETWEEN <b id="fromDate">Wed. May 1</b> and <b id="toDate">Tue. May 7</b>.</p>
+               <p class="shippingMsg"><i class="fa fa-clock-o" aria-hidden="true"></i> ESTIMATED DELIVERY BETWEEN <b id="fromDate">{{ $startFormatted }}</b> to <b id="toDate">{{ $endFormatted }}</b>.</p>
                <div class="userViewMsg" data-user="20" data-time="11000"><i class="fa fa-users" aria-hidden="true"></i> <strong class="uersView">14</strong> PEOPLE ARE LOOKING FOR THIS PRODUCT</div>
             </div>
          </div>
@@ -287,20 +300,12 @@
                         <td>{{ $productdetail->sleeve }}</td>
                      </tr>
                      <tr>
-                        <th>Color :</th>
-                        <td>{{ $productdetail->color }}</td>
-                     </tr>
-                     <tr>
                         <th>Number of Contents in Sales Package :</th>
                         <td>{{ $productdetail->sale_package }}</td>
                      </tr>
                      <tr>
                         <th>Fabric Care :</th>
                         <td>{{ $productdetail->fabric_care }}</td>
-                     </tr>
-                     <tr>
-                        <th>Style Code :</th>
-                        <td>{{ $productdetail->style_code }}</td>
                      </tr>
                   </table>
                </div>

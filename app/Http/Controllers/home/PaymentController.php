@@ -13,6 +13,7 @@ use App\Models\Coupon;
 use Auth;
 use Validator;
 use DB;
+use Session;
 
 class PaymentController extends Controller
 {
@@ -45,8 +46,8 @@ class PaymentController extends Controller
         'email' => $email,
         'phone' => $phone,
         'surl' => route('web.success'),
-        'furl' => route('payment.failure'),
-        'curl' => route('payment.cancel'),
+        'furl' => route('web.fail'),
+        'curl' => route('web.cancel'),
         'hash' => '',
     ];
 
@@ -55,8 +56,15 @@ class PaymentController extends Controller
     $hash = strtolower(hash('sha512', $hashSequence));
     $params['hash'] = $hash;
 
+    // Temporarily disable auth middleware
+    $this->middleware(\App\Http\Middleware\Authenticate::class)->except('payment.pay');
+
+    // Store the user ID in the session to be used later
+    session(['user_id' => Auth::guard('web')->user()->id]);
+
     return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint]);
 }
+
 
 
     public function success(Request $request)

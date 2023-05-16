@@ -136,10 +136,9 @@
                     <!--End Minicart Popup-->
                 </div>
                 <div class="site-header__search">
-                    <button type="button" class="search-trigger"><i class="icon anm anm-search-l"></i></button>
-                </div>
-                <div class="site-header__search">
-                    <button type="button" class="search-trigger"><i class="icon anm anm-heart-l"></i></button>
+                    @if(Auth::guard('web')->user() != '')
+                    <a href="{{route('web.wish')}}"> <h2><i class="icon anm anm-heart-l mr-2"></i></h2> </a>
+                    @endif
                 </div>
             </div>
         </div>

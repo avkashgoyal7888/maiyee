@@ -1,11 +1,11 @@
 @extends('layouts.front.app')
 @section('css')
-<title>Order-Success</title>
+<title>Order-Fail</title>
 @stop
 @section('content')
 <div class="page section-header text-center">
             <div class="page-title">
-                <div class="wrapper"><h1 class="page-width">Order Confirmation</h1></div>
+                <div class="wrapper"><h1 class="page-width">Order Fail</h1></div>
             </div>
         </div>
         <!--End Page Title-->

@@ -17,7 +17,6 @@ use App\Http\Controllers\home\PaymentController;
 		Route::get('/exhibition', 'exhibition')->name('web.exhibition');
 		Route::get('/refund', 'refund')->name('web.refund');
 		Route::get('/shipping', 'shipping')->name('web.shipping');
-		Route::get('/order-success', 'orderSuccess')->name('web.success');
 		Route::get('/product-detail/{id}', 'productDetail')->name('web.product.detail');
 		Route::post('/login-submit', 'loginSubmit')->name('web.login.submit');
 		Route::get('/auth/google','redirectToGoogle')->name('auth.google.redirect');
@@ -46,14 +45,14 @@ use App\Http\Controllers\home\PaymentController;
 
 	Route::group(['middleware'=>'auth'], function() {
 		Route::any('/pay', [PaymentController::class, 'pay'])->name('payment.pay');
-		Route::any('/success', [PaymentController::class, 'success'])->name('payment.success');
-		Route::any('/failure', [PaymentController::class, 'failure'])->name('payment.failure');
-		Route::any('/cancel', [PaymentController::class, 'cancel'])->name('payment.cancel');
 
 		Route::post('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
 		Route::controller(HomeController::class)->group(function(){
 			Route::get('/cart', 'cart')->name('web.cart');
 			Route::get('/wish', 'wish')->name('web.wish');
+			Route::get('/order-success', 'orderSuccess')->name('web.success');
+			Route::any('/order-fail', 'orderFail')->name('web.fail');
+			Route::any('/order-cancel', 'orderCancel')->name('web.cancel');
 			Route::get('/logout', 'logOut')->name('web.logout');
 		});
 		Route::controller(CartController::class)->group(function(){

@@ -13,7 +13,7 @@
 <div class="page section-header text-center">
    <div class="page-title">
       <div class="wrapper">
-         <h1 class="page-width">Your cart</h1>
+         <h1 class="page-width">Your WishList</h1>
       </div>
    </div>
 </div>

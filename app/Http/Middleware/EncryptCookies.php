@@ -12,6 +12,10 @@ class EncryptCookies extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        //
+        'web' => [
+        // Other middleware...
+        \App\Http\Middleware\EncryptCookies::class,
+        // Other middleware...
+    ],
     ];
 }
