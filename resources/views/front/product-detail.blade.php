@@ -2,37 +2,30 @@
 @section('css')
 <title>Disclaimer</title>
 <style>
-    .spr-form-review-rating {
-  margin-bottom: 20px;
-}
-
-.spr-starrating {
-  direction: rtl;
-  unicode-bidi: bidi-override;
-  text-align: left;
-  font-size: 24px;
-}
-
-.spr-starrating label {
-  display: inline-block;
-  padding: 0 10px;
-  margin-right: -15px;
-  color: #ccc;
-  cursor: pointer;
-}
-
-.spr-starrating input[type="radio"] {
-  display: none;
-}
-
-.spr-starrating label:hover,
-.spr-starrating label:hover ~ label,
-.spr-starrating input[type="radio"]:checked ~ label {
-  color: #ffd700;
-}
-
-
-
+   .spr-form-review-rating {
+   margin-bottom: 20px;
+   }
+   .spr-starrating {
+   direction: rtl;
+   unicode-bidi: bidi-override;
+   text-align: left;
+   font-size: 24px;
+   }
+   .spr-starrating label {
+   display: inline-block;
+   padding: 0 10px;
+   margin-right: -15px;
+   color: #ccc;
+   cursor: pointer;
+   }
+   .spr-starrating input[type="radio"] {
+   display: none;
+   }
+   .spr-starrating label:hover,
+   .spr-starrating label:hover ~ label,
+   .spr-starrating input[type="radio"]:checked ~ label {
+   color: #ffd700;
+   }
 </style>
 @stop
 @section('content')
@@ -52,16 +45,17 @@
                <div class="product-details-img">
                   <div class="product-thumb">
                      <div id="gallery" class="product-dec-slider-2 product-tab-left">
-    @foreach($proimage as $img)
-        <a data-color-id="{{$img->color_id}}" data-image="{{asset('admin/color/'.$img->image)}}" data-zoom-image="{{asset('admin/color/'.$img->image)}}" class="product-image slick-slide slick-cloned color-image" aria-hidden="true" tabindex="-1">
-            <img class="blur-up lazyload" src="{{asset('admin/color/'.$img->image)}}" alt="" />
-        </a>
-    @endforeach
-</div>
+                        @foreach($proimage as $img)
+                        <a data-color-id="{{$img->color_id}}" data-image="{{ asset('admin/color/'.$img->image) }}" data-zoom-image="{{ asset('admin/color/'.$img->image) }}" class="product-image slick-slide slick-cloned color-image" aria-hidden="true" tabindex="-1">
+                        <img class="blur-up lazyload" src="{{ asset('admin/color/'.$img->image) }}" alt="" />
+                        </a>
+                        @endforeach
+                     </div>
                   </div>
                   <div class="zoompro-wrap product-zoom-right pl-20">
+                     <
                      <div class="zoompro-span">
-                        <img class="blur-up lazyload zoompro" data-zoom-image="{{asset('admin/color/'.$colorzoom->image)}}" alt="" src="{{asset('admin/color/'.$colorzoom->image)}}" />
+                        <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ asset('admin/color/'.$proimage[0]->image) }}" />
                      </div>
                      <div class="product-labels"><span class="lbl on-sale">Sale</span><span class="lbl pr-label1">new</span></div>
                      <div class="product-buttons">
@@ -87,24 +81,17 @@
                      <div class="product-stock"> <span class="instock ">In Stock</span> <span class="outstock hide">Unavailable</span> </div>
                      <div class="product-sku">SKU: <span class="variant-sku">{{$product->hsn_code}}</span></div>
                      <div class="product-review">
-  @for($i = 1; $i <= 5; $i++)
-    @if($i <= floor($avg))
-      <i class="font-13 fa fa-star"></i>
-    @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
-      <i class="font-13 fa fa-star-half-o"></i>
-    @else
-      <i class="font-13 fa fa-star-o"></i>
-    @endif
-  @endfor
-  <span class="spr-badge-caption">{{$count}} reviews</span>
-</div>
-
-
-
-
-
-
-
+                        @for($i = 1; $i <= 5; $i++)
+                        @if($i <= floor($avg))
+                        <i class="font-13 fa fa-star"></i>
+                        @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
+                        <i class="font-13 fa fa-star-half-o"></i>
+                        @else
+                        <i class="font-13 fa fa-star-o"></i>
+                        @endif
+                        @endfor
+                        <span class="spr-badge-caption">{{$count}} reviews</span>
+                     </div>
                   </div>
                   <p class="product-single__price product-single__price-product-template">
                      <span class="visually-hidden">Regular price</span>
@@ -132,15 +119,15 @@
                <div id="quantity_message">Hurry! Only  <span class="items">4</span>  left in stock.</div>
                <form class="product-form product-form-product-template hidedropdown" id="addToCart">
                   <div class="swatch clearfix swatch-0 option1" data-option-index="0">
-      <div class="product-form__item">
-    <label class="header">Color:</label>
-    @foreach($color as $colors)
-        <div data-value="{{$colors->code}}" class="swatch-element available" data-color="{{$colors->id}}">
-            <input class="swatchInput" id="{{$colors->id}}" type="radio" name="color_id" value="{{$colors->id}}" @if($colors->id == 1) checked @endif>
-            <label class="swatchLbl color small" for="{{$colors->id}}" style="background-color:{{$colors->code}}" title="{{$colors->code}}"></label>
-        </div>
-    @endforeach
-</div>
+                     <div class="product-form__item">
+                        <label class="header">Color:</label>
+                        @foreach($color as $colors)
+                        <div data-value="{{$colors->code}}" class="swatch-element available" data-color="{{$colors->id}}">
+                           <input class="swatchInput" id="{{$colors->id}}" type="radio" name="color_id" value="{{$colors->id}}" @if($colors->id == 1) checked @endif>
+                           <label class="swatchLbl color small" for="{{$colors->id}}" style="background-color:{{$colors->code}}" title="{{$colors->code}}"></label>
+                        </div>
+                        @endforeach
+                     </div>
                   </div>
                   <div class="swatch clearfix swatch-1 option2" data-option-index="1">
                      <div class="product-form__item">
@@ -263,61 +250,59 @@
             <div id="tab1" class="tab-content">
                <div class="product-description rte">
                   <table class="table" style="width:30% !important;">
-                        <tr>
-                          <th>Ideal For :</th>
-                          <td>{{ $productdetail->ideal }}</td>
-                        </tr>
-                        <tr>
-                          <th>Length Type :</th>
-                          <td>{{ $productdetail->length_type }}</td>
-                        </tr>
-                        <tr>
-                          <th>Brand Color :</th>
-                          <td>{{ $productdetail->brand_color }}</td>
-                        </tr>
-                        <tr>
-                          <th>Ocassion :</th>
-                          <td>{{ $productdetail->ocassion }}</td>
-                        </tr>
-                        <tr>
-                          <th>Pattern :</th>
-                          <td>{{ $productdetail->pattern }}</td>
-                        </tr>
-                        <tr>
-                          <th>Type :</th>
-                          <td>{{ $productdetail->type }}</td>
-                        </tr>
-                        <tr>
-                          <th>Fabric :</th>
-                          <td>{{ $productdetail->fabric }}</td>
-                        </tr>
-                        <tr>
-                          <th>Neck :</th>
-                          <td>{{ $productdetail->neck }}</td>
-                        </tr>
-                        <tr>
-                          <th>Sleeve :</th>
-                          <td>{{ $productdetail->sleeve }}</td>
-                        </tr>
-                        <tr>
-                          <th>Color :</th>
-                          <td>{{ $productdetail->color }}</td>
-                        </tr>
-                        <tr>
-                          <th>Number of Contents in Sales Package :</th>
-                          <td>{{ $productdetail->sale_package }}</td>
-                        </tr>
-                        <tr>
-                          <th>Fabric Care :</th>
-                          <td>{{ $productdetail->fabric_care }}</td>
-                        </tr>
-                        <tr>
-                          <th>Style Code :</th>
-                          <td>{{ $productdetail->style_code }}</td>
-                        </tr>
-                      </table>
-                  
-                   
+                     <tr>
+                        <th>Ideal For :</th>
+                        <td>{{ $productdetail->ideal }}</td>
+                     </tr>
+                     <tr>
+                        <th>Length Type :</th>
+                        <td>{{ $productdetail->length_type }}</td>
+                     </tr>
+                     <tr>
+                        <th>Brand Color :</th>
+                        <td>{{ $productdetail->brand_color }}</td>
+                     </tr>
+                     <tr>
+                        <th>Ocassion :</th>
+                        <td>{{ $productdetail->ocassion }}</td>
+                     </tr>
+                     <tr>
+                        <th>Pattern :</th>
+                        <td>{{ $productdetail->pattern }}</td>
+                     </tr>
+                     <tr>
+                        <th>Type :</th>
+                        <td>{{ $productdetail->type }}</td>
+                     </tr>
+                     <tr>
+                        <th>Fabric :</th>
+                        <td>{{ $productdetail->fabric }}</td>
+                     </tr>
+                     <tr>
+                        <th>Neck :</th>
+                        <td>{{ $productdetail->neck }}</td>
+                     </tr>
+                     <tr>
+                        <th>Sleeve :</th>
+                        <td>{{ $productdetail->sleeve }}</td>
+                     </tr>
+                     <tr>
+                        <th>Color :</th>
+                        <td>{{ $productdetail->color }}</td>
+                     </tr>
+                     <tr>
+                        <th>Number of Contents in Sales Package :</th>
+                        <td>{{ $productdetail->sale_package }}</td>
+                     </tr>
+                     <tr>
+                        <th>Fabric Care :</th>
+                        <td>{{ $productdetail->fabric_care }}</td>
+                     </tr>
+                     <tr>
+                        <th>Style Code :</th>
+                        <td>{{ $productdetail->style_code }}</td>
+                     </tr>
+                  </table>
                </div>
             </div>
             <div id="tab2" class="tab-content">
@@ -326,14 +311,14 @@
                      <div class="spr-header clearfix">
                         <div class="spr-summary">
                            <span class="product-review">@for($i = 1; $i <= 5; $i++)
-    @if($i <= floor($avg))
-      <i class="font-13 fa fa-star"></i>
-    @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
-      <i class="font-13 fa fa-star-half-o"></i>
-    @else
-      <i class="font-13 fa fa-star-o"></i>
-    @endif
-  @endfor<span class="spr-summary-actions-togglereviews">Based on {{$count}} reviews</span></span>
+                           @if($i <= floor($avg))
+                           <i class="font-13 fa fa-star"></i>
+                           @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
+                           <i class="font-13 fa fa-star-half-o"></i>
+                           @else
+                           <i class="font-13 fa fa-star-o"></i>
+                           @endif
+                           @endfor<span class="spr-summary-actions-togglereviews">Based on {{$count}} reviews</span></span>
                            <span class="spr-summary-actions">
                            <a href="#" class="spr-summary-actions-newreview btn">Write a review</a>
                            </span>
@@ -344,41 +329,37 @@
                            <form id="review-form" class="new-review-form">
                               <h3 class="spr-form-title">Write a review</h3>
                               <fieldset class="spr-form-contact">
-  @if(Auth::guard('web')->user() == '')
-  <div class="spr-form-contact-name">
-    <label class="spr-form-label" for="review_author_10508262282">Name</label>
-    <input class="spr-form-input spr-form-input-text" type="text" name="name" placeholder="Enter your name">
-  </div>
-  <div class="spr-form-contact-email">
-    <label class="spr-form-label" for="review_email_10508262282">Email</label>
-    <input class="spr-form-input spr-form-input-email" type="email" name="email" placeholder="john.smith@example.com">
-  </div>
-  @elseif(Auth::guard('web')->user() != '')
-  <div class="spr-form-contact-name">
-    <label class="spr-form-label" for="review_author_10508262282">Name</label>
-    <input class="spr-form-input spr-form-input-text" type="text" name="name" value="{{Auth::guard('web')->user()->name}}" readonly>
-  </div>
-  <div class="spr-form-contact-email">
-    <label class="spr-form-label" for="review_email_10508262282">Email</label>
-    <input class="spr-form-input spr-form-input-email" type="text" name="email" value="{{Auth::guard('web')->user()->email}}" readonly>
-  </div>
-  @endif
-</fieldset>
-
+                                 @if(Auth::guard('web')->user() == '')
+                                 <div class="spr-form-contact-name">
+                                    <label class="spr-form-label" for="review_author_10508262282">Name</label>
+                                    <input class="spr-form-input spr-form-input-text" type="text" name="name" placeholder="Enter your name">
+                                 </div>
+                                 <div class="spr-form-contact-email">
+                                    <label class="spr-form-label" for="review_email_10508262282">Email</label>
+                                    <input class="spr-form-input spr-form-input-email" type="email" name="email" placeholder="john.smith@example.com">
+                                 </div>
+                                 @elseif(Auth::guard('web')->user() != '')
+                                 <div class="spr-form-contact-name">
+                                    <label class="spr-form-label" for="review_author_10508262282">Name</label>
+                                    <input class="spr-form-input spr-form-input-text" type="text" name="name" value="{{Auth::guard('web')->user()->name}}" readonly>
+                                 </div>
+                                 <div class="spr-form-contact-email">
+                                    <label class="spr-form-label" for="review_email_10508262282">Email</label>
+                                    <input class="spr-form-input spr-form-input-email" type="text" name="email" value="{{Auth::guard('web')->user()->email}}" readonly>
+                                 </div>
+                                 @endif
+                              </fieldset>
                               <fieldset class="spr-form-review">
                                  <div class="spr-form-review-rating">
-  <label class="spr-form-label">Rating</label>
-  <div class="spr-form-input spr-starrating">
-      <input type="radio" id="star1" name="rating" value="5" /><label for="star1" title="1 star"><i class="fa fa-star"></i></label>
-      <input type="radio" id="star2" name="rating" value="4" /><label for="star2" title="2 stars"><i class="fa fa-star"></i></label>
-      <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i class="fa fa-star"></i></label>
-      <input type="radio" id="star4" name="rating" value="2" /><label for="star4" title="4 stars"><i class="fa fa-star"></i></label>
-      <input type="radio" id="star5" name="rating" value="1" /><label for="star5" title="5 stars"><i class="fa fa-star"></i></label>
-  </div>
-</div>
-
-
-
+                                    <label class="spr-form-label">Rating</label>
+                                    <div class="spr-form-input spr-starrating">
+                                       <input type="radio" id="star1" name="rating" value="5" /><label for="star1" title="1 star"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star2" name="rating" value="4" /><label for="star2" title="2 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star4" name="rating" value="2" /><label for="star4" title="4 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star5" name="rating" value="1" /><label for="star5" title="5 stars"><i class="fa fa-star"></i></label>
+                                    </div>
+                                 </div>
                                  <div class="spr-form-review-title">
                                     <label class="spr-form-label" for="review_title_10508262282">Review Title</label>
                                     <input class="spr-form-input spr-form-input-text " type="text" name="title" placeholder="Give your review a title">
@@ -401,7 +382,7 @@
                            </form>
                         </div>
                         <div class="spr-reviews">
-                            @foreach($review as $reviews)
+                           @foreach($review as $reviews)
                            <div class="spr-review">
                               <div class="spr-review-header">
                                  @foreach($rim->where('review_id', $reviews->id) as $rims)
@@ -409,13 +390,12 @@
                                  @endforeach
                                  <br>
                                  <span class="product-review spr-starratings spr-review-header-starratings">
-  <span class="reviewLink">
-    @for($i = 1; $i <= $reviews->rating; $i++)
-      <i class="fa fa-star"></i>
-    @endfor
-  </span>
-</span>
-
+                                 <span class="reviewLink">
+                                 @for($i = 1; $i <= $reviews->rating; $i++)
+                                 <i class="fa fa-star"></i>
+                                 @endfor
+                                 </span>
+                                 </span>
                                  <h3 class="spr-review-header-title">{{$reviews->title}}</h3>
                                  <span class="spr-review-header-byline"><strong>{{$reviews->name}}</strong> on <strong>{{ $reviews->created_at->format('M d, Y') }}</strong></span>
                               </div>
@@ -1192,13 +1172,32 @@
 @section('js')
 <script>
    $(document).ready(function(){
+       var initialImage = "{{ asset('admin/color/'.$proimage[0]->image) }}";
+        
+        // Update the initial image source in the zoompro-span div
+        $('#zoompro-image').attr('src', initialImage);
+        
+        // Handle change event on color selection
+        $('input[name=color_id]').change(function() {
+            // Get the selected color ID
+            var selectedColorId = $(this).val();
+            
+            // Find the image associated with the selected color ID
+            var selectedImage = $('.product-image[data-color-id="' + selectedColorId + '"]').first();
+            
+            // Get the data-image attribute value of the selected image
+            var imageSrc = selectedImage.data('image');
+            
+            // Update the image source in the zoompro-span div
+            $('#zoompro-image').attr('src', imageSrc);
+        });
       $('input[name=color_id]').change(function() {
             // Get the selected color ID
             var selectedColorId = $(this).val();
-
+   
             // Hide all product images
             $('.product-image').hide();
-
+   
             // Show the product images with the selected color ID
             $('.color-image[data-color-id="' + selectedColorId + '"]').show();
         });
@@ -1212,11 +1211,11 @@
    });
       // addtocart
       $('#addToCart').submit(function(e){
-
+   
             e.preventDefault();
             var fd = new FormData(this);
             fd.append('_token',"{{ csrf_token() }}");
-
+   
             $.ajax({
                 url: "{{ route('web.add.cart') }}",
                 type: "post",
@@ -1225,7 +1224,7 @@
                 processData: false,
                 contentType: false,
                 success: function (result) {
-
+   
                     if(result.status===true){
                         toastr.success(result.msg, "Message", {
                             timeOut: 500,
@@ -1254,11 +1253,11 @@
         });
       // Review Form
       $('#review-form').submit(function(e){
-
+   
             e.preventDefault();
             var fd = new FormData(this);
             fd.append('_token',"{{ csrf_token() }}");
-
+   
             $.ajax({
                 url: "{{ route('web.review.submit') }}",
                 type: "post",
@@ -1267,7 +1266,7 @@
                 processData: false,
                 contentType: false,
                 success: function (result) {
-
+   
                     if(result.status===true){
                         toastr.success(result.msg, "Message", {
                             timeOut: 500,
@@ -1294,7 +1293,7 @@
                 }
             });
         });
-
+   
         // Add End
    });
 </script>

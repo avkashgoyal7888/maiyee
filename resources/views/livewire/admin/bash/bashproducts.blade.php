@@ -81,7 +81,7 @@
                               <input type="text" id="search-products" class="form-control" placeholder="Search products...">
                               <select class="form-control" id="products" wire:model="selectedProducts" multiple>
                                  @foreach($products as $product)
-                                 <option value="{{ $product->id }}">{{ $product->name }}</option>
+                                 <option value="{{ $product->id }}">{{ $product->style_code }}</option>
                                  @endforeach
                               </select>
                            </div>
