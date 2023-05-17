@@ -1,7 +1,7 @@
 <!--Promotion Bar-->
 <style>
     body  {
-      background-image: url("{{asset('front/assets/images/background.jpeg')}}");
+      background-image: linear-gradient(to right, rgba(166, 77, 255,0), rgba(166, 77, 255,0.5));
     }
     </style>
 <div class="notification-bar mobilehide">
