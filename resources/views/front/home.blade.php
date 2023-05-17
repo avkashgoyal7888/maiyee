@@ -82,14 +82,6 @@
                         <span class="price">₹{{$products->discount}}</span>
                      </div>
                      <!-- End product price -->
-                     <!-- Color Variant -->
-                     <ul class="swatches">
-                        <li class="swatch small rounded black" rel="{{asset('front/assets/images/product-images/cape-dress-2.jpg')}}"></li>
-                        <li class="swatch small rounded maroon" rel="{{asset('front/assets/images/product-images/product-image4-1.jpg')}}"></li>
-                        <li class="swatch small rounded navy" rel="{{asset('front/assets/images/product-images/product-image2.jpg')}}"></li>
-                        <li class="swatch small rounded darkgreen" rel="{{asset('front/assets/images/product-images/product-image2-1.jpg')}}"></li>
-                     </ul>
-                     <!-- End Variant -->
                   </div>
                   <!-- End product details -->
                </div>
@@ -161,13 +153,7 @@
                         <span class="price">₹{{$products->product->discount}}</span>
                      </div>
                      <!-- End product price -->
-                     <!-- Color Variant -->
-                     <ul class="swatches">
-                        <li class="swatch small rounded black" rel="{{asset('front/assets/images/product-images/cape-dress-2.jpg')}}"></li>
-                        <li class="swatch small rounded maroon" rel="{{asset('front/assets/images/product-images/product-image4-1.jpg')}}"></li>
-                        <li class="swatch small rounded navy" rel="{{asset('front/assets/images/product-images/product-image2.jpg')}}"></li>
-                        <li class="swatch small rounded darkgreen" rel="{{asset('front/assets/images/product-images/product-image2-1.jpg')}}"></li>
-                     </ul>
+                     
                      <!-- End Variant -->
                   </div>
                   <!-- End product details -->
