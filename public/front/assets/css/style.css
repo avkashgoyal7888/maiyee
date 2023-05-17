@@ -913,6 +913,9 @@ table { margin-bottom:15px; width:100%; border-collapse:collapse; border-spacing
 .template-product .tabs-listing .tab-container table tr th { background:#000; color:#fff; border:0 !important; }
 .template-product .tabs-listing .tab-container table tr th, .template-product .tabs-listing .tab-container table tr td { padding:7px 12px; text-align:center; font-size:12px; border:1px solid #e8e9eb; }
 
+.template-product .tabs-listing .tab-container table tr th { background:#000; color:#fff; border:0 !important; }
+.template-product .tabs-listing .tab-container table tr th, .template-product .tabs-listing .tab-container table tr td { padding:7px 12px; text-align:center; font-size:12px; border:1px solid #e8e9eb; }
+
 .related-product { margin-bottom:30px; }
 .product-template__container .section-header { margin-bottom:40px; }
 .sub-heading { text-align:center; max-width:500px; margin:0 auto; }
