@@ -210,7 +210,7 @@
             @foreach($sub as $subcat)
             <div class="col-lg-2 col-md-3 col-sm-6 col-6">
                <!-- start product image -->
-               <div class="product-image">
+               <div class="product-image" style="text-align: center">
                   <!-- start product image -->
                   <a href="{{route('front.sub',$subcat->id)}}">
                      <!-- image --> 
