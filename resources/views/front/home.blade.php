@@ -208,7 +208,7 @@
       <div class="grid-products">
          <div class="row">
             @foreach($sub as $subcat)
-            <div class="col-2 col-sm-2 col-md-4 col-lg-6 item">
+            <div class="col-lg-2 col-md-3 col-sm-6 col-6">
                <!-- start product image -->
                <div class="product-image">
                   <!-- start product image -->
