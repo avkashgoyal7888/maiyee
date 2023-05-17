@@ -208,15 +208,13 @@
       <div class="grid-products">
          <div class="row">
             @foreach($sub as $subcat)
-            <div class="col-6 col-sm-2 col-md-3 col-lg-3 item">
+            <div class="col-2 col-sm-2 col-md-4 col-lg-6 item">
                <!-- start product image -->
                <div class="product-image">
                   <!-- start product image -->
-                  <a href="{{route('front.sub',$subcat->id)}}" class="grid-view-item__link">
-                     <!-- image -->
-                     <div class="col-lg-6 col-md-3 col-sm-2 col-2">
-                     <img  data-src="{{ asset('admin/tile/' . $subcat->tile) }}" src="{{ asset('admin/tile/' . $subcat->tile) }}" alt="image" title="product">
-                     </div>
+                  <a href="{{route('front.sub',$subcat->id)}}">
+                     <!-- image --> 
+                     <img  src="{{ asset('admin/tile/' . $subcat->tile) }}">
                      <!-- End image -->
                      <h2 class="mt-2">{{$subcat->sub_name}}</h2>
                   </a>
