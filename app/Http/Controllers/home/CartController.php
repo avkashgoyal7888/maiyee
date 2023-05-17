@@ -53,7 +53,6 @@ class CartController extends Controller
         } else {
 
             $uid = Auth::guard('web')->user()->id;
-
             $data = new Cart();
             $data->product_id = $req->product_id;
             $data->size_id = $req->size_id;

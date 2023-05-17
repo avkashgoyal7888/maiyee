@@ -144,7 +144,7 @@
                   </div>
                   <div class="swatch clearfix swatch-1 option2" data-option-index="1">
                      <div class="product-form__item">
-                        <label class="header">Size: <span class="slVariant">XS</span></label>
+                        <label class="header">Size: <span class="slVariant"></span></label>
                         @foreach($size as $sizes)
                         <div data-value="{{$sizes->size}}" data-size="{{$sizes->id}}" class="swatch-element xs available">
                            <input class="swatchInput" id="{{$sizes->id}}" type="radio" name="size_id" value="{{$sizes->id}}">
@@ -167,11 +167,8 @@
                      </div>
                      <div class="product-form__item--submit">
                         <input type="hidden" name="product_id" value="{{$product->id}}">
-                        <input type="hidden" name="color_id" id="productColorId">
-                        <input type="hidden" name="size_id" id="productSizeId">
                         <input type="hidden" name="price" value="{{$product->discount}}">
                         <input type="hidden" name="gst" value="{{$product->gst_rate}}">
-                        <input type="hidden" name="quantity" value="1">
                         @if(Auth::guard('web')->user() == '')
                         <button class="btn btn-addto-cart" data-toggle="modal" data-target="#myModal" tabindex="0">Add To Cart</button>
                         @else
@@ -1177,6 +1174,21 @@
 @section('js')
 <script>
    $(document).ready(function(){
+      function qnt_incre(){
+      $(".qtyBtn").on("click", function() {
+        var qtyField = $(this).parent(".qtyField"),
+          oldValue = $(qtyField).find(".qty").val(),
+           newVal = 1;
+   
+        if ($(this).is(".plus")) {
+         newVal = parseInt(oldValue) + 1;
+        } else if (oldValue > 1) {
+         newVal = parseInt(oldValue) - 1;
+        }
+        $(qtyField).find(".qty").val(newVal);
+      });
+   }
+   qnt_incre();
        var initialImage = "{{ asset('admin/color/'.$proimage[0]->image) }}";
         
         // Update the initial image source in the zoompro-span div
@@ -1206,14 +1218,6 @@
             // Show the product images with the selected color ID
             $('.color-image[data-color-id="' + selectedColorId + '"]').show();
         });
-      $('input[name="color_id"]').on('click', function() {
-         var selectedColor = $(this).val();
-         $('#productColorId').val(selectedColor);
-      });
-      $('input[name="size_id"]').on('click', function() {
-      var selectedSize = $(this).val();
-      $('#productSizeId').val(selectedSize);
-   });
       // addtocart
       $('#addToCart').submit(function(e){
    

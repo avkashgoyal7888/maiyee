@@ -33,7 +33,7 @@
             <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
                 <span class="user-menu d-block d-lg-none"><i class="anm anm-user-al" aria-hidden="true"></i></span>
                 <ul class="customer-links list-inline"> @if(Auth::guard('web')->user() == '') <li><a href="#" data-toggle="modal" data-target="#myModal">Login</a></li>
-                    <li><a href="{{route('web.register')}}">Create Account</a></li> @else <li><a href="wishlist.html">Account Profile</a></li>
+                    <li><a href="{{route('web.register')}}">Create Account</a></li> @else <li><a href="{{route('web.orders')}}">My Orders</a></li>
                     <li><a href="{{route('web.logout')}}">Logout</a></li> @endif
                 </ul>
             </div>

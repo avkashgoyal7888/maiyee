@@ -50,9 +50,10 @@ use App\Http\Controllers\home\PaymentController;
 		Route::controller(HomeController::class)->group(function(){
 			Route::get('/cart', 'cart')->name('web.cart');
 			Route::get('/wish', 'wish')->name('web.wish');
-			Route::get('/order-success', 'orderSuccess')->name('web.success');
+			Route::any('/order-success', 'orderSuccess')->name('web.success');
 			Route::any('/order-fail', 'orderFail')->name('web.fail');
 			Route::any('/order-cancel', 'orderCancel')->name('web.cancel');
+			Route::get('/orders', 'orders')->name('web.orders');
 			Route::get('/logout', 'logOut')->name('web.logout');
 		});
 		Route::controller(CartController::class)->group(function(){
