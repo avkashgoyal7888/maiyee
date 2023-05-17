@@ -80,7 +80,6 @@
     <p>No images available</p>
 @endif
 
-
                   </div>
                </div>
             </div>
