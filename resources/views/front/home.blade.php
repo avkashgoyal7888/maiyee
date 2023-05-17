@@ -136,9 +136,7 @@
                         <i class="icon anm anm-search-plus-r"></i>
                         </a>
                         <div class="wishlist-btn">
-                           <a class="wishlist add-to-wishlist" href="#" data-product-id="{{$products->product->id}}">
-    <i class="icon anm anm-heart-l"></i>
-</a>
+                           <a class="wishlist add-to-wishlist" href="#" data-product-id="{{$products->product->id}}"><i class="icon anm anm-heart-l"></i></a>
 
                         </div>
                         <div class="compare-btn">
@@ -216,7 +214,9 @@
                   <!-- start product image -->
                   <a href="{{route('front.sub',$subcat->id)}}" class="grid-view-item__link">
                      <!-- image -->
-                     <img class="rounded-circle" data-src="{{ asset('admin/tile/' . $subcat->tile) }}" src="{{ asset('admin/tile/' . $subcat->tile) }}" alt="image" title="product">
+                     <div class="col-lg-6 col-md-3 col-sm-2 col-2">
+                     <img  data-src="{{ asset('admin/tile/' . $subcat->tile) }}" src="{{ asset('admin/tile/' . $subcat->tile) }}" alt="image" title="product">
+                     </div>
                      <!-- End image -->
                      <h2 class="mt-2">{{$subcat->sub_name}}</h2>
                   </a>
