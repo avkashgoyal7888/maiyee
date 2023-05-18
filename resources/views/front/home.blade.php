@@ -60,11 +60,6 @@
                            <i class="icon anm anm-heart-l"></i>
                            </a>
                         </div>
-                        <div class="compare-btn">
-                           <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
-                           <i class="icon anm anm-random-r"></i>
-                           </a>
-                        </div>
                      </div>
                      <!-- end product button -->
                   </div>
@@ -119,9 +114,6 @@
                         <!-- Variant Image-->
                         <img class="grid-view-item__image hover variantImg" src="{{ asset('admin/product/' . $products->product->image) }}" alt="image" title="product">
                         <!-- Variant Image-->
-                        <!-- product label -->
-                        <div class="product-labels rounded"><span class="lbl on-sale">Sale</span></div>
-                        <!-- End product label -->
                      </a>
                      <div class="button-set">
                         <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
@@ -130,11 +122,6 @@
                         <div class="wishlist-btn">
                            <a class="wishlist add-to-wishlist" href="#" data-product-id="{{$products->product->id}}"><i class="icon anm anm-heart-l"></i></a>
 
-                        </div>
-                        <div class="compare-btn">
-                           <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
-                           <i class="icon anm anm-random-r"></i>
-                           </a>
                         </div>
                      </div>
                      <!-- end product button -->
