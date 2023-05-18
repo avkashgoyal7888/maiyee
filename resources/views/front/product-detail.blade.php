@@ -233,14 +233,14 @@
                <img src="{{asset('front/assets/images/worldwide.png')}}" alt="Worldwide Delivery" title="Worldwide Delivery" />
                <div class="details">
                   <h3>Worldwide Delivery</h3>
-                  FREE &amp; fast shipping to over 200+ countries &amp; regions.
+                  FREE &amp; fast shipping to over 200+ cities &amp; regions.
                </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
                <img src="{{asset('front/assets/images/phone-call.png')}}" alt="Hotline" title="Hotline" />
                <div class="details">
                   <h3>Hotline</h3>
-                  Talk to help line for your question on 4141 456 789, 4125 666 888
+                  Talk to help line for your question on +91-8273028229
                </div>
             </div>
          </div>
@@ -258,7 +258,7 @@
             <div id="tab1" class="tab-content">
                <div class="product-description rte">
                   <div class="row">
-                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
                      <table class="table">
                      <tr>
                         <th>Ideal For :</th>
