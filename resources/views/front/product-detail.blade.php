@@ -46,7 +46,7 @@
                   <div class="product-thumb">
                      <div id="gallery" class="product-dec-slider-2 product-tab-left">
                         @foreach($proimage as $img)
-                        <a data-color-id="{{$img->color_id}}" data-image="{{ asset('admin/color/'.$img->image) }}" data-zoom-image="{{ asset('admin/color/'.$img->image) }}" class="product-image slick-slide slick-cloned color-image" aria-hidden="true" tabindex="-1">
+                        <a data-color-id="{{$img->color_id}}" data-image="{{ asset('admin/color/'.$img->image) }}" data-zoom-image="{{ asset('admin/color/'.$img->image) }}" class="slick-slide slick-cloned" aria-hidden="true" tabindex="-1">
                         <img class="blur-up lazyload" src="{{ asset('admin/color/'.$img->image) }}" alt="" />
                         </a>
                         @endforeach
