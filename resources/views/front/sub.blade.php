@@ -312,9 +312,6 @@
                            </a>
                            <!-- end product image -->
                            <!-- Start product button -->
-                           <form class="variants add" action="#" method="post">
-                              <button class="btn btn-addto-cart" type="button">Select Options</button>
-                           </form>
                            <div class="button-set">
                               <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
                               <i class="icon anm anm-search-plus-r"></i>
@@ -322,11 +319,6 @@
                               <div class="wishlist-btn">
                                  <a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">
                                  <i class="icon anm anm-heart-l"></i>
-                                 </a>
-                              </div>
-                              <div class="compare-btn">
-                                 <a class="compare add-to-compare" href="#" title="Add to Compare">
-                                 <i class="icon anm anm-random-r"></i>
                                  </a>
                               </div>
                            </div>
@@ -428,9 +420,6 @@
            html += '<span class="lbl pr-label1">new</span>';
            html += '</div>';
            html += '</a>';
-           html += '<form class="variants add" action="#" method="post">';
-           html += '<button class="btn btn-addto-cart" type="button">Select Options</button>';
-           html += '</form>';
            html += '<div class="button-set">';
            html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
            html += '<i class="icon anm anm-search-plus-r"></i>';
@@ -438,11 +427,6 @@
            html += '<div class="wishlist-btn">';
            html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
            html += '<i class="icon anm anm-heart-l"></i>';
-           html += '</a>';
-           html += '</div>';
-           html += '<div class="compare-btn">';
-           html += '<a class="compare add-to-compare" href="#" title="Add to Compare">';
-           html += '<i class="icon anm anm-random-r"></i>';
            html += '</a>';
            html += '</div>';
            html += '</div>';
@@ -512,9 +496,6 @@
            html += '<span class="lbl pr-label1">new</span>';
            html += '</div>';
            html += '</a>';
-           html += '<form class="variants add" action="#" method="post">';
-           html += '<button class="btn btn-addto-cart" type="button">Select Options</button>';
-           html += '</form>';
            html += '<div class="button-set">';
            html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
            html += '<i class="icon anm anm-search-plus-r"></i>';
@@ -522,11 +503,6 @@
            html += '<div class="wishlist-btn">';
            html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
            html += '<i class="icon anm anm-heart-l"></i>';
-           html += '</a>';
-           html += '</div>';
-           html += '<div class="compare-btn">';
-           html += '<a class="compare add-to-compare" href="#" title="Add to Compare">';
-           html += '<i class="icon anm anm-random-r"></i>';
            html += '</a>';
            html += '</div>';
            html += '</div>';
@@ -605,9 +581,6 @@
            html += '<span class="lbl pr-label1">new</span>';
            html += '</div>';
            html += '</a>';
-           html += '<form class="variants add" action="#" method="post">';
-           html += '<button class="btn btn-addto-cart" type="button">Select Options</button>';
-           html += '</form>';
            html += '<div class="button-set">';
            html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
            html += '<i class="icon anm anm-search-plus-r"></i>';
@@ -615,11 +588,6 @@
            html += '<div class="wishlist-btn">';
            html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
            html += '<i class="icon anm anm-heart-l"></i>';
-           html += '</a>';
-           html += '</div>';
-           html += '<div class="compare-btn">';
-           html += '<a class="compare add-to-compare" href="#" title="Add to Compare">';
-           html += '<i class="icon anm anm-random-r"></i>';
            html += '</a>';
            html += '</div>';
            html += '</div>';

@@ -56,10 +56,17 @@
                         <i class="icon anm anm-search-plus-r"></i>
                         </a>
                         <div class="wishlist-btn">
-                           <a href="#" data-product-id="{{$products->id}}" class="wishlist add-to-wishlist">
-                           <i class="icon anm anm-heart-l"></i>
-                           </a>
-                        </div>
+    @auth
+        <a href="#" data-product-id="{{$products->id}}" class="wishlist add-to-wishlist">
+            <i class="icon anm anm-heart-l"></i>
+        </a>
+    @else
+        <a href="#" data-toggle="modal" data-target="#myModal" class="wishlist">
+            <i class="icon anm anm-heart-l"></i>
+        </a>
+    @endauth
+</div>
+
                      </div>
                      <!-- end product button -->
                   </div>
