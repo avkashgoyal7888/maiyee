@@ -33,7 +33,7 @@
    <!--Breadcrumb-->
    <div class="bredcrumbWrap">
       <div class="container breadcrumbs">
-         <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Product With Left Thumbs</span>
+         <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Product Details</span>
       </div>
    </div>
    <!--End Breadcrumb-->
@@ -53,13 +53,12 @@
                      </div>
                   </div>
                   <div class="zoompro-wrap product-zoom-right pl-20">
-                     <
                      <div class="zoompro-span">
                         @if($proimage[0]->image ?? null)
-    <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ asset('admin/color/'.$proimage[0]->image) }}" />
-@else
-    <p>No image available</p>
-@endif
+                        <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ asset('admin/color/'.$proimage[0]->image) }}" />
+                        @else
+                        <p>No image available</p>
+                        @endif
 
                      </div>
                      <div class="product-labels"><span class="lbl on-sale">Sale</span><span class="lbl pr-label1">new</span></div>
@@ -206,7 +205,7 @@
                      </div>
                   </div>
                </div>
-               <p id="freeShipMsg" class="freeShipMsg" data-price="199"><i class="fa fa-truck" aria-hidden="true"></i> GETTING CLOSER! ONLY <b class="freeShip"><span class="money" data-currency-usd="$199.00" data-currency="USD">₹199.00</span></b> AWAY FROM <b>FREE SHIPPING!</b></p>
+               <p id="freeShipMsg" class="freeShipMsg" data-price="199"><i class="fa fa-truck" aria-hidden="true"></i> GETTING CLOSER! ONLY <b class="freeShip"><span class="money">₹99.00</span>SHIPPING CHARGES!</b></p>
                <p class="shippingMsg"><i class="fa fa-clock-o" aria-hidden="true"></i> ESTIMATED DELIVERY BETWEEN <b id="fromDate">{{ $startFormatted }}</b> to <b id="toDate">{{ $endFormatted }}</b>.</p>
                <div class="userViewMsg" data-user="20" data-time="11000"><i class="fa fa-users" aria-hidden="true"></i> <strong class="uersView">14</strong> PEOPLE ARE LOOKING FOR THIS PRODUCT</div>
             </div>
@@ -258,7 +257,9 @@
          <div class="tab-container">
             <div id="tab1" class="tab-content">
                <div class="product-description rte">
-                  <table class="table" style="width:30% !important;">
+                  <div class="row">
+                     <div class="col-lg-6 col-md-6 col-sm-12 col-12"
+                     <table class="table">
                      <tr>
                         <th>Ideal For :</th>
                         <td>{{ $productdetail->ideal }}</td>
@@ -304,6 +305,8 @@
                         <td>{{ $productdetail->fabric_care }}</td>
                      </tr>
                   </table>
+                  </div>
+                  </div>
                </div>
             </div>
             <div id="tab2" class="tab-content">
