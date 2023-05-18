@@ -60,11 +60,6 @@
                            <i class="icon anm anm-heart-l"></i>
                            </a>
                         </div>
-                        <div class="compare-btn">
-                           <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
-                           <i class="icon anm anm-random-r"></i>
-                           </a>
-                        </div>
                      </div>
                      <!-- end product button -->
                   </div>
@@ -82,14 +77,6 @@
                         <span class="price">₹{{$products->discount}}</span>
                      </div>
                      <!-- End product price -->
-                     <!-- Color Variant -->
-                     <ul class="swatches">
-                        <li class="swatch small rounded black" rel="{{asset('front/assets/images/product-images/cape-dress-2.jpg')}}"></li>
-                        <li class="swatch small rounded maroon" rel="{{asset('front/assets/images/product-images/product-image4-1.jpg')}}"></li>
-                        <li class="swatch small rounded navy" rel="{{asset('front/assets/images/product-images/product-image2.jpg')}}"></li>
-                        <li class="swatch small rounded darkgreen" rel="{{asset('front/assets/images/product-images/product-image2-1.jpg')}}"></li>
-                     </ul>
-                     <!-- End Variant -->
                   </div>
                   <!-- End product details -->
                </div>
@@ -127,24 +114,14 @@
                         <!-- Variant Image-->
                         <img class="grid-view-item__image hover variantImg" src="{{ asset('admin/product/' . $products->product->image) }}" alt="image" title="product">
                         <!-- Variant Image-->
-                        <!-- product label -->
-                        <div class="product-labels rounded"><span class="lbl on-sale">Sale</span></div>
-                        <!-- End product label -->
                      </a>
                      <div class="button-set">
                         <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
                         <i class="icon anm anm-search-plus-r"></i>
                         </a>
                         <div class="wishlist-btn">
-                           <a class="wishlist add-to-wishlist" href="#" data-product-id="{{$products->product->id}}">
-    <i class="icon anm anm-heart-l"></i>
-</a>
+                           <a class="wishlist add-to-wishlist" href="#" data-product-id="{{$products->product->id}}"><i class="icon anm anm-heart-l"></i></a>
 
-                        </div>
-                        <div class="compare-btn">
-                           <a class="compare add-to-compare" href="compare.html" title="Add to Compare">
-                           <i class="icon anm anm-random-r"></i>
-                           </a>
                         </div>
                      </div>
                      <!-- end product button -->
@@ -163,13 +140,7 @@
                         <span class="price">₹{{$products->product->discount}}</span>
                      </div>
                      <!-- End product price -->
-                     <!-- Color Variant -->
-                     <ul class="swatches">
-                        <li class="swatch small rounded black" rel="{{asset('front/assets/images/product-images/cape-dress-2.jpg')}}"></li>
-                        <li class="swatch small rounded maroon" rel="{{asset('front/assets/images/product-images/product-image4-1.jpg')}}"></li>
-                        <li class="swatch small rounded navy" rel="{{asset('front/assets/images/product-images/product-image2.jpg')}}"></li>
-                        <li class="swatch small rounded darkgreen" rel="{{asset('front/assets/images/product-images/product-image2-1.jpg')}}"></li>
-                     </ul>
+                     
                      <!-- End Variant -->
                   </div>
                   <!-- End product details -->
@@ -210,13 +181,13 @@
       <div class="grid-products">
          <div class="row">
             @foreach($sub as $subcat)
-            <div class="col-6 col-sm-2 col-md-3 col-lg-3 item">
+            <div class="col-lg-2 col-md-3 col-sm-6 col-6">
                <!-- start product image -->
-               <div class="product-image">
+               <div class="product-image" style="text-align: center">
                   <!-- start product image -->
-                  <a href="{{route('front.sub',$subcat->id)}}" class="grid-view-item__link">
-                     <!-- image -->
-                     <img class="rounded-circle" data-src="{{ asset('admin/tile/' . $subcat->tile) }}" src="{{ asset('admin/tile/' . $subcat->tile) }}" alt="image" title="product">
+                  <a href="{{route('front.sub',$subcat->id)}}">
+                     <!-- image --> 
+                     <img  src="{{ asset('admin/tile/' . $subcat->tile) }}">
                      <!-- End image -->
                      <h2 class="mt-2">{{$subcat->sub_name}}</h2>
                   </a>
