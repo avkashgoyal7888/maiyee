@@ -15,7 +15,7 @@
       </div>
       @endif
       <div class="p-2 w-100">
-         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add" style="float:right;">Add Color</button>
+         <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add" style="float:right;">Add Image</button>
       </div>
       <!-- Tab panes -->
       <div class="tab-content p-3 text-muted">
