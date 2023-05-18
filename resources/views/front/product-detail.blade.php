@@ -258,7 +258,7 @@
             <div id="tab1" class="tab-content">
                <div class="product-description rte">
                   <div class="row">
-                     <div class="col-lg-6 col-md-6 col-sm-12 col-12"
+                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                      <table class="table">
                      <tr>
                         <th>Ideal For :</th>
