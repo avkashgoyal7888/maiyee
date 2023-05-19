@@ -103,6 +103,12 @@
                </a>
             </li>
             <li>
+               <a href="{{route('admin.user')}}">
+               <i class="bx bx-home-circle nav-icon"></i>
+               <span class="menu-item" data-key="t-dashboard">User</span>
+               </a>
+            </li>
+            <li>
                <a href="javascript: void(0);" class="has-arrow">
                <i class="bx bxs-user-detail nav-icon"></i>
                <span class="menu-item" data-key="t-ecommerce">Suppliers</span>

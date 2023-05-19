@@ -44,9 +44,12 @@ class CartController extends Controller
         $val = Validator::make($req->all(), [
             'product_id' => 'required',
             'color_id' => 'required',
+            'size_id' => 'required',
             'price' => 'required',
             'gst' => 'required',
-        ]);
+        ],[
+            'color_id.required' => 'Select Your Color...',
+            'size_id.required' => 'Select Your Size...']);
 
         if ($val->fails()) {
             return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);

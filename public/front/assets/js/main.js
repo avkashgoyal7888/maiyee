@@ -796,16 +796,16 @@
 	/*----------------------------
        22. Product details slider 2
     ------------------------------ */
-	function product_thumb(){
-		$('.product-dec-slider-2').slick({
-			infinite: true,
-			slidesToShow: 5,
-			vertical: true,
-			slidesToScroll: 1,
-			centerPadding: '60px'
-		});
-	}
-	product_thumb();
+	// function product_thumb(){
+	// 	$('.product-dec-slider-2').slick({
+	// 		infinite: true,
+	// 		slidesToShow: 5,
+	// 		vertical: true,
+	// 		slidesToScroll: 1,
+	// 		centerPadding: '60px'
+	// 	});
+	// }
+	// product_thumb();
 	
 	/*----------------------------
        23. Product details slider 1

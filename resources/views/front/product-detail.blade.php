@@ -45,17 +45,17 @@
                <div class="product-details-img">
                   <div class="product-thumb">
                      <div id="gallery" class="product-dec-slider-2 product-tab-left">
-    @foreach($proimage as $img)
-    <a data-color-id="{{$img->color_id}}" data-image="{{ asset('admin/color/'.$img->image) }}" data-zoom-image="{{ asset('admin/color/'.$img->image) }}" class="product-image slick-slide slick-cloned color-image" aria-hidden="true" tabindex="-1">
-        <img class="blur-up lazyload" src="{{ asset('admin/color/'.$img->image) }}" alt="" />
-    </a>
-    @endforeach
-</div>
+                        @foreach($proimage as $img)
+                        <a data-color-id="{{$img->color_id}}" data-image="{{ asset('admin/color/'.$img->image) }}" data-zoom-image="{{ asset('admin/color/'.$img->image) }}" class="product-image slick-slide slick-cloned color-image" aria-hidden="true" tabindex="-1">
+                        <img class="blur-up lazyload" src="{{ asset('admin/color/'.$img->image) }}" alt="" />
+                        </a>
+                        @endforeach
+                     </div>
                   </div>
                   <div class="zoompro-wrap product-zoom-right pl-20">
                      <div class="zoompro-span">
-    <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ asset('admin/color/'.$proimage->where('color_id', app('request')->input('color_id', $proimage[0]->color_id))->first()->image) }}" />
-</div>
+                        <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ asset('admin/color/'.$proimage->where('color_id', app('request')->input('color_id', $proimage[0]->color_id))->first()->image) }}" />
+                     </div>
                      <div class="product-labels"><span class="lbl on-sale">Sale</span><span class="lbl pr-label1">new</span></div>
                      <div class="product-buttons">
                         <a href="https://www.youtube.com/watch?v=93A2jOW5Mog" class="btn popup-video" title="View Video"><i class="icon anm anm-play-r" aria-hidden="true"></i></a>
@@ -65,15 +65,14 @@
                   <div class="lightboximages">
                      <a href="{{asset('admin/color/'.$colorzoom->image)}}" data-size="1462x2048"></a>
                      @if(!is_null($proimage) && count($proimage) > 0)
-    @foreach($proimage as $img)
-        @if(!is_null($img) && property_exists($img, 'image'))
-            <a href="{{ asset('admin/color/'.$img->image) }}" data-size="1462x2048"></a>
-        @endif
-    @endforeach
-@else
-    <p>No images available</p>
-@endif
-
+                     @foreach($proimage as $img)
+                     @if(!is_null($img) && property_exists($img, 'image'))
+                     <a href="{{ asset('admin/color/'.$img->image) }}" data-size="1462x2048"></a>
+                     @endif
+                     @endforeach
+                     @else
+                     <p>No images available</p>
+                     @endif
                   </div>
                </div>
             </div>
@@ -126,28 +125,26 @@
                <form class="product-form product-form-product-template hidedropdown" id="addToCart">
                   <div class="swatch clearfix swatch-0 option1" data-option-index="0">
                      <div class="product-form__item">
-    <label class="header">Color:</label>
-    @foreach($color as $colors)
-    <div data-value="{{$colors->code}}" class="swatch-element available" data-color="{{$colors->id}}">
-        <input class="swatchInput" id="{{$colors->id}}" type="radio" name="color_id" value="{{$colors->id}}" @if($colors->id == app('request')->input('color_id', $proimage[0]->color_id)) checked @endif>
-        <label class="swatchLbl color small" for="{{$colors->id}}" style="background-color:{{$colors->code}}" title="{{$colors->code}}"></label>
-    </div>
-    @endforeach
-</div>
+                        <label class="header">Color:</label>
+                        @foreach($color as $colors)
+                        <div data-value="{{$colors->code}}" class="swatch-element available" data-color="{{$colors->id}}">
+                           <input class="swatchInput" id="{{$colors->id}}" type="radio" name="color_id" value="{{$colors->id}}" @if($colors->id == app('request')->input('color_id', $proimage[0]->color_id)) checked @endif>
+                           <label class="swatchLbl color small" for="{{$colors->id}}" style="background-color:{{$colors->code}}" title="{{$colors->code}}"></label>
+                        </div>
+                        @endforeach
+                     </div>
                   </div>
                   <div class="swatch clearfix swatch-1 option2" data-option-index="1">
                      <div class="product-form__item">
-    <label class="header">Size: <span class="slVariant"></span></label>
-    @foreach($size as $sizes)
-        @if($sizes->color_id == app('request')->input('color_id', $proimage[0]->color_id))
-            <div data-value="{{$sizes->size}}" data-size="{{$sizes->id}}" data-color="{{$sizes->color_id}}" class="swatch-element xs available">
-                <input class="swatchInput" id="{{$sizes->id}}" type="radio" name="size_id" value="{{$sizes->id}}" @if($sizes->id == app('request')->input('size_id')) checked @endif>
-                <label class="swatchLbl medium rectangle" for="{{$sizes->id}}" title="XS">{{$sizes->size}}</label>
-            </div>
-        @endif
-        @endforeach
-   
-
+                        <label class="header">Size: <span class="slVariant"></span></label>
+                        @foreach($size as $sizes)
+                        @if($sizes->color_id == app('request')->input('color_id', $proimage[0]->color_id))
+                        <div data-value="{{$sizes->size}}" data-size="{{$sizes->id}}" data-color="{{$sizes->color_id}}" class="swatch-element xs available">
+                           <input class="swatchInput" id="{{$sizes->id}}" type="radio" name="size_id" value="{{$sizes->id}}" @if($sizes->id == app('request')->input('size_id')) checked @endif>
+                           <label class="swatchLbl medium rectangle" for="{{$sizes->id}}" title="XS">{{$sizes->size}}</label>
+                        </div>
+                        @endif
+                        @endforeach
                      </div>
                   </div>
                   <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a> <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a></p>
@@ -258,53 +255,53 @@
                <div class="product-description rte">
                   <div class="row">
                      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                     <table class="table">
-                     <tr>
-                        <th>Ideal For :</th>
-                        <td>{{ $productdetail->ideal }}</td>
-                     </tr>
-                     <tr>
-                        <th>Length Type :</th>
-                        <td>{{ $productdetail->length_type }}</td>
-                     </tr>
-                     <tr>
-                        <th>Brand Color :</th>
-                        <td>{{ $productdetail->brand_color }}</td>
-                     </tr>
-                     <tr>
-                        <th>Ocassion :</th>
-                        <td>{{ $productdetail->ocassion }}</td>
-                     </tr>
-                     <tr>
-                        <th>Pattern :</th>
-                        <td>{{ $productdetail->pattern }}</td>
-                     </tr>
-                     <tr>
-                        <th>Type :</th>
-                        <td>{{ $productdetail->type }}</td>
-                     </tr>
-                     <tr>
-                        <th>Fabric :</th>
-                        <td>{{ $productdetail->fabric }}</td>
-                     </tr>
-                     <tr>
-                        <th>Neck :</th>
-                        <td>{{ $productdetail->neck }}</td>
-                     </tr>
-                     <tr>
-                        <th>Sleeve :</th>
-                        <td>{{ $productdetail->sleeve }}</td>
-                     </tr>
-                     <tr>
-                        <th>Number of Contents in Sales Package :</th>
-                        <td>{{ $productdetail->sale_package }}</td>
-                     </tr>
-                     <tr>
-                        <th>Fabric Care :</th>
-                        <td>{{ $productdetail->fabric_care }}</td>
-                     </tr>
-                  </table>
-                  </div>
+                        <table class="table">
+                           <tr>
+                              <th>Ideal For :</th>
+                              <td>{{ $productdetail->ideal }}</td>
+                           </tr>
+                           <tr>
+                              <th>Length Type :</th>
+                              <td>{{ $productdetail->length_type }}</td>
+                           </tr>
+                           <tr>
+                              <th>Brand Color :</th>
+                              <td>{{ $productdetail->brand_color }}</td>
+                           </tr>
+                           <tr>
+                              <th>Ocassion :</th>
+                              <td>{{ $productdetail->ocassion }}</td>
+                           </tr>
+                           <tr>
+                              <th>Pattern :</th>
+                              <td>{{ $productdetail->pattern }}</td>
+                           </tr>
+                           <tr>
+                              <th>Type :</th>
+                              <td>{{ $productdetail->type }}</td>
+                           </tr>
+                           <tr>
+                              <th>Fabric :</th>
+                              <td>{{ $productdetail->fabric }}</td>
+                           </tr>
+                           <tr>
+                              <th>Neck :</th>
+                              <td>{{ $productdetail->neck }}</td>
+                           </tr>
+                           <tr>
+                              <th>Sleeve :</th>
+                              <td>{{ $productdetail->sleeve }}</td>
+                           </tr>
+                           <tr>
+                              <th>Number of Contents in Sales Package :</th>
+                              <td>{{ $productdetail->sale_package }}</td>
+                           </tr>
+                           <tr>
+                              <th>Fabric Care :</th>
+                              <td>{{ $productdetail->fabric_care }}</td>
+                           </tr>
+                        </table>
+                     </div>
                   </div>
                </div>
             </div>
@@ -1191,65 +1188,59 @@
    }
    qnt_incre();
        var selectedColorId = '{{ app('request')->input('color_id', $proimage[0]->color_id) }}';
-console.log('Selected Color ID:', selectedColorId);
-
-$('input[name="color_id"][value="' + selectedColorId + '"]').prop('checked', true);
-
-function filterImagesByColorId(colorId) {
+   
+   $('input[name="color_id"][value="' + selectedColorId + '"]').prop('checked', true);
+   
+   function filterImagesByColorId(colorId) {
     $('.product-image').hide();
     $('.product-image[data-color-id="' + colorId + '"]').show();
-}
-
-filterImagesByColorId(selectedColorId);
-
-// Update main image based on the selected color ID
-var selectedImage = $('.product-image[data-color-id="' + selectedColorId + '"]').first();
-var imageSrc = selectedImage.data('image');
-var zoomImageSrc = selectedImage.data('zoom-image');
-$('#zoompro-image').attr('src', imageSrc).data('zoom-image', zoomImageSrc);
-
-$('input[name="color_id"]').on('change', function() {
+   }
+   
+   filterImagesByColorId(selectedColorId);
+   
+   // Update main image based on the selected color ID
+   var selectedImage = $('.product-image[data-color-id="' + selectedColorId + '"]').first();
+   var imageSrc = selectedImage.data('image');
+   var zoomImageSrc = selectedImage.data('zoom-image');
+   $('#zoompro-image').attr('src', imageSrc).data('zoom-image', zoomImageSrc);
+   
+   $('input[name="color_id"]').on('change', function() {
     var selectedColorId = $(this).val();
-    console.log('Selected Color ID:', selectedColorId);
-
     var searchParams = new URLSearchParams(window.location.search);
     searchParams.set('color_id', selectedColorId);
     var newUrl = window.location.pathname + '?' + searchParams.toString();
     window.location.href = newUrl;
-});
-
-// Show all colors
-$('.swatch-element').show();
-
-// Show sizes based on color selection
-var selectedSizeId = '{{ app('request')->input('size_id') }}';
-console.log('Selected Size ID:', selectedSizeId);
-
-function filterSizesByColorId(colorId) {
+   });
+   
+   // Show all colors
+   $('.swatch-element').show();
+   
+   // Show sizes based on color selection
+   var selectedSizeId = '{{ app('request')->input('size_id') }}';
+   
+   function filterSizesByColorId(colorId) {
     $('.swatch-element[data-color]').show(); // Show all sizes
     $('.swatch-element[data-color]').not('[data-color="' + colorId + '"]').show(); // Hide sizes for other colors
-
+   
     // Select the first size for the selected color
     var firstSize = $('.swatch-element[data-color="' + colorId + '"]').first();
     var firstSizeId = firstSize.data('size');
     $('input[name="size_id"][value="' + firstSizeId + '"]').prop('checked', true);
-}
-
-filterSizesByColorId(selectedColorId);
-
-$('input[name="color_id"]').on('change', function() {
+   }
+   
+   filterSizesByColorId(selectedColorId);
+   
+   $('input[name="color_id"]').on('change', function() {
     var selectedColorId = $(this).val();
-    console.log('Selected Color ID:', selectedColorId);
     filterSizesByColorId(selectedColorId);
-});
-
-// Handle size selection change
-$('input[name="size_id"]').on('change', function() {
+   });
+   
+   // Handle size selection change
+   $('input[name="size_id"]').on('change', function() {
     var selectedSizeId = $(this).val();
-    console.log('Selected Size ID:', selectedSizeId);
-});
-
-
+   });
+   
+   
       // addtocart
       $('#addToCart').submit(function(e){
    

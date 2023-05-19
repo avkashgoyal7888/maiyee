@@ -53,6 +53,8 @@ use App\Http\Controllers\Admin\HomeController;
 	// Order Routes
 	Route::get('/order', function(){ return view('admin.order.index'); })->name('admin.order');
 	Route::get('/order-detail/{id}', function() { return view('admin.order.detail'); })->name('admin.order.detail');
+	// User Routes
+	Route::get('/users', function(){ return view('admin.user.index'); })->name('admin.user');
 });
 
 
