@@ -6,7 +6,9 @@
                <tr>
                   <th>S. No.</th>
                   <th>Product</th>
-                  <th>HSN Code</th>
+                  <th>Style Code</th>
+                  <th>Color</th>
+                  <th>Size</th>
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Taxable</th>
@@ -22,7 +24,9 @@
                <tr>
                   <td>{{ $key + 1 }}</td>
                   <td>{{ ucwords($order->product->name) }}</td>
-                  <td>{{ ucwords($order->product->hsn_code) }}</td>
+                  <td>{{ ucwords($order->product->style_code) }}</td>
+                  <td><button class="btn btn-lg" style="background-color: {{ $order->color->code }};"></button></td>
+                  <td>{{ ucwords($order->size->size) }}</td>
                   <td>{{ ucwords($order->price) }}</td>
                   <td>{{ ucwords($order->quantity) }}</td>
                   <td>{{ ucwords($order->taxable) }}</td>
@@ -38,7 +42,7 @@
                </tr>
                @endforelse
                <tr>
-                  <th colspan="4">Total</th>
+                  <th colspan="6">Total</th>
                   <td>{{$quantity}}</td>
                   <td>{{$taxable}}</td>
                   <td>{{$gst}}</td>
@@ -48,15 +52,15 @@
                   <td>{{$total}}</td>
                </tr>
                <tr>
-                  <th colspan="10">Coupon Discount ( Coupon Code : {{$orders->coupon_code}})</th>
+                  <th colspan="12">Coupon Discount ( Coupon Code : {{$orders->coupon_code}})</th>
                   <td>{{$orders->discount}}</td>
                </tr>
                <tr>
-                  <th colspan="10">Shipping Charges</th>
+                  <th colspan="12">Shipping Charges</th>
                   <td>{{$orders->shipping_charges}}</td>
                </tr>
                <tr>
-                  <th colspan="10">Payable</th>
+                  <th colspan="12">Payable</th>
                   <td>{{$orders->payable}}</td>
                </tr>
             </tbody>

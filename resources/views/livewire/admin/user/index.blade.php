@@ -43,7 +43,7 @@
                   <td>{{ ucwords($user->email) }}</td>
                   <td>{{ ucwords($user->number) }}</td>
                   <td> {{ $orderTotal }} </td>
-                  <td><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#view" wire:click="viewDetailProduct({{$user->id}})"><i class="fas fa-eye"></i></button></td>
+                  <td><a class="btn btn-success btn-sm" href="{{ route('admin.address',$user->id) }}">View</a></td>
                </tr>
                @empty
                <tr>

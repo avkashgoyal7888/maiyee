@@ -22,7 +22,7 @@ class PaymentController extends Controller
 
     public function pay()
 {
-    $payment = Order::where('user_id', Auth::guard('web')->user()->id)->first();
+    $payment = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
     $amount = $payment->payable;
     $product = 'product'; // You should set this to an appropriate value
     $email = $payment->email;

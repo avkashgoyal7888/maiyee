@@ -18,15 +18,13 @@ class Index extends Component
     {
         $this->resetPage();
     }
-    public function closemodal()
-    {
-        $this->resetinputfields();
-    }
+
     public function render()
     {
         $data = User::where('name', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
-                        $orderTotal = Order::where('user_id', Auth::guard('web')->user()->id)->sum('payable');
+                    ->orderByDesc('id')->paginate(10);
+
+        $orderTotal = Order::whereIn('user_id', $data->pluck('id'))->sum('payable');
         return view('livewire.admin.user.index',compact('data', 'orderTotal'));
     }
 }

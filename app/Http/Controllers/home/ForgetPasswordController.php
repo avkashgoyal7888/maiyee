@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Cart;
 use App\Models\UserAddress;
+use App\Models\Head;
+use App\Models\Category;
 use Auth;
 use Validator;
 use DB; 

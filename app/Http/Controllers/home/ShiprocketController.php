@@ -301,7 +301,7 @@ class ShiprocketController extends Controller
             'giftwrap_charges' => 0.00,
             'transaction_charges' => 0.00,
             'total_discount' => 0.00,
-            'sub_total' => 100.00,
+            'sub_total' => $payable,
             'length' => 12.00,
             'breadth' => 10.00,
             'height' => 1.00,
