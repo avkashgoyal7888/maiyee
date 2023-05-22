@@ -297,7 +297,7 @@ class ShiprocketController extends Controller
             'shipping_is_billing' => true,
             'order_items' => $order_items,
             'payment_method' => $payment,
-            'shipping_charges' => 99,
+            'shipping_charges' => $shipping,
             'giftwrap_charges' => 0.00,
             'transaction_charges' => 0.00,
             'total_discount' => 0.00,

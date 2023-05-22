@@ -8,10 +8,17 @@ use App\Http\Controllers\home\ForgetPasswordController;
 use App\Http\Controllers\home\ReviewController;
 use App\Http\Controllers\home\ShiprocketController;
 use App\Http\Controllers\home\PaymentController;
+use Illuminate\Http\Request;
 	Route::controller(HomeController::class)->group(function(){
 		Route::get('/', 'index')->name('web.home');
 		Route::get('/register', 'register')->name('web.register');
 		Route::post('/register-submit', 'registerSubmit')->name('web.register.submit');
+
+Route::post('/store-generated-otp', function (Request $request) {
+    $request->session()->put('generatedOTP', $request->otp);
+    return response()->json(['status' => 200]);
+})->name('store.generated.otp');
+
 		Route::get('/disclaimer', 'disclaimer')->name('web.disclaimer');
 		Route::get('/policy', 'policy')->name('web.policy');
 		Route::get('/exhibition', 'exhibition')->name('web.exhibition');
