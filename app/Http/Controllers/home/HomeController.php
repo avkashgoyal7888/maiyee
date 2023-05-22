@@ -515,6 +515,16 @@ class HomeController extends Controller
 
     public function registerSubmit(Request $req)
 {
+    $enteredOtp = $req->otp;
+    $generatedOtp = session('generatedOTP'); // Retrieve the generated OTP from the session
+
+    if ($enteredOtp !== $generatedOtp) {
+        return response()->json([
+            "status" => 400,
+            "otpError" => "Invalid OTP",
+        ]);
+    }
+
     $validator = Validator::make(
         $req->all(),
         [
@@ -523,7 +533,6 @@ class HomeController extends Controller
             "number" => "required|unique:users,number",
             "password" => "required|min:6",
             "confirm_password" => "required|same:password",
-            "otp" => "required", // New OTP field
         ],
         [
             "name.required" => "Name cannot be blank",
@@ -532,10 +541,9 @@ class HomeController extends Controller
             "number.required" => "Contact number cannot be blank",
             "number.unique" => "Contact number is already registered",
             "password.required" => "Password cannot be blank",
-            "password.min" => "Password should be minimum 6 characters",
+            "password.min" => "Password should be a minimum of 6 characters",
             "confirm_password.required" => "Confirm password cannot be blank",
             "confirm_password.same" => "Confirm password does not match",
-            "otp.required" => "OTP cannot be blank", // New OTP validation message
         ]
     );
 
@@ -547,38 +555,23 @@ class HomeController extends Controller
             "emailError" => $validator->errors()->first('email'),
             "passwordError" => $validator->errors()->first('password'),
             "confpasswordError" => $validator->errors()->first('confirm_password'),
-            "otpError" => $validator->errors()->first('otp'), // Add OTP validation error message
+            "otpError" => "Invalid OTP",
         ]);
+    }
+
+    $data = new User;
+    $data->name = $req->name;
+    $data->number = $req->number;
+    $data->email = $req->email;
+    $data->password = Hash::make($req->password);
+    $reg = $data->save();
+
+    if ($reg) {
+        return response()->json(['status' => 200, 'message' => 'Registered successfully']);
     } else {
-        $enteredOtp = $req->otp;
-        $generatedOtp = session('generatedOTP'); // Retrieve the generated OTP from the session
-        // print_r($generatedOtp); exit();
-
-        if ($enteredOtp !== $generatedOtp) {
-            return response()->json([
-                "status" => 400,
-                "otpError" => "Invalid OTP",
-            ]);
-        }
-
-        // Rest of your code for registration
-
-        $data = new User;
-        $data->name = $req->name;
-        $data->number = $req->number;
-        $data->email = $req->email;
-        $data->password = Hash::make($req->password); // Save the hashed password
-        $reg = $data->save();
-
-        if ($reg) {
-            return response()->json(['status' => 200, 'message' => 'Registered successfully']);
-        } else {
-            return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.']);
-        }
+        return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.']);
     }
 }
-
-
 
 
 

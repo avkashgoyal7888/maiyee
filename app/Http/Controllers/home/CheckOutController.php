@@ -25,6 +25,9 @@ class CheckOutController extends Controller
         }
         $cart = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
         $cartTotal = $cart->sum('total');
+        if ($cartTotal < 2000) {
+            $cartTotal += 99;
+        }
         $user = UserAddress::where('user_id', Auth::guard('web')->user()->id)->get();
         $nav = Head::first();
         $cat = Category::get();
@@ -72,24 +75,35 @@ class CheckOutController extends Controller
             return response()->json(['status' => false,'msg' => 'Coupon Code Value is less your total.',]);
         }
 
-             if($data->coupon_type == 'amount') {
-                $newCartTotal = $cartTotal - $data->coupon_price;
-                }
+             if ($data->coupon_type == 'amount') {
+    $newCartTotal = $cartTotal - $data->coupon_price;
+}
 
-                if($data->coupon_type == '%') {
-                $newCartTotal = $cartTotal - ($cartTotal * ($data->coupon_price / 100));
-                }
+if ($data->coupon_type == '%') {
+    $newCartTotal = $cartTotal - ($cartTotal * ($data->coupon_price / 100));
+}
+
+if ($newCartTotal < 2000) {
+    $newCartTotal += 99;
+}
+
 
 
             if ($upd) {
-                if($data->coupon_type == 'amount') {
-                    $newCartTotal = $cartTotal - $data->coupon_price;
-                    $discount = $data->coupon_price;
-                }
-                if($data->coupon_type == '%') {
-                    $discount = $cartTotal * ($data->coupon_price / 100);
-                    $newCartTotal = $cartTotal - $discount;
-                }
+                if ($data->coupon_type == 'amount') {
+    $newCartTotal = $cartTotal - $data->coupon_price;
+    $discount = $data->coupon_price;
+}
+
+if ($data->coupon_type == '%') {
+    $discount = $cartTotal * ($data->coupon_price / 100);
+    $newCartTotal = $cartTotal - $discount;
+}
+
+if ($newCartTotal < 2000) {
+    $newCartTotal += 99;
+}
+
                 return response()->json([
                     'status'=>true,
                     'msg'=>'Coupon Applied Successfully....',

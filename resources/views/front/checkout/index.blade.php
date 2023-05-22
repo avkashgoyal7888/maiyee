@@ -16,11 +16,11 @@
       </div>
    </div>
 </div>
-<div class="alert alert-success text-uppercase" role="alert" id="shipping" style="display: none;">
-   <i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
-</div>
 <!--End Page Title-->
 <div class="container">
+   <div class="alert alert-success text-uppercase" id="shippingFree" role="alert" style="display: none;">
+      <i class="icon anm anm-truck-l icon-large"></i> &nbsp;<strong>Congratulations!</strong> You've got free shipping!
+   </div>
    <div class="row">
       <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
          <div class="customer-box returning-customer">
@@ -58,11 +58,11 @@
                   <div id="coupon" class="coupon-dec tab-pane active">
                      <p class="margin-10px-bottom">Enter your coupon code if you have one.</p>
                      <select name="state_id" id="couponCode">
-                              <option value=""> --- Choose Code --- </option>
-                              @foreach($coupon as $coupons)
-                              <option value="{{$coupons->id}}" data-code="{{$coupons->coupon_code}}">Use {{$coupons->coupon_code}} ** and get flat {{$coupons->coupon_price}} @if($coupons->coupon_type == 'amount') Rupees @else % @endif on order above {{$coupons->order_value}}</option>
-                              @endforeach
-                           </select>
+                        <option value=""> --- Choose Code --- </option>
+                        @foreach($coupon as $coupons)
+                        <option value="{{$coupons->id}}" data-code="{{$coupons->coupon_code}}">Use {{$coupons->coupon_code}} ** and get flat {{$coupons->coupon_price}} @if($coupons->coupon_type == 'amount') Rupees @else % @endif on order above {{$coupons->order_value}}</option>
+                        @endforeach
+                     </select>
                      <label class="required get" for="coupon-code"><span class="required-f">*</span> Coupon</label>
                      <form id="applyCoupon">
                         <input name="coupon_code" id="coupon-code" type="text" class="mb-3 input-field">
@@ -144,7 +144,8 @@
                      <thead>
                         <tr>
                            <th class="text-left">Product Name</th>
-                           <th>Price</th>
+                           <th>Seling Price</th>
+                           <th>List Price</th>
                            <th>Qty</th>
                            <th>Subtotal</th>
                         </tr>
@@ -153,27 +154,32 @@
                         @foreach($cart as $carts)
                         <tr>
                            <td class="text-left">{{$carts->product->name}}</td>
-                           <td>₹{{$carts->price}}</td>
+                           <td>₹{{$carts->product->mrp}}</td>
+                           <td>₹{{$carts->product->discount}}</td>
                            <td>{{$carts->quantity}}</td>
-                           <td>₹{{$carts->price}}</td>
+                           <td id="carttotal">₹{{$carts->price * $carts->quantity}}</td>
                         </tr>
                         @endforeach
                      </tbody>
                      <tfoot class="font-weight-600">
+                        <tr id="charge" class="shipping" style="display: none;">
+                           <td colspan="4" class="text-right">Shipping </td>
+                           <td>₹99.00</td>
+                        </tr>
                         <tr id="charge" style="display: none;">
-                           <td colspan="3" class="text-right">Shipping </td>
-                           <td>$50.00</td>
+                           <td colspan="4" class="text-right">Shipping </td>
+                           <td>₹0</td>
                         </tr>
                         <tr>
-                           <td colspan="3" class="text-right">Total</td>
+                           <td colspan="4" class="text-right">Total</td>
                            <td id="sval">₹{{$cartTotal}}</td>
                         </tr>
                         <tr id="discount" style="display: none;">
-                           <td colspan="3" class="text-right">Discount</td>
+                           <td colspan="4" class="text-right">Discount</td>
                            <td id="cartDiscount"></td>
                         </tr>
                         <tr id="total" style="display: none;">
-                           <td colspan="3" class="text-right">Final Price</td>
+                           <td colspan="4" class="text-right">Final Price</td>
                            <td id="cartTotal"></td>
                         </tr>
                      </tfoot>
@@ -221,7 +227,7 @@
 @section('js')
 <script>
    $(document).ready(function(){
-
+   
       $('#couponCode').on('change', function() {
               var  selectedCoupon = $(this).find(':selected');
                if(selectedCoupon.val() !== '') {
@@ -401,7 +407,7 @@
         $('#cartTotal').text(result.newCartTotal);
         $('#shipping').show();
     } 
-
+   
     if(result.newCartTotal > 2000) {
         $('#cartTotal').text(result.newCartTotal);
         $('#charge').show();
@@ -424,9 +430,17 @@
              });
          });
    
-   if($('#sval').val() > 2000) {
-    $('#shipping').show();
+   var cartTotal = parseInt("{{$cartTotal}}");
+   
+   if (cartTotal < 2000) {
+    $('.shipping').show();
+   } else {
+   $('#charge').show();
    }
+   if (cartTotal > 2000) {
+    $('#shippingFree').show();
+   }
+   
    
    
    })
