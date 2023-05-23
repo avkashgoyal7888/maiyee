@@ -74,134 +74,167 @@
    var otpGenerated = false;
    var generatedOTP = null;
    
-   $("#generate-otp-button").click(function(e) {
-       e.preventDefault();
-   
-       if (!otpGenerated) {
-           generateOTP();
-           otpGenerated = true;
-       }
-   
-       $("#otp-input-container").show();
-       $("#generate-otp-button").hide();
-       $("#verify-otp-button").show();
-   });
-   
-   $('#register_user').on('submit', function(e) {
-       e.preventDefault();
-   
-       if (!otpGenerated) {
-           return;
-       }
-   
-       let fd = new FormData(this);
-       fd.append('otp', generatedOTP);
-   
-       // Add OTP verification check
-       var enteredOTP = $('#otp-input').val();
-       if (enteredOTP !== generatedOTP.toString()) {
-           $('#otp-error').text("Invalid OTP");
-           return;
-       }
-   
-       $.ajax({
-           url: "{{ route('web.register.submit') }}",
-           type: "POST",
-           data: fd,
-           processData: false,
-           contentType: false,
-           beforeSend: function(xhr) {
-               xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
-               $('#verify-otp-button').prop('disabled', false);
-           },
-           success: function(result) {
-               if (result.status === 400) {
-                   // Display error messages
-                   $('#name-error').text(result.nameError);
-                   $('#number-error').text(result.numberError);
-                   $('#email-error').text(result.emailError);
-                   $('#password-error').text(result.passwordError);
-                   $('#confpassword-error').text(result.confpasswordError);
-                   $('#otp-error').text(result.otpError);
-               } else if (result.status === 200) {
-                   toastr.success(result.message, 'Message', {
-                       timeOut: 1000,
-                       closeButton: true,
-                       progressBar: true,
-                       onclick: null,
-                       showMethod: 'fadeIn',
-                       hideMethod: 'fadeOut',
-                       tapToDismiss: 0
-                   });
-                   otpGenerated = false; // Reset the OTP generation flagEnable the "Generate OTP" button
-                   setTimeout(function(){
-                       window.location.href="{{route('web.home')}}";
-                   }, 1500);
-               }
-           },
-           error: function(jqXHR, exception) {
-               console.log(jqXHR.responseJSON);
-           }
-       });
-   });
-   
-   function generateOTP() {
-       // Generate OTP logic here
-   
-       // Mocking the OTP generation with a random number
-       generatedOTP = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
-   
-       // Store the generated OTP in the session
-       $.ajax({
-           url: "{{ route('store.generated.otp') }}",
-           type: "POST",
-           data: { otp: generatedOTP },
-           beforeSend: function(xhr) {
-               xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
-           },
-           success: function(result) {
-               console.log("Generated OTP: " + generatedOTP);
-               otpGenerated = true;
+   function checkPhoneNumber(number) {
+      $.ajax({
+         url: "{{ route('check-phone-number') }}",
+         type: "POST",
+         data: { number: number },
+         beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+         },
+         success: function(response) {
+            // Phone number is valid and not registered
+            generateOTP();
 
-               // Send OTP message
-               var message = "Dear " + $("#register_user input[name='name']").val() + " Your OTP for Signup is " + generatedOTP + " and password is '1234'";
-               var numbers = $("#register_user input[name='number']").val();
-               sendSMS(message, numbers);
-           },
-           error: function(jqXHR, exception) {
-               console.log(jqXHR.responseJSON);
-           }
-       });
+            // Show OTP input and "Verify OTP" button
+            $("#otp-input-container").show();
+            $("#verify-otp-button").show();
+            $('#generate-otp-button').hide();
+
+            // Disable the phone number input
+            $("#register_user input[name='number']").prop('disabled', false);
+         },
+         error: function(jqXHR, exception) {
+            // Handle the error responses
+            if (jqXHR.status === 400) {
+               var error = jqXHR.responseJSON.error;
+               if (error === 'Phone number already registered') {
+                  $('#number-error').text("Phone number is already registered");
+               } else if (error === 'Invalid phone number') {
+                  $('#number-error').text("Invalid phone number");
+               }
+
+               // Hide OTP input and "Verify OTP" button
+               $("#otp-input-container").hide();
+               $("#verify-otp-button").hide();
+            }
+         }
+      });
    }
 
-   // JavaScript code
+   $("#generate-otp-button").click(function(e) {
+      e.preventDefault();
 
-function sendSMS(message, numbers) {
-   var data = {
-       message: message,
-       numbers: numbers
-   };
+      var phoneNumber = $("#register_user input[name='number']").val();
 
-   $.ajax({
-       url: "{{ route('send-sms') }}",
-       type: "POST",
-       data: data,
-       beforeSend: function(xhr) {
-           xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
-       },
-       success: function(response) {
-           console.log("SMS sent successfully");
-           console.log(response);
-       },
-       error: function(jqXHR, exception) {
-           console.log("Error sending SMS");
-           console.log(jqXHR.responseJSON);
-       }
+      // Validate the phone number before generating OTP
+      checkPhoneNumber(phoneNumber);
    });
-}
 
+   $('#register_user').on('submit', function(e) {
+      e.preventDefault();
 
+      if (!otpGenerated) {
+         return;
+      }
 
+      let fd = new FormData(this);
+      fd.append('otp', generatedOTP);
+
+      // Add OTP verification check
+      var enteredOTP = $('#otp-input').val();
+      if (enteredOTP !== generatedOTP.toString()) {
+         $('#otp-error').text("Invalid OTP");
+         return;
+      }
+
+      $.ajax({
+         url: "{{ route('web.register.submit') }}",
+         type: "POST",
+         data: fd,
+         processData: false,
+         contentType: false,
+         beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+            $('#verify-otp-button').prop('disabled', false);
+         },
+         success: function(result) {
+            if (result.status === 400) {
+               // Display error messages
+               $('#name-error').text(result.nameError);
+               $('#number-error').text(result.numberError);
+               $('#email-error').text(result.emailError);
+               $('#password-error').text(result.passwordError);
+               $('#confpassword-error').text(result.confpasswordError);
+               $('#otp-error').text(result.otpError);
+
+               // Hide OTP input and "Verify OTP" button
+               $("#otp-input-container").hide();
+               $("#verify-otp-button").hide();
+            } else if (result.status === 200) {
+               toastr.success(result.message, 'Message', {
+                  timeOut: 1000,
+                  closeButton: true,
+                  progressBar: true,
+                  onclick: null,
+                  showMethod: 'fadeIn',
+                  hideMethod: 'fadeOut',
+                  tapToDismiss: 0
+               });
+               otpGenerated = false; // Reset the OTP generation flag
+               setTimeout(function(){
+                  window.location.href="{{route('web.home')}}";
+               }, 1500);
+            }
+         },
+         error: function(jqXHR, exception) {
+            console.log(jqXHR.responseJSON);
+         }
+      });
+   });
+
+   function generateOTP() {
+      // Generate OTP logic here
+   
+      // Mocking the OTP generation with a random number
+      generatedOTP = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
+   
+      // Store the generated OTP in the session
+      $.ajax({
+         url: "{{ route('store.generated.otp') }}",
+         type: "POST",
+         data: { otp: generatedOTP },
+         beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+         },
+         success: function(result) {
+            console.log("Generated OTP: " + generatedOTP);
+            otpGenerated = true;
+
+            // Send OTP message
+            var message = "Dear " + $("#register_user input[name='name']").val() + " Your OTP for Signup is " + generatedOTP + " and password is '1234'";
+            var numbers = $("#register_user input[name='number']").val();
+            sendSMS(message, numbers);
+         },
+         error: function(jqXHR, exception) {
+            console.log(jqXHR.responseJSON);
+         }
+      });
+   }
+
+   function sendSMS(message, numbers) {
+      var data = {
+         message: message,
+         numbers: numbers
+      };
+
+      $.ajax({
+         url: "{{ route('send-sms') }}",
+         type: "POST",
+         data: data,
+         beforeSend: function(xhr) {
+            xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
+         },
+         success: function(response) {
+            console.log("SMS sent successfully");
+            console.log(response);
+         },
+         error: function(jqXHR, exception) {
+            console.log("Error sending SMS");
+            console.log(jqXHR.responseJSON);
+         }
+      });
+   }
 });
 
    

@@ -602,6 +602,29 @@ public function sendSMS(Request $request)
         }
     }
 
+    public function checkPhoneNumber(Request $request)
+{
+    $phoneNumber = $request->input('number');
+
+    // Check if the phone number already exists in the User model
+    $user = User::where('number', $phoneNumber)->first();
+
+    if ($user) {
+        // Phone number already registered
+        return response()->json(['error' => 'Phone number already registered'], 400);
+    }
+
+    // Validate the length of the phone number
+    if (strlen($phoneNumber) !== 10) {
+        // Invalid phone number length
+        return response()->json(['error' => 'Invalid phone number'], 400);
+    }
+
+    // Phone number is valid and not registered
+    return response()->json(['message' => 'Phone number is valid']);
+}
+
+
 
 
 

@@ -22,6 +22,9 @@ Route::post('/store-generated-otp', function (Request $request) {
 
 Route::post('/send-sms', 'sendSMS')->name('send-sms');
 
+Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number');
+
+
 
 		Route::get('/disclaimer', 'disclaimer')->name('web.disclaimer');
 		Route::get('/policy', 'policy')->name('web.policy');
