@@ -1,6 +1,11 @@
 @extends('layouts.front.app')
 @section('css')
 <title>Register</title>
+<style>
+    #verify-otp-button{
+        display: none;
+    }
+</style>
 @stop
 @section('content')
 <div class="page section-header text-center">
@@ -49,8 +54,8 @@
                <input type="text" id="otp-input" name="otp">
             </div>
             <div class="inputBx">
-               <button type="button" id="generate-otp-button">Generate OTP</button>
-               <button type="submit" id="verify-otp-button" disabled>Verify OTP</button>
+               <button class="btn btn-primary" type="button" id="generate-otp-button">Generate OTP</button>
+               <button class="btn btn-primary" type="submit" id="verify-otp-button">Verify OTP</button>
             </div>
          </form>
          <h3>Login with social media</h3>
@@ -78,8 +83,8 @@
        }
    
        $("#otp-input-container").show();
-       $("#generate-otp-button").prop("disabled", true);
-       $("#verify-otp-button").prop("disabled", false);
+       $("#generate-otp-button").hide();
+       $("#verify-otp-button").show();
    });
    
    $('#register_user').on('submit', function(e) {
@@ -128,10 +133,10 @@
                        hideMethod: 'fadeOut',
                        tapToDismiss: 0
                    });
-                   $('#register_user')[0].reset();
-                   $("#otp-input-container").hide(); // Hide the OTP input container
-                   otpGenerated = false; // Reset the OTP generation flag
-                   $("#generate-otp-button").prop("disabled", false); // Enable the "Generate OTP" button
+                   otpGenerated = false; // Reset the OTP generation flagEnable the "Generate OTP" button
+                   setTimeout(function(){
+   window.location.href="{{route('web.home')}}";
+   }, 1500);
                }
            },
            error: function(jqXHR, exception) {

@@ -567,11 +567,16 @@ class HomeController extends Controller
     $reg = $data->save();
 
     if ($reg) {
+        session()->forget('generatedOTP');
+        Auth::attempt(['email' => $req->email, 'password' => $req->password]);
+        // Authentication passed
+
         return response()->json(['status' => 200, 'message' => 'Registered successfully']);
     } else {
         return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.']);
     }
 }
+
 
 
 
