@@ -131,7 +131,7 @@ class ShiprocketController extends Controller
             return response()->json(['status' => false, 'msg' => 'Coupon Code has expired.']);
             }
 
-            $cartTotal = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('total');
+            $cartTotal = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('total');
             if ($data->order_value < $cartTotal) {
             $val->errors()->add('status', 'Coupon Code Value is less your total.');
             $req->coupon_code = '';
@@ -149,10 +149,10 @@ class ShiprocketController extends Controller
             if ($data->coupon_type == 'amount') {
                 $discount = $data->coupon_price;
                 $total = max($cartTotal - $discount, 0);
-                $newCGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('cgst');
-            $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
-            $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
-            $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
+                $newCGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('cgst');
+            $newSGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('sgst');
+            $newIGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('igst');
+            $taxable = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('taxable');
             $payable = $total - $discount;
                 if ($payable < 2000) {
                     $shipping = 99;
@@ -166,10 +166,10 @@ class ShiprocketController extends Controller
             elseif($data->coupon_type == '%') {
                 $discount = $cartTotal * ($data->coupon_price / 100);
                 $total = max($cartTotal - $discount, 0);
-                $newCGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('cgst');
-            $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
-            $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
-            $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
+                $newCGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('cgst');
+            $newSGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('sgst');
+            $newIGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('igst');
+            $taxable = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('taxable');
             $payable = $total;
             if ($payable < 2000) {
                     $shipping = 99;
@@ -184,11 +184,11 @@ class ShiprocketController extends Controller
                 $data->update();
         } else {
             $discount = 0;
-            $total = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('total');
-            $newCGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('cgst');
-            $newSGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('sgst');
-            $newIGST = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('igst');
-            $taxable = OrderDetail::where('user_id', Auth::guard('web')->user()->id)->sum('taxable');
+            $total = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('total');
+            $newCGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('cgst');
+            $newSGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('sgst');
+            $newIGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('igst');
+            $taxable = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('taxable');
             $payable = $total - $discount;
             if ($payable < 2000) {
                     $shipping = 99;
@@ -317,7 +317,7 @@ class ShiprocketController extends Controller
         ]);
 
         if ($response->getStatusCode() == 200) {
-            Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
+            // Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
             return response()->json(['status'=>true, 'msg'=>'Order Successfully....']);
             if ($req->cash == 'yes') {
                 return redirect()->route('web.success');
