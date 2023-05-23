@@ -558,6 +558,7 @@ class HomeController extends Controller
             "otpError" => "Invalid OTP",
         ]);
     }
+    
 
     $data = new User;
     $data->name = $req->name;

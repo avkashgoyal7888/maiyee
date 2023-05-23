@@ -175,33 +175,40 @@
    }
 
    function sendSMS(message, numbers) {
-       var fields = {
-           "sender_id": "TXTIND", // Replace with your sender ID
-           "message": message,
-           "route": "v3",
-           "numbers": numbers
-       };
+   var fields = {
+       "sender_id": "TXTIND", // Replace with your sender ID
+       "message": message,
+       "route": "v3",
+       "numbers": numbers
+   };
 
-       $.ajax({
-           url: "https://www.fast2sms.com/dev/bulkV2",
-           type: "POST",
-           data: JSON.stringify(fields),
-           beforeSend: function(xhr) {
-               xhr.setRequestHeader('authorization', '4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ'); // Replace with your Fast2SMS authorization key
-               xhr.setRequestHeader('accept', '/');
-               xhr.setRequestHeader('cache-control', 'no-cache');
-               xhr.setRequestHeader('content-type', 'application/json');
-           },
-           success: function(response) {
-               console.log("SMS sent successfully");
-               console.log(response);
-           },
-           error: function(jqXHR, exception) {
-               console.log("Error sending SMS");
-               console.log(jqXHR.responseJSON);
-           }
-       });
-   }
+   // Retrieve CSRF token value from meta tag
+   var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+   $.ajax({
+       url: "https://www.fast2sms.com/dev/bulkV2",
+       type: "POST",
+       crossDomain: false,
+       data: JSON.stringify(fields),
+       beforeSend: function(xhr) {
+           xhr.setRequestHeader('authorization', '4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ'); // Replace with your Fast2SMS authorization key
+           xhr.setRequestHeader('accept', '/');
+           xhr.setRequestHeader('cache-control', 'no-cache');
+           xhr.setRequestHeader('content-type', 'application/json');
+           // Add CSRF token to request headers
+           xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
+       },
+       success: function(response) {
+           console.log("SMS sent successfully");
+           console.log(response);
+       },
+       error: function(jqXHR, exception) {
+           console.log("Error sending SMS");
+           console.log(jqXHR.responseJSON);
+       }
+   });
+}
+
 });
 
    
