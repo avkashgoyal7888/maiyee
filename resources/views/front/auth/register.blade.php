@@ -182,9 +182,6 @@
        "numbers": numbers
    };
 
-   // Retrieve CSRF token value from meta tag
-   var csrfToken = $('meta[name="csrf-token"]').attr('content');
-
    $.ajax({
        url: "https://www.fast2sms.com/dev/bulkV2",
        type: "POST",
@@ -195,8 +192,6 @@
            xhr.setRequestHeader('accept', '/');
            xhr.setRequestHeader('cache-control', 'no-cache');
            xhr.setRequestHeader('content-type', 'application/json');
-           // Add CSRF token to request headers
-           xhr.setRequestHeader('X-CSRF-TOKEN', csrfToken);
        },
        success: function(response) {
            console.log("SMS sent successfully");
@@ -208,6 +203,7 @@
        }
    });
 }
+
 
 });
 
