@@ -18,6 +18,10 @@ Route::post('/store-generated-otp', function (Request $request) {
     $request->session()->put('generatedOTP', $request->otp);
     return response()->json(['status' => 200]);
 })->name('store.generated.otp');
+// routes/web.php
+
+Route::post('/send-sms', 'sendSMS')->name('send-sms');
+
 
 		Route::get('/disclaimer', 'disclaimer')->name('web.disclaimer');
 		Route::get('/policy', 'policy')->name('web.policy');

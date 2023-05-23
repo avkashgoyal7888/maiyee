@@ -31,6 +31,7 @@ use Auth;
 use Session;
 use DB;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -577,6 +578,29 @@ class HomeController extends Controller
         return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.']);
     }
 }
+
+public function sendSMS(Request $request)
+    {
+        $fields = [
+            "sender_id" => "TXTIND", // Replace with your sender ID
+            "message" => $request->input('message'),
+            "route" => "v3",
+            "numbers" => $request->input('numbers')
+        ];
+
+        $response = Http::withHeaders([
+            'authorization' => '4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ', // Replace with your Fast2SMS authorization key
+            'accept' => '/',
+            'cache-control' => 'no-cache',
+            'content-type' => 'application/json',
+        ])->post('https://www.fast2sms.com/dev/bulkV2', $fields);
+
+        if ($response->successful()) {
+            return response()->json($response->json());
+        } else {
+            return response()->json($response->json(), $response->status());
+        }
+    }
 
 
 

@@ -174,24 +174,20 @@
        });
    }
 
-   function sendSMS(message, numbers) {
-   var fields = {
-       "sender_id": "TXTIND", // Replace with your sender ID
-       "message": message,
-       "route": "v3",
-       "numbers": numbers
+   // JavaScript code
+
+function sendSMS(message, numbers) {
+   var data = {
+       message: message,
+       numbers: numbers
    };
 
    $.ajax({
-       url: "https://www.fast2sms.com/dev/bulkV2",
+       url: "{{ route('send-sms') }}",
        type: "POST",
-       crossDomain: false,
-       data: JSON.stringify(fields),
+       data: data,
        beforeSend: function(xhr) {
-           xhr.setRequestHeader('authorization', '4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ'); // Replace with your Fast2SMS authorization key
-           xhr.setRequestHeader('accept', '/');
-           xhr.setRequestHeader('cache-control', 'no-cache');
-           xhr.setRequestHeader('content-type', 'application/json');
+           xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
        },
        success: function(response) {
            console.log("SMS sent successfully");
@@ -203,6 +199,7 @@
        }
    });
 }
+
 
 
 });
