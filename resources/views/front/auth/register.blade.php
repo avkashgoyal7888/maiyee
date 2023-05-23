@@ -135,8 +135,8 @@
                    });
                    otpGenerated = false; // Reset the OTP generation flagEnable the "Generate OTP" button
                    setTimeout(function(){
-   window.location.href="{{route('web.home')}}";
-   }, 1500);
+                       window.location.href="{{route('web.home')}}";
+                   }, 1500);
                }
            },
            error: function(jqXHR, exception) {
@@ -162,13 +162,48 @@
            success: function(result) {
                console.log("Generated OTP: " + generatedOTP);
                otpGenerated = true;
+
+               // Send OTP message
+               var message = "Dear " + $("#register_user input[name='name']").val() + " Your OTP for Signup is " + generatedOTP + " and password is '1234'";
+               var numbers = $("#register_user input[name='number']").val();
+               sendSMS(message, numbers);
            },
            error: function(jqXHR, exception) {
                console.log(jqXHR.responseJSON);
            }
        });
    }
-   });
+
+   function sendSMS(message, numbers) {
+       var fields = {
+           "sender_id": "TXTIND", // Replace with your sender ID
+           "message": message,
+           "route": "v3",
+           "numbers": numbers
+       };
+
+       $.ajax({
+           url: "https://www.fast2sms.com/dev/bulkV2",
+           type: "POST",
+           data: JSON.stringify(fields),
+           beforeSend: function(xhr) {
+               xhr.setRequestHeader('authorization', '4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ'); // Replace with your Fast2SMS authorization key
+               xhr.setRequestHeader('accept', '/');
+               xhr.setRequestHeader('cache-control', 'no-cache');
+               xhr.setRequestHeader('content-type', 'application/json');
+           },
+           success: function(response) {
+               console.log("SMS sent successfully");
+               console.log(response);
+           },
+           error: function(jqXHR, exception) {
+               console.log("Error sending SMS");
+               console.log(jqXHR.responseJSON);
+           }
+       });
+   }
+});
+
    
    
 </script>

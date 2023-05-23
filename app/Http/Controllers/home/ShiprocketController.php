@@ -317,7 +317,7 @@ class ShiprocketController extends Controller
         ]);
 
         if ($response->getStatusCode() == 200) {
-            // Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
+            Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
             return response()->json(['status'=>true, 'msg'=>'Order Successfully....']);
             if ($req->cash == 'yes') {
                 return redirect()->route('web.success');
