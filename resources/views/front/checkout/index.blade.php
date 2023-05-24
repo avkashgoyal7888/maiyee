@@ -162,7 +162,7 @@
                         @endforeach
                      </tbody>
                      <tfoot class="font-weight-600">
-                        <tr id="charge" class="shipping" style="display: none;">
+                        <tr id="shipping" style="display: none;">
                            <td colspan="4" class="text-right">Shipping </td>
                            <td>₹99.00</td>
                         </tr>
@@ -433,7 +433,7 @@
    var cartTotal = parseInt("{{$cartTotal}}");
    
    if (cartTotal < 2000) {
-    $('.shipping').show();
+    $('#shipping').show();
    } else {
    $('#charge').show();
    }

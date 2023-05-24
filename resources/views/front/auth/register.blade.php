@@ -23,6 +23,7 @@
       <div class="formBx">
          <h2>Signup</h2>
          <form id="register_user">
+            <div id="hide1">
             <div class="inputBx">
                <span>Username</span>
                <div id="name-error" class="text-danger error-message my-2"></div>
@@ -47,6 +48,7 @@
                <span>Confirm Password</span>
                <div id="confpassword-error" class="text-danger error-message my-2"></div>
                <input type="password" name="confirm_password">
+            </div>
             </div>
             <div class="inputBx" id="otp-input-container" style="display: none;">
                <span>OTP</span>
@@ -92,7 +94,7 @@
             $('#generate-otp-button').hide();
 
             // Disable the phone number input
-            $("#register_user input[name='number']").prop('disabled', false);
+            $("#hide1").hide();
          },
          error: function(jqXHR, exception) {
             // Handle the error responses
@@ -177,9 +179,6 @@
                }, 1500);
             }
          },
-         error: function(jqXHR, exception) {
-            console.log(jqXHR.responseJSON);
-         }
       });
    });
 
@@ -198,7 +197,6 @@
             xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
          },
          success: function(result) {
-            console.log("Generated OTP: " + generatedOTP);
             otpGenerated = true;
 
             // Send OTP message
@@ -206,9 +204,6 @@
             var numbers = $("#register_user input[name='number']").val();
             sendSMS(message, numbers);
          },
-         error: function(jqXHR, exception) {
-            console.log(jqXHR.responseJSON);
-         }
       });
    }
 
@@ -225,14 +220,6 @@
          beforeSend: function(xhr) {
             xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
          },
-         success: function(response) {
-            console.log("SMS sent successfully");
-            console.log(response);
-         },
-         error: function(jqXHR, exception) {
-            console.log("Error sending SMS");
-            console.log(jqXHR.responseJSON);
-         }
       });
    }
 });

@@ -76,33 +76,31 @@ class CheckOutController extends Controller
         }
 
              if ($data->coupon_type == 'amount') {
-    $newCartTotal = $cartTotal - $data->coupon_price;
-}
+                    $newCartTotal = $cartTotal - $data->coupon_price;
+                }
 
-if ($data->coupon_type == '%') {
-    $newCartTotal = $cartTotal - ($cartTotal * ($data->coupon_price / 100));
-}
+             if ($data->coupon_type == '%') {
+                 $newCartTotal = $cartTotal - ($cartTotal * ($data->coupon_price / 100));
+             }
+             
+             if ($newCartTotal < 2000) {
+                 $newCartTotal += 99;
+             }
 
-if ($newCartTotal < 2000) {
-    $newCartTotal += 99;
-}
-
-
-
-            if ($upd) {
+             if ($upd) {
                 if ($data->coupon_type == 'amount') {
-    $newCartTotal = $cartTotal - $data->coupon_price;
-    $discount = $data->coupon_price;
-}
+                        $newCartTotal = $cartTotal - $data->coupon_price;
+                        $discount = $data->coupon_price;
+            }
 
-if ($data->coupon_type == '%') {
-    $discount = $cartTotal * ($data->coupon_price / 100);
-    $newCartTotal = $cartTotal - $discount;
-}
+            if ($data->coupon_type == '%') {
+                $discount = $cartTotal * ($data->coupon_price / 100);
+                $newCartTotal = $cartTotal - $discount;
+            }
 
-if ($newCartTotal < 2000) {
-    $newCartTotal += 99;
-}
+            if ($newCartTotal < 2000) {
+                $newCartTotal += 99;
+            }
 
                 return response()->json([
                     'status'=>true,

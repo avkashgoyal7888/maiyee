@@ -18,7 +18,8 @@
   <div class="row">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
       <div class="form-group">
-        <input type="text" value="" name="email_or_contact" placeholder="Enter Your Email/Mobile Number" class="" required>                         
+        <div id="email-error" class="text-danger error-message my-2"></div>
+        <input type="text" value="" name="email_or_contact" placeholder="Enter Your Email/Mobile Number" class="" >                         
       </div>
     </div>
   </div>
@@ -53,11 +54,7 @@ $(document).ready(function(){
             },
             success: function(result) {
                 if (result.status === false) {
-                    toastr.error(result.msg, 'Error', {
-                        timeOut: 3000,
-                        progressBar: true,
-                        closeButton: true
-                    });
+                    $('#email-error').text(result.emailOrContact);
                 } else if (result.status === true) {
                     toastr.success(result.msg, 'Success', {
                         timeOut: 3000,

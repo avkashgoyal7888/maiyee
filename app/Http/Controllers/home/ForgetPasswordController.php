@@ -15,6 +15,7 @@ use DB;
 use Carbon\Carbon; 
 use Hash;
 use Session;
+use Mail;
 
 class ForgetPasswordController extends Controller
 {
@@ -53,7 +54,8 @@ class ForgetPasswordController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status'=>false, 
+                "emailOrContact" => $val->errors()->first('email_or_contact')]);
         } else {
             $token = mt_rand(100000, 999999);
             $emailOrContact = $req->input('email_or_contact');
@@ -61,12 +63,49 @@ class ForgetPasswordController extends Controller
             ->orWhere('number', $emailOrContact)
             ->first();
 
+            
+
             $pass = DB::table('password_reset_tokens')->insert([
                 'user_id' => $user->id,
                 'email' => $emailOrContact,
                 'token' => $token,
                 'created_at' => Carbon::now()
             ]);
+
+            Mail::send('front.auth.forgetemail', ['token' => $token], function ($message) use ($req, $user) {
+                $message->to($user->email);
+                $message->subject('Reset Password');
+            });
+
+
+            $fields = array(
+            "sender_id" => "TXTIND",
+            "message" => "Congratulations!! ".$user->name. " Your Loginid is ".$token,
+            "route" => "v3",
+              "numbers" => $user->number,
+            );
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+            CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_SSL_VERIFYHOST => 0,
+            CURLOPT_SSL_VERIFYPEER => 0,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($fields),
+            CURLOPT_HTTPHEADER => array(
+            "authorization: 4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ",
+            "accept: /",
+            "cache-control: no-cache",
+            "content-type: application/json"
+            ),
+            ));
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
 
             if ($pass) {
                 session()->put(['user_id' => $user->id, 'email'=>$emailOrContact, 'token'=>$token]);

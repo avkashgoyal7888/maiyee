@@ -354,66 +354,66 @@ class HomeController extends Controller
     }
 
     public function category(Request $request)
-{
-    // Get cart data
-    $cartNav = Cart::get();
-    $cartTotalnav = 0;
-    $cartCount = 0;
-    if (Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
-    }
-    // Get navigation data
-    $nav = Head::first();
-    // Get subcategory data
-    $productsQuery = Product::where('cat_id', $request->id);
-    $size = Size::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('size')->distinct()->get('size');
-    $category = Category::get();
-    $sub = SubCategory::get();
-    $color = Color::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('code')->distinct()->get('code');
-    $catimg = Category::where('id', $request->id)->first();
-    // Apply sorting to the query
-    $sortBy = $request->input('SortBy', 'Alphabetically, A-Z');
-    switch ($sortBy) {
-        case 'Best Selling':
-            $productsQuery->orderBy('sales_count', 'desc');
-            break;
-        case 'Alphabetically, A-Z':
-            $productsQuery->orderBy('name', 'asc');
-            break;
-        case 'Alphabetically, Z-A':
-            $productsQuery->orderBy('name', 'desc');
-            break;
-        case 'Price, low to high':
-            $productsQuery->orderBy('discount', 'asc');
-            break;
-        case 'Price, high to low':
-            $productsQuery->orderBy('discount', 'desc');
-            break;
-        case 'Date, new to old':
-            $productsQuery->orderBy('created_at', 'desc');
-            break;
-        case 'Date, old to new':
-            $productsQuery->orderBy('created_at', 'asc');
-            break;
-        default:
-            $productsQuery->orderBy('name', 'asc');
-            break;
-    }
+    {
+        // Get cart data
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
+        }
+        // Get navigation data
+        $nav = Head::first();
+        // Get subcategory data
+        $productsQuery = Product::where('cat_id', $request->id);
+        $size = Size::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('size')->distinct()->get('size');
+        $category = Category::get();
+        $sub = SubCategory::get();
+        $color = Color::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('code')->distinct()->get('code');
+        $catimg = Category::where('id', $request->id)->first();
+        // Apply sorting to the query
+        $sortBy = $request->input('SortBy', 'Alphabetically, A-Z');
+        switch ($sortBy) {
+            case 'Best Selling':
+                $productsQuery->orderBy('sales_count', 'desc');
+                break;
+                case 'Alphabetically, A-Z':
+                $productsQuery->orderBy('name', 'asc');
+                break;
+            case 'Alphabetically, Z-A':
+                $productsQuery->orderBy('name', 'desc');
+                break;
+            case 'Price, low to high':
+                $productsQuery->orderBy('discount', 'asc');
+                break;
+            case 'Price, high to low':
+                $productsQuery->orderBy('discount', 'desc');
+                break;
+            case 'Date, new to old':
+                $productsQuery->orderBy('created_at', 'desc');
+                break;
+            case 'Date, old to new':
+                $productsQuery->orderBy('created_at', 'asc');
+                break;
+            default:
+                $productsQuery->orderBy('name', 'asc');
+                break;
+        }
 
-    // Get the sorted products
-    $product = $productsQuery->get();
-    $cat = Category::get();
-    $count = 0;
-    $rating = 0;
-    foreach ($product as $p) {
-        $count += DB::table("reviews")->where("product_id", $p->id)->count();
-        $rating += DB::table("reviews")->where("product_id", $p->id)->sum('rating');
+        // Get the sorted products
+        $product = $productsQuery->get();
+        $cat = Category::get();
+        $count = 0;
+        $rating = 0;
+        foreach ($product as $p) {
+            $count += DB::table("reviews")->where("product_id", $p->id)->count();
+            $rating += DB::table("reviews")->where("product_id", $p->id)->sum('rating');
+        }
+        $avg = $count > 0 ? $rating / $count : 0;
+        return view('front.cat', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'catimg', 'product', 'sortBy','cat', 'avg'));
     }
-    $avg = $count > 0 ? $rating / $count : 0;
-    return view('front.cat', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'catimg', 'product', 'sortBy','cat', 'avg'));
-}
 
 
 
@@ -465,7 +465,7 @@ class HomeController extends Controller
     }
 
     public function handleGoogleCallback()
-{
+    {
         $user = Socialite::driver('google')->stateless()->user();
         
         $authUser = User::where('email', $user->getEmail())->first();
@@ -497,89 +497,88 @@ class HomeController extends Controller
     }
 
     public function handleFacebookCallback()
-{
-    $user = Socialite::driver('facebook')->user();
-
-    // insert user information into users table
-    User::updateOrCreate([
-        'email' => $user->getEmail(),
-    ], [
-        'name' => $user->getName(),
-        'password' => Hash::make(Str::random(24)),
-    ]);
-
-    // log in the user
-    auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
-
-    return redirect()->route('web.home');
-}
+    {
+        $user = Socialite::driver('facebook')->user();
+    
+        // insert user information into users table
+        User::updateOrCreate([
+            'email' => $user->getEmail(),
+        ], [
+            'name' => $user->getName(),
+            'password' => Hash::make(Str::random(24)),
+        ]);
+    
+        // log in the user
+        auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
+    
+        return redirect()->route('web.home');
+    }
 
     public function registerSubmit(Request $req)
-{
-    $enteredOtp = $req->otp;
-    $generatedOtp = session('generatedOTP'); // Retrieve the generated OTP from the session
+    {
+        $enteredOtp = $req->otp;
+        $generatedOtp = session('generatedOTP'); // Retrieve the generated OTP from the session
 
-    if ($enteredOtp !== $generatedOtp) {
-        return response()->json([
-            "status" => 400,
-            "otpError" => "Invalid OTP",
-        ]);
-    }
+        if ($enteredOtp !== $generatedOtp) {
+            return response()->json([
+                "status" => 400,
+                "otpError" => "Invalid OTP",
+            ]);
+        }
 
-    $validator = Validator::make(
-        $req->all(),
-        [
-            "name" => "required",
-            "email" => "required|unique:users,email",
-            "number" => "required|unique:users,number",
-            "password" => "required|min:6",
-            "confirm_password" => "required|same:password",
-        ],
-        [
-            "name.required" => "Name cannot be blank",
-            "email.required" => "Email ID cannot be blank",
-            "email.unique" => "Email ID is already registered",
-            "number.required" => "Contact number cannot be blank",
-            "number.unique" => "Contact number is already registered",
-            "password.required" => "Password cannot be blank",
-            "password.min" => "Password should be a minimum of 6 characters",
-            "confirm_password.required" => "Confirm password cannot be blank",
-            "confirm_password.same" => "Confirm password does not match",
-        ]
-    );
+        $validator = Validator::make(
+            $req->all(),
+            [
+                "name" => "required",
+                "email" => "required|unique:users,email",
+                "number" => "required|unique:users,number",
+                "password" => "required|min:6",
+                "confirm_password" => "required|same:password",
+            ],
+            [
+                "name.required" => "Name cannot be blank",
+                "email.required" => "Email ID cannot be blank",
+                "email.unique" => "Email ID is already registered",
+                "number.required" => "Contact number cannot be blank",
+                "number.unique" => "Contact number is already registered",
+                "password.required" => "Password cannot be blank",
+                "password.min" => "Password should be a minimum of 6 characters",
+                "confirm_password.required" => "Confirm password cannot be blank",
+                "confirm_password.same" => "Confirm password does not match",
+            ]);
 
-    if ($validator->fails()) {
-        return response()->json([
-            "status" => 400,
-            "nameError" => $validator->errors()->first('name'),
-            "numberError" => $validator->errors()->first('number'),
-            "emailError" => $validator->errors()->first('email'),
-            "passwordError" => $validator->errors()->first('password'),
-            "confpasswordError" => $validator->errors()->first('confirm_password'),
-            "otpError" => "Invalid OTP",
-        ]);
-    }
+        if ($validator->fails()) {
+            return response()->json([
+                "status" => 400,
+                "nameError" => $validator->errors()->first('name'),
+                "numberError" => $validator->errors()->first('number'),
+                "emailError" => $validator->errors()->first('email'),
+                "passwordError" => $validator->errors()->first('password'),
+                "confpasswordError" => $validator->errors()->first('confirm_password'),
+                "otpError" => "Invalid OTP",
+            ]);
+        }
     
 
-    $data = new User;
-    $data->name = $req->name;
-    $data->number = $req->number;
-    $data->email = $req->email;
-    $data->password = Hash::make($req->password);
-    $reg = $data->save();
+        $data = new User;
+        $data->name = $req->name;
+        $data->number = $req->number;
+        $data->email = $req->email;
+        $data->password = Hash::make($req->password);
+        $reg = $data->save();
 
-    if ($reg) {
-        session()->forget('generatedOTP');
-        Auth::attempt(['email' => $req->email, 'password' => $req->password]);
-        // Authentication passed
+        if ($reg) {
+            session()->forget('generatedOTP');
+            Auth::attempt(['email' => $req->email, 'password' => $req->password]);
+            // Authentication passed
 
-        return response()->json(['status' => 200, 'message' => 'Registered successfully']);
-    } else {
-        return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.']);
+            return response()->json(['status' => 200, 'message' => 'Registered successfully']);
+        } else {
+            return response()->json(['status' => 400, 'message' => 'Something went wrong. Please try again later.']);
+        }
     }
-}
 
-public function sendSMS(Request $request)
+    public function sendSMS(Request $request)
     {
         $fields = [
             "sender_id" => "TXTIND", // Replace with your sender ID
@@ -603,32 +602,27 @@ public function sendSMS(Request $request)
     }
 
     public function checkPhoneNumber(Request $request)
-{
-    $phoneNumber = $request->input('number');
-
-    // Check if the phone number already exists in the User model
-    $user = User::where('number', $phoneNumber)->first();
-
-    if ($user) {
-        // Phone number already registered
-        return response()->json(['error' => 'Phone number already registered'], 400);
+    {
+        $phoneNumber = $request->input('number');
+    
+        // Check if the phone number already exists in the User model
+        $user = User::where('number', $phoneNumber)->first();
+    
+        if ($user) {
+            // Phone number already registered
+            return response()->json(['error' => 'Phone number already registered'], 400);
+        }
+    
+        // Validate the length of the phone number
+        if (strlen($phoneNumber) !== 10) {
+            // Invalid phone number length
+            return response()->json(['error' => 'Invalid phone number'], 400);
+        }
+    
+        // Phone number is valid and not registered
+        return response()->json(['message' => 'Phone number is valid']);
     }
-
-    // Validate the length of the phone number
-    if (strlen($phoneNumber) !== 10) {
-        // Invalid phone number length
-        return response()->json(['error' => 'Invalid phone number'], 400);
-    }
-
-    // Phone number is valid and not registered
-    return response()->json(['message' => 'Phone number is valid']);
-}
-
-
-
-
-
-
+    
     public function logOut()
     { 
         Auth::guard('web')->logOut();
