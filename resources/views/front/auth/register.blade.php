@@ -75,17 +75,20 @@
    $(document).ready(function() {
    var otpGenerated = false;
    var generatedOTP = null;
-   
-   function checkPhoneNumber(number) {
+
+   function checkPhoneNumber(number, email) {
       $.ajax({
          url: "{{ route('check-phone-number') }}",
          type: "POST",
-         data: { number: number },
+         data: {
+            number: number,
+            email: email
+         },
          beforeSend: function(xhr) {
             xhr.setRequestHeader('X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content'));
          },
          success: function(response) {
-            // Phone number is valid and not registered
+            // Phone number and email are valid and not registered
             generateOTP();
 
             // Show OTP input and "Verify OTP" button
@@ -93,7 +96,7 @@
             $("#verify-otp-button").show();
             $('#generate-otp-button').hide();
 
-            // Disable the phone number input
+            // Disable the phone number and email inputs
             $("#hide1").hide();
          },
          error: function(jqXHR, exception) {
@@ -104,6 +107,12 @@
                   $('#number-error').text("Phone number is already registered");
                } else if (error === 'Invalid phone number') {
                   $('#number-error').text("Invalid phone number");
+               }
+
+               if (error === 'Email already registered') {
+                  $('#email-error').text("Email is already registered");
+               } else if (error === 'Invalid email') {
+                  $('#email-error').text("Email is already registered");
                }
 
                // Hide OTP input and "Verify OTP" button
@@ -118,9 +127,10 @@
       e.preventDefault();
 
       var phoneNumber = $("#register_user input[name='number']").val();
+      var email = $("#register_user input[name='email']").val();
 
       // Validate the phone number before generating OTP
-      checkPhoneNumber(phoneNumber);
+      checkPhoneNumber(phoneNumber, email);
    });
 
    $('#register_user').on('submit', function(e) {
@@ -174,8 +184,8 @@
                   tapToDismiss: 0
                });
                otpGenerated = false; // Reset the OTP generation flag
-               setTimeout(function(){
-                  window.location.href="{{route('web.home')}}";
+               setTimeout(function() {
+                  window.location.href = "{{route('web.home')}}";
                }, 1500);
             }
          },
@@ -184,10 +194,10 @@
 
    function generateOTP() {
       // Generate OTP logic here
-   
+
       // Mocking the OTP generation with a random number
       generatedOTP = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
-   
+
       // Store the generated OTP in the session
       $.ajax({
          url: "{{ route('store.generated.otp') }}",
@@ -199,18 +209,20 @@
          success: function(result) {
             otpGenerated = true;
 
-            // Send OTP message
+            // Send OTP message and email
             var message = "Dear " + $("#register_user input[name='name']").val() + " Your OTP for Signup is " + generatedOTP + " and password is '1234'";
             var numbers = $("#register_user input[name='number']").val();
-            sendSMS(message, numbers);
+            var email = $("#register_user input[name='email']").val();
+            sendSMS(message, numbers, email);
          },
       });
    }
 
-   function sendSMS(message, numbers) {
+   function sendSMS(message, numbers, email) {
       var data = {
          message: message,
-         numbers: numbers
+         numbers: numbers,
+         email: email
       };
 
       $.ajax({
@@ -223,6 +235,7 @@
       });
    }
 });
+
 
    
    

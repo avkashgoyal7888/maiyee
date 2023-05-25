@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')->onDelete('cascade');
             $table->string('code');
             $table->string('image');
+            $table->enum('color_category', ['black', 'white', 'blue', 'pink', 'purple', 'beige', 'brown', 'off_white', 'gold', 'green', 'grey', 'khaki', 'maroon', 'red', 'multi_color', 'orange', 'silver', 'yellow', 'teal', 'wine', 'turquoise']);
             $table->timestamps();
         });
     }

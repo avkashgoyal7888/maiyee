@@ -1,4 +1,4 @@
-APP_NAME=Laravel
+APP_NAME=Maiyee
 APP_ENV=production
 APP_KEY=base64:av2RH2JrVIvukPwGfAnFYsMOVyU4nc4X8Gk0KBsuciQ=
 APP_DEBUG=true
