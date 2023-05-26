@@ -28,8 +28,8 @@
       <div class="row">
          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="section-header text-center">
-               <h2 class="h2">Weekly Bestseller</h2>
-               <p>Our most popular products based on sales</p>
+               <h2 class="h2">New Arrivals</h2>
+               <p>Our Most recent Added Products</p>
             </div>
             <div class="productSlider grid-products">
                @foreach($product as $products)
@@ -180,7 +180,7 @@
       <div class="row">
          <div class="col-12 col-sm-12 col-md-12 col-lg-12">
             <div class="section-header text-center">
-               <h2 class="h2">New Arrivals</h2>
+               <h2 class="h2">Match Your Vibes</h2>
                <p>Grab these new items before they are gone!</p>
             </div>
          </div>

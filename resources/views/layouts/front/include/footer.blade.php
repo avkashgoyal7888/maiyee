@@ -2,10 +2,10 @@
 <div class="container bottom_border">
 <div class="row">
     <div class=" col-sm-4 col-md-4  col-lg-4 col-12">
-<h5 class="headin5_amrc col_white_amrc pt2">Find us</h5>
+<h5 class="headin5_amrc col_white_amrc pt2">Contact Us</h5>
 <!--headin5_amrc-->
-<p><i class="fa fa-location-arrow"></i>  1/59 Darbar Nagar, Magob, Puna Patia Surat</p>
-<p><i class="fa fa-phone"></i>  +91-8273028229</p>
+<p><i class="fa fa-location-arrow"></i>  3006 Shree Kuberji Empire, Kadodara Road, Saroli, Surat Gujrat (395010)</p>
+<p><i class="fa fa-phone"></i>  +91-9904145427</p>
 <p><i class="fa fa fa-envelope"></i> info@maiyee.in  </p>
 
 
