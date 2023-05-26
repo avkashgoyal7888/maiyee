@@ -12,28 +12,24 @@
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 main-col">
                     <div id="accordionExample">
-                        <h2 class="title h2">Cancellation/Refund Policy</h2>
+                        <h2 class="title h2">Return & Exchange Policy</h2>
                         <div class="faq-body">
                             <h4 class="panel-title" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">Product Return Policy</h4>
-                            <div id="collapseOne" class="collapse panel-content" data-parent="#accordionExample">In case of any dissatisfaction, manufacturing or packaging defect, customers/Distributors can return/exchange the product. The customers/Distributors must contact the Distributor/Company from whom they had purchased the same, within 30 days from the date of purchase. They have to provide a reason and return the said products. In case the customer returns the product, it is the distributor's obligation to satisfy the customer’s need for money refund or replacements of products.
-                            <br>The Distributor can then return these products, with original Invoice to the Company. The Company will replace these products free of cost or if the distributor does not want the same products, the Company will give a cash voucher of the same amount, which can be used by the Distributor for purchasing products of their choice.
-                            <br>• Product Return Form
-                            <br>• Reason for return
-                            <br>• Copy of Invoice
-                            <br>• Products to be returned
-                            </div>
+                            <div id="collapseOne" class="collapse panel-content" data-parent="#accordionExample">We offer 7 days hassle-free returns & exchange from the date of delivery and a further 5 days for the returned product(s) to reach us. We also offer reverse pick-up services at no additional costs or charge.
+                                Please return your product(s) in the same condition as it was shipped. If the products are returned in poor condition or have clearly been worn, a refund would not be provided.
+                                Kindly allow 7 days for the return to be processed and the amount to be shown in your bank account. PLEASE NOTE: REFUND / BANK TRANSFER ARE ONLY APPLICABLE FOR PREPAID ORDERS / ONLINE PAYMENTS MADE ON OUR WEBSITE. 
+                                Shipping Charges are Non-Refundable
+                                You can get in touch with us about any issues at our customer support e-mail ID  maiyee.designer@gmail.com and we will be happy to help you. For a faster response you can also reach us on +917861972855. All queries will be solved between Monday-Saturday, 10am-6pm. All pending queries will be solved on priority the next day.
+                                Please note that we can solve customer queries on WhatsApp.
+                                Cancellations will only be possible till the order has not been dispatched from our warehouse. 
+                                Once a product is exchanged and is delivered, no further actions such as exchange or refund would be applicable on that order. 
+                                </div>
                         </div>
                         <div class="faq-body">
-                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Buy Back Policy</h4>
-                            <div id="collapseTwo" class="collapse panel-content">The Company provides a Buy Back Policy to the distributor who wishes to resign from his/her distributorship and return any Eduse products that are in good condition, useable, resaleable, restock-able, unopened, unaltered and must have a shelf life of at least four months.
-                            <br>If the Distributor resigns within 30 days from the purchase of the products, Eduse shall provide a full refund for the products to the Distributor.
-                            <br>If the Distributor resigns from his/her distributorship after the expiry of 30 days from the date of purchase of products from Eduse, the amount refunded will be equal to distributor cost of the products being returned, less total bonus paid out by the Company on the original purchase, less 10% service charge.
-                            <br>The Buy Back policy is designed to impose upon the sponsor and the Company the obligation to ensure that the distributor is buying products wisely.
-                        </div>
-                        <div class="faq-body">
-                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Cancellation</h4>
-                            <div class="panel-content collapse" id="collapseThree">For Cancellation of confirmed/placed order please Contact Us on our helpline no : +91-0129-4889489 or write to us at info@edusekart.com</div>
-                        </div>
+                            <h4 class="panel-title" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">Exchange</h4>
+                            <div id="collapseTwo" class="collapse panel-content">For exchanging a product, the same product can be exchanged for a different size - please note that you cannot exchange a product with another kind of product. If you wish to get another product in exchange of the ordered product kindly opt for return.
+                                After the product is picked up, a new order for the different size needed will be auto placed and the shipping fee will be charged again.
+                                Please Note one order is eligible for an Exchange or Return only one time.</div>
                     </div>
                 </div>
             </div>
