@@ -31,6 +31,7 @@
                         <th>S. No.</th>
                         <th>Product</th>
                         <th>Color</th>
+                        <th>Color Category</th>
                         <th>Image</th>
                         <th>Action</th>
                      </tr>
@@ -41,7 +42,8 @@
                         <td> {{ $key +1 }} </td>
                         <td>{{ ucwords($pros->product->name) }}</td>
                         <td><button class="btn btn-lg" style="background-color: {{ $pros->code }};"></button></td>
-                        <td width="100%"><img src="{{ asset('admin/color/' . $pros->image) }}" width="100" height="200" /></td>
+                        <td> {{ $pros->color_category }} </td>
+                        <td><img src="{{ asset('admin/color/' . $pros->image) }}" width="100" height="100" /></td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editColor({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteColor({{$pros->id}})"><i class="fas fa-trash"></i></button>
@@ -103,6 +105,34 @@
                            @error('product_id')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                         <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Color Category</label>
+                           <select class="form-control" wire:model="color_category">
+                              <option>Select A Color Category</option>
+                              <option value="black">Black</option>
+                              <option value="white">White</option>
+                              <option value="blue">Blue</option>
+                              <option value="pink">Pink</option>
+                              <option value="purple">Purple</option>
+                              <option value="beige">Beige</option>
+                              <option value="brown">Brown</option>
+                              <option value="off_white">Off White</option>
+                              <option value="gold">Gold</option>
+                              <option value="green">Green</option>
+                              <option value="grey">Grey</option>
+                              <option value="khaki">Khaki</option>
+                              <option value="maroon">Maroon</option>
+                              <option value="red">Red</option>
+                              <option value="multi_color">Multi Color</option>
+                              <option value="orange">Orange</option>
+                              <option value="silver">Silver</option>
+                              <option value="yellow">Yellow</option>
+                              <option value="teal">Teal</option>
+                              <option value="wine">Wine</option>
+                              <option value="turquoise">Turquoise</option>
+                           </select>
+                           @error('color_category')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Color</label>
                            <input type="color" class="form-control" placeholder="Enter Color" wire:model="code">
                            @error("code")<span class="text-danger">{{$message}}</span>@enderror
@@ -136,6 +166,34 @@
                <form wire:submit.prevent='updateColor()'>
                   <div class="modal-body">
                      <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Color Category</label>
+                           <select class="form-control" wire:model="color_category">
+                              <option>Select A Color Category</option>
+                              <option value="black">Black</option>
+                              <option value="white">White</option>
+                              <option value="blue">Blue</option>
+                              <option value="pink">Pink</option>
+                              <option value="purple">Purple</option>
+                              <option value="beige">Beige</option>
+                              <option value="brown">Brown</option>
+                              <option value="off_white">Off White</option>
+                              <option value="gold">Gold</option>
+                              <option value="green">Green</option>
+                              <option value="grey">Grey</option>
+                              <option value="khaki">Khaki</option>
+                              <option value="maroon">Maroon</option>
+                              <option value="red">Red</option>
+                              <option value="multi_color">Multi Color</option>
+                              <option value="orange">Orange</option>
+                              <option value="silver">Silver</option>
+                              <option value="yellow">Yellow</option>
+                              <option value="teal">Teal</option>
+                              <option value="wine">Wine</option>
+                              <option value="turquoise">Turquoise</option>
+                           </select>
+                           @error('color_category')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
                         <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                            <label for="nameExLarge" class="form-label">Color Name</label>
                            <input type="hidden" wire:model='color_id'>

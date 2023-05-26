@@ -6,7 +6,7 @@
 <!--Page Title-->
         <div class="page section-header text-center">
             <div class="page-title">
-                <div class="wrapper"><h1 class="page-width">Recover Password</h1></div>
+                <div class="wrapper"><h1 class="page-width">OTP Verification</h1></div>
             </div>
         </div>
         <!--End Page Title-->
@@ -18,13 +18,13 @@
   <div class="row">
     <div class="col-12 col-sm-12 col-md-12 col-lg-12">
       <div class="form-group">
-        <input type="text" value="" name="otp" placeholder="Enter Your Email/Mobile Number" class="" required>                         
+        <input type="text" value="" name="otp" placeholder="Enter Your OTP" class="" required>                         
       </div>
     </div>
   </div>
   <div class="row">
     <div class="text-center col-12 col-sm-12 col-md-12 col-lg-12">
-      <input type="submit" class="btn btn-blue text-center" value="Continue">
+      <input type="submit" class="btn btn-blue text-center" value="Verify OTP">
     </div>
   </div>
 </form>

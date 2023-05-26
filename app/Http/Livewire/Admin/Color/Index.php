@@ -18,7 +18,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $color_id,$category_id, $subcategory_id, $subcategories, $category, $code, $product_id, $startDate, $endDate,$product;
+    public $color_id,$category_id, $subcategory_id, $subcategories, $category, $code, $product_id, $startDate, $endDate,$product, $color_category;
     public $image;
     public function updatingSearch()
     {
@@ -58,6 +58,7 @@ class Index extends Component
         $this->code = '';
         $this->image = '';
         $this->color_id = '';
+        $this->color_category = '';
     }
 
     protected $rules = [
@@ -75,7 +76,8 @@ class Index extends Component
             'subcategory_id' => 'required',
             'product_id' => 'required',
             'code' => 'required',
-            'image' => 'required|image', // limit to 1 MB
+            'image' => 'required|image',
+            'color_category' => 'required',
         ], [
             'category_id.required' => 'Select Category first.....',
             'subcategory_id.required' => 'Select Sub-Category first.....',
@@ -83,6 +85,7 @@ class Index extends Component
             'code.required' => 'Color Name is required',
             'image.required' => 'Image is required',
             'image.image' => 'Only image files are allowed',
+            'color_category.required' => 'Color Category is required....'
         ]);
             $image = $this->image;
     
@@ -97,6 +100,7 @@ class Index extends Component
                 $data->product_id = $this->product_id;
                 $data->code = $this->code;
                 $data->image = $filename;
+                $data->color_category = $this->color_category;
                 $data->save();
             }
     
@@ -112,6 +116,7 @@ class Index extends Component
             $this->color_id = $clr->id;
             $this->code = $clr->code;
             $this->image = $clr->image;
+            $this->color_category = $clr->color_category;
 
         } else {
             return redirect()->to('/admin/products');
@@ -132,6 +137,7 @@ class Index extends Component
         Color::where('id', $this->color_id)->update([
             'code' => $this->code,
             'image' => $image,
+            'color_category' => $this->color_category,
         ]);
         $this->resetinputfields();
         session()->flash('success', 'Color Updated Successfully...');

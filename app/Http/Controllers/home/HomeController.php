@@ -32,6 +32,7 @@ use Session;
 use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
+use Mail;
 
 class HomeController extends Controller
 {
@@ -310,7 +311,7 @@ class HomeController extends Controller
         $size = Size::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('size')->distinct()->get('size');
         $category = Category::get();
         $sub = SubCategory::get();
-        $color = Color::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('code')->distinct()->get('code');
+        $color = Color::whereIn('product_id', $productsQuery->pluck('id'))->groupBy('color_category')->distinct()->get('color_category');
         $subimg = SubCategory::where('id', $request->id)->first();
         // Apply sorting to the query
         $sortBy = $request->input('SortBy', 'name-ascending');
@@ -421,7 +422,7 @@ class HomeController extends Controller
     {
         $selectedSizes = $request->input('selected_sizes');
         $products = Color::join("products","colors.product_id","=","products.id")
-            ->select("colors.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.id as proid")->whereIn('code', $selectedSizes)->get();
+            ->select("colors.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.id as proid")->whereIn('color_category', $selectedSizes)->get();
         return response()->json($products);
     }
 
@@ -579,49 +580,64 @@ class HomeController extends Controller
     }
 
     public function sendSMS(Request $request)
-    {
-        $fields = [
-            "sender_id" => "TXTIND", // Replace with your sender ID
-            "message" => $request->input('message'),
-            "route" => "v3",
-            "numbers" => $request->input('numbers')
-        ];
+{
+    $fields = [
+        "sender_id" => "TXTIND", // Replace with your sender ID
+        "message" => $request->input('message'),
+        "route" => "v3",
+        "numbers" => $request->input('numbers')
+    ];
 
-        $response = Http::withHeaders([
-            'authorization' => '4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ', // Replace with your Fast2SMS authorization key
-            'accept' => '/',
-            'cache-control' => 'no-cache',
-            'content-type' => 'application/json',
-        ])->post('https://www.fast2sms.com/dev/bulkV2', $fields);
+    $response = Http::withHeaders([
+        'authorization' => '4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ', // Replace with your Fast2SMS authorization key
+        'accept' => '/',
+        'cache-control' => 'no-cache',
+        'content-type' => 'application/json',
+    ])->post('https://www.fast2sms.com/dev/bulkV2', $fields);
 
-        if ($response->successful()) {
-            return response()->json($response->json());
-        } else {
-            return response()->json($response->json(), $response->status());
-        }
+    // Send OTP to the email address if it is provided
+    $generatedOtp = session('generatedOTP');
+    $email = $request->input('email');
+    if (!empty($email)) {
+        Mail::send('front.auth.forgetemail', ['token' => $generatedOtp], function ($message) use ($email) {
+            $message->to($email);
+            $message->subject('Reset Password');
+        });
     }
 
+    if ($response->successful()) {
+        return response()->json($response->json());
+    } else {
+        return response()->json($response->json(), $response->status());
+    }
+}
+
+
     public function checkPhoneNumber(Request $request)
-    {
-        $phoneNumber = $request->input('number');
-    
-        // Check if the phone number already exists in the User model
-        $user = User::where('number', $phoneNumber)->first();
-    
-        if ($user) {
+{
+    $phoneNumber = $request->input('number');
+    $email = $request->input('email');
+
+    // Check if the phone number or email already exists in the User model
+    $user = User::where('number', $phoneNumber)->orWhere('email', $email)->first();
+
+    if ($user) {
+        if ($user->number === $phoneNumber) {
             // Phone number already registered
             return response()->json(['error' => 'Phone number already registered'], 400);
         }
-    
-        // Validate the length of the phone number
-        if (strlen($phoneNumber) !== 10) {
-            // Invalid phone number length
-            return response()->json(['error' => 'Invalid phone number'], 400);
+
+        if ($user->email === $email) {
+            // Email already registered
+            return response()->json(['error' => 'Email already registered'], 400);
         }
-    
-        // Phone number is valid and not registered
-        return response()->json(['message' => 'Phone number is valid']);
     }
+
+    // Phone number and email are valid and not registered
+    return response()->json(['message' => 'Phone number and email are valid']);
+}
+
+
     
     public function logOut()
     { 
