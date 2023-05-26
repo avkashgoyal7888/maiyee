@@ -72,12 +72,14 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 		});
 		Route::controller(CartController::class)->group(function(){
 		Route::post('/add-to-cart', 'addToCart')->name('web.add.cart');
+		Route::post('/buy-now', 'buyNow')->name('web.buy.now');
 		Route::post('/cart-to-cart', 'cartDelete')->name('web.delete.cart');
 		Route::post('/cart-quantity-edit', 'cartEdit')->name('edit.cart');
 		Route::post('/add-to-wish', 'addToWishList')->name('web.add.wishlist');
 		});
 		Route::controller(CheckOutController::class)->group(function(){
 			Route::get('/checkout','index')->name('web.checkout');
+			Route::get('/but', 'buyView')->name('web.check.buy');
 			Route::post('/apply-coupon', 'applyCoupon')->name('web.apply.coupon');
 		});
 	});

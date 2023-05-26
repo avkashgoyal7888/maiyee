@@ -1242,47 +1242,94 @@
    
    
       // addtocart
-      $('#addToCart').submit(function(e){
-   
-            e.preventDefault();
-            var fd = new FormData(this);
-            fd.append('_token',"{{ csrf_token() }}");
-   
-            $.ajax({
-                url: "{{ route('web.add.cart') }}",
-                type: "post",
-                data: fd,
-                dataType: "JSON",
-                processData: false,
-                contentType: false,
-                success: function (result) {
-   
-                    if(result.status===true){
-                        toastr.success(result.msg, "Message", {
-                            timeOut: 500,
-                            closeButton: !0,
-                            progressBar: !0,
-                            onclick: null,
-                            showMethod: "fadeIn",
-                            hideMethod: "fadeOut",
-                            tapToDismiss: 0
-                        });
-                        window.location.reload();
-                    }
-                    else{
-                        toastr.error(result.msg, "Message", {
-                            timeOut: 500,
-                            closeButton: !0,
-                            progressBar: !0,
-                            onclick: null,
-                            showMethod: "fadeIn",
-                            hideMethod: "fadeOut",
-                            tapToDismiss: 0
-                        })
-                    }
-                }
-            });
-        });
+      $('#addToCart').submit(function(e) {
+    e.preventDefault();
+    var fd = new FormData(this);
+    fd.append('_token', "{{ csrf_token() }}");
+
+    addToCart(fd);
+});
+
+$('.shopify-payment-button__button').click(function(e) {
+    e.preventDefault();
+    var fd = new FormData($('#addToCart')[0]);
+    fd.append('_token', "{{ csrf_token() }}");
+
+    buyNow(fd);
+});
+
+function addToCart(data) {
+    $.ajax({
+        url: "{{ route('web.add.cart') }}",
+        type: "post",
+        data: data,
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        success: function(result) {
+            if (result.status === true) {
+                toastr.success(result.msg, "Message", {
+                    timeOut: 500,
+                    closeButton: true,
+                    progressBar: true,
+                    onclick: null,
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: 0
+                });
+                window.location.reload();
+            } else {
+                toastr.error(result.msg, "Message", {
+                    timeOut: 500,
+                    closeButton: true,
+                    progressBar: true,
+                    onclick: null,
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: 0
+                });
+            }
+        }
+    });
+}
+
+function buyNow(data) {
+    $.ajax({
+        url: "{{ route('web.buy.now') }}",
+        type: "post",
+        data: data,
+        dataType: "JSON",
+        processData: false,
+        contentType: false,
+        success: function(result) {
+            if (result.status === true) {
+                toastr.success(result.msg, "Message", {
+                    timeOut: 500,
+                    closeButton: true,
+                    progressBar: true,
+                    onclick: null,
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: 0
+                });
+                setTimeout(function(){
+     window.location.href="{{route('web.check.buy')}}";
+     }, 500);
+            } else {
+                toastr.error(result.msg, "Message", {
+                    timeOut: 500,
+                    closeButton: true,
+                    progressBar: true,
+                    onclick: null,
+                    showMethod: "fadeIn",
+                    hideMethod: "fadeOut",
+                    tapToDismiss: 0
+                });
+            }
+        }
+    });
+}
+
       // Review Form
       $('#review-form').submit(function(e){
    

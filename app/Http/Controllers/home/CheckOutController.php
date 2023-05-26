@@ -9,6 +9,7 @@ use App\Models\Coupon;
 use App\Models\UserAddress;
 use App\Models\Head;
 use App\Models\Category;
+use App\Models\BuyNow;
 use Auth;
 use Validator;
 
@@ -24,6 +25,27 @@ class CheckOutController extends Controller
         $cartTotalnav = $cartNav->sum('total');
         }
         $cart = Cart::where('user_id', Auth::guard('web')->user()->id)->get();
+        $cartTotal = $cart->sum('total');
+        if ($cartTotal < 2000) {
+            $cartTotal += 99;
+        }
+        $user = UserAddress::where('user_id', Auth::guard('web')->user()->id)->get();
+        $nav = Head::first();
+        $cat = Category::get();
+        $coupon = Coupon::where(['type'=>'admin','status'=>'0'])->get();
+        return view('front.checkout.index', compact('cartNav', 'cartTotalnav','cart','cartTotal','user','cartCount','nav','nav','cat','coupon'));
+    }
+
+    public function buyView()
+    {
+        $cartNav = Cart::get();
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $cart = BuyNow::where('user_id', Auth::guard('web')->user()->id)->get();
         $cartTotal = $cart->sum('total');
         if ($cartTotal < 2000) {
             $cartTotal += 99;

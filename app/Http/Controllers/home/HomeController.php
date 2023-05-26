@@ -599,7 +599,7 @@ class HomeController extends Controller
     $generatedOtp = session('generatedOTP');
     $email = $request->input('email');
     if (!empty($email)) {
-        Mail::send('front.auth.forgetemail', ['token' => $generatedOtp], function ($message) use ($email) {
+        Mail::send('front.auth.registeremail', ['token' => $generatedOtp], function ($message) use ($email) {
             $message->to($email);
             $message->subject('Reset Password');
         });
