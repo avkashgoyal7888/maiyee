@@ -485,7 +485,6 @@
        let html = '';
        result.forEach(function(products) {
              url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
-           html += '<div class="grid-products grid--view-items" id="product_container">';
            html += '<div class="row">';
            html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
            html += '<div class="product-image">';
@@ -527,7 +526,6 @@
            html += '</div>';
            html += '</div>';
            html += '</div>';
-           html += '</div>';
        });
        $('#product_container').html(html);
    },
@@ -561,7 +559,6 @@
        let html = '';
        result.forEach(function(products) {
          url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
-           html += '<div class="grid-products grid--view-items" id="product_container">';
            html += '<div class="row">';
            html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
            html += '<div class="product-image">';
@@ -600,7 +597,6 @@
            html +='<i class="font-13 fa fa-star"></i>';
            html +='<i class="font-13 fa fa-star-o"></i>';
            html +='<i class="font-13 fa fa-star-o"></i>';
-           html += '</div>';
            html += '</div>';
            html += '</div>';
            html += '</div>';
@@ -646,7 +642,6 @@
        let html = '';
        result.forEach(function(products) {
          url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.id));
-           html += '<div class="grid-products grid--view-items" id="product_container">';
            html += '<div class="row">';
            html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
            html += '<div class="product-image">';
@@ -684,7 +679,6 @@
            html +='<i class="font-13 fa fa-star"></i>';
            html +='<i class="font-13 fa fa-star-o"></i>';
            html +='<i class="font-13 fa fa-star-o"></i>';
-           html += '</div>';
            html += '</div>';
            html += '</div>';
            html += '</div>';
