@@ -45,8 +45,8 @@ class CheckOutController extends Controller
         $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
         $cartTotalnav = $cartNav->sum('total');
         }
-        $cart = BuyNow::where('user_id', Auth::guard('web')->user()->id)->get();
-        $cartTotal = $cart->sum('total');
+        $cart = BuyNow::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
+        $cartTotal = $cart->total;
         if ($cartTotal < 2000) {
             $cartTotal += 99;
         }
@@ -54,7 +54,7 @@ class CheckOutController extends Controller
         $nav = Head::first();
         $cat = Category::get();
         $coupon = Coupon::where(['type'=>'admin','status'=>'0'])->get();
-        return view('front.checkout.index', compact('cartNav', 'cartTotalnav','cart','cartTotal','user','cartCount','nav','nav','cat','coupon'));
+        return view('front.checkout.buy', compact('cartNav', 'cartTotalnav','cart','cartTotal','user','cartCount','nav','nav','cat','coupon'));
     }
 
     public function applyCoupon(Request $req)

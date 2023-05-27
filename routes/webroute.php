@@ -61,6 +61,7 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 		Route::any('/pay', [PaymentController::class, 'pay'])->name('payment.pay');
 
 		Route::post('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
+		Route::post('/buy-order', [ShiprocketController::class, 'buyOrder'])->name('web.buy.create');
 		Route::controller(HomeController::class)->group(function(){
 			Route::get('/cart', 'cart')->name('web.cart');
 			Route::get('/wish', 'wish')->name('web.wish');
