@@ -2,13 +2,12 @@
 @section('css')
 <title>Category</title>
 <style>
-    .swatch {
-        display: inline-block;
-        width: 30px;
-        height: 14px;
-        margin-right: 5px;
-
-    }
+   .swatch {
+   display: inline-block;
+   width: 30px;
+   height: 14px;
+   margin-right: 5px;
+   }
 </style>
 @stop
 @section('content')
@@ -93,104 +92,102 @@
                <!--End Size Swatches-->
                <!--Color Swatches-->
                <div class="sidebar_widget filterBox filter-widget size-swacthes">
-    <div class="widget-title">
-        <h2>Color</h2>
-    </div>
-    <div class="filter-color swacth-list">
-        <form id="color-form">
-            <div id="size">
-                <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="black">
-        <span class="swatch mr-3">Black</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="white">
-        <span class="swatch mr-3">White</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="blue">
-        <span class="swatch mr-3">Blue</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="pink">
-        <span class="swatch mr-3">Pink</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="purple">
-        <span class="swatch mr-3">Purple</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="beige">
-        <span class="swatch mr-3">Beige</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="brown">
-        <span class="swatch mr-3">Brown</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="gold">
-        <span class="swatch mr-3">Gold</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="green">
-        <span class="swatch mr-3">Green</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="grey">
-        <span class="swatch mr-3">Grey</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="khaki">
-        <span class="swatch mr-3">Khaki</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="maroon">
-        <span class="swatch mr-3">Maroon</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="red">
-        <span class="swatch mr-3">Red</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="orange">
-        <span class="swatch mr-3">Orange</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="silver">
-        <span class="swatch mr-3">Silver</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="yellow">
-        <span class="swatch mr-3">Yellow</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="teal">
-        <span class="swatch mr-3">Teal</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="wine">
-        <span class="swatch mr-3">Wine</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="turquoise">
-        <span class="swatch mr-3">Turquoise</span>
- </label>
- <br>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="off_white">
-        <span class="swatch mr-3">Off White</span>
- </label>
- <label>
-    <input type="checkbox" class="color-checkbox mx-1" value="multi_color">
-        <span class="swatch mr-3">Multi Color</span>
- </label>
-            </div>
-            <button type="submit" class="btn btn-primary">Filter</button>
-        </form>
-    </div>
-</div>
-
-
+                  <div class="widget-title">
+                     <h2>Color</h2>
+                  </div>
+                  <div class="filter-color swacth-list">
+                     <form id="color-form">
+                        <div id="size">
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="black">
+                           <span class="swatch mr-3">Black</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="white">
+                           <span class="swatch mr-3">White</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="blue">
+                           <span class="swatch mr-3">Blue</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="pink">
+                           <span class="swatch mr-3">Pink</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="purple">
+                           <span class="swatch mr-3">Purple</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="beige">
+                           <span class="swatch mr-3">Beige</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="brown">
+                           <span class="swatch mr-3">Brown</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="gold">
+                           <span class="swatch mr-3">Gold</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="green">
+                           <span class="swatch mr-3">Green</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="grey">
+                           <span class="swatch mr-3">Grey</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="khaki">
+                           <span class="swatch mr-3">Khaki</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="maroon">
+                           <span class="swatch mr-3">Maroon</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="red">
+                           <span class="swatch mr-3">Red</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="orange">
+                           <span class="swatch mr-3">Orange</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="silver">
+                           <span class="swatch mr-3">Silver</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="yellow">
+                           <span class="swatch mr-3">Yellow</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="teal">
+                           <span class="swatch mr-3">Teal</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="wine">
+                           <span class="swatch mr-3">Wine</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="turquoise">
+                           <span class="swatch mr-3">Turquoise</span>
+                           </label>
+                           <br>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="off_white">
+                           <span class="swatch mr-3">Off White</span>
+                           </label>
+                           <label>
+                           <input type="checkbox" class="color-checkbox mx-1" value="multi_color">
+                           <span class="swatch mr-3">Multi Color</span>
+                           </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                     </form>
+                  </div>
+               </div>
                <!--End Color Swatches-->
                <!--Brand-->
                <div class="sidebar_widget filterBox filter-widget">
@@ -351,20 +348,18 @@
                         </div>
                         <div class="col-4 col-md-4 col-lg-4 text-right">
                            <div class="filters-toolbar__item">
-    <label for="SortBy" class="hidden">Sort</label>
-    <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
-        <option value="title-ascending" @if($sortBy === 'title-ascending') selected @endif>Sort</option>
-        <option value="Best Selling" @if($sortBy === 'Best Selling') selected @endif>Best Selling</option>
-        <option value="Alphabetically, A-Z" @if($sortBy === 'Alphabetically, A-Z') selected @endif>Alphabetically, A-Z</option>
-        <option value="Alphabetically, Z-A" @if($sortBy === 'Alphabetically, Z-A') selected @endif>Alphabetically, Z-A</option>
-        <option value="Price, low to high" @if($sortBy === 'Price, low to high') selected @endif>Price, low to high</option>
-        <option value="Price, high to low" @if($sortBy === 'Price, high to low') selected @endif>Price, high to low</option>
-        <option value="Date, new to old" @if($sortBy === 'Date, new to old') selected @endif>Date, new to old</option>
-        <option value="Date, old to new" @if($sortBy === 'Date, old to new') selected @endif>Date, old to new</option>
-    </select>
-</div>
-
-
+                              <label for="SortBy" class="hidden">Sort</label>
+                              <select name="SortBy" id="SortBy" class="filters-toolbar__input filters-toolbar__input--sort">
+                              <option value="title-ascending" @if($sortBy === 'title-ascending') selected @endif>Sort</option>
+                              <option value="Best Selling" @if($sortBy === 'Best Selling') selected @endif>Best Selling</option>
+                              <option value="Alphabetically, A-Z" @if($sortBy === 'Alphabetically, A-Z') selected @endif>Alphabetically, A-Z</option>
+                              <option value="Alphabetically, Z-A" @if($sortBy === 'Alphabetically, Z-A') selected @endif>Alphabetically, Z-A</option>
+                              <option value="Price, low to high" @if($sortBy === 'Price, low to high') selected @endif>Price, low to high</option>
+                              <option value="Price, high to low" @if($sortBy === 'Price, high to low') selected @endif>Price, high to low</option>
+                              <option value="Date, new to old" @if($sortBy === 'Date, new to old') selected @endif>Date, new to old</option>
+                              <option value="Date, old to new" @if($sortBy === 'Date, old to new') selected @endif>Date, old to new</option>
+                              </select>
+                           </div>
                         </div>
                      </div>
                   </div>
@@ -395,9 +390,15 @@
                               <i class="icon anm anm-search-plus-r"></i>
                               </a>
                               <div class="wishlist-btn">
-                                 <a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">
+                                 @auth
+                                 <a href="#" data-product-id="{{$products->id}}" class="wishlist add-to-wishlist">
                                  <i class="icon anm anm-heart-l"></i>
                                  </a>
+                                 @else
+                                 <a href="#" data-toggle="modal" data-target="#myModal" class="wishlist">
+                                 <i class="icon anm anm-heart-l"></i>
+                                 </a>
+                                 @endauth
                               </div>
                            </div>
                            <!-- end product button -->
@@ -418,14 +419,14 @@
                            <!-- End product price -->
                            <div class="product-review">
                               @for($i = 1; $i <= 5; $i++)
-    @if($i <= floor($avg))
-      <i class="font-13 fa fa-star"></i>
-    @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
-      <i class="font-13 fa fa-star-half-o"></i>
-    @else
-      <i class="font-13 fa fa-star-o"></i>
-    @endif
-  @endfor
+                              @if($i <= floor($avg))
+                              <i class="font-13 fa fa-star"></i>
+                              @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
+                              <i class="font-13 fa fa-star-half-o"></i>
+                              @else
+                              <i class="font-13 fa fa-star-o"></i>
+                              @endif
+                              @endfor
                            </div>
                         </div>
                         <!-- End product details -->
@@ -450,7 +451,52 @@
 @section('js')
 <script>
    $(document).ready(function() {
-  $('#SortBy').on('change', function() {
+      $('.add-to-wishlist').on('click', function(e) {
+        e.preventDefault(); // prevent default form submission
+        let product_id = $(this).data('product-id');
+        let token = "{{ csrf_token() }}";
+   
+        $.ajax({
+            url: "{{ route('web.add.wishlist') }}",
+            type: "POST",
+            data: {
+                product_id: product_id,
+                _token: token
+            },
+            dataType: 'json',
+            beforeSend: function() {
+                $('.add-to-wishlist').prop('disabled', true);
+            },
+            success: function(result) {
+                if (result.status === false) {
+                    toastr.error(result.msg, 'Error', {
+                        timeOut: 3000,
+                        progressBar: true,
+                        closeButton: true
+                    });
+                } else if (result.status === true) {
+                    toastr.success(result.msg, 'Success', {
+                        timeOut: 3000,
+                        progressBar: true,
+                        closeButton: true
+                    });
+                    window.location.reload();
+                }
+            },
+            error: function(jqXHR, exception) {
+                console.log(jqXHR.responseJSON);
+                toastr.error(jqXHR.responseJSON.msg, 'Error', {
+                    timeOut: 3000,
+                    progressBar: true,
+                    closeButton: true
+                });
+            },
+            complete: function() {
+                $('.add-to-wishlist').prop('disabled', false);
+            }
+        });
+    });
+   $('#SortBy').on('change', function() {
     var sortBy = $(this).val();
     var currentUrl = window.location.href;
     var url = new URL(currentUrl);
@@ -459,11 +505,11 @@
     url.search = searchParams.toString();
     var newUrl = url.toString().replace(/,+|%2C/g, '');
     window.location.href = newUrl;
-  });
-
-
-
-
+   });
+   
+   
+   
+   
       $(".size-btn").click(function() {
        $("#color-form").submit();
      });
@@ -483,62 +529,66 @@
            selected_sizes: selectedSizes
          },
          success: function(result) {
-       let html = '';
-       result.forEach(function(products) {
-             url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
-           html += '<div class="grid-products grid--view-items" id="product_container">';
-           html += '<div class="row">';
-           html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
-           html += '<div class="product-image">';
-           html += '<a href="' + url + '">';
-           html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.image + '" src="{{ asset('admin/color/') }}/' + products.image + '" alt="image" title="product">';
-           html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.image + '" src="{{ asset('admin/color/') }}/' + products.image + '" alt="image" title="product">';
-           html += '<div class="product-labels rectangular">';
-           // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
-           html += '<span class="lbl pr-label1">new</span>';
-           html += '</div>';
-           html += '</a>';
-           html += '<div class="button-set">';
-           html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
-           html += '<i class="icon anm anm-search-plus-r"></i>';
-           html += '</a>';
-           html += '<div class="wishlist-btn">';
-           html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
-           html += '<i class="icon anm anm-heart-l"></i>';
-           html += '</a>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '<div class="product-details text-center">';
-           html += '<div class="product-name">';
-           html += '<a href="#">' + products.proname + '</a>';
-           html += '</div>';
-           html += '<div class="product-price">';
-           html += '<span class="old-price">₹' + products.mrps + '</span>';
-           html += '<span class="price">₹' + products.discounts + '</span>';
-           html += '</div>';
-           html += '<div class="product-review">';
-           html += '<i class="font-13 fa fa-star"></i>';
-           html +=        '<i class="font-13 fa fa-star"></i>';
-           html += '<i class="font-13 fa fa-star"></i>';
-           html +='<i class="font-13 fa fa-star"></i>';
-           html +='<i class="font-13 fa fa-star-o"></i>';
-           html +='<i class="font-13 fa fa-star-o"></i>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-       });
-       $('#product_container').html(html);
+    let html = '<div class="grid-products grid--view-items" id="product_container">';
+    html += '<div class="row">';
+    result.forEach(function(products) {
+        url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
+        html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
+        html += '<div class="product-image">';
+        html += '<a href="' + url + '">';
+        html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.image + '" src="{{ asset('admin/color/') }}/' + products.image + '" alt="image" title="product">';
+        html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.image + '" src="{{ asset('admin/color/') }}/' + products.image + '" alt="image" title="product">';
+        html += '<div class="product-labels rectangular">';
+        // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
+        html += '<span class="lbl pr-label1">new</span>';
+        html += '</div>';
+        html += '</a>';
+        html += '<div class="button-set">';
+        html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
+        html += '<i class="icon anm anm-search-plus-r"></i>';
+        html += '</a>';
+        html += '<div class="wishlist-btn">';
+        html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
+        html += '<i class="icon anm anm-heart-l"></i>';
+        html += '</a>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="product-details text-center">';
+        html += '<div class="product-name">';
+        html += '<a href="#">' + products.proname + '</a>';
+        html += '</div>';
+        html += '<div class="product-price">';
+        html += '<span class="old-price">₹' + products.mrps + '</span>';
+        html += '<span class="price">₹' + products.discounts + '</span>';
+        html += '</div>';
+        html += '<div class="product-review">';
+   for (var i = 1; i <= 5; i++) {
+    if (i <= Math.floor('{{$avg}}')) {
+        html += '<i class="font-13 fa fa-star"></i>';
+    } else if (i === Math.ceil('{{$avg}}') && '{{$avg}}' - Math.floor('{{$avg}}') >= 0.5) {
+        html += '<i class="font-13 fa fa-star-half-o"></i>';
+    } else {
+        html += '<i class="font-13 fa fa-star-o"></i>';
+    }
+   }
+   html += '</div>';
+   
+        html += '</div>';
+        html += '</div>';
+    });
+    html += '</div>';
+    html += '</div>';
+    $('#product_container').html(html);
    },
+   
          error: function(jqXHR, textStatus, errorThrown) {
            // Handle the error
            console.error("Error filtering products:", errorThrown);
          }
        });
      });
-
+   
       // Size FIlter
          $(".size-btn").click(function() {
        $("#filter-form").submit();
@@ -559,55 +609,58 @@
            selected_sizes: selectedSizes
          },
          success: function(result) {
-       let html = '';
-       result.forEach(function(products) {
-         url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
-           html += '<div class="grid-products grid--view-items" id="product_container">';
-           html += '<div class="row">';
-           html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
-           html += '<div class="product-image">';
-           html += '<a href="' + url + '">';
-           html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.images + '" src="{{ asset('admin/product/') }}/' + products.images + '" alt="image" title="product">';
-           html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.images + '" src="{{ asset('admin/product/') }}/' + products.images + '" alt="image" title="product">';
-           html += '<div class="product-labels rectangular">';
-           // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
-           html += '<span class="lbl pr-label1">new</span>';
-           html += '</div>';
-           html += '</a>';
-           html += '<div class="button-set">';
-           html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
-           html += '<i class="icon anm anm-search-plus-r"></i>';
-           html += '</a>';
-           html += '<div class="wishlist-btn">';
-           html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
-           html += '<i class="icon anm anm-heart-l"></i>';
-           html += '</a>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '<div class="product-details text-center">';
-           html += '<div class="product-name">';
-           html += '<a href="#">' + products.proname + '</a>';
-           html += '</div>';
-           html += '<div class="product-price">';
-           html += '<span class="old-price">₹' + products.mrps + '</span>';
-           html += '<span class="price">₹' + products.discounts + '</span>';
-           html += '</div>';
-           html += '<span class="price">' + products.size + '</span>';
-           html += '<div class="product-review">';
-           html += '<i class="font-13 fa fa-star"></i>';
-           html +=        '<i class="font-13 fa fa-star"></i>';
-           html += '<i class="font-13 fa fa-star"></i>';
-           html +='<i class="font-13 fa fa-star"></i>';
-           html +='<i class="font-13 fa fa-star-o"></i>';
-           html +='<i class="font-13 fa fa-star-o"></i>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-       });
-       $('#product_container').html(html);
+    let html = '<div class="grid-products grid--view-items" id="product_container">';
+    html += '<div class="row">';
+    result.forEach(function(products) {
+        url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
+        html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
+        html += '<div class="product-image">';
+        html += '<a href="' + url + '">';
+        html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.images + '" src="{{ asset('admin/product/') }}/' + products.images + '" alt="image" title="product">';
+        html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.images + '" src="{{ asset('admin/product/') }}/' + products.images + '" alt="image" title="product">';
+        html += '<div class="product-labels rectangular">';
+        // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
+        html += '<span class="lbl pr-label1">new</span>';
+        html += '</div>';
+        html += '</a>';
+        html += '<div class="button-set">';
+        html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
+        html += '<i class="icon anm anm-search-plus-r"></i>';
+        html += '</a>';
+        html += '<div class="wishlist-btn">';
+        html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
+        html += '<i class="icon anm anm-heart-l"></i>';
+        html += '</a>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="product-details text-center">';
+        html += '<div class="product-name">';
+        html += '<a href="#">' + products.proname + '</a>';
+        html += '</div>';
+        html += '<div class="product-price">';
+        html += '<span class="old-price">₹' + products.mrps + '</span>';
+        html += '<span class="price">₹' + products.discounts + '</span>';
+        html += '</div>';
+        html += '<span class="price">' + products.size + '</span>';
+        html += '<div class="product-review">';
+   for (var i = 1; i <= 5; i++) {
+    if (i <= Math.floor('{{$avg}}')) {
+        html += '<i class="font-13 fa fa-star"></i>';
+    } else if (i === Math.ceil('{{$avg}}') && '{{$avg}}' - Math.floor('{{$avg}}') >= 0.5) {
+        html += '<i class="font-13 fa fa-star-half-o"></i>';
+    } else {
+        html += '<i class="font-13 fa fa-star-o"></i>';
+    }
+   }
+   html += '</div>';
+   
+        html += '</div>';
+        html += '</div>';
+    });
+    html += '</div>';
+    html += '</div>';
+    $('#product_container').html(html);
    },
          error: function(jqXHR, textStatus, errorThrown) {
            // Handle the error
@@ -644,54 +697,57 @@
                    $('#addBtn').prop('disabled', true);
                },
                success: function(result) {
-       let html = '';
-       result.forEach(function(products) {
-         url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.id));
-           html += '<div class="grid-products grid--view-items" id="product_container">';
-           html += '<div class="row">';
-           html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
-           html += '<div class="product-image">';
-           html += '<a href="' + url + '">';
-           html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.image + '" src="{{ asset('admin/product/') }}/' + products.image + '" alt="image" title="product">';
-           html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.image + '" src="{{ asset('admin/product/') }}/' + products.image + '" alt="image" title="product">';
-           html += '<div class="product-labels rectangular">';
-           html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
-           html += '<span class="lbl pr-label1">new</span>';
-           html += '</div>';
-           html += '</a>';
-           html += '<div class="button-set">';
-           html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
-           html += '<i class="icon anm anm-search-plus-r"></i>';
-           html += '</a>';
-           html += '<div class="wishlist-btn">';
-           html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
-           html += '<i class="icon anm anm-heart-l"></i>';
-           html += '</a>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '<div class="product-details text-center">';
-           html += '<div class="product-name">';
-           html += '<a href="#">' + products.name + '</a>';
-           html += '</div>';
-           html += '<div class="product-price">';
-           html += '<span class="old-price">₹' + products.mrp + '</span>';
-           html += '<span class="price">₹' + products.discount + '</span>';
-           html += '</div>';
-           html += '<div class="product-review">';
-           html += '<i class="font-13 fa fa-star"></i>';
-           html +=        '<i class="font-13 fa fa-star"></i>';
-           html += '<i class="font-13 fa fa-star"></i>';
-           html +='<i class="font-13 fa fa-star"></i>';
-           html +='<i class="font-13 fa fa-star-o"></i>';
-           html +='<i class="font-13 fa fa-star-o"></i>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-           html += '</div>';
-       });
-       $('#product_container').html(html);
+    let html = '<div class="grid-products grid--view-items" id="product_container">';
+    html += '<div class="row">';
+    result.forEach(function(products) {
+        url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.id));
+        html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
+        html += '<div class="product-image">';
+        html += '<a href="' + url + '">';
+        html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.image + '" src="{{ asset('admin/product/') }}/' + products.image + '" alt="image" title="product">';
+        html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.image + '" src="{{ asset('admin/product/') }}/' + products.image + '" alt="image" title="product">';
+        html += '<div class="product-labels rectangular">';
+        // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
+        html += '<span class="lbl pr-label1">new</span>';
+        html += '</div>';
+        html += '</a>';
+        html += '<div class="button-set">';
+        html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
+        html += '<i class="icon anm anm-search-plus-r"></i>';
+        html += '</a>';
+        html += '<div class="wishlist-btn">';
+        html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
+        html += '<i class="icon anm anm-heart-l"></i>';
+        html += '</a>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="product-details text-center">';
+        html += '<div class="product-name">';
+        html += '<a href="#">' + products.name + '</a>';
+        html += '</div>';
+        html += '<div class="product-price">';
+        html += '<span class="old-price">₹' + products.mrp + '</span>';
+        html += '<span class="price">₹' + products.discount + '</span>';
+        html += '</div>';
+        html += '<div class="product-review">';
+   for (var i = 1; i <= 5; i++) {
+    if (i <= Math.floor('{{$avg}}')) {
+        html += '<i class="font-13 fa fa-star"></i>';
+    } else if (i === Math.ceil('{{$avg}}') && '{{$avg}}' - Math.floor('{{$avg}}') >= 0.5) {
+        html += '<i class="font-13 fa fa-star-half-o"></i>';
+    } else {
+        html += '<i class="font-13 fa fa-star-o"></i>';
+    }
+   }
+   html += '</div>';
+   
+        html += '</div>';
+        html += '</div>';
+    });
+    html += '</div>';
+    html += '</div>';
+    $('#product_container').html(html);
    },
                error: function(jqXHR, exception) {
                    console.log(jqXHR.responseJSON);

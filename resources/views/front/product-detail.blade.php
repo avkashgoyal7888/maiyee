@@ -170,7 +170,11 @@
                         @endif
                      </div>
                      <div class="shopify-payment-button" data-shopify="payment-button">
+                        @if(Auth::guard('web')->user() == '')
+                        <button class="shopify-payment-button__button shopify-payment-button__button--unbranded" data-toggle="modal" data-target="#myModal">Buy it now</button>
+                        @else
                         <button type="button" class="shopify-payment-button__button shopify-payment-button__button--unbranded">Buy it now</button>
+                        @endif
                      </div>
                   </div>
                   <!-- End Product Action -->
@@ -178,7 +182,15 @@
                <div class="display-table shareRow">
                   <div class="display-table-cell medium-up--one-third">
                      <div class="wishlist-btn">
-                        <a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist"><i class="icon anm anm-heart-l" aria-hidden="true"></i> <span>Add to Wishlist</span></a>
+                        @auth
+                                 <a href="#" data-product-id="{{$product->id}}" class="wishlist add-to-wishlist">
+                                 <i class="icon anm anm-heart-l"></i><span>Add to Wishlist</span>
+                                 </a>
+                                 @else
+                                 <a href="#" data-toggle="modal" data-target="#myModal" class="wishlist">
+                                 <i class="icon anm anm-heart-l"></i><span>Add to Wishlist</span>
+                                 </a>
+                                 @endauth
                      </div>
                   </div>
                   <div class="display-table-cell text-right">
@@ -1172,6 +1184,51 @@
 @section('js')
 <script>
    $(document).ready(function(){
+      $('.add-to-wishlist').on('click', function(e) {
+        e.preventDefault(); // prevent default form submission
+        let product_id = $(this).data('product-id');
+        let token = "{{ csrf_token() }}";
+   
+        $.ajax({
+            url: "{{ route('web.add.wishlist') }}",
+            type: "POST",
+            data: {
+                product_id: product_id,
+                _token: token
+            },
+            dataType: 'json',
+            beforeSend: function() {
+                $('.add-to-wishlist').prop('disabled', true);
+            },
+            success: function(result) {
+                if (result.status === false) {
+                    toastr.error(result.msg, 'Error', {
+                        timeOut: 3000,
+                        progressBar: true,
+                        closeButton: true
+                    });
+                } else if (result.status === true) {
+                    toastr.success(result.msg, 'Success', {
+                        timeOut: 3000,
+                        progressBar: true,
+                        closeButton: true
+                    });
+                    window.location.reload();
+                }
+            },
+            error: function(jqXHR, exception) {
+                console.log(jqXHR.responseJSON);
+                toastr.error(jqXHR.responseJSON.msg, 'Error', {
+                    timeOut: 3000,
+                    progressBar: true,
+                    closeButton: true
+                });
+            },
+            complete: function() {
+                $('.add-to-wishlist').prop('disabled', false);
+            }
+        });
+    });
       function qnt_incre(){
       $(".qtyBtn").on("click", function() {
         var qtyField = $(this).parent(".qtyField"),
