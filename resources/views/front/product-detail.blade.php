@@ -260,7 +260,7 @@
             <li rel="tab2"><a class="tablink">Product Reviews</a></li>
             <li rel="tab3"><a class="tablink">Size Chart</a></li>
             <li rel="tab4"><a class="tablink">Shipping &amp; Returns</a></li>
-         </ul>
+        </ul>
          <div class="tab-container">
             <div id="tab1" class="tab-content">
                <div class="product-description rte">
