@@ -47,9 +47,6 @@
                         <!-- Variant Image-->
                         <img class="grid-view-item__image hover variantImg" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product">
                         <!-- Variant Image-->
-                        <!-- product label -->
-                        <div class="product-labels rounded"><span class="lbl on-sale">Sale</span></div>
-                        <!-- End product label -->
                      </a>
                      <div class="button-set">
                         <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview" data-products-id="{{$products->id}}">
@@ -196,7 +193,7 @@
                      <!-- image --> 
                      <img  src="{{ asset('admin/tile/' . $subcat->tile) }}">
                      <!-- End image -->
-                     <h2 class="mt-2">{{$subcat->sub_name}}</h2>
+                     <h4 class="mt-2">{{$subcat->sub_name}}</h4>
                   </a>
                </div>
       </div>
