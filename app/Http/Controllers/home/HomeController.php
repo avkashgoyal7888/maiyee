@@ -33,8 +33,6 @@ use DB;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Http;
 use Mail;
-use GeneaLabs\LaravelShare\Facades\Share;
-
 
 class HomeController extends Controller
 {
