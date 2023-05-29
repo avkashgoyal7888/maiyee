@@ -288,7 +288,7 @@ class HomeController extends Controller
         $endDate = $startDate->copy()->addDays(7);
         $startFormatted = $startDate->format('D. M j');
         $endFormatted = $endDate->format('D. M j');
-        $shareButton = \Share::page('https://maiyee.in','product-detail')->facebook()->twitter()->linkedin()->telegram()->whatsapp()->reddit();
+        $shareButton = \Share::page('https://maiyee.in/product-detail/'.$req->id,$product->name)->facebook()->twitter()->linkedin()->telegram()->whatsapp()->reddit();
         return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount','startFormatted','endFormatted','shareButton'));
     }
 

@@ -1,6 +1,6 @@
 @extends('layouts.front.app')
 @section('css')
-<title>Disclaimer</title>
+<title>{{$product->name}}</title>
 <style>
    .spr-form-review-rating {
    margin-bottom: 20px;
@@ -26,6 +26,19 @@
    .spr-starrating input[type="radio"]:checked ~ label {
    color: #ffd700;
    }
+   .social-btn-sp #social-links {
+                margin: 0 auto;
+                max-width: 500px;
+            }
+            .social-btn-sp #social-links ul li {
+                display: inline-block;
+            }          
+            .social-btn-sp #social-links ul li a {
+                padding: 15px;
+                border: 1px solid #ccc;
+                margin: 1px;
+                font-size: 30px;
+            }
 </style>
 @stop
 @section('content')
@@ -194,25 +207,9 @@
                      </div>
                   </div>
                   <div class="display-table-cell text-right">
-                     <div class="social-sharing">
-                        <a target="_blank" href="#" class="btn btn--small btn--secondary btn--share share-facebook" title="Share on Facebook">
-                        <i class="fa fa-facebook-square" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Share</span>
-                        </a>
-                        <a target="_blank" href="#" class="btn btn--small btn--secondary btn--share share-twitter" title="Tweet on Twitter">
-                        <i class="fa fa-twitter" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Tweet</span>
-                        </a>
-                        <a href="#" title="Share on google+" class="btn btn--small btn--secondary btn--share" >
-                        <i class="fa fa-google-plus" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Google+</span>
-                        </a>
-                        <a target="_blank" href="#" class="btn btn--small btn--secondary btn--share share-pinterest" title="Pin on Pinterest">
-                        <i class="fa fa-pinterest" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Pin it</span>
-                        </a>
-                        <a href="#" class="btn btn--small btn--secondary btn--share share-pinterest" title="Share by Email" target="_blank">
-                        <i class="fa fa-envelope" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Email</span>
-                        </a>
-                     </div>
+                     <div class="social-btn-sp">
                         {!! $shareButton !!}
-                     {{ Share::page(url('/product-detail/'.$product->id))->facebook()->twitter()->whatsapp() }}
+                     </div>
                   </div>
                </div>
                <p id="freeShipMsg" class="freeShipMsg" data-price="199"><i class="fa fa-truck" aria-hidden="true"></i> GETTING CLOSER! ONLY <b class="freeShip"><span class="money">₹99.00</span>SHIPPING CHARGES!</b></p>
