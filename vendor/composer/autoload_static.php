@@ -127,6 +127,10 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
             'Laravel\\Sanctum\\' => 16,
             'Laravel\\Sail\\' => 13,
         ),
+        'J' => 
+        array (
+            'Jorenvh\\Share\\' => 14,
+        ),
         'I' => 
         array (
             'Illuminate\\Support\\' => 19,
@@ -345,8 +349,8 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
         ),
         'Psr\\Http\\Message\\' => 
         array (
-            0 => __DIR__ . '/..' . '/psr/http-message/src',
-            1 => __DIR__ . '/..' . '/psr/http-factory/src',
+            0 => __DIR__ . '/..' . '/psr/http-factory/src',
+            1 => __DIR__ . '/..' . '/psr/http-message/src',
         ),
         'Psr\\Http\\Client\\' => 
         array (
@@ -423,6 +427,10 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
         'Laravel\\Sail\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/sail/src',
+        ),
+        'Jorenvh\\Share\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/jorenvanhocht/laravel-share/src',
         ),
         'Illuminate\\Support\\' => 
         array (
@@ -562,6 +570,8 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
         'App\\Http\\Livewire\\Admin\\Subcategory\\Index' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Subcategory/Index.php',
         'App\\Http\\Livewire\\Admin\\Supplier\\Account' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Supplier/Account.php',
         'App\\Http\\Livewire\\Admin\\Supplier\\Index' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/Supplier/Index.php',
+        'App\\Http\\Livewire\\Admin\\User\\Address' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/User/Address.php',
+        'App\\Http\\Livewire\\Admin\\User\\Index' => __DIR__ . '/../..' . '/app/Http/Livewire/Admin/User/Index.php',
         'App\\Http\\Middleware\\AdminAuth' => __DIR__ . '/../..' . '/app/Http/Middleware/AdminAuth.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
@@ -578,6 +588,7 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
         'App\\Models\\BadgeProduct' => __DIR__ . '/../..' . '/app/Models/BadgeProduct.php',
         'App\\Models\\Banner' => __DIR__ . '/../..' . '/app/Models/Banner.php',
         'App\\Models\\Bash' => __DIR__ . '/../..' . '/app/Models/Bash.php',
+        'App\\Models\\BuyNow' => __DIR__ . '/../..' . '/app/Models/BuyNow.php',
         'App\\Models\\Cart' => __DIR__ . '/../..' . '/app/Models/Cart.php',
         'App\\Models\\Category' => __DIR__ . '/../..' . '/app/Models/Category.php',
         'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
@@ -2781,6 +2792,9 @@ class ComposerStaticInit0b3a8e0ba8d5a3fbb9f04c316f1ee845
         'Illuminate\\View\\ViewFinderInterface' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewFinderInterface.php',
         'Illuminate\\View\\ViewName' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewName.php',
         'Illuminate\\View\\ViewServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/View/ViewServiceProvider.php',
+        'Jorenvh\\Share\\Providers\\ShareServiceProvider' => __DIR__ . '/..' . '/jorenvanhocht/laravel-share/src/Providers/ShareServiceProvider.php',
+        'Jorenvh\\Share\\Share' => __DIR__ . '/..' . '/jorenvanhocht/laravel-share/src/Share.php',
+        'Jorenvh\\Share\\ShareFacade' => __DIR__ . '/..' . '/jorenvanhocht/laravel-share/src/ShareFacade.php',
         'Laravel\\Sail\\Console\\AddCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/AddCommand.php',
         'Laravel\\Sail\\Console\\Concerns\\InteractsWithDockerComposeServices' => __DIR__ . '/..' . '/laravel/sail/src/Console/Concerns/InteractsWithDockerComposeServices.php',
         'Laravel\\Sail\\Console\\InstallCommand' => __DIR__ . '/..' . '/laravel/sail/src/Console/InstallCommand.php',

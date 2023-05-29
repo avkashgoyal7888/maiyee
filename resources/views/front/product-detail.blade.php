@@ -211,6 +211,7 @@
                         <i class="fa fa-envelope" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Email</span>
                         </a>
                      </div>
+                     {{ Share::page(url('/product-detail/'.$product->id))->facebook()->twitter()->whatsapp() }}
                   </div>
                </div>
                <p id="freeShipMsg" class="freeShipMsg" data-price="199"><i class="fa fa-truck" aria-hidden="true"></i> GETTING CLOSER! ONLY <b class="freeShip"><span class="money">₹99.00</span>SHIPPING CHARGES!</b></p>

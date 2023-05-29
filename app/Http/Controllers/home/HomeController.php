@@ -286,11 +286,10 @@ class HomeController extends Controller
         $discount = $product->mrp - $product->discount;
         $startDate = Carbon::today();
         $endDate = $startDate->copy()->addDays(7);
-        
-        // Format the start and end dates
         $startFormatted = $startDate->format('D. M j');
         $endFormatted = $endDate->format('D. M j');
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount','startFormatted','endFormatted'));
+        $shareButton = \Share::page('https://maiyee.in','product-detail')->facebook()->twitter()->linkedin()->telegram()->whatsapp()->reddit();
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount','startFormatted','endFormatted','shareButton'));
     }
 
     public function subcategory(Request $request)
