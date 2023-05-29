@@ -400,14 +400,14 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder { opacity:1; -ms-fil
 .tab-slider-product .tab_drawer_heading { display:none; }
 
 /*======================================================================
-  13. Product Grid
+  13. Product Grid 
 ========================================================================*/
 .grid-products a { text-decoration:none !important; }
 @media only screen and (min-width: 992px) {
 .shop-grid-5 .grid-products .item.col-lg-2 { -ms-flex:0 0 20%; -webkit-flex:0 0 20%; flex:0 0 20%; max-width:20%; }
 }
 @media only screen and (min-width: 1540px) {
-	.shop-grid-7 .grid-products .item.col-lg-2 { -ms-flex:0 0 14.2222%; -webkit-flex:0 0 14.2222%; flex:0 0 14.2222%; max-width:14.2222%; }
+	.shop-grid-7 .grid-products .item.col-lg-2 { -ms-flex:0 0 14.2222%; -webkit-flex:0 0 14.2222%; flex:0 0 14.2222%; max-width:14.2222%; border-radius: 10px; border: solid #a64dff 1px; }
 }
 .grid-products .item .product-image .showVariantImg img { opacity:0; visibility:hidden; }
 .grid-products .item .product-image .showVariantImg .variantImg { visibility:visible; opacity:1; }

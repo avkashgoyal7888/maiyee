@@ -193,7 +193,7 @@
                      <!-- image --> 
                      <img  src="{{ asset('admin/tile/' . $subcat->tile) }}">
                      <!-- End image -->
-                     <p class="mt-2">{{$subcat->sub_name}}</p>
+                     <h4 class="mt-2">{{$subcat->sub_name}}</h4>
                   </a>
                </div>
       </div>
