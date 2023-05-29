@@ -182,6 +182,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
+        GeneaLabs\LaravelShare\Providers\ShareServiceProvider::class,
 
         /*
          * Package Service Providers...
