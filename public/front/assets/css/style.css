@@ -407,7 +407,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder { opacity:1; -ms-fil
 .shop-grid-5 .grid-products .item.col-lg-2 { -ms-flex:0 0 20%; -webkit-flex:0 0 20%; flex:0 0 20%; max-width:20%; }
 }
 @media only screen and (min-width: 1540px) {
-	.shop-grid-7 .grid-products .item.col-lg-2 { -ms-flex:0 0 14.2222%; -webkit-flex:0 0 14.2222%; flex:0 0 14.2222%; max-width:14.2222%; border-radius: 10px; border: solid #a64dff 1px; }
+	.shop-grid-7 .grid-products .item.col-lg-2 { -ms-flex:0 0 14.2222%; -webkit-flex:0 0 14.2222%; flex:0 0 14.2222%; max-width:14.2222%; border-radius: 10px; border: 1px solid #a64dff ; }
 }
 .grid-products .item .product-image .showVariantImg img { opacity:0; visibility:hidden; }
 .grid-products .item .product-image .showVariantImg .variantImg { visibility:visible; opacity:1; }
