@@ -539,11 +539,11 @@
                max: 10000,
                values: [0, 10000],
                slide: function(event, ui) {
-                   $("#amount").val("$" + ui.values[0] + " - $" + ui.values[1]);
+                   $("#amount").val("₹" + ui.values[0] + " - ₹" + ui.values[1]);
                }
            });
-           $("#amount").val("$" + $("#slider-range").slider("values", 0) +
-           " - $" + $("#slider-range").slider("values", 1));
+           $("#amount").val("₹" + $("#slider-range").slider("values", 0) +
+           " - ₹" + $("#slider-range").slider("values", 1));
        }
        price_slider();
        $('#price_filter').on('submit', function(e) {
