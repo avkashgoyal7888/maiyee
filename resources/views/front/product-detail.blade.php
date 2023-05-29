@@ -96,7 +96,12 @@
                      <a href="#" class="next" title="Next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
                   </div>
                   <div class="prInfoRow">
-                     <div class="product-stock"> <span class="instock ">In Stock</span> <span class="outstock hide">Unavailable</span> </div>
+                     <div class="product-stock">
+                        @if($quantity->quantity > 0)
+                     <span class="instock">In Stock</span>
+                     @else
+                     <span class="outstock text-danger">Out of Stock</span> </div>
+                     @endif
                      <div class="product-sku">SKU: <span class="variant-sku">{{$product->hsn_code}}</span></div>
                      <div class="product-review">
                         @for($i = 1; $i <= 5; $i++)
@@ -179,14 +184,14 @@
                         @if(Auth::guard('web')->user() == '')
                         <button class="btn btn-addto-cart" data-toggle="modal" data-target="#myModal" tabindex="0">Add To Cart</button>
                         @else
-                        <button class="btn btn-addto-cart" type="submit" tabindex="0">Add To Cart</button>
+                        <button class="btn btn-addto-cart" type="submit" tabindex="0"  {{ $quantity->quantity == 0 ? 'disabled' : '' }}>Add To Cart</button>
                         @endif
                      </div>
                      <div class="shopify-payment-button" data-shopify="payment-button">
                         @if(Auth::guard('web')->user() == '')
                         <button class="shopify-payment-button__button shopify-payment-button__button--unbranded" data-toggle="modal" data-target="#myModal">Buy it now</button>
                         @else
-                        <button type="button" class="shopify-payment-button__button shopify-payment-button__button--unbranded">Buy it now</button>
+                        <button type="button" class="shopify-payment-button__button shopify-payment-button__button--unbranded"  {{ $quantity->quantity == 0 ? 'disabled' : '' }}>Buy it now</button>
                         @endif
                      </div>
                   </div>
