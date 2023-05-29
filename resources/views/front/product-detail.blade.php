@@ -211,6 +211,7 @@
                         <i class="fa fa-envelope" aria-hidden="true"></i> <span class="share-title" aria-hidden="true">Email</span>
                         </a>
                      </div>
+                        {!! $shareButton !!}
                      {{ Share::page(url('/product-detail/'.$product->id))->facebook()->twitter()->whatsapp() }}
                   </div>
                </div>
