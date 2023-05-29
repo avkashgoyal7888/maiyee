@@ -262,7 +262,7 @@
             <li rel="tab4"><a class="tablink">Shipping &amp; Returns</a></li>
          </ul>
          <div class="tab-container">
-            <div id="tab1" class="tab-content active">
+            <div id="tab1" class="tab-content">
                <div class="product-description rte">
                   <div class="row">
                      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
