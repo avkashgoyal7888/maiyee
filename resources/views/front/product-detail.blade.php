@@ -260,60 +260,11 @@
             <li rel="tab2"><a class="tablink">Product Reviews</a></li>
             <li rel="tab3"><a class="tablink">Size Chart</a></li>
             <li rel="tab4"><a class="tablink">Shipping &amp; Returns</a></li>
-        </ul>
+         </ul>
          <div class="tab-container">
             <div id="tab1" class="tab-content">
                <div class="product-description rte">
-                  <div class="row">
-                     <div class="col-lg-12 col-md-12 col-sm-12 col-12">
-                        <table class="table">
-                           <tr>
-                              <th>Ideal For :</th>
-                              <td>{{ $productdetail->ideal }}</td>
-                           </tr>
-                           <tr>
-                              <th>Length Type :</th>
-                              <td>{{ $productdetail->length_type }}</td>
-                           </tr>
-                           <tr>
-                              <th>Brand Color :</th>
-                              <td>{{ $productdetail->brand_color }}</td>
-                           </tr>
-                           <tr>
-                              <th>Ocassion :</th>
-                              <td>{{ $productdetail->ocassion }}</td>
-                           </tr>
-                           <tr>
-                              <th>Pattern :</th>
-                              <td>{{ $productdetail->pattern }}</td>
-                           </tr>
-                           <tr>
-                              <th>Type :</th>
-                              <td>{{ $productdetail->type }}</td>
-                           </tr>
-                           <tr>
-                              <th>Fabric :</th>
-                              <td>{{ $productdetail->fabric }}</td>
-                           </tr>
-                           <tr>
-                              <th>Neck :</th>
-                              <td>{{ $productdetail->neck }}</td>
-                           </tr>
-                           <tr>
-                              <th>Sleeve :</th>
-                              <td>{{ $productdetail->sleeve }}</td>
-                           </tr>
-                           <tr>
-                              <th>Number of Contents in Sales Package :</th>
-                              <td>{{ $productdetail->sale_package }}</td>
-                           </tr>
-                           <tr>
-                              <th>Fabric Care :</th>
-                              <td>{{ $productdetail->fabric_care }}</td>
-                           </tr>
-                        </table>
-                     </div>
-                  </div>
+                  
                </div>
             </div>
             <div id="tab2" class="tab-content">
