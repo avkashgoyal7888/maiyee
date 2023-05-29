@@ -80,6 +80,8 @@
              $('#fund').modal('hide');
              $('#addFund').modal('hide');
              $('#supplierfund').modal('hide');
+             $('#addInventory').modal('hide');
+             $('#removeInventory').modal('hide');
          });
       </script>
    </body>

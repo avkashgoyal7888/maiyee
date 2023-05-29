@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Product;
 use App\Models\Color;
+use App\Models\Inventory;
 use Livewire\WithFileUploads;
 
 class Index extends Component
@@ -17,7 +18,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $size_id,$category_id, $subcategory_id, $subcategories, $category, $size, $product_id,$product, $color, $color_id;
+    public $size_id,$category_id, $subcategory_id, $subcategories, $category, $size, $product_id,$product, $color, $color_id,$quantity, $remarks;
     public $fields = [
         ['size' => ''],
     ];
@@ -80,6 +81,8 @@ class Index extends Component
         $this->size = '';
         $this->fields = [];
         $this->size_id = '';
+        $this->quantity = '';
+        $this->remarks = '';
     }
 
     protected $rules = [
@@ -134,6 +137,61 @@ class Index extends Component
             return redirect()->to('/admin/size');
         }
 
+    }
+
+    public function addInventoryData($id)
+    {
+        $store = Size::find($id);
+        if ($store) {
+            $this->size_id = $store->id;
+        } else {
+            return redirect()->to('/admin/size');
+        }
+
+    }
+
+    public function addInventory()
+    {
+        $validatedata = $this->validate([
+            'quantity' => 'required',
+            'remarks' => 'required',
+        ]);
+        $size = Size::where('id',$this->size_id)->first();
+        $data = new Inventory();
+        $data->product_id = $size->product_id;
+        $data->color_id = $size->color_id;
+        $data->size_id = $size->id;
+        $data->quantity = $this->quantity;
+        $data->remarks = $this->remarks;
+        $data->status = '1';
+        $data->save();
+        $size->quantity += $this->quantity;
+        $size->update();
+        $this->resetinputfields();
+        session()->flash('success', 'Inventory Added Successfully...');
+        $this->emit('closemodal');
+    }
+
+    public function removeInventories()
+    {
+        $validatedata = $this->validate([
+            'quantity' => 'required',
+            'remarks' => 'required',
+        ]);
+        $size = Size::where('id',$this->size_id)->first();
+        $data = new Inventory();
+        $data->product_id = $size->product_id;
+        $data->color_id = $size->color_id;
+        $data->size_id = $size->id;
+        $data->quantity = $this->quantity;
+        $data->remarks = $this->remarks;
+        $data->status = '0';
+        $data->save();
+        $size->quantity -= $this->quantity;
+        $size->update();
+        $this->resetinputfields();
+        session()->flash('success', 'Inventory Added Successfully...');
+        $this->emit('closemodal');
     }
 
     public function updateSize()

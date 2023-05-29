@@ -36,15 +36,15 @@
                   @foreach($wish as $carts)
                   <tr class="cart__row border-bottom line1 cart-flex border-top">
                      <td class="cart__image-wrapper cart-flex-item">
-                        <a href="#"><img class="cart__image" src="{{asset('admin/product/'.$carts->product->image)}}" alt="Elastic Waist Dress - Navy / Small"></a>
+                        <a href="{{route('web.product.detail',$carts->product->id)}}"><img class="cart__image" src="{{asset('admin/product/'.$carts->product->image)}}" alt="Elastic Waist Dress - Navy / Small"></a>
                      </td>
                      <td class="cart__meta small--text-center cart-flex-item">
                         <div class="list-view-item__title">
-                           <a href="#">{{$carts->product->name}} </a>
+                           <a href="{{route('web.product.detail',$carts->product->id)}}">{{$carts->product->name}} </a>
                         </div>
                      </td>
                      <td class="cart__price-wrapper">
-                        <span class="money">₹{{$carts->product->mrp}}</span>
+                        <span class="money">₹{{$carts->product->discount}}</span>
                      </td>
                   </tr>
                   @endforeach

@@ -31,6 +31,9 @@
                         <th>S. No.</th>
                         <th>Product</th>
                         <th>Size</th>
+                        <th>Quantity</th>
+                        <th>Inventory++</th>
+                        <th>Inventory--</th>
                         <th>Action</th>
                      </tr>
                   </thead>
@@ -40,6 +43,9 @@
                         <td> {{ $key +1 }} </td>
                         <td>{{ ucwords($pros->product->name) }}</td>
                         <td>{{ strtoupper($pros->size) }}</td>
+                        <td>{{ strtoupper($pros->quantity) }}</td>
+                        <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addInventory" wire:click="addInventoryData({{$pros->id}})">Inventory++</button></td>
+                        <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#removeInventory" wire:click="addInventoryData({{$pros->id}})">Inventory--</button></td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editSize({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteSize({{$pros->id}})"><i class="fas fa-trash"></i></button>
@@ -58,6 +64,74 @@
       <!-- end tab pane -->
    </div>
    <!-- end tab pane -->
+   <!-- Remove Inventory -->
+   <div wire:ignore.self class="modal" id="removeInventory" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myExtraLargeModalLabel">Edit Size</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="closemodal"></button>
+            </div>
+            <div class="modal-body">
+               <form wire:submit.prevent='removeInventories()'>
+                  <div class="modal-body">
+                     <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Quantity</label>
+                           <input type="number" class="form-control" wire:model='quantity'>
+                           @error('quantity')<span class="text-danger">{{$message}}</span>@enderror
+                           </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Remarks</label>
+                           <input type="text" class="form-control" wire:model='remarks'>
+                           @error('remarks')<span class="text-danger">{{$message}}</span>@enderror
+                           </div>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-success">Submit</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End Remove Inventory -->
+   <!-- Add Inventory -->
+   <div wire:ignore.self class="modal" id="addInventory" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myExtraLargeModalLabel">Edit Size</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="closemodal"></button>
+            </div>
+            <div class="modal-body">
+               <form wire:submit.prevent='addInventory()'>
+                  <div class="modal-body">
+                     <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Quantity</label>
+                           <input type="number" class="form-control" wire:model='quantity'>
+                           @error('quantity')<span class="text-danger">{{$message}}</span>@enderror
+                           </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Remarks</label>
+                           <input type="text" class="form-control" wire:model='remarks'>
+                           @error('remarks')<span class="text-danger">{{$message}}</span>@enderror
+                           </div>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-success">Submit</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End Add Inventory -->
    <!-- Add Modal -->
    <div wire:ignore.self class="modal" id="add" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
