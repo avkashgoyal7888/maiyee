@@ -96,13 +96,7 @@
                      <a href="#" class="next" title="Next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
                   </div>
                   <div class="prInfoRow">
-                     <div class="product-stock">
-                        @if($quantity->quantity > 0)
-                     <span class="instock">In Stock</span>
-                     @else
-                     <span class="outstock text-danger">Out of Stock</span> </div>
-                     @endif
-                     <div class="product-sku">SKU: <span class="variant-sku">{{$product->hsn_code}}</span></div>
+                     <div class="product-sku">SKU: <span class="variant-sku">{{$product->style_code}}</span></div>
                      <div class="product-review">
                         @for($i = 1; $i <= 5; $i++)
                         @if($i <= floor($avg))
@@ -158,7 +152,7 @@
                         @foreach($size as $sizes)
                         @if($sizes->color_id == app('request')->input('color_id', $proimage[0]->color_id))
                         <div data-value="{{$sizes->size}}" data-size="{{$sizes->id}}" data-color="{{$sizes->color_id}}" class="swatch-element xs available">
-                           <input class="swatchInput" id="{{$sizes->id}}" type="radio" name="size_id" value="{{$sizes->id}}" @if($sizes->id == app('request')->input('size_id')) checked @endif>
+                           <input class="swatchInput" id="{{$sizes->id}}" type="radio" name="size_id" value="{{$sizes->id}}" @if($sizes->id == app('request')->input('size_id')) checked @endif {{$sizes->quantity === 0 ? 'disabled' : ''}}>
                            <label class="swatchLbl medium rectangle" for="{{$sizes->id}}" title="XS">{{$sizes->size}}</label>
                         </div>
                         @endif
