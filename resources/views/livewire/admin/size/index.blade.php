@@ -30,10 +30,11 @@
                      <tr>
                         <th>S. No.</th>
                         <th>Product</th>
+                        <th>Color</th>
+                        <th>Image</th>
                         <th>Size</th>
                         <th>Quantity</th>
                         <th>Inventory++</th>
-                        <th>Inventory--</th>
                         <th>Action</th>
                      </tr>
                   </thead>
@@ -41,11 +42,12 @@
                      @forelse($data as $key => $pros)
                      <tr>
                         <td> {{ $key +1 }} </td>
-                        <td>{{ ucwords($pros->product->name) }}</td>
+                        <td>{{ ucwords($pros->product->style_code) }}</td>
+                        <td><button class="btn btn-lg" style="background-color: {{ $pros->color->code }};"></button></td>
+                        <td><img src="{{ asset('admin/color/' . $pros->color->image) }}" width="100" height="100" /></td>
                         <td>{{ strtoupper($pros->size) }}</td>
                         <td>{{ strtoupper($pros->quantity) }}</td>
-                        <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addInventory" wire:click="addInventoryData({{$pros->id}})">Inventory++</button></td>
-                        <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#removeInventory" wire:click="addInventoryData({{$pros->id}})">Inventory--</button></td>
+                        <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addInventory" wire:click="addInventoryData({{$pros->id}})">++</button>&nbsp;&nbsp; <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removeInventory" wire:click="addInventoryData({{$pros->id}})">--</button></td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editSize({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteSize({{$pros->id}})"><i class="fas fa-trash"></i></button>
@@ -69,7 +71,7 @@
       <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header">
-               <h5 class="modal-title" id="myExtraLargeModalLabel">Edit Size</h5>
+               <h5 class="modal-title" id="myExtraLargeModalLabel">Remove Inventory</h5>
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="closemodal"></button>
             </div>
             <div class="modal-body">
@@ -103,7 +105,7 @@
       <div class="modal-dialog modal-lg">
          <div class="modal-content">
             <div class="modal-header">
-               <h5 class="modal-title" id="myExtraLargeModalLabel">Edit Size</h5>
+               <h5 class="modal-title" id="myExtraLargeModalLabel">Add Inventory</h5>
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="closemodal"></button>
             </div>
             <div class="modal-body">

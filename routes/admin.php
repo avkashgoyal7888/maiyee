@@ -56,6 +56,7 @@ use App\Http\Controllers\Admin\HomeController;
 	// User Routes
 	Route::get('/users', function(){ return view('admin.user.index'); })->name('admin.user');
 	Route::get('/user-address/{id}', function(){ return view('admin.user.address'); })->name('admin.address');
+	Route::get('/inventory', function(){ return view('admin.inventory.index'); })->name('admin.inventory');
 });
 
 

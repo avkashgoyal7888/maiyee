@@ -91,7 +91,7 @@ class CheckOutController extends Controller
             $upd = $data;
             $cartTotal = Cart::where('user_id', Auth::guard('web')->user()->id)->sum('total');
 
-            if ($data->order_value < $cartTotal) {
+            if ($data->order_value > $cartTotal) {
             $val->errors()->add('status', 'Coupon Code Value is less your total.');
             $req->coupon_code = '';
             return response()->json(['status' => false,'msg' => 'Coupon Code Value is less your total.',]);

@@ -64,6 +64,7 @@
                   <li><a href="{{route('admin.size')}}" data-key="t-size"><i class="bx bx-hash nav-icon"></i>Size</a></li>
                   <li><a href="{{route('admin.color.image')}}" data-key="t-size"><i class="bx bx-hash nav-icon"></i>Product Image</a></li>
                   <li><a href="{{route('admin.product.detail')}}" data-key="t-size"><i class="bx bx-hash nav-icon"></i>Product Details</a></li>
+                  <li><a href="{{route('admin.inventory')}}" data-key="t-size"><i class="bx bx-hash nav-icon"></i>Inventory</a></li>
                </ul>
             </li>
             <li>

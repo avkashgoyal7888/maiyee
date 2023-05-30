@@ -278,6 +278,7 @@ class HomeController extends Controller
         $proimage = ProductImage::where('product_id', $req->id)->get();
         $nav = Head::first();
         $review = Review::where('product_id',$req->id)->get();
+        $quantity = Size::where('product_id', $req->id)->first();
         $rating = DB::table("reviews")->where("product_id", $req->id)->sum("rating");
         $count = DB::table("reviews")->where("product_id", $req->id)->count();
         $avg = $count > 0 ? $rating / $count : 0;
@@ -289,7 +290,7 @@ class HomeController extends Controller
         $startFormatted = $startDate->format('D. M j');
         $endFormatted = $endDate->format('D. M j');
         $shareButton = \Share::page('https://maiyee.in/product-detail/'.$req->id,$product->name)->facebook()->twitter()->linkedin()->telegram()->whatsapp()->reddit();
-        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount','startFormatted','endFormatted','shareButton'));
+        return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount','startFormatted','endFormatted','shareButton','quantity'));
     }
 
     public function subcategory(Request $request)
