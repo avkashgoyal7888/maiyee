@@ -15,17 +15,11 @@ class ReviewController extends Controller
     {
         if (Auth::guard('web')->user() != '') {
             $val = Validator::make($req->all(), [
-                'title' => 'required',
                 'rating' => 'required',
-                'review' => 'required',
             ]);
         } else {
             $val = Validator::make($req->all(), [
-                'name' => 'required',
-                'email' => 'required',
-                'title' => 'required',
                 'rating' => 'required',
-                'review' => 'required',
             ]);
         }
 

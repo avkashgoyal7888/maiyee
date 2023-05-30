@@ -10,6 +10,8 @@ use App\Models\Order;
 use App\Models\Cart;
 use App\Models\UserAddress;
 use App\Models\Coupon;
+use App\Models\Head;
+use App\Models\Category;
 use Auth;
 use Validator;
 use DB;
@@ -32,13 +34,14 @@ class PaymentController extends Controller
         $city = $payment->city;
         $state = $payment->state;
         $zip = $payment->zip;
+        $order = $payment->order_id;
         $merchantKey = 'cSATia'; // Your merchant key
         $merchantSalt = 'h4l22zSM'; // Your merchant salt
         $payuEndpoint = 'https://secure.payu.in/_payment/';
 
         $params = [
             'key' => $merchantKey,
-            'txnid' => uniqid(),
+            'txnid' => $order,
             'amount' => $amount,
             'productinfo' => $product,
             'firstname' => $firstName,
@@ -63,4 +66,64 @@ class PaymentController extends Controller
 
         return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint]);
     }
+
+    public function orderCancel(Request $request)
+    {
+        $cancelData = $request->all();
+        $ref = $cancelData['txnid'];
+        $txnid = $cancelData['mihpayid'];
+        $status = $cancelData['status'];
+        $order = Order::where('order_id', $ref)->first();
+        if ($order) {
+            // Update the order status to indicate cancellation
+            $order->txnid = $txnid;
+            $order->order_status = $status;
+            $order->update();
+    
+        }
+            $cartNav = Cart::get();
+            $cartTotalnav = 0;
+            $cartCount = 0;
+            if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
+        }
+            $nav = Head::first();
+            $cat = Category::get();
+            return view('front.cancel', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'order'));
+    }
+
+    public function orderSuccess()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
+        return view('front.success',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
+    }
+
+    public function orderFail()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
+        return view('front.fail',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
+    }
+
 }

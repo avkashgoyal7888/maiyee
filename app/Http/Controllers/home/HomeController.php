@@ -149,54 +149,6 @@ class HomeController extends Controller
         return view('front.orders',compact('cartNav','cartTotalnav','cartCount','nav','cat','order', 'orderdetail'));
     }
 
-    public function orderSuccess()
-    {
-        $cartNav = Cart::get();
-        $cartTotalnav = 0;
-        $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
-        }
-        $nav = Head::first();
-        $cat = Category::get();
-        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
-        return view('front.success',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
-    }
-
-    public function orderFail()
-    {
-        $cartNav = Cart::get();
-        $cartTotalnav = 0;
-        $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
-        }
-        $nav = Head::first();
-        $cat = Category::get();
-        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
-        return view('front.fail',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
-    }
-
-    public function orderCancel()
-    {
-        $cartNav = Cart::get();
-        $cartTotalnav = 0;
-        $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
-        }
-        $nav = Head::first();
-        $cat = Category::get();
-        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
-        return view('front.cancel',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
-    }
-
     public function refund()
     {
         $cartNav = Cart::get();

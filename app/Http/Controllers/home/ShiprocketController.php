@@ -248,7 +248,6 @@ class ShiprocketController extends Controller
                     $order->payable = $payable;
                     $order->shipping_charges = $shipping;
                     $order->payment_method = $payment;
-                    $order->order_status = 'placed';
                     $order->save();
                     $order_items = [];
                 foreach ($order_details as $order_detail) {
@@ -307,32 +306,24 @@ class ShiprocketController extends Controller
                     'weight' => 0.300,
                 ];
         // Create the order
-                $response = $client->post('external/orders/create/adhoc', [
-                    'headers' => [
-                        'Content-Type' => 'application/json',
-                        'Authorization' => 'Bearer '.$access_token,
-                ],
-                    'json' => $orderData,
-                ]);
+                if ($payment_method == 'payu') {
+    return response()->json(['status' => true, 'msg' => 'Redirecting to Payment....']);
+} else {
+    $response = $client->post('external/orders/create/adhoc', [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $access_token,
+        ],
+        'json' => $orderData,
+    ]);
 
-                if ($response->getStatusCode() == 200) {
-                    Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
-                    return response()->json(['status'=>true, 'msg'=>'Order Successfully....']);
-                    if ($req->cash == 'yes') {
-                        return redirect()->route('web.success');
-                    } elseif($req->payu == 'yes') {
-                        return redirect()->route('web.home');
-                }
-                    // $result = json_decode($response->getBody()->getContents());
-                    // // Handle the successful order placement
-                    // echo "Order created with ID: " . $order_id;
-                } else {
-                    return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later.....']);
-                    // $result = json_decode($response->getBody()->getContents());
-                    // $error_message = $result->message;
-                    // Handle the error
-                    // echo "Error creating order: " . $error_message;
-                }
+    if ($response->getStatusCode() == 200) {
+        Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
+        return response()->json(['status' => true, 'msg' => 'Order Successfully....']);
+    } else {
+        return response()->json(['status' => false, 'msg' => 'Something went wrong, try again later.....']);
+    }
+}
             }
         }
 
@@ -565,7 +556,6 @@ class ShiprocketController extends Controller
                     $order->payable = $payable;
                     $order->shipping_charges = $shipping;
                     $order->payment_method = $payment;
-                    $order->order_status = 'placed';
                     $order->save();
                     $order_items = [];
                 foreach ($order_details as $order_detail) {
@@ -624,32 +614,25 @@ class ShiprocketController extends Controller
                     'weight' => 0.300,
                 ];
         // Create the order
-                $response = $client->post('external/orders/create/adhoc', [
-                    'headers' => [
-                        'Content-Type' => 'application/json',
-                        'Authorization' => 'Bearer '.$access_token,
-                ],
-                    'json' => $orderData,
-                ]);
+                if ($payment_method == 'payu') {
+    return response()->json(['status' => true, 'msg' => 'Redirecting to Payment....']);
+} else {
+    $response = $client->post('external/orders/create/adhoc', [
+        'headers' => [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Bearer ' . $access_token,
+        ],
+        'json' => $orderData,
+    ]);
 
-                if ($response->getStatusCode() == 200) {
-                    BuyNow::where('user_id', Auth::guard('web')->user()->id)->delete();
-                    return response()->json(['status'=>true, 'msg'=>'Order Successfully....']);
-                    if ($req->cash == 'yes') {
-                        return redirect()->route('web.success');
-                    } elseif($req->payu == 'yes') {
-                        return redirect()->route('web.home');
-                }
-                    // $result = json_decode($response->getBody()->getContents());
-                    // // Handle the successful order placement
-                    // echo "Order created with ID: " . $order_id;
-                } else {
-                    return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later.....']);
-                    // $result = json_decode($response->getBody()->getContents());
-                    // $error_message = $result->message;
-                    // Handle the error
-                    // echo "Error creating order: " . $error_message;
-                }
+    if ($response->getStatusCode() == 200) {
+        BuyNow::where('user_id', Auth::guard('web')->user()->id)->delete();
+        return response()->json(['status' => true, 'msg' => 'Order Successfully....']);
+    } else {
+        return response()->json(['status' => false, 'msg' => 'Something went wrong, try again later.....']);
+    }
+}
+
             }
         }
         

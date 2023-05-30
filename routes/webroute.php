@@ -58,16 +58,18 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 	Route::post('/review-submit', [ReviewController::class, 'reviewSubmit'])->name('web.review.submit');
 
 	Route::group(['middleware'=>'auth'], function() {
-		Route::any('/pay', [PaymentController::class, 'pay'])->name('payment.pay');
+		Route::controller(PaymentController::class)->group(function(){
+			Route::any('/pay', 'pay')->name('payment.pay');
+			Route::any('/order-success', 'orderSuccess')->name('web.success');
+			Route::any('/order-fail', 'orderFail')->name('web.fail');
+			Route::any('/order-cancel', 'orderCancel')->name('web.cancel');
+		});
 
 		Route::post('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
 		Route::post('/buy-order', [ShiprocketController::class, 'buyOrder'])->name('web.buy.create');
 		Route::controller(HomeController::class)->group(function(){
 			Route::get('/cart', 'cart')->name('web.cart');
 			Route::get('/wish', 'wish')->name('web.wish');
-			Route::any('/order-success', 'orderSuccess')->name('web.success');
-			Route::any('/order-fail', 'orderFail')->name('web.fail');
-			Route::any('/order-cancel', 'orderCancel')->name('web.cancel');
 			Route::get('/orders', 'orders')->name('web.orders');
 			Route::get('/logout', 'logOut')->name('web.logout');
 		});
