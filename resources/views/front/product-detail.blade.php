@@ -224,7 +224,7 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
                <img src="{{asset('front/assets/images/credit-card.png')}}" alt="Safe Payment" title="Safe Payment" />
                <div class="details">
-                  <h4>Safe Payment</h4>
+                  <h3>SAFE PAYMENTS</h3>
                   Pay with the world's most payment methods.
                </div>
             </div>
@@ -239,7 +239,7 @@
                <img src="{{asset('front/assets/images/worldwide.png')}}" alt="Worldwide Delivery" title="Worldwide Delivery" />
                <div class="details">
                   <h3>All Over India Delivery</h3>
-                  FREE &amp; fast shipping to over 200+ cities &amp; regions.
+                  Fast shipping to over 200+ cities &amp; regions.
                </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
