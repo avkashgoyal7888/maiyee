@@ -159,7 +159,7 @@
                         @endforeach
                      </div>
                   </div>
-                  <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a> <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a></p>
+                  <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a></p>
                   <!-- Product Action -->
                   <div class="product-action clearfix">
                      <div class="product-form__item--quantity">
@@ -224,29 +224,29 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
                <img src="{{asset('front/assets/images/credit-card.png')}}" alt="Safe Payment" title="Safe Payment" />
                <div class="details">
-                  <h4>Safe Payment</h4>
+                  <h3>SAFE PAYMENTS</h3>
                   Pay with the world's most payment methods.
                </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
                <img src="{{asset('front/assets/images/shield.png')}}" alt="Confidence" title="Confidence" />
                <div class="details">
-                  <h3>Confidence</h3>
+                  <h3>Security</h3>
                   Protection covers your purchase and personal data.
                </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
                <img src="{{asset('front/assets/images/worldwide.png')}}" alt="Worldwide Delivery" title="Worldwide Delivery" />
                <div class="details">
-                  <h3>Worldwide Delivery</h3>
-                  FREE &amp; fast shipping to over 200+ cities &amp; regions.
+                  <h3>All Over India Delivery</h3>
+                  Fast shipping to over 200+ cities &amp; regions.
                </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
                <img src="{{asset('front/assets/images/phone-call.png')}}" alt="Hotline" title="Hotline" />
                <div class="details">
                   <h3>Hotline</h3>
-                  Talk to help line for your question on +91-8273028229
+                  Talk to help line for your question on +91-9904145427
                </div>
             </div>
          </div>
@@ -315,7 +315,110 @@
                   </div>
                </div>
             </div>
-            
+            <div id="tab2" class="tab-content">
+               <div id="shopify-product-reviews">
+                  <div class="spr-container">
+                     <div class="spr-header clearfix">
+                        <div class="spr-summary">
+                           <span class="product-review">@for($i = 1; $i <= 5; $i++)
+                           @if($i <= floor($avg))
+                           <i class="font-13 fa fa-star"></i>
+                           @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
+                           <i class="font-13 fa fa-star-half-o"></i>
+                           @else
+                           <i class="font-13 fa fa-star-o"></i>
+                           @endif
+                           @endfor<span class="spr-summary-actions-togglereviews">Based on {{$count}} reviews</span></span>
+                           <span class="spr-summary-actions">
+                           <a href="#" class="spr-summary-actions-newreview btn">Write a review</a>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="spr-content">
+                        <div class="spr-form clearfix">
+                           <form id="review-form" class="new-review-form">
+                              <h3 class="spr-form-title">Write a review</h3>
+                              <fieldset class="spr-form-contact">
+                                 @if(Auth::guard('web')->user() == '')
+                                 <div class="spr-form-contact-name">
+                                    <label class="spr-form-label" for="review_author_10508262282">Name</label>
+                                    <input class="spr-form-input spr-form-input-text" type="text" name="name" placeholder="Enter your name">
+                                 </div>
+                                 <div class="spr-form-contact-email">
+                                    <label class="spr-form-label" for="review_email_10508262282">Email</label>
+                                    <input class="spr-form-input spr-form-input-email" type="email" name="email" placeholder="john.smith@example.com">
+                                 </div>
+                                 @elseif(Auth::guard('web')->user() != '')
+                                 <div class="spr-form-contact-name">
+                                    <label class="spr-form-label" for="review_author_10508262282">Name</label>
+                                    <input class="spr-form-input spr-form-input-text" type="text" name="name" value="{{Auth::guard('web')->user()->name}}" readonly>
+                                 </div>
+                                 <div class="spr-form-contact-email">
+                                    <label class="spr-form-label" for="review_email_10508262282">Email</label>
+                                    <input class="spr-form-input spr-form-input-email" type="text" name="email" value="{{Auth::guard('web')->user()->email}}" readonly>
+                                 </div>
+                                 @endif
+                              </fieldset>
+                              <fieldset class="spr-form-review">
+                                 <div class="spr-form-review-rating">
+                                    <label class="spr-form-label">Rating</label>
+                                    <div class="spr-form-input spr-starrating">
+                                       <input type="radio" id="star1" name="rating" value="5" /><label for="star1" title="1 star"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star2" name="rating" value="4" /><label for="star2" title="2 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star4" name="rating" value="2" /><label for="star4" title="4 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star5" name="rating" value="1" /><label for="star5" title="5 stars"><i class="fa fa-star"></i></label>
+                                    </div>
+                                 </div>
+                                 <div class="spr-form-review-title">
+                                    <label class="spr-form-label" for="review_title_10508262282">Review Title</label>
+                                    <input class="spr-form-input spr-form-input-text " type="text" name="title" placeholder="Give your review a title">
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                 </div>
+                                 <div class="spr-form-review-title">
+                                    <label class="spr-form-label" for="review_title_10508262282">Image</label>
+                                    <input class="spr-form-input spr-form-input-text " type="file" name="image[]" multiple>
+                                 </div>
+                                 <div class="spr-form-review-body">
+                                    <label class="spr-form-label" for="review_body_10508262282">Body of Review</label>
+                                    <div class="spr-form-input">
+                                       <textarea class="spr-form-input spr-form-input-textarea " name="review" rows="4"placeholder="Write your comments here"></textarea>
+                                    </div>
+                                 </div>
+                              </fieldset>
+                              <fieldset class="spr-form-actions">
+                                 <input type="submit" class="spr-button spr-button-primary button button-primary btn btn-primary" value="Submit Review">
+                              </fieldset>
+                           </form>
+                        </div>
+                        <div class="spr-reviews">
+                           @foreach($review as $reviews)
+                           <div class="spr-review">
+                              <div class="spr-review-header">
+                                 @foreach($rim->where('review_id', $reviews->id) as $rims)
+                                 <img src="{{ asset('admin/review/' . $rims->image) }}" width="300" height="100" />
+                                 @endforeach
+                                 <br>
+                                 <span class="product-review spr-starratings spr-review-header-starratings">
+                                 <span class="reviewLink">
+                                 @for($i = 1; $i <= $reviews->rating; $i++)
+                                 <i class="fa fa-star"></i>
+                                 @endfor
+                                 </span>
+                                 </span>
+                                 <h3 class="spr-review-header-title">{{$reviews->title}}</h3>
+                                 <span class="spr-review-header-byline"><strong>{{$reviews->name}}</strong> on <strong>{{ $reviews->created_at->format('M d, Y') }}</strong></span>
+                              </div>
+                              <div class="spr-review-content">
+                                 <p class="spr-review-content-body">{{$reviews->review}}</p>
+                              </div>
+                           </div>
+                           @endforeach
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
             <div id="tab3" class="tab-content">
                <h3>WOMEN'S BODY SIZING CHART</h3>
                <table>
@@ -425,653 +528,7 @@
          </div>
       </div>
       <!--End Product Tabs-->
-      <!--Related Product Slider-->
-      <div class="related-product grid-products">
-         <header class="section-header">
-            <h2 class="section-header__title text-center h2"><span>Related Products</span></h2>
-            <p class="sub-heading">You can stop autoplay, increase/decrease aniamtion speed and number of grid to show and products from store admin.</p>
-         </header>
-         <div class="productPageSlider">
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image1.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image1-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image1-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                     <!-- product label -->
-                     <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div>
-                     <!-- End product label -->
-                  </a>
-                  <!-- end product image -->
-                  <!-- Start product button -->
-                  <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                     <button class="btn btn-addto-cart" type="button" tabindex="0">Select Options</button>
-                  </form>
-                  <div class="button-set">
-                     <a href="#" title="Quick View" class="quick-view" tabindex="0">
-                     <i class="icon anm anm-search-plus-r"></i>
-                     </a>
-                     <div class="wishlist-btn">
-                        <a class="wishlist add-to-wishlist" href="wishlist.html">
-                        <i class="icon anm anm-heart-l"></i>
-                        </a>
-                     </div>
-                  </div>
-                  <!-- end product button -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Edna Dress</a>
-                  </div>
-                  <!-- End product name -->
-                  <!-- product price -->
-                  <div class="product-price">
-                     <span class="old-price">$500.00</span>
-                     <span class="price">$600.00</span>
-                  </div>
-                  <!-- End product price -->
-                  <div class="product-review">
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star-o"></i>
-                     <i class="font-13 fa fa-star-o"></i>
-                  </div>
-                  <!-- Variant -->
-                  <ul class="swatches">
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant1.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant2.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant4.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant5.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant6.jpg')}}" alt="image" /></li>
-                  </ul>
-                  <!-- End Variant -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image2.jpg')}}" src="{{asset('front/assets/images/product-images/product-image2.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image2-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image2-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-                  <!-- Start product button -->
-                  <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                     <button class="btn btn-addto-cart" type="button" tabindex="0">Select Options</button>
-                  </form>
-                  <div class="button-set">
-                     <a href="#" title="Quick View" class="quick-view" tabindex="0">
-                     <i class="icon anm anm-search-plus-r"></i>
-                     </a>
-                     <div class="wishlist-btn">
-                        <a class="wishlist add-to-wishlist" href="wishlist.html">
-                        <i class="icon anm anm-heart-l"></i>
-                        </a>
-                     </div>
-                  </div>
-                  <!-- end product button -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Elastic Waist Dress</a>
-                  </div>
-                  <!-- End product name -->
-                  <!-- product price -->
-                  <div class="product-price">
-                     <span class="price">$748.00</span>
-                  </div>
-                  <!-- End product price -->
-                  <div class="product-review">
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                  </div>
-                  <!-- Variant -->
-                  <ul class="swatches">
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant2-1.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant2-2.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant2-3.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant2-4.jpg')}}" alt="image" /></li>
-                  </ul>
-                  <!-- End Variant -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image3.jpg')}}" src="{{asset('front/assets/images/product-images/product-image3.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image3-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image3-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                     <!-- product label -->
-                     <div class="product-labels rectangular"><span class="lbl pr-label2">Hot</span></div>
-                     <!-- End product label -->
-                  </a>
-                  <!-- end product image -->
-                  <!-- Start product button -->
-                  <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                     <button class="btn btn-addto-cart" type="button" tabindex="0">Select Options</button>
-                  </form>
-                  <div class="button-set">
-                     <a href="#" title="Quick View" class="quick-view" tabindex="0">
-                     <i class="icon anm anm-search-plus-r"></i>
-                     </a>
-                     <div class="wishlist-btn">
-                        <a class="wishlist add-to-wishlist" href="wishlist.html">
-                        <i class="icon anm anm-heart-l"></i>
-                        </a>
-                     </div>
-                  </div>
-                  <!-- end product button -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">3/4 Sleeve Kimono Dress</a>
-                  </div>
-                  <!-- End product name -->
-                  <!-- product price -->
-                  <div class="product-price">
-                     <span class="price">$550.00</span>
-                  </div>
-                  <!-- End product price -->
-                  <div class="product-review">
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star-o"></i>
-                  </div>
-                  <!-- Variant -->
-                  <ul class="swatches">
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3-1.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3-2.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3-3.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3-4.jpg')}}" alt="image" /></li>
-                  </ul>
-                  <!-- End Variant -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image4.jpg')}}" src="{{asset('front/assets/images/product-images/product-image4.jpg')}}" alt="image" title="product" />
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image4-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image4-1.jpg')}}" alt="image" title="product" />
-                     <!-- End hover image -->
-                     <!-- product label -->
-                     <div class="product-labels"><span class="lbl on-sale">Sale</span></div>
-                     <!-- End product label -->
-                  </a>
-                  <!-- end product image -->
-                  <!-- Start product button -->
-                  <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                     <button class="btn btn-addto-cart" type="button" tabindex="0">Select Options</button>
-                  </form>
-                  <div class="button-set">
-                     <a href="#" title="Quick View" class="quick-view" tabindex="0">
-                     <i class="icon anm anm-search-plus-r"></i>
-                     </a>
-                     <div class="wishlist-btn">
-                        <a class="wishlist add-to-wishlist" href="wishlist.html">
-                        <i class="icon anm anm-heart-l"></i>
-                        </a>
-                     </div>
-                  </div>
-                  <!-- end product button -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Cape Dress</a>
-                  </div>
-                  <!-- End product name -->
-                  <!-- product price -->
-                  <div class="product-price">
-                     <span class="old-price">$900.00</span>
-                     <span class="price">$788.00</span>
-                  </div>
-                  <!-- End product price -->
-                  <div class="product-review">
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star-o"></i>
-                     <i class="font-13 fa fa-star-o"></i>
-                  </div>
-                  <!-- Variant -->
-                  <ul class="swatches">
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant4-1.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant4-2.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant4-3.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant4-4.jpg')}}" alt="image" /></li>
-                  </ul>
-                  <!-- End Variant -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload"data-src="{{asset('front/ assets/images/product-images/product-image5.jpg')}}" src="{{asset('front/assets/images/product-images/product-image5.jpg')}}" alt="image" title="product" />
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image5-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image5-1.jpg')}}" alt="image" title="product" />
-                     <!-- End hover image -->
-                     <!-- product label -->
-                     <div class="product-labels"><span class="lbl on-sale">Sale</span></div>
-                     <!-- End product label -->
-                  </a>
-                  <!-- end product image -->
-                  <!-- Start product button -->
-                  <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                     <button class="btn btn-addto-cart" type="button" tabindex="0">Select Options</button>
-                  </form>
-                  <div class="button-set">
-                     <a href="#" title="Quick View" class="quick-view" tabindex="0">
-                     <i class="icon anm anm-search-plus-r"></i>
-                     </a>
-                     <div class="wishlist-btn">
-                        <a class="wishlist add-to-wishlist" href="wishlist.html">
-                        <i class="icon anm anm-heart-l"></i>
-                        </a>
-                     </div>
-                  </div>
-                  <!-- end product button -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Paper Dress</a>
-                  </div>
-                  <!-- End product name -->
-                  <!-- product price -->
-                  <div class="product-price">
-                     <span class="price">$550.00</span>
-                  </div>
-                  <!-- End product price -->
-                  <div class="product-review">
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                  </div>
-                  <!-- Variant -->
-                  <ul class="swatches">
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3-1.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3-2.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3-3.jpg')}}" alt="image" /></li>
-                     <li class="swatch medium rounded"><img src="{{asset('front/assets/images/product-images/variant3-4.jpg')}}" alt="image" /></li>
-                  </ul>
-                  <!-- End Variant -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image6.jpg')}}" src="{{asset('front/assets/images/product-images/product-image6.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image6-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image6-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                     <!-- product label -->
-                     <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div>
-                     <!-- End product label -->
-                  </a>
-                  <!-- end product image -->
-                  <!-- Start product button -->
-                  <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                     <button class="btn btn-addto-cart" type="button" tabindex="0">Select Options</button>
-                  </form>
-                  <div class="button-set">
-                     <a href="#" title="Quick View" class="quick-view" tabindex="0">
-                     <i class="icon anm anm-search-plus-r"></i>
-                     </a>
-                     <div class="wishlist-btn">
-                        <a class="wishlist add-to-wishlist" href="wishlist.html">
-                        <i class="icon anm anm-heart-l"></i>
-                        </a>
-                     </div>
-                  </div>
-                  <!-- end product button -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Zipper Jacket</a>
-                  </div>
-                  <!-- End product name -->
-                  <!-- product price -->
-                  <div class="product-price">
-                     <span class="price">$788.00</span>
-                  </div>
-                  <!-- End product price -->
-                  <div class="product-review">
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star-o"></i>
-                     <i class="font-13 fa fa-star-o"></i>
-                  </div>
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image7.jpg')}}" src="{{asset('front/assets/images/product-images/product-image7.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image7-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image7-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-                  <!-- Start product button -->
-                  <form class="variants add" action="#" onclick="window.location.href='cart.html'"method="post">
-                     <button class="btn btn-addto-cart" type="button" tabindex="0">Select Options</button>
-                  </form>
-                  <div class="button-set">
-                     <a href="#" title="Quick View" class="quick-view" tabindex="0">
-                     <i class="icon anm anm-search-plus-r"></i>
-                     </a>
-                     <div class="wishlist-btn">
-                        <a class="wishlist add-to-wishlist" href="wishlist.html">
-                        <i class="icon anm anm-heart-l"></i>
-                        </a>
-                     </div>
-                  </div>
-                  <!-- end product button -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Zipper Jacket</a>
-                  </div>
-                  <!-- End product name -->
-                  <!-- product price -->
-                  <div class="product-price">
-                     <span class="price">$748.00</span>
-                  </div>
-                  <!-- End product price -->
-                  <div class="product-review">
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                     <i class="font-13 fa fa-star"></i>
-                  </div>
-               </div>
-               <!-- End product details -->
-            </div>
-         </div>
       </div>
-      <!--End Related Product Slider-->
-      <!--Recently Product Slider-->
-      <div class="related-product grid-products">
-         <header class="section-header">
-            <h2 class="section-header__title text-center h2"><span>Recently Viewed Product</span></h2>
-            <p class="sub-heading">You can manage this section from store admin as describe in above section</p>
-         </header>
-         <div class="productPageSlider">
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image6.jpg')}}" src="{{asset('front/assets/images/product-images/product-image6.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image6-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image6-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                     <!-- product label -->
-                     <div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div>
-                     <!-- End product label -->
-                  </a>
-                  <!-- end product image -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Zipper Jacket</a>
-                  </div>
-                  <!-- End product name -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image7.jpg')}}" src="{{asset('front/assets/images/product-images/product-image7.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image7-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image7-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Zipper Jacket</a>
-                  </div>
-                  <!-- End product name -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image8.jpg')}}" src="{{asset('front/assets/images/product-images/product-image8.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image8-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image8-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Workers Shirt Jacket</a>
-                  </div>
-                  <!-- End product name -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image9.jpg')}}" src="{{asset('front/assets/images/product-images/product-image9.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image9-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image9-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Watercolor Sport Jacket in Brown/Blue</a>
-                  </div>
-                  <!-- End product name -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image10.jpg')}}" src="{{asset('front/assets/images/product-images/product-image10.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image10-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image10-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Washed Wool Blazer</a>
-                  </div>
-                  <!-- End product name -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image13.jpg')}}" src="{{asset('front/assets/images/product-images/product-image13.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image13-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image13-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Ashton Necklace</a>
-                  </div>
-                  <!-- End product name -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image14.jpg')}}" src="{{asset('front/assets/images/product-images/product-image14.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image14-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image14-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Ara Ring</a>
-                  </div>
-                  <!-- End product name -->
-               </div>
-               <!-- End product details -->
-            </div>
-            <div class="col-12 item">
-               <!-- start product image -->
-               <div class="product-image">
-                  <!-- start product image -->
-                  <a href="#">
-                     <!-- image -->
-                     <img class="primary blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image15.jpg')}}" src="{{asset('front/assets/images/product-images/product-image15.jpg')}}" alt="image" title="product">
-                     <!-- End image -->
-                     <!-- Hover image -->
-                     <img class="hover blur-up lazyload" data-src="{{asset('front/assets/images/product-images/product-image15-1.jpg')}}" src="{{asset('front/assets/images/product-images/product-image15-1.jpg')}}" alt="image" title="product">
-                     <!-- End hover image -->
-                  </a>
-                  <!-- end product image -->
-               </div>
-               <!-- end product image -->
-               <!--start product details -->
-               <div class="product-details text-center">
-                  <!-- product name -->
-                  <div class="product-name">
-                     <a href="#">Ara Ring</a>
-                  </div>
-                  <!-- End product name -->
-               </div>
-               <!-- End product details -->
-            </div>
-         </div>
-      </div>
-      <!--End Recently Product Slider-->
-   </div>
    <!--#ProductSection-product-template-->
 </div>
 <!--MainContent-->

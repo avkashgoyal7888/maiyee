@@ -1,7 +1,7 @@
 <footer class="footer">
 <div class="container bottom_border">
 <div class="row">
-    <div class=" col-sm-4 col-md-4  col-lg-4 col-12">
+    <div class=" col-sm-6 col-md-6  col-lg-6 col-12">
 <h5 class="headin5_amrc col_white_amrc pt2">Contact Us</h5>
 <!--headin5_amrc-->
 <p><i class="fa fa-location-arrow"></i>  3006 Shree Kuberji Empire, Kadodara Road, Saroli, Surat Gujrat (395010)</p>
@@ -12,22 +12,7 @@
 </div>
 
 
-<div class=" col-sm-4 col-md-4  col-lg-4 col-12">
-<h5 class="headin5_amrc col_white_amrc pt2">Quick links</h5>
-<!--headin5_amrc-->
-<ul class="footer_ul_amrc">
-<li><a href="#">Shopping Cart</a></li>
-<li><a href="#">Checkout</a></li>
-<li><a href="#">Order-sucess</a></li>
-<li><a href="#">Ebay & Amazon</a></li>
-<li><a href="#">Hair Masking/Clipping</a></li>
-<li><a href="#">Image Cropping</a></li>
-</ul>
-<!--footer_ul_amrc ends here-->
-</div>
-
-
-<div class=" col-sm-4 col-md-4  col-lg-4 col-12">
+<div class=" col-sm-6 col-md-6  col-lg-6 col-12">
 <h5 class="headin5_amrc col_white_amrc pt2">Important Links</h5>
 <!--headin5_amrc-->
 <ul class="footer_ul_amrc">
