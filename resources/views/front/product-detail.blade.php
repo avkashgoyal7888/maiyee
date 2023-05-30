@@ -232,14 +232,14 @@
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
                <img src="{{asset('front/assets/images/shield.png')}}" alt="Confidence" title="Confidence" />
                <div class="details">
-                  <h3>Confidence</h3>
+                  <h3>Security</h3>
                   Protection covers your purchase and personal data.
                </div>
             </div>
             <div class="col-12 col-sm-6 col-md-6 col-lg-3 feature">
                <img src="{{asset('front/assets/images/worldwide.png')}}" alt="Worldwide Delivery" title="Worldwide Delivery" />
                <div class="details">
-                  <h3>Worldwide Delivery</h3>
+                  <h3>All Over India Delivery</h3>
                   FREE &amp; fast shipping to over 200+ cities &amp; regions.
                </div>
             </div>
@@ -247,7 +247,7 @@
                <img src="{{asset('front/assets/images/phone-call.png')}}" alt="Hotline" title="Hotline" />
                <div class="details">
                   <h3>Hotline</h3>
-                  Talk to help line for your question on +91-8273028229
+                  Talk to help line for your question on +91-9904145427
                </div>
             </div>
          </div>
@@ -316,7 +316,110 @@
                   </div>
                </div>
             </div>
-            
+            <div id="tab2" class="tab-content">
+               <div id="shopify-product-reviews">
+                  <div class="spr-container">
+                     <div class="spr-header clearfix">
+                        <div class="spr-summary">
+                           <span class="product-review">@for($i = 1; $i <= 5; $i++)
+                           @if($i <= floor($avg))
+                           <i class="font-13 fa fa-star"></i>
+                           @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
+                           <i class="font-13 fa fa-star-half-o"></i>
+                           @else
+                           <i class="font-13 fa fa-star-o"></i>
+                           @endif
+                           @endfor<span class="spr-summary-actions-togglereviews">Based on {{$count}} reviews</span></span>
+                           <span class="spr-summary-actions">
+                           <a href="#" class="spr-summary-actions-newreview btn">Write a review</a>
+                           </span>
+                        </div>
+                     </div>
+                     <div class="spr-content">
+                        <div class="spr-form clearfix">
+                           <form id="review-form" class="new-review-form">
+                              <h3 class="spr-form-title">Write a review</h3>
+                              <fieldset class="spr-form-contact">
+                                 @if(Auth::guard('web')->user() == '')
+                                 <div class="spr-form-contact-name">
+                                    <label class="spr-form-label" for="review_author_10508262282">Name</label>
+                                    <input class="spr-form-input spr-form-input-text" type="text" name="name" placeholder="Enter your name">
+                                 </div>
+                                 <div class="spr-form-contact-email">
+                                    <label class="spr-form-label" for="review_email_10508262282">Email</label>
+                                    <input class="spr-form-input spr-form-input-email" type="email" name="email" placeholder="john.smith@example.com">
+                                 </div>
+                                 @elseif(Auth::guard('web')->user() != '')
+                                 <div class="spr-form-contact-name">
+                                    <label class="spr-form-label" for="review_author_10508262282">Name</label>
+                                    <input class="spr-form-input spr-form-input-text" type="text" name="name" value="{{Auth::guard('web')->user()->name}}" readonly>
+                                 </div>
+                                 <div class="spr-form-contact-email">
+                                    <label class="spr-form-label" for="review_email_10508262282">Email</label>
+                                    <input class="spr-form-input spr-form-input-email" type="text" name="email" value="{{Auth::guard('web')->user()->email}}" readonly>
+                                 </div>
+                                 @endif
+                              </fieldset>
+                              <fieldset class="spr-form-review">
+                                 <div class="spr-form-review-rating">
+                                    <label class="spr-form-label">Rating</label>
+                                    <div class="spr-form-input spr-starrating">
+                                       <input type="radio" id="star1" name="rating" value="5" /><label for="star1" title="1 star"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star2" name="rating" value="4" /><label for="star2" title="2 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star4" name="rating" value="2" /><label for="star4" title="4 stars"><i class="fa fa-star"></i></label>
+                                       <input type="radio" id="star5" name="rating" value="1" /><label for="star5" title="5 stars"><i class="fa fa-star"></i></label>
+                                    </div>
+                                 </div>
+                                 <div class="spr-form-review-title">
+                                    <label class="spr-form-label" for="review_title_10508262282">Review Title</label>
+                                    <input class="spr-form-input spr-form-input-text " type="text" name="title" placeholder="Give your review a title">
+                                    <input type="hidden" name="product_id" value="{{$product->id}}">
+                                 </div>
+                                 <div class="spr-form-review-title">
+                                    <label class="spr-form-label" for="review_title_10508262282">Image</label>
+                                    <input class="spr-form-input spr-form-input-text " type="file" name="image[]" multiple>
+                                 </div>
+                                 <div class="spr-form-review-body">
+                                    <label class="spr-form-label" for="review_body_10508262282">Body of Review</label>
+                                    <div class="spr-form-input">
+                                       <textarea class="spr-form-input spr-form-input-textarea " name="review" rows="4"placeholder="Write your comments here"></textarea>
+                                    </div>
+                                 </div>
+                              </fieldset>
+                              <fieldset class="spr-form-actions">
+                                 <input type="submit" class="spr-button spr-button-primary button button-primary btn btn-primary" value="Submit Review">
+                              </fieldset>
+                           </form>
+                        </div>
+                        <div class="spr-reviews">
+                           @foreach($review as $reviews)
+                           <div class="spr-review">
+                              <div class="spr-review-header">
+                                 @foreach($rim->where('review_id', $reviews->id) as $rims)
+                                 <img src="{{ asset('admin/review/' . $rims->image) }}" width="300" height="100" />
+                                 @endforeach
+                                 <br>
+                                 <span class="product-review spr-starratings spr-review-header-starratings">
+                                 <span class="reviewLink">
+                                 @for($i = 1; $i <= $reviews->rating; $i++)
+                                 <i class="fa fa-star"></i>
+                                 @endfor
+                                 </span>
+                                 </span>
+                                 <h3 class="spr-review-header-title">{{$reviews->title}}</h3>
+                                 <span class="spr-review-header-byline"><strong>{{$reviews->name}}</strong> on <strong>{{ $reviews->created_at->format('M d, Y') }}</strong></span>
+                              </div>
+                              <div class="spr-review-content">
+                                 <p class="spr-review-content-body">{{$reviews->review}}</p>
+                              </div>
+                           </div>
+                           @endforeach
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
             <div id="tab3" class="tab-content">
                <h3>WOMEN'S BODY SIZING CHART</h3>
                <table>
