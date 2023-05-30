@@ -160,7 +160,7 @@
                         @endforeach
                      </div>
                   </div>
-                  <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a> <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a></p>
+                  <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a></p>
                   <!-- Product Action -->
                   <div class="product-action clearfix">
                      <div class="product-form__item--quantity">
