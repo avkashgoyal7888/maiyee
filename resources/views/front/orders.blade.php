@@ -52,7 +52,10 @@
                       </div>
                       <div class="col-12 col-md-3">
                         <div class="shopify-payment-button" data-shopify="payment-button">
-                            <button type="button" class="btn-lg btn-success">Track Your Order</button>
+                            <button type="button" class="btn-lg btn-success">
+  <a href="https://shiprocket.co/tracking/{{$orders->order_id}}" class="text-white">Track Your Order</a>
+</button>
+
                         </div>
                       </div>
                       @foreach($orderdetail as $od)
