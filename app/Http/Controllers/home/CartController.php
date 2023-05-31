@@ -40,6 +40,28 @@ class CartController extends Controller
         }
     }
 
+    public function wishDelete(Request $req)
+    {
+        $val = Validator::make($req->all(), [
+            'id' => 'required|exists:wish_lists,id',
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+        } else {
+
+            $rem = WishList::findOrFail($req->id);
+
+            $del = $rem->delete();
+
+            if ($del) {
+                return response()->json(['status'=>true,'msg'=>'deleted Successfully.....']);
+            } else {
+                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later....']);
+            }
+        }
+    }
+
     public function addToCart(Request $req)
     {
         $val = Validator::make($req->all(), [

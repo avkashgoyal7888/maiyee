@@ -79,6 +79,7 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 		Route::post('/cart-to-cart', 'cartDelete')->name('web.delete.cart');
 		Route::post('/cart-quantity-edit', 'cartEdit')->name('edit.cart');
 		Route::post('/add-to-wish', 'addToWishList')->name('web.add.wishlist');
+		Route::post('/delete-wish', 'wishDelete')->name('web.delete.wish');
 		});
 		Route::controller(CheckOutController::class)->group(function(){
 			Route::get('/checkout','index')->name('web.checkout');

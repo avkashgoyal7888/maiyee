@@ -30,6 +30,7 @@
                   <tr>
                      <th class="text-center">Product</th>
                      <th class="text-center">Price</th>
+                     <th class="text-center">Remove</th>
                   </tr>
                </thead>
                <tbody>
@@ -46,6 +47,9 @@
                      <td class="cart__price-wrapper">
                         <span class="money">₹{{$carts->product->discount}}</span>
                      </td>
+                     <td class="cart__price-wrapper">
+                        <button data-id="{{$carts->id}}" class="cart__remove deleteWishList" title="Remove tem"><i class="icon icon anm anm-times-l"></i></button>
+                     </td>
                   </tr>
                   @endforeach
                </tbody>
@@ -54,4 +58,88 @@
       </div>
    </div>
 </div>
+<!-- Delete modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+   aria-hidden="true" id="deleteWishList" >
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="myLargeModalLabel">Delete Client</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form id="deleteWishListSubmit">
+               <div class="modal-body">
+                  <p>Are you sure you want to delete this.....</p>
+                  <input type="hidden" name="id" id="wishListDeleteId">
+               </div>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Delete</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+@stop
+@section('js')
+<script>
+   $(document).ready(function(){
+      $('body').on('click','.deleteWishList',function(){
+               $('#deleteWishList').modal('show')
+               $('#wishListDeleteId').val($(this).attr('data-id'))
+      
+               });
+      $('#deleteWishListSubmit').on('submit', function(e) {
+           e.preventDefault(); // prevent default form submission
+           let fd = new FormData(this);
+           fd.append('_token', "{{ csrf_token() }}");
+    
+           $.ajax({
+               url: "{{ route('web.delete.wish') }}",
+               type: "POST",
+               data: fd,
+               dataType: 'json',
+               processData: false,
+               contentType: false,
+               beforeSend: function() {
+                   $('#addBtn').prop('disabled', true)
+                   $('#loader').show(); // show the loader
+                   $('#deleteWishList').modal('toggle');
+               },
+               success: function(result) {
+                   if (result.status === false) {
+                       toastr.error(result.msg, 'Error', {
+                           timeOut: 3000,
+                           progressBar: true,
+                           closeButton: true
+                       });
+                   } else if (result.status === true) {
+                       toastr.success(result.msg, 'Success', {
+                           timeOut: 3000,
+                           progressBar: true,
+                           closeButton: true
+                       });
+                       window.location.reload();
+                   }
+               },
+               error: function(jqXHR, exception) {
+                   console.log(jqXHR.responseJSON);
+                   toastr.error(result.msg, 'Error', {
+                       timeOut: 3000,
+                       progressBar: true,
+                       closeButton: true
+                   });
+               },
+               complete: function() {
+                   $('#addBtn').prop('disabled', false);
+                   $('#loader').hide(); // hide the loader when done
+               }
+           });
+       });
+   })
+</script>
 @stop
