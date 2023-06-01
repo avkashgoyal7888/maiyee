@@ -302,7 +302,7 @@
             closeButton: true,
             onHidden: function() {
                 if ($('#cash').prop('checked')) {
-                    window.location.href = "{{ route('web.success') }}";
+                    window.location.href = "{{ route('order.cod') }}";
                 } else if ($('#payu').prop('checked')) {
                     window.location.href = "{{ route('payment.pay') }}";
                 }

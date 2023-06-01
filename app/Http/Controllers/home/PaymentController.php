@@ -12,6 +12,7 @@ use App\Models\UserAddress;
 use App\Models\Coupon;
 use App\Models\Head;
 use App\Models\Category;
+use App\Models\BuyNow;
 use Auth;
 use Validator;
 use DB;
@@ -49,7 +50,7 @@ class PaymentController extends Controller
             'phone' => $phone,
             'surl' => route('web.success'),
             'furl' => route('web.fail'),
-            'curl' => route('web.cancel'),
+            'curl' => route('web.success'),
             'hash' => '',
         ];
 
@@ -175,6 +176,14 @@ class PaymentController extends Controller
         ],
         'json' => $orderData,
     ]);
+                if ($response->getStatusCode() == 200) {
+                    if ($order->buy_mode == '1' && $order->order_id == $ref) {
+                BuyNow::where('user_id', $order->user_id)->delete();
+            } elseif ($order->buy_mode == '0' && $order->order_id == $ref)    {
+                Cart::where('user_id', $order->user_id)->delete();
+            }
+
+            }
         }
         $cartNav = Cart::get();
         $cartTotalnav = 0;
@@ -216,6 +225,22 @@ class PaymentController extends Controller
         $cat = Category::get();
         $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
         return view('front.fail',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
+    }
+
+    public function orderCOD()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
+        return view('front.cod',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
     }
 
 }

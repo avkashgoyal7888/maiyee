@@ -63,6 +63,7 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 			Route::any('/order-success', 'orderSuccess')->name('web.success');
 			Route::any('/order-fail', 'orderFail')->name('web.fail');
 			Route::any('/order-cancel', 'orderCancel')->name('web.cancel');
+			Route::get('/order-successful', 'orderCOD')->name('order.cod');
 		});
 
 		Route::post('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
