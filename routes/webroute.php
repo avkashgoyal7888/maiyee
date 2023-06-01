@@ -8,6 +8,7 @@ use App\Http\Controllers\home\ForgetPasswordController;
 use App\Http\Controllers\home\ReviewController;
 use App\Http\Controllers\home\ShiprocketController;
 use App\Http\Controllers\home\PaymentController;
+use App\Http\Controllers\home\OrderController;
 use Illuminate\Http\Request;
 	Route::controller(HomeController::class)->group(function(){
 		Route::get('/', 'index')->name('web.home');
@@ -65,13 +66,16 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 			Route::any('/order-cancel', 'orderCancel')->name('web.cancel');
 			Route::get('/order-successful', 'orderCOD')->name('order.cod');
 		});
+		Route::controller(OrderController::class)->group(function(){
+			Route::get('/orders', 'orders')->name('web.orders');
+			Route::post('/return', 'returnOrReplace')->name('web.order.submit');
+		});
 
 		Route::post('/order/create', [ShiprocketController::class, 'createOrder'])->name('web.order.create');
 		Route::post('/buy-order', [ShiprocketController::class, 'buyOrder'])->name('web.buy.create');
 		Route::controller(HomeController::class)->group(function(){
 			Route::get('/cart', 'cart')->name('web.cart');
 			Route::get('/wish', 'wish')->name('web.wish');
-			Route::get('/orders', 'orders')->name('web.orders');
 			Route::get('/logout', 'logOut')->name('web.logout');
 		});
 		Route::controller(CartController::class)->group(function(){

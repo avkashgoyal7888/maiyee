@@ -79,7 +79,7 @@
                           <!-- <h6 class="text-charcoal text-left mb-0 mb-md-2"><b>$19.54</b></h6> -->
                         </div>
                         <div class="col-12 col-md-3 hidden-sm-down">
-                          <a href="" class="btn btn-danger w-100 mb-2">Return Item</a>
+                          <button data-id="{{$od->id}}" data-order="{{$od->order_id}}" class="btn btn-danger w-100 mb-2 returnOrReplace" title="Remove tem">Return Item</button>
                           <a href="{{route('web.product.detail',$od->product_id)}}" class="btn btn--small-wide checkout" id="cartCheckout">Buy It Again</a>
                           <!-- <input type="submit" name="checkout" id="cartCheckout" class="" value=""> -->
                         </div>
@@ -93,6 +93,102 @@
               @endforeach
           </div>
       </div>
+
+      <!-- Return modal -->
+<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+   aria-hidden="true" id="returnModal" >
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="myLargeModalLabel">Return Or Replace</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form id="returnOrReplaceSubmit">
+               <div class="modal-body">
+                <div class="col-md-12 col-lg-12 col-xl-12 p-0">
+                     <label for="nameExLarge" class="form-label">Return or Replace<span class="required-f">*</span></label>
+                     <select name="option">
+                        <option value=""> --- Choose Option --- </option>
+                        <option value="return">Return</option>
+                        <option value="replace">Replace</option>
+                     </select>
+                  </div>
+                  <div class="col-md-12 col-lg-12 col-xl-12 p-0">
+                     <label for="nameExLarge" class="form-label">Reason<span class="required-f">*</span></label>
+                     <textarea name="reason" class="form-control resize-both input-field" rows="3"></textarea>
+                  </div>
+                  <input type="hidden" name="returnid" id="returnOrReplaceId">
+                  <input type="hidden" name="order_id" id="returnOrReplaceOrderId">
+               </div>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
 @stop
 @section('js')
+<script>
+  $(document).ready(function(){
+    $('body').on('click','.returnOrReplace',function(){
+               $('#returnModal').modal('show');
+               $('#returnOrReplaceId').val($(this).attr('data-id'));
+               $('#returnOrReplaceOrderId').val($(this).attr('data-order'));
+    });
+
+    $('#returnOrReplaceSubmit').on('submit', function(e) {
+           e.preventDefault(); // prevent default form submission
+           let fd = new FormData(this);
+           fd.append('_token', "{{ csrf_token() }}");
+    
+           $.ajax({
+               url: "{{ route('web.order.submit') }}",
+               type: "POST",
+               data: fd,
+               dataType: 'json',
+               processData: false,
+               contentType: false,
+               beforeSend: function() {
+                   $('#addBtn').prop('disabled', true)
+                   $('#loader').show(); // show the loader
+                   $('#deleteWishList').modal('toggle');
+               },
+               success: function(result) {
+                   if (result.status === false) {
+                       toastr.error(result.msg, 'Error', {
+                           timeOut: 3000,
+                           progressBar: true,
+                           closeButton: true
+                       });
+                   } else if (result.status === true) {
+                       toastr.success(result.msg, 'Success', {
+                           timeOut: 3000,
+                           progressBar: true,
+                           closeButton: true
+                       });
+                       window.location.reload();
+                   }
+               },
+               error: function(jqXHR, exception) {
+                   console.log(jqXHR.responseJSON);
+                   toastr.error(result.msg, 'Error', {
+                       timeOut: 3000,
+                       progressBar: true,
+                       closeButton: true
+                   });
+               },
+               complete: function() {
+                   $('#addBtn').prop('disabled', false);
+                   $('#loader').hide(); // hide the loader when done
+               }
+           });
+       });
+  })
+</script>
 @stop

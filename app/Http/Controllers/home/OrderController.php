@@ -8,6 +8,11 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Head;
+use App\Models\Exchange;
+use Auth;
+use Validator;
+use DB;
 
 class OrderController extends Controller
 {
@@ -26,5 +31,48 @@ class OrderController extends Controller
         $order = Order::where(['user_id' => Auth::guard('web')->user()->id, 'order_status'=>'success'])->orderByDesc('id')->get();
         $orderdetail = OrderDetail::get();
         return view('front.orders',compact('cartNav','cartTotalnav','cartCount','nav','cat','order', 'orderdetail'));
+    }
+
+    public function returnOrReplace(Request $req)
+    {
+        $val = Validator::make($req->all(), [
+            'option' => 'required',
+            'reason' => 'required',
+            'order_id' => 'unique:exchanges,order_id',
+        ], [
+            'option.required' => 'Select One Return or Replace...',
+            'reason.required' => 'Reason is Required...',
+            'order_id.unique' => 'Request Already Raised wait for response...'
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+        } else {
+            $order = orderdetail::where('id', $req->returnid)->first();
+            $data = new Exchange();
+            $data->order_id = $req->order_id;
+            $data->user_id = $order->user_id;
+            $data->product_id = $order->product_id;
+            $data->color_id = $order->color_id;
+            $data->size_id = $order->size_id;
+            $data->price = $order->price;
+            $data->quantity = $order->quantity;
+            $data->taxable = $order->taxable;
+            $data->gst = $order->gst;
+            $data->cgst = $order->cgst;
+            $data->sgst = $order->sgst;
+            $data->igst = $order->igst;
+            $data->total = $order->total;
+            $data->option = $req->option;
+            $data->reason = $req->reason;
+            $return = $data->save();
+
+            if ($return) {
+                return response()->json(['status'=>true, 'msg'=>'Success...']);
+            } else {
+                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later...']);
+            }
+
+        }
     }
 }
