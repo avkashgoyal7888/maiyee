@@ -84,7 +84,9 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 		});
 		Route::controller(CheckOutController::class)->group(function(){
 			Route::get('/checkout','index')->name('web.checkout');
-			Route::get('/but', 'buyView')->name('web.check.buy');
+			Route::get('/buy', 'buyView')->name('web.check.buy');
+			Route::get('/address', 'addressView')->name('web.address');
+			Route::post('/address-submit', 'addressSubmit')->name('web.address.submit');
 			Route::post('/apply-coupon', 'applyCoupon')->name('web.apply.coupon');
 		});
 	});

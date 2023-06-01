@@ -135,4 +135,87 @@ class CheckOutController extends Controller
             }
         }
     }
+
+    public function addressView()
+    {$cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        $user = UserAddress::where('user_id', Auth::guard('web')->user()->id)->get();
+        return view('front.auth.address', compact('cartNav','cartTotalnav','cartCount','nav','cat','user'));
+    }
+
+    public function addressSubmit(Request $req)
+    {
+        $val = Validator::make($req->all(), [
+            'name' => 'required',
+            'email' => 'required',
+            'contact' => 'required|min:10',
+            'address' => 'required',
+            'landmark' => 'required',
+            'state' => 'required',
+            'city' => 'required',
+            'pin' => 'required|min:6',
+        ], [
+            'name.required' => 'Name cannot be blank...',
+            'email.required' => 'Email cannot be blank...',
+            'contact.required' => 'Contact cannot be blank...',
+            'contact.min' => 'Enter a correct contact number...',
+            'address.required' => 'Address cannot be blank...',
+            'landmark.required' => 'Landmark cannot be blank...',
+            'state.required' => 'State cannot be blank...',
+            'city.required' => 'City cannot be blank...',
+            'pin.required' => 'Pin Code cannot be blank...',
+            'pin.min' => 'Enter a correct Pin Code...',
+        ]);
+
+        if ($val->fails()) {
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
+        } else {
+            $uid = Auth::guard('web')->user()->id;
+
+            $selectedData = $req->input('state_id');
+
+            if ($selectedData) {
+                // If the user selected existing data, update it
+                $userAddress = UserAddress::find($selectedData);
+
+                if ($userAddress) {
+                    $userAddress->name = $req->name;
+                    $userAddress->email = $req->email;
+                    $userAddress->contact = $req->contact;
+                    $userAddress->address = $req->address;
+                    $userAddress->state = $req->state;
+                    $userAddress->landmark = $req->landmark;
+                    $userAddress->city = $req->city;
+                    $userAddress->pin_code = $req->pin;
+                    $userAddress->update();
+
+                return response()->json(['status' => true, 'msg' => 'Update....']);
+                } else {
+                    return response()->json(['status' => false, 'msg' => 'Something went wrong. Please try again later....']);
+                }
+            } else {
+                UserAddress::create([
+                    'user_id' => $uid,
+                    'name' => $req->name,
+                    'email' => $req->email,
+                    'contact' => $req->contact,
+                    'address' => $req->address,
+                    'state' => $req->state,
+                    'landmark' => $req->landmark,
+                    'city' => $req->city,
+                    'pin_code' => $req->pin
+                ]);
+
+                return response()->json(['status' => true, 'msg' => 'Create....']);
+            }
+        }
+    }
 }
