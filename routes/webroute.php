@@ -28,6 +28,7 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 
 
 		Route::get('/disclaimer', 'disclaimer')->name('web.disclaimer');
+		Route::get('/about-us', 'about')->name('web.about');
 		Route::get('/policy', 'policy')->name('web.policy');
 		Route::get('/exhibition', 'exhibition')->name('web.exhibition');
 		Route::get('/refund', 'refund')->name('web.refund');

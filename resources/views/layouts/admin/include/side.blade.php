@@ -111,6 +111,18 @@
             </li>
             <li>
                <a href="javascript: void(0);" class="has-arrow">
+               <i class="bx bx-map nav-icon"></i>
+               <span class="menu-item" data-key="t-ecommerce">Return or Replace</span>
+               </a>
+               <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="{{route('admin.return')}}" data-key="t-state"> <i class="bx bx-hash nav-icon"></i>Return</a></li>
+                  <li><a href="{{route('admin.replace')}}" data-key="t-city">
+                     <i class="bx bx-hash nav-icon"></i>Replace</a>
+                  </li>
+               </ul>
+            </li>
+            <li>
+               <a href="javascript: void(0);" class="has-arrow">
                <i class="bx bxs-user-detail nav-icon"></i>
                <span class="menu-item" data-key="t-ecommerce">Suppliers</span>
                </a>

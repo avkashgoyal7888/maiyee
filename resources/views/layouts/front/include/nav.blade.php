@@ -64,7 +64,7 @@
                     <!-- for mobile -->
                     <ul id="siteNav" class="site-nav medium center hidearrow">
                         <li class="lvl1"><a href="{{route('web.home')}}">Home </a></li>
-                        <li class="lvl1"><a href="{{route('web.home')}}">About Us </a></li>
+                        <li class="lvl1"><a href="{{route('web.about')}}">About Us </a></li>
                         <li class="lvl1 parent dropdown">
                             <a href="#">Indian wear<i class="anm anm-angle-down-l"></i></a>
                             <ul class="dropdown"> @foreach($cat as $cats) @if($cats->menu == 'indian') <li><a href="{{route('front.cat',$cats->id)}}" class="site-nav">{{$cats->cat_name}}</a></li> @endif @endforeach </ul>
@@ -151,7 +151,7 @@
     <ul id="MobileNav" class="mobile-nav">
         <li class="lvl1 parent megamenu"><a href="{{route('web.home')}}">Home</a></li>
 
-        <li class="lvl1 parent megamenu"><a href="{{route('web.home')}}">About Us</a>
+        <li class="lvl1 parent megamenu"><a href="{{route('web.about')}}">About Us</a>
         </li>
         <li class="lvl1 parent megamenu">
             <a href="#">Indian wear<i class="anm anm-plus-l"></i></a>

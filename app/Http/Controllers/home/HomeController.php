@@ -101,6 +101,21 @@ class HomeController extends Controller
         return view('front.disclaimer', compact('cartNav','cartTotalnav','cartCount','nav','cat'));
     }
 
+    public function about()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        return view('front.about', compact('cartNav','cartTotalnav','cartCount','nav','cat'));
+    }
+
     public function policy()
     {
         $cartNav = Cart::get();
