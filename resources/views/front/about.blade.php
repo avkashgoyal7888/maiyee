@@ -38,7 +38,7 @@
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-4">
                     <video id='myVideo' width="500" height="500" autoplay controls muted>
-                        <source src="{{asset('assets/about.MP4')}}" type="video/mp4">
+                        <source src="{{asset('front/assets/video/about.MP4')}}" type="video/mp4">
                         Your browser does not support the video tag.
                       </video>
                 </div>

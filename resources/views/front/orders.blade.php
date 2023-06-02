@@ -30,6 +30,10 @@
                         <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">₹{{$orders->payable}}</p> 
                       </div>
                       <div class="col-6 col-md"> 
+                        <h6 class="text-charcoal mb-0 w-100">Payment Mode</h6>
+                        <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">{{$orders->payment_method}}</p> 
+                      </div>
+                      <div class="col-6 col-md"> 
                         <h6 class="text-charcoal mb-0 w-100">Shipped To</h6>
                         <p class="text-pebble mb-0 w-100 mb-2 mb-md-0">{{$orders->address}} {{$orders->landmark}} {{$orders->state}} {{$orders->city}} {{$orders->pin_code}}</p> 
                       </div>
