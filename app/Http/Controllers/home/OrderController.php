@@ -30,7 +30,9 @@ class OrderController extends Controller
         $cat = Category::get();
         $order = Order::where(['user_id' => Auth::guard('web')->user()->id, 'order_status'=>'success'])->orderByDesc('id')->get();
         $orderdetail = OrderDetail::get();
-        return view('front.orders',compact('cartNav','cartTotalnav','cartCount','nav','cat','order', 'orderdetail'));
+        $ex = Exchange::whereIn('order_id', $orderdetail->pluck('order_id'))
+        ->get();
+        return view('front.orders',compact('cartNav','cartTotalnav','cartCount','nav','cat','order', 'orderdetail','ex'));
     }
 
     public function returnOrReplace(Request $req)

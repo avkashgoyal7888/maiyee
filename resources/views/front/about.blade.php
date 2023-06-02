@@ -1,6 +1,6 @@
 @extends('layouts.front.app')
 @section('css')
-<title>Disclaimer</title>
+<title>About Us</title>
 @stop
 @section('content')
 <!--Page Title-->

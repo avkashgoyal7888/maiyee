@@ -18,7 +18,7 @@ DB_PASSWORD=Eduse@0908
 
 GOOGLE_CLIENT_ID=751106570632-1jen0c9ufr170mithttvos2fqb04vh3p.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=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
-GOOGLE_REDIRECT_URI=https://maiyee.in/google/callback
+GOOGLE_REDIRECT_URI=https://maiyee.in
 
 BROADCAST_DRIVER=log
 CACHE_DRIVER=file
