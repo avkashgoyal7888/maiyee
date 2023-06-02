@@ -89,8 +89,6 @@
                         @else
                         <button data-id="{{$od->id}}" data-order="{{$od->order_id}}" class="btn btn-danger w-100 mb-2 returnOrReplace" title="Remove tem">Return Item</button>
                         @endif
-                        <a href="{{route('web.product.detail',$od->product_id)}}" class="btn btn--small-wide checkout" id="cartCheckout">Buy It Again</a>
-                        <!-- <input type="submit" name="checkout" id="cartCheckout" class="" value=""> -->
                      </div>
                   </div>
                   @endif
