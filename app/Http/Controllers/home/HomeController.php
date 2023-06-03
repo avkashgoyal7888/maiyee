@@ -301,7 +301,8 @@ class HomeController extends Controller
         $rating += DB::table("reviews")->where("product_id", $p->id)->sum('rating');
         }
         $avg = $count > 0 ? $rating / $count : 0;
-        return view('front.sub', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'subimg', 'product', 'sortBy','cat', 'avg'));
+        $subid = $request->id;
+        return view('front.sub', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'subimg', 'product', 'sortBy','cat', 'avg','subid'));
     }
 
     public function category(Request $request)
@@ -363,34 +364,8 @@ class HomeController extends Controller
             $rating += DB::table("reviews")->where("product_id", $p->id)->sum('rating');
         }
         $avg = $count > 0 ? $rating / $count : 0;
-        return view('front.cat', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'catimg', 'product', 'sortBy','cat', 'avg'));
-    }
-
-
-
-    public function filterByColor(Request $request)
-    {
-        $selectedSizes = $request->input('selected_sizes');
-        $products = Color::join("products","colors.product_id","=","products.id")
-            ->select("colors.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.id as proid")->whereIn('color_category', $selectedSizes)->get();
-        return response()->json($products);
-    }
-
-    public function filterBySize(Request $request)
-    {
-        $selectedSizes = $request->input('selected_sizes');
-        $products = Size::join("products","sizes.product_id","=","products.id")
-            ->select("sizes.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.image as images","products.id as proid")->whereIn('size', $selectedSizes)->get();
-        return response()->json($products);
-    }
-
-    public function filterByPrice(Request $request)
-    {
-        $minPrice = $request->input('min_price');
-        $maxPrice = $request->input('max_price');
-        
-        $products = Product::whereBetween('discount', [$minPrice, $maxPrice])->get();
-        return response()->json($products);
+        $catid = $request->id;
+        return view('front.cat', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'size', 'category', 'sub', 'color', 'catimg', 'product', 'sortBy','cat', 'avg','catid'));
     }
 
     public function loginSubmit(Request $req)

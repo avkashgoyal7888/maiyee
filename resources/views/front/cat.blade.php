@@ -383,14 +383,16 @@
        e.preventDefault();
        // Get the selected sizes
        var selectedSizes = [];
+       var catid = {{ $catid }};
        $(".color-checkbox:checked").each(function() {
          selectedSizes.push($(this).val());
        });
        // Make the AJAX request to filter products
        $.ajax({
-         url: "{{route('filter.by.color')}}",
+         url: "{{route('filter.by.color.cat')}}",
          type: "GET",
          data: {
+            id: catid,
            selected_sizes: selectedSizes
          },
          success: function(result) {
@@ -463,14 +465,16 @@
        e.preventDefault();
        // Get the selected sizes
        var selectedSizes = [];
+       var catid = {{ $catid }};
        $(".size-checkbox:checked").each(function() {
          selectedSizes.push($(this).val());
        });
        // Make the AJAX request to filter products
        $.ajax({
-         url: "{{route('filter.by.size')}}",
+         url: "{{route('filter.by.size.cat')}}",
          type: "GET",
          data: {
+            id: catid,
            selected_sizes: selectedSizes
          },
          success: function(result) {
@@ -553,10 +557,13 @@
            e.preventDefault(); // prevent default form submission
                let min_price = $("#slider-range").slider("values", 0);
                let max_price = $("#slider-range").slider("values", 1);
+               var catid = {{ $catid }};
            $.ajax({
-               url: "{{ route('filter.by.price') }}",
+               url: "{{ route('filter.by.price.cat') }}",
                type: "GET",
-               data: {min_price: min_price, max_price: max_price, _token: "{{ csrf_token() }}"},
+               data: {
+                  id: catid,
+                  min_price: min_price, max_price: max_price, _token: "{{ csrf_token() }}"},
                dataType: 'json',
                beforeSend: function() {
                    $('#addBtn').prop('disabled', true);

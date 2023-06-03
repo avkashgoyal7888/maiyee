@@ -9,24 +9,18 @@ use App\Http\Controllers\home\ReviewController;
 use App\Http\Controllers\home\ShiprocketController;
 use App\Http\Controllers\home\PaymentController;
 use App\Http\Controllers\home\OrderController;
+use App\Http\Controllers\home\FilterController;
 use Illuminate\Http\Request;
 	Route::controller(HomeController::class)->group(function(){
 		Route::get('/', 'index')->name('web.home');
 		Route::get('/register', 'register')->name('web.register');
 		Route::post('/register-submit', 'registerSubmit')->name('web.register.submit');
-
-Route::post('/store-generated-otp', function (Request $request) {
-    $request->session()->put('generatedOTP', $request->otp);
-    return response()->json(['status' => 200]);
-})->name('store.generated.otp');
-// routes/web.php
-
-Route::post('/send-sms', 'sendSMS')->name('send-sms');
-
-Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number');
-
-
-
+		Route::post('/store-generated-otp', function (Request $request) {
+    		$request->session()->put('generatedOTP', $request->otp);
+    		return response()->json(['status' => 200]);
+		})->name('store.generated.otp');
+		Route::post('/send-sms', 'sendSMS')->name('send-sms');
+		Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number');
 		Route::get('/disclaimer', 'disclaimer')->name('web.disclaimer');
 		Route::get('/about-us', 'about')->name('web.about');
 		Route::get('/policy', 'policy')->name('web.policy');
@@ -41,11 +35,16 @@ Route::post('/check-phone-number', 'checkPhoneNumber')->name('check-phone-number
 		Route::get('/auth/facebook/callback', 'handleFacebookCallback');
 		Route::get('/sub-category/{id}', 'subcategory')->name('front.sub');
 		Route::get('/category/{id}', 'category')->name('front.cat');
-		Route::get('/filterbyprice','filterByPrice')->name('filter.by.price');
-		Route::get('/filter-by-size','filterBySize')->name('filter.by.size');
-		Route::get('/filter-by-color','filterByColor')->name('filter.by.color');
 		Route::get('/product/{id}', 'getProductData')->name('web.product.data');
+	});
 
+	Route::controller(FilterController::class)->group(function(){
+		Route::get('/filterbypricecat','filterByPriceCat')->name('filter.by.price.cat');
+		Route::get('/filter-by-size','filterBySizeCat')->name('filter.by.size.cat');
+		Route::get('/filter-by-color','filterByColorCat')->name('filter.by.color.cat');
+		Route::get('/filterbypricesub','filterByPriceSub')->name('filter.by.price.sub');
+		Route::get('/filterbysizesub','filterBySizeSub')->name('filter.by.size.sub');
+		Route::get('/filterbycolorsub','filterByColorSub')->name('filter.by.color.sub');
 	});
 
 	Route::controller(ForgetPasswordController::class)->group(function(){
