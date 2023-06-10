@@ -87,9 +87,6 @@
             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                <div class="product-single__meta">
                   <h1 class="product-single__title">{{$product->name}}</h1>
-                  <div class="product-nav clearfix">                  
-                     <a href="#" class="next" title="Next"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-                  </div>
                   <div class="prInfoRow">
                      <div class="product-sku">SKU: <span class="variant-sku">{{$product->style_code}}</span></div>
                      <div class="product-review">
@@ -249,13 +246,6 @@
       </div>
       <!--End Product Fearure-->
       <!--Product Tabs-->
-      <div class="tabs-listing">
-         <ul class="product-tabs">
-            <li rel="tab1"><a class="tablink">Product Details</a></li>
-            <li rel="tab2"><a class="tablink">Product Reviews</a></li>
-         </ul>
-         <div class="tab-container">
-            <div id="tab1" class="tab-content">
                <div class="product-description rte">
                   <div class="row">
                      <div class="col-lg-12 col-md-12 col-sm-12 col-12">
@@ -307,8 +297,7 @@
                         </table>
                      </div>
                   </div>
-               </div>
-            </div>
+
             <div id="tab2" class="tab-content">
                <div id="shopify-product-reviews">
                   <div class="spr-container">
@@ -414,11 +403,7 @@
                </div>
             </div>
                      </div>
-      </div>
-      <!--End Product Tabs-->
-      </div>
-   <!--#ProductSection-product-template-->
-</div>
+
 <!--MainContent-->
 @stop
 @section('js')
