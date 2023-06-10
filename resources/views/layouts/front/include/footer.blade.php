@@ -1,18 +1,20 @@
 <footer class="footer">
 <div class="container bottom_border">
 <div class="row">
-    <div class=" col-sm-6 col-md-6  col-lg-6 col-12">
-<h5 class="headin5_amrc col_white_amrc pt2">Contact Us</h5>
-<!--headin5_amrc-->
+
+<div class=" col-sm-6 col-md-4  col-lg-4 col-12">
+<h5 class="headin5_amrc col_white_amrc pt2">Address</h5>
 <p><i class="fa fa-location-arrow"></i>  3006 Shree Kuberji Empire, Kadodara Road, Saroli, Surat Gujrat (395010)</p>
-<p><i class="fa fa-phone"></i>  +91-9904145427</p>
-<p><i class="fa fa fa-envelope"></i> info@maiyee.in  </p>
-
-
 </div>
 
+<div class=" col-sm-6 col-md-4  col-lg-4 col-12">
+    <h5 class="headin5_amrc col_white_amrc pt2">Contact Us</h5>
+    <p><i class="fa fa-phone"></i>  +91-9904145427</p>
+    <p><i class="fa fa fa-envelope"></i> info@maiyee.in  </p>
+    </div>
 
-<div class=" col-sm-6 col-md-6  col-lg-6 col-12">
+
+<div class=" col-sm-6 col-md-4  col-lg-4 col-12">
 <h5 class="headin5_amrc col_white_amrc pt2">Important Links</h5>
 <!--headin5_amrc-->
 <ul class="footer_ul_amrc">
