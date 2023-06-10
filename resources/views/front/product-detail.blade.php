@@ -192,6 +192,7 @@
                         @auth
                                  <a href="#" data-product-id="{{$product->id}}" class="wishlist add-to-wishlist" style="font-size: 16px">
                                  <i class="icon anm anm-heart-l"></i><span>Add to Wishlist</span>
+                                 <i class="icon anm anm-heart-l" style="color: #000;"></i><span>Already Added To Wishlist</span>
                                  </a>
                                  @else
                                  <a href="#" data-toggle="modal" data-target="#myModal" class="wishlist">
