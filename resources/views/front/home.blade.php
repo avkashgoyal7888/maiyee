@@ -158,13 +158,18 @@
    </div>
 </div>
 <!--Bash-->
-<!--Parallax Section-->
-<div class="collection-header">
+
+
+<div class="section imgBanners">
    @foreach($hbanner as $home)
-      <div class="collection-hero__image">
-         <img class="bg-img" src="{{asset('admin/banner/'. $home->image)}}" alt="" />
-     </div>
-   @endforeach
+   <div class="container-fluid">
+       <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+           <a href="#">
+               <img src="{{asset('admin/banner/'. $home->image)}}" class="blur-up lazyload" />
+            </a>
+        </div>
+    </div>
+    @endforeach
 </div>
 <!--End Parallax Section-->
 <!--New Arrivals-->
