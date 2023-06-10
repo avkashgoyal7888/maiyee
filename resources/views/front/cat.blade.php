@@ -10,7 +10,7 @@
    }
 </style>
 @stop
-@section('content')
+@section('content') 
 <!--Body Content-->
 <div id="page-content">
    <!--Collection Banner-->

@@ -159,15 +159,11 @@
 </div>
 <!--Bash-->
 <!--Parallax Section-->
-<div class="section">
+<div class="collection-header">
    @foreach($hbanner as $home)
-   <div class="hero hero--medium hero__overlay bg-size">
-      <img class="bg-img" src="{{asset('admin/banner/'. $home->image)}}" alt="" />
-      <div class="hero__inner">
-         <div class="container">
-         </div>
-      </div>
-   </div>
+      <div class="collection-hero__image">
+         <img class="bg-img" src="{{asset('admin/banner/'. $home->image)}}" alt="" />
+     </div>
    @endforeach
 </div>
 <!--End Parallax Section-->
