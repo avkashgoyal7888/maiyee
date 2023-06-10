@@ -309,11 +309,10 @@
                            @elseif($i == ceil($avg) && $avg - floor($avg) >= 0.5)
                            <i class="font-13 fa fa-star-half-o"></i>
                            @else
-                           <i class="font-13 fa fa-star-o"></i>
+                           <i class="font-13 fa fa-star-o" style="font-size: 16px;"></i>
                            @endif
                            @endfor<span class="spr-summary-actions-togglereviews">Based on {{$count}} reviews</span></span>
                            <span class="spr-summary-actions">
-                           <a href="#" class="spr-summary-actions-newreview btn">Write a review</a>
                            </span>
                         </div>
                      </div>
