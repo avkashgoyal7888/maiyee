@@ -1,6 +1,6 @@
 <footer class="footer">
 <div class="container bottom_border">
-<div class="row">
+<div class="row justify-content-center">
 
 <div class=" col-sm-6 col-md-4  col-lg-4 col-12">
 <h5 class="headin5_amrc col_white_amrc pt2">Address</h5>
