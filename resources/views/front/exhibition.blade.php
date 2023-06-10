@@ -10,21 +10,17 @@
             </div>
         </div>
 <!--Parallax Section-->
-	@foreach($ex as $exh)
-<div class="section">
-   <div class="hero hero--medium hero__overlay bg-size">
-      <img class="bg-img" src="{{asset('admin/exhibition/'. $exh->image)}}" alt="" />
-      <div class="hero__inner">
-         <div class="container">
-            <div class="wrap-text left text-small font-bold">
-               <h2 class="h2 mega-title">{{$exh->title}}</h2>
-               <div class="rte-setting mega-subtitle">on {{ date('d-M-y', strtotime($exh->ex_date)) }}</div>
-            </div>
-         </div>
-      </div>
+   <div class="section imgBanners">
+      @foreach($ex as $exh)
+      <div class="container-fluid">
+          <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
+              <a href="#">
+                  <img src="{{asset('admin/exhibition/'. $exh->image)}}" class="blur-up lazyload" />
+               </a>
+           </div>
+       </div>
+       @endforeach
    </div>
-</div>
-   @endforeach
 <!--End Parallax Section-->
 @stop
 @section('js')
