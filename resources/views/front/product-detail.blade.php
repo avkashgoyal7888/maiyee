@@ -188,13 +188,18 @@
                      <div class="wishlist-btn">
                         @auth
                                  <a href="#" data-product-id="{{$product->id}}" class="wishlist add-to-wishlist" style="font-size: 16px">
-                                 <i class="icon anm anm-heart-l"></i>
-                                 @if($wish->product_id != $product->id)
-                                 <span>Add to Wishlist</span>
-                                 <i class="icon anm anm-heart-l" style="color: #000;"></i>
-                                 @elseif($product->id == $wish->product_id)
-                                 <span>Already Added To Wishlist</span>
-                                 @endif
+                                 @if ($wish)
+    @if ($wish->product_id != $product->id)
+        <span>Add to Wishlist</span>
+        <i class="icon anm anm-heart-l" style="color: #000;"></i>
+    @elseif ($product->id == $wish->product_id)
+        <span>Already Added To Wishlist</span>
+        <i class="icon anm anm-heart-l" style="color: red;"></i>
+    @endif
+@else
+    <span>Add to Wishlist</span>
+    <i class="icon anm anm-heart-l" style="color: #000;"></i>
+@endif
                                  </a>
                                  @else
                                  <a href="#" data-toggle="modal" data-target="#myModal" class="wishlist">
