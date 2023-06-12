@@ -320,6 +320,10 @@ class ShiprocketController extends Controller
 
     if ($response->getStatusCode() == 200) {
         Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
+        $orderCoupon = Order::where('order_id',$order->order_id)->first();
+        if ($orderCoupon->coupon_code != '') {
+            Coupon::where('coupon_code',$orderCoupon->coupon_code)->delete();
+        }
         return response()->json(['status' => true, 'msg' => 'Order Successfully....']);
     } else {
         return response()->json(['status' => false, 'msg' => 'Something went wrong, try again later.....']);
@@ -442,7 +446,7 @@ class ShiprocketController extends Controller
                 }
 
                 $cartTotal = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('total');
-                if ($data->order_value < $cartTotal) {
+                if ($data->order_value > $cartTotal) {
                 $val->errors()->add('status', 'Coupon Code Value is less your total.');
                 $req->coupon_code = '';
                 return response()->json(['status' => false,'msg' => 'Coupon Code Value is less your total.',]);
@@ -629,6 +633,10 @@ class ShiprocketController extends Controller
 
     if ($response->getStatusCode() == 200) {
         BuyNow::where('user_id', Auth::guard('web')->user()->id)->delete();
+        $orderCoupon = Order::where('order_id',$order->order_id)->first();
+        if ($orderCoupon->coupon_code != '') {
+            Coupon::where('coupon_code',$orderCoupon->coupon_code)->delete();
+        }
         return response()->json(['status' => true, 'msg' => 'Order Successfully....']);
     } else {
         return response()->json(['status' => false, 'msg' => 'Something went wrong, try again later.....']);

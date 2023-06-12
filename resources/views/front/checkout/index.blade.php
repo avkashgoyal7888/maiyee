@@ -192,7 +192,7 @@
                   <h2 class="payment-title mb-3">payment method</h2>
                   <div class="payment-method">
                      <div class="row">
-                        <input name="coupon_code" id="coupon_codea" type="hidden" >
+                        <input name="coupon_code" id="coupon_codes" type="text" >
                         <input type="hidden" id="addressid" name="addressid"/>
                         <input type="hidden" class="name" name="name"/>
                         <input type="hidden" name="email" class="email" type="email">
@@ -233,6 +233,7 @@
                if(selectedCoupon.val() !== '') {
                   // Fill in the input fields with the address details and make them readonly
                   $('#coupon-code').val(selectedCoupon.data('code')).prop('readonly', true);
+                  $('#coupon_codes').val(selectedCoupon.data('code')).prop('readonly', true);
               }
           });
    
