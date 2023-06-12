@@ -249,6 +249,7 @@ class ShiprocketController extends Controller
                     $order->shipping_charges = $shipping;
                     $order->payment_method = $payment;
                     $order->buy_mode = '0';
+                    $order->order_status = 'success';
                     $order->save();
                     $order_items = [];
                 foreach ($order_details as $order_detail) {
@@ -562,6 +563,7 @@ class ShiprocketController extends Controller
                     $order->shipping_charges = $shipping;
                     $order->payment_method = $payment;
                     $order->buy_mode = '1';
+                    $order->order_status = 'success';
                     $order->save();
                     $order_items = [];
                 foreach ($order_details as $order_detail) {

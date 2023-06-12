@@ -12,6 +12,7 @@ use App\Models\Category;
 use App\Models\BuyNow;
 use Auth;
 use Validator;
+use PDF;
 
 class CheckOutController extends Controller
 {
@@ -217,5 +218,21 @@ class CheckOutController extends Controller
                 return response()->json(['status' => true, 'msg' => 'Create....']);
             }
         }
+    }
+
+     function download()
+    {
+        $data = [
+            'title' => 'Welcome to Tutsmake.com',
+            'date' => date('m/d/Y')
+        ];
+
+        $pdf = PDF::loadView('testPDF', $data);
+        $pdf->setPaper('A4', 'portrait'); // Set the paper size and orientation
+        // dd($pdf);
+
+        $filename = 'tutsmake.pdf';
+
+        return $pdf->download($filename);
     }
 }

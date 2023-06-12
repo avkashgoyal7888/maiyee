@@ -71,7 +71,7 @@ class PaymentController extends Controller
         $nav = Head::first();
         $cat = Category::get();
 
-        return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint],compact('cartNav','cartTotalnav','cartCount','nav','cat'));
+        return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint],compact('cartNav','cartTotalnav','cartCount','nav','cat','payment'));
     }
 
     public function orderCancel(Request $request)

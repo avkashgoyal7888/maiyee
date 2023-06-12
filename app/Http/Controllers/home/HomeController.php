@@ -240,7 +240,9 @@ class HomeController extends Controller
         $startFormatted = $startDate->format('D. M j');
         $endFormatted = $endDate->format('D. M j');
         $shareButton = \Share::page('https://maiyee.in/product-detail/'.$req->id,$product->name)->facebook()->twitter()->linkedin()->telegram()->whatsapp()->reddit();
-        $wish = WishList::where(['user_id' => Auth::guard('web')->user()->id, 'product_id'=>$req->id])->first();
+        $user = Auth::guard('web')->user();
+        $userId = $user ? $user->id : null;
+        $wish = WishList::where(['user_id' => $userId, 'product_id' => $req->id])->first();
         return view('front.product-detail', compact('product', 'color', 'size','colorzoom','cartNav','proimage','cartTotalnav','cartCount','nav','review','count','rating','avg','rim','cat','productdetail','discount','startFormatted','endFormatted','shareButton','quantity','wish'));
     }
 
