@@ -194,7 +194,7 @@
         <i class="icon anm anm-heart-l" style="color: #000;"></i>
     @elseif ($product->id == $wish->product_id)
         <span>Already Added To Wishlist</span>
-        <i class="icon anm anm-heart-l" style="color: red;"></i>
+        <i class="icon anm anm-heart" style="color: red;"></i>
     @endif
 @else
     <span>Add to Wishlist</span>
