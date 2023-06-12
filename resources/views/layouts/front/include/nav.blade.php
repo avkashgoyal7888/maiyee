@@ -103,16 +103,12 @@
                                     <img src="{{asset('admin/color/'. $carts->color->image)}}" alt="3/4 Sleeve Kimono Dress" title="" />
                                 </a>
                                 <div class="product-details">
-                                    <a href="#" class="remove"><i class="anm anm-times-l" aria-hidden="true"></i></a>
-                                    <a href="#" class="edit-i remove"><i class="anm anm-edit" aria-hidden="true"></i></a>
                                     <a class="pName" href="{{route('web.cart')}}">{{$carts->product->name}}</a>
                                     <div class="variant-cart">Black / {{$carts->size->size}}</div>
                                     <div class="wrapQtyBtn">
                                         <div class="qtyField">
                                             <span class="label">Qty:</span>
-                                            <a class="qtyBtn minus" href="javascript:void(0);"><i class="fa anm anm-minus-r" aria-hidden="true"></i></a>
-                                            <input type="text" id="Quantity" name="quantity" value="1" class="product-form__input qty">
-                                            <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
+                                            {{$carts->quantity}}
                                         </div>
                                     </div>
                                     <div class="priceRow">

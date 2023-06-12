@@ -1,3 +1,8 @@
+@extends('layouts.front.app')
+@section('css')
+<title>Pay-Now</title>
+@stop
+@section('content')
 <form method="post" action="{{ $payuEndpoint }}">
     @csrf
     @foreach ($params as $key => $value)
@@ -5,3 +10,7 @@
     @endforeach
     <button type="submit">Pay Now</button>
 </form>
+
+@stop
+@section('js')
+@stop

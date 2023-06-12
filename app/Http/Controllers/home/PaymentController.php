@@ -58,14 +58,20 @@ class PaymentController extends Controller
         $hashSequence = $merchantKey . '|' . $params['txnid'] . '|' . $params['amount'] . '|' . $params['productinfo'] . '|' . $params['firstname'] . '|' . $params['email'] . '|||||||||||' . $merchantSalt;
         $hash = strtolower(hash('sha512', $hashSequence));
         $params['hash'] = $hash;
-
-        // Temporarily disable auth middleware
         $this->middleware(\App\Http\Middleware\Authenticate::class)->except('payment.pay');
-
-        // Store the user ID in the session to be used later
         session(['user_id' => Auth::guard('web')->user()->id]);
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if(Auth::guard('web')->check()) {
+        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+        $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
 
-        return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint]);
+        return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint],compact('cartNav','cartTotalnav','cartCount','nav','cat'));
     }
 
     public function orderCancel(Request $request)
