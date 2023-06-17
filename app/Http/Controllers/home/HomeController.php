@@ -25,6 +25,7 @@ use App\Models\exhibition;
 use App\Models\WishList;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Visitor;
 use Validator;
 use Hash;
 use Auth;
@@ -36,7 +37,7 @@ use Mail;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $req)
     {
         $banner = Banner::get();
         $product = Product::get();
@@ -56,6 +57,20 @@ class HomeController extends Controller
         $bashpr = BadgeProduct::get();
         $hbanner = HomeBanner::get();
         $bash = Bash::get();
+        $ip = $req->ip();
+        $today = now()->format('Y-m-d');
+        $visitor = Visitor::where('ip_address', $ip)
+            ->where('visit_date', $today)
+            ->first();
+        if ($visitor) {
+            $visitor->incrementHits();
+        } else {
+            Visitor::create([
+                'ip_address' => $ip,
+                'visit_date' => $today,
+                'hits' => 1,
+            ]);
+        }
         return view('front.home',compact('banner','product', 'color','size','cartNav','cartTotalnav','cartCount','nav','sub', 'cat', 'bash', 'bashpr','hbanner'));
     }
 

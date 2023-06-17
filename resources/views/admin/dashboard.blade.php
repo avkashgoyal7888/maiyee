@@ -1,19 +1,126 @@
 @extends('layouts.admin.app')
 @section('css')
 <title>Dashboard</title>
+<style>
+        body {
+            text-align: center;
+            background: #ffffff;
+            font-family: 'PT Sans Narrow', sans-serif;
+        }
+
+        .counter {
+            background-color: #fdd200;
+            display: inline-block;
+            margin: 60px 0;
+            padding: 30px;
+            font-weight: bold;
+            border-radius: 6px;
+            box-shadow: 0px 0px 30px rgba(0, 46, 108, .8);
+        }
+
+        .counter:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .counter-digit {
+            position: relative;
+            float: left;
+            margin-right: 5px;
+            width: auto;
+            height: 60px;
+            line-height: 58px;
+            color: white;
+            text-align: center;
+            font-size: 45px;
+            background: #304361;
+            border-radius: 4px;
+            overflow: hidden;
+            text-shadow: 2px 1px 1px rgba(0, 0, 0, .2);
+            box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+        }
+
+        .counter-digit:last-child {
+            margin-right: 0;
+        }
+
+        .gradient-top {
+            position: absolute;
+            top: 0;
+            bottom: 50%;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, .3), transparent, transparent);
+        }
+
+        .gradient-top:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: rgba(0, 0, 0, .2);
+        }
+
+        .comma {
+            float: left;
+            margin-right: 5px;
+            height: 60px;
+            line-height: 85px;
+            font-size: 35px;
+            color: #304361;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+        }
+
+        div#dollars {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        a {
+            color: #304361;
+        }
+    </style>
 @stop
 @section('content')
-<div class="col-xl-3 col-sm-6 col-md-3 col-lg-3 col-12">
-   <div class="card">
-      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit">
-         <div class="card-body">
-            <div>
+    <div class="container">
+       <div class="row">
+         <div class="col-xl-3 col-sm-6 col-md-3 col-lg-3 col-12">
+    <div class="d-flex">
+        <div class="counter mb-3">
+            <div id="donors">Visitors:</div>
+            <div class="counter-digit">
+                <span>{{$visitorCount}}</span>
+                <div class="gradient-top"></div>
             </div>
+        </div>
+        <div class="counter ms-5" onclick="document.getElementById('counterBtn').click()">
+         <div id="donors"></div>
+         <div class="counter-digit">
+            <button id="counterBtn" class="btn btn-sm" data-bs-toggle="modal" data-bs-target="#edit">
+                Navbar
+            </button>
+         </div>
+        </div>
+    </div>
+ </div>
+</div>
+    </div>
+
+
+
+
+<!-- End -->
+
+<!-- <div class="col-xl-3 col-sm-6 col-md-3 col-lg-3 col-12">
+   <div class="counter">
+      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit">
             Navbar
       </button>
       </div>
-   </div>
-</div>
+   </div> -->
 <!--  Edit City Modal -->
 <div class="modal" id="edit" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
    <div class="modal-dialog">

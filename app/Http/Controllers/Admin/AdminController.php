@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Head;
+use App\Models\Visitor;
 use Validator;
 use Session;
 use Auth;
 use Hash;
+use Illuminate\Support\Facades\Artisan;
 
 class AdminController extends Controller
 {
@@ -25,7 +27,8 @@ class AdminController extends Controller
     public function dashboard()
     {
         $nav = Head::first();
-        return view('admin.dashboard', compact('nav'));
+        $visitorCount = Visitor::sum('hits');
+        return view('admin.dashboard', compact('nav','visitorCount'));
     }
 
     public function loginSubmit(Request $req)
