@@ -371,7 +371,7 @@
              fd.append('_token', "{{ csrf_token() }}");
       
              $.ajax({
-                 url: "{{ route('web.apply.coupon') }}",
+                 url: "{{ route('web.apply.coupon.buy') }}",
                  type: "POST",
                  data: fd,
                  dataType: 'json',

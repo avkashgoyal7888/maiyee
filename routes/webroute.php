@@ -92,6 +92,7 @@ use Illuminate\Http\Request;
 			Route::get('/address', 'addressView')->name('web.address');
 			Route::post('/address-submit', 'addressSubmit')->name('web.address.submit');
 			Route::post('/apply-coupon', 'applyCoupon')->name('web.apply.coupon');
+			Route::post('/apply-coupon-buy', 'applyCouponBuy')->name('web.apply.coupon.buy');
 			Route::get('/download-pdf', 'download')->name('download');
 		});
 	});

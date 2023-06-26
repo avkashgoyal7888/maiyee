@@ -471,10 +471,10 @@ class ShiprocketController extends Controller
                 $payable = $total - $discount;
                     if ($payable < 2000) {
                         $shipping = 99;
-                        $payable = $total - $discount + $shipping;
+                        $payable = $total + $shipping;
                     } else {
                         $shipping = 0;
-                        $payable = $total - $discount + $shipping;
+                        $payable = $total + $shipping;
                     }
                 }
         
@@ -488,10 +488,10 @@ class ShiprocketController extends Controller
                 $payable = $total;
                 if ($payable < 2000) {
                         $shipping = 99;
-                        $payable = $total - $discount + $shipping;
+                        $payable = $total + $shipping;
                     } else {
                         $shipping = 0;
-                        $payable = $total - $discount + $shipping;
+                        $payable = $total + $shipping;
                     }
                 }
                 $data->status = '1';

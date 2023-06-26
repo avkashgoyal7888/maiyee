@@ -137,6 +137,86 @@ class CheckOutController extends Controller
         }
     }
 
+    public function applyCouponBuy(Request $req)
+    {
+        $val = Validator::make($req->all(), [
+            'coupon_code' => 'required|exists:coupons,coupon_code',
+            'status' => 'in:0,1'
+        ],[
+            'coupon_code.required' => 'Coupon Code can not be blank...',
+            'coupon_code.exists' => 'Your Coupon Code is Wrong. Try Another One....',
+            'status.in.1' => 'Coupon Code is already used....',
+        ]);
+
+        if($val->fails())
+        {
+            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+        } else {
+
+            $data = Coupon::where('coupon_code',$req->coupon_code)->first();
+            if ($data->status == 1) {
+            $val->errors()->add('status', 'Coupon Code is already used.');
+            $req->coupon_code = '';
+            return response()->json(['status' => false,'msg' => 'Coupon Code is already used....',]);
+        }
+
+        if (strtotime($data->exp_date) < strtotime(date('Y-m-d'))) {
+            $val->errors()->add('status', 'Coupon Code has expired.');
+            $req->coupon_code = '';
+            return response()->json(['status' => false, 'msg' => 'Coupon Code has expired.']);
+            }
+
+
+            $data->coupon_code = $req->coupon_code;
+            $upd = $data;
+            $buy = BuyNow::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
+            $cartTotal = $buy->total;
+
+            if ($data->order_value > $cartTotal) {
+            $val->errors()->add('status', 'Coupon Code Value is less your total.');
+            $req->coupon_code = '';
+            return response()->json(['status' => false,'msg' => 'Coupon Code Value is less your total.',]);
+        }
+
+             if ($data->coupon_type == 'amount') {
+                    $newCartTotal = $cartTotal - $data->coupon_price;
+                }
+
+             if ($data->coupon_type == '%') {
+                 $newCartTotal = $cartTotal - ($cartTotal * ($data->coupon_price / 100));
+             }
+             
+             if ($newCartTotal < 2000) {
+                 $newCartTotal += 99;
+             }
+
+             if ($upd) {
+                if ($data->coupon_type == 'amount') {
+                        $newCartTotal = $cartTotal - $data->coupon_price;
+                        $discount = $data->coupon_price;
+            }
+
+            if ($data->coupon_type == '%') {
+                $discount = $cartTotal * ($data->coupon_price / 100);
+                $newCartTotal = $cartTotal - $discount;
+            }
+
+            if ($newCartTotal < 2000) {
+                $newCartTotal += 99;
+            }
+
+                return response()->json([
+                    'status'=>true,
+                    'msg'=>'Coupon Applied Successfully....',
+                    'discount' => $discount,
+                    'newCartTotal' => $newCartTotal
+                ]);
+                } else {
+                    return response()->json(['status'=>false, 'msg'=>'Something went Wrong try again later....']);
+            }
+        }
+    }
+
     public function addressView()
     {$cartNav = Cart::get();
         $cartTotalnav = 0;
