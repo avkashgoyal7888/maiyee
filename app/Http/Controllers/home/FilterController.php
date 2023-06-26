@@ -26,10 +26,10 @@ class FilterController extends Controller
         $catid = $request->id;
         $selectedSizes = $request->input('selected_sizes');
         $productIds = Product::where('cat_id', $catid)->pluck('id');
-        $products = Size::join("products", "sizes.product_id", "=", "products.id")
+        $products = Size::join("products", "sizes.product_id", "=", "products.id")->join("colors", "sizes.color_id", "=", "colors.id")
             ->whereIn('sizes.product_id', $productIds)
             ->whereIn('sizes.size', $selectedSizes)
-            ->select("sizes.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.image as images","products.id as proid")
+            ->select("sizes.*","products.name as proname","products.mrp as mrps","products.discount as discounts","colors.image as images","products.id as proid")
         ->get();
         return response()->json($products);
     }
@@ -59,10 +59,10 @@ class FilterController extends Controller
         $subid = $request->id;
         $selectedSizes = $request->input('selected_sizes');
         $productIds = Product::where('cat_id', $subid)->pluck('id');
-        $products = Size::join("products", "sizes.product_id", "=", "products.id")
+        $products = Size::join("products", "sizes.product_id", "=", "products.id")->join("colors", "sizes.color_id", "=", "colors.id")
             ->whereIn('sizes.product_id', $productIds)
             ->whereIn('sizes.size', $selectedSizes)
-            ->select("sizes.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.image as images","products.id as proid")
+            ->select("sizes.*","products.name as proname","products.mrp as mrps","products.discount as discounts","colors.image as images","products.id as proid")
         ->get();
         return response()->json($products);
     }
