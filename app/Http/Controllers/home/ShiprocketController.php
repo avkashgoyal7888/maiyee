@@ -154,13 +154,13 @@ class ShiprocketController extends Controller
                 $newSGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('sgst');
                 $newIGST = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('igst');
                 $taxable = OrderDetail::where(['user_id' => Auth::guard('web')->user()->id , 'order_id' => $order_id])->sum('taxable');
-                $payable = $total - $discount;
+                $payable = $total;
                     if ($payable < 2000) {
                         $shipping = 99;
-                        $payable = $total - $discount + $shipping;
+                        $payable = $total + $shipping;
                     } else {
                         $shipping = 0;
-                        $payable = $total - $discount + $shipping;
+                        $payable = $total + $shipping;
                     }
                 }
         
@@ -174,10 +174,10 @@ class ShiprocketController extends Controller
                 $payable = $total;
                 if ($payable < 2000) {
                         $shipping = 99;
-                        $payable = $total - $discount + $shipping;
+                        $payable = $total + $shipping;
                     } else {
                         $shipping = 0;
-                        $payable = $total - $discount + $shipping;
+                        $payable = $total + $shipping;
                     }
                 }
                 $data->status = '1';
