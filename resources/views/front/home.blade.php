@@ -3,7 +3,7 @@
 <title>Welcome To Maiyee</title>
 @stop
 @section('content')
-<a href="{{route('download')}}">download</a>
+<!-- <a href="{{route('download')}}">download</a> -->
 <div class="slideshow slideshow-wrapper pb-section">
    <div class="home-slideshow">
       @foreach($banner as $banners)
