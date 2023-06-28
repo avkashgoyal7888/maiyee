@@ -34,7 +34,7 @@
                 display: inline-block;
             }          
             .social-btn-sp #social-links ul li a {
-                padding: 15px;
+                padding: 5px;
                 border: 1px solid #ccc;
                 margin: 1px;
                 font-size: 30px;
