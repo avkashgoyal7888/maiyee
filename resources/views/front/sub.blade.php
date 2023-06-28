@@ -482,8 +482,8 @@
         html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
         html += '<div class="product-image">';
         html += '<a href="' + url + '">';
-        html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.images + '" src="{{ asset('admin/product/') }}/' + products.images + '" alt="image" title="product">';
-        html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.images + '" src="{{ asset('admin/product/') }}/' + products.images + '" alt="image" title="product">';
+        html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
+        html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
         html += '<div class="product-labels rectangular">';
         // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
         html += '<span class="lbl pr-label1">new</span>';
