@@ -34,7 +34,7 @@
                 display: inline-block;
             }          
             .social-btn-sp #social-links ul li a {
-                padding: 15px;
+                padding: 5px;
                 border: 1px solid #ccc;
                 margin: 1px;
                 font-size: 30px;
@@ -215,7 +215,7 @@
                   </div>
                </div>
                <p id="freeShipMsg" class="freeShipMsg" data-price="199"><i class="fa fa-truck" aria-hidden="true"></i> GETTING CLOSER! ONLY <b class="freeShip"><span class="money">₹99.00</span>SHIPPING CHARGES!</b></p>
-               <p class="shippingMsg"><i class="fa fa-clock-o" aria-hidden="true"></i> ESTIMATED DELIVERY BETWEEN <b id="fromDate">{{ $startFormatted }}</b> to <b id="toDate">{{ $endFormatted }}</b>.</p>
+               <p class="shippingMsg"><i class="fa fa-clock-o" aria-hidden="true"></i> ESTIMATED DELIVERY BETWEEN <br><b id="fromDate" style="margin-left: 30px">{{ $startFormatted }}</b> to <b id="toDate">{{ $endFormatted }}</b>.</p>
                <div class="userViewMsg" data-user="20" data-time="11000"><i class="fa fa-users" aria-hidden="true"></i> <strong class="uersView">14</strong> PEOPLE ARE LOOKING FOR THIS PRODUCT</div>
             </div>
          </div>
