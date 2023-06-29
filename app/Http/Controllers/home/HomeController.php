@@ -417,10 +417,12 @@ class HomeController extends Controller
         if ($authUser) {
             Auth::login($authUser, true);
         } else {
+            $password = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(8 / strlen($x)))), 1, 8);
+            $hashedPassword = Hash::make($password);
             $authUser = User::create([
                 'name' => $user->getName(),
                 'email' => $user->getEmail(),
-                'password' => Hash::make(Str::random(24)),
+                'password' => $hashedPassword,
                 'avatar' => $user->getAvatar(),
                 'provider_id' => $user->getId(),
             ]);
