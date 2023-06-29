@@ -438,23 +438,29 @@ class HomeController extends Controller
 
     public function redirectToFacebook()
     {
-        return Socialite::driver('facebook')->redirect();
+        return Socialite::driver('facebook')->stateless()->redirect();
     }
 
     public function handleFacebookCallback()
     {
-        $user = Socialite::driver('facebook')->user();
+        $user = Socialite::driver('facebook')->stateless()->user();
     
-        // insert user information into users table
-        User::updateOrCreate([
-            'email' => $user->getEmail(),
-        ], [
-            'name' => $user->getName(),
-            'password' => Hash::make(Str::random(24)),
-        ]);
+        $authUser = User::where('email', $user->getEmail())->first();
+        if ($authUser) {
+            Auth::login($authUser, true);
+        } else {
+            $password = substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil(8 / strlen($x)))), 1, 8);
+            $hashedPassword = Hash::make($password);
+            $authUser = User::create([
+                'name' => $user->getName(),
+                'email' => $user->getEmail(),
+                'password' => $hashedPassword,
+                'avatar' => $user->getAvatar(),
+                'provider_id' => $user->getId(),
+            ]);
     
-        // log in the user
-        auth()->attempt(['email' => $user->getEmail(), 'password' => '']);
+            Auth::login($authUser, true);
+        }
     
         return redirect()->route('web.home');
     }

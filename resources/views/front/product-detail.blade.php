@@ -86,7 +86,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                <div class="product-single__meta">
-                  <h1 class="product-single__title">{{$product->name}}</h1>
+                  <h1 class="product-single__title">{{$product->name}} <a href="#" class="float-right" onclick="copyToClipboard('{{ route('web.product.detail', $product->id) }}')"><i class="fas fa-copy"></a></h1>
                   <div class="prInfoRow">
                      <div class="product-sku">SKU: <span class="variant-sku">{{$product->style_code}}</span></div>
                      <div class="product-review">
@@ -416,6 +416,19 @@
 <!--MainContent-->
 @stop
 @section('js')
+<script>
+  function copyToClipboard(text) {
+    var dummyElement = document.createElement('textarea');
+    dummyElement.value = text;
+    dummyElement.setAttribute('readonly', '');
+    dummyElement.style.position = 'absolute';
+    dummyElement.style.left = '-9999px';
+    document.body.appendChild(dummyElement);
+    dummyElement.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummyElement);
+  }
+</script>
 <script>
    $(document).ready(function(){
       $('.add-to-wishlist').on('click', function(e) {
