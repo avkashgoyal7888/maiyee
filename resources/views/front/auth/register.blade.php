@@ -175,7 +175,7 @@
                $("#verify-otp-button").hide();
             } else if (result.status === 200) {
                toastr.success(result.message, 'Message', {
-                  timeOut: 1000,
+                  timeOut: 500,
                   closeButton: true,
                   progressBar: true,
                   onclick: null,
@@ -186,7 +186,7 @@
                otpGenerated = false; // Reset the OTP generation flag
                setTimeout(function() {
                   window.location.href = "{{route('web.home')}}";
-               }, 1500);
+               }, 500);
             }
          },
       });

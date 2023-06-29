@@ -54,13 +54,13 @@ $(document).ready(function(){
             success: function(result) {
                 if (result.status === false) {
                     toastr.error(result.msg, 'Error', {
-                        timeOut: 3000,
+                        timeOut: 500,
                         progressBar: true,
                         closeButton: true
                     });
                 } else if (result.status === true) {
                     toastr.success(result.msg, 'Success', {
-                        timeOut: 3000,
+                        timeOut: 500,
                         progressBar: true,
                         closeButton: true
                     });
@@ -70,7 +70,7 @@ $(document).ready(function(){
             error: function(jqXHR, exception) {
                 console.log(jqXHR.responseJSON);
                 toastr.error(result.msg, 'Error', {
-                    timeOut: 3000,
+                    timeOut: 500,
                     progressBar: true,
                     closeButton: true
                 });

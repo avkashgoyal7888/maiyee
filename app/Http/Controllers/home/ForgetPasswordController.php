@@ -63,14 +63,11 @@ class ForgetPasswordController extends Controller
             ->orWhere('number', $emailOrContact)
             ->first();
 
+            $user->prt = $token;
+
             
 
-            $pass = DB::table('password_reset_tokens')->insert([
-                'user_id' => $user->id,
-                'email' => $emailOrContact,
-                'token' => $token,
-                'created_at' => Carbon::now()
-            ]);
+            $pass = $user->update();
 
 
             $fields = array(
@@ -102,10 +99,10 @@ class ForgetPasswordController extends Controller
             $err = curl_error($curl);
             curl_close($curl);
 
-            Mail::send('front.auth.forgetemail', ['token' => $token], function ($message) use ($req, $user) {
-                $message->to($user->email);
-                $message->subject('Reset Password');
-            });
+            // Mail::send('front.auth.forgetemail', ['token' => $token], function ($message) use ($req, $user) {
+            //     $message->to($user->email);
+            //     $message->subject('Reset Password');
+            // });
 
             if ($pass) {
                 session()->put(['user_id' => $user->id, 'email'=>$emailOrContact, 'token'=>$token]);
@@ -147,8 +144,8 @@ class ForgetPasswordController extends Controller
               return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
           } else {
   
-          $updatePassword = DB::table('password_reset_tokens')
-                              ->where('token', $request->otp)->exists();
+          $updatePassword = DB::table('users')
+                              ->where('prt', $request->otp)->exists();
   
           if(!$updatePassword){
               return response()->json(['status'=>false, 'msg'=>'Enter Correct OTP....']);
@@ -196,8 +193,8 @@ class ForgetPasswordController extends Controller
           } else {
 
           $user_id = session('user_id');
-          $updatePassword = DB::table('password_reset_tokens')
-                              ->where('user_id', $user_id)->first();
+          $updatePassword = DB::table('users')
+                              ->where('id', $user_id)->first();
   
           if(!$updatePassword){
               return response()->json(['status'=>false, 'msg'=>'Enter Correct OTP....']);
@@ -205,8 +202,6 @@ class ForgetPasswordController extends Controller
   
           $user = User::where('id', $user_id)
                       ->update(['password' => Hash::make($request->password)]);
- 
-          DB::table('password_reset_tokens')->where('user_id', $user_id)->delete();
           Session::flush();
           return response()->json(['status'=>true, 'msg'=>'Password Changed Successfully....']);
       }
