@@ -47,7 +47,7 @@ class FilterController extends Controller
     public function filterByColorSub(Request $request)
     {
         $subid = $request->id;
-        $productIds = Product::where('cat_id', $subid)->pluck('id');
+        $productIds = Product::where('sub_id', $subid)->pluck('id');
         $selectedSizes = $request->input('selected_sizes');
         $products = Color::join("products","colors.product_id","=","products.id")->whereIn('colors.product_id', $productIds)->whereIn('color_category', $selectedSizes)
             ->select("colors.*","products.name as proname","products.mrp as mrps","products.discount as discounts","products.id as proid")->get();
@@ -58,7 +58,7 @@ class FilterController extends Controller
     {
         $subid = $request->id;
         $selectedSizes = $request->input('selected_sizes');
-        $productIds = Product::where('cat_id', $subid)->pluck('id');
+        $productIds = Product::where('sub_id', $subid)->pluck('id');
         $products = Size::join("products", "sizes.product_id", "=", "products.id")->join("colors", "sizes.color_id", "=", "colors.id")
             ->whereIn('sizes.product_id', $productIds)
             ->whereIn('sizes.size', $selectedSizes)
@@ -73,7 +73,7 @@ class FilterController extends Controller
         $minPrice = $request->input('min_price');
         $maxPrice = $request->input('max_price');
         
-        $products = Product::where('cat_id', $subid)->whereBetween('discount', [$minPrice, $maxPrice])->get();
+        $products = Product::where('sub_id', $subid)->whereBetween('discount', [$minPrice, $maxPrice])->get();
         return response()->json($products);
     }
 }
