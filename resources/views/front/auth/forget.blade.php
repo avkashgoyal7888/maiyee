@@ -12,6 +12,9 @@
         <!--End Page Title-->
         
         <div class="container">
+            <div id="loader" style="display:none;">
+    @include('components.loader')
+   </div>
             <div class="row">
                 <div class="col-12 col-sm-12 col-md-6 col-lg-6 main-col offset-md-3">
                        <form id="forgetPassword" accept-charset="UTF-8" class="contact-form">   
@@ -51,6 +54,7 @@ $(document).ready(function(){
             contentType: false,
             beforeSend: function() {
                 $('#addBtn').prop('disabled', true)
+                $('#loader').show();
             },
             success: function(result) {
                 if (result.status === false) {
@@ -74,6 +78,7 @@ $(document).ready(function(){
             },
             complete: function() {
                 $('#addBtn').prop('disabled', false);
+                $('#loader').hide();
             }
         });
     });
