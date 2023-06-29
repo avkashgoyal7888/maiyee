@@ -413,7 +413,6 @@ class HomeController extends Controller
         $user = Socialite::driver('google')->stateless()->user();
         
         $authUser = User::where('email', $user->getEmail())->first();
-        print_r($authUser); exit();
     
         if ($authUser) {
             Auth::login($authUser, true);
