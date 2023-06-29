@@ -145,7 +145,7 @@
                         @if($sizes->color_id == app('request')->input('color_id', $proimage[0]->color_id))
                         <div data-value="{{$sizes->size}}" data-size="{{$sizes->id}}" data-color="{{$sizes->color_id}}" class="swatch-element xs available">
                            <input class="swatchInput" id="{{$sizes->id}}" type="radio" name="size_id" value="{{$sizes->id}}" @if($sizes->id == app('request')->input('size_id')) checked @endif {{$sizes->quantity === 0 ? 'disabled' : ''}}>
-                           <label class="swatchLbl medium rectangle" for="{{$sizes->id}}" title="XS">{{$sizes->size}}</label>
+                           <label class="swatchLbl medium rectangle" for="{{$sizes->id}}">{{$sizes->size}}</label>
                         </div>
                         @endif
                         @endforeach
