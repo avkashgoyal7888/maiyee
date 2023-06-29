@@ -192,7 +192,7 @@
                   <h2 class="payment-title mb-3">payment method</h2>
                   <div class="payment-method">
                      <div class="row">
-                        <input name="coupon_code" id="coupon_codes" type="text" >
+                        <input name="coupon_code" id="coupon_codes" type="hidden" >
                         <input type="hidden" id="addressid" name="addressid"/>
                         <input type="hidden" class="name" name="name"/>
                         <input type="hidden" name="email" class="email" type="email">
