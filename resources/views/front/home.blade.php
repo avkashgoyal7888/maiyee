@@ -109,7 +109,7 @@
                   <!-- start product image -->
                   <div class="product-image">
                      <!-- start product image -->
-                     <a href="{{route('web.product.detail',$products->id)}}" class="grid-view-item__link">
+                     <a href="{{route('web.product.detail',$products->product->id)}}" class="grid-view-item__link">
                         <!-- image -->
                         <img class="primary blur-up lazyload" data-src="{{ asset('admin/product/' . $products->product->image) }}" src="{{ asset('admin/product/' . $products->product->image) }}" alt="image" title="product" />
                         <!-- End image -->
