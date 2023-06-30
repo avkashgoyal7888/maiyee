@@ -69,119 +69,118 @@
                <!--End Price Filter-->
                <!--Size Swatches-->
                <div class="sidebar_widget filterBox filter-widget size-swacthes">
-                  <div class="widget-title">
-                     <h2>Size</h2>
-                  </div>
-                  <div class="filter-color swacth-list">
-                        <div id="size">
-                           @foreach($size as $sizes)
-                           <label>
-                           <input type="checkbox" class="size-checkbox" value="{{ $sizes->size }}"> {{ $sizes->size }}
-                           </label>
-                           @endforeach
-                        </div>
-                  </div>
+               <div class="widget-title">
+               <h2>Size</h2>
+               </div>
+               <div class="filter-color swacth-list">
+               <div id="size">
+               @foreach($size as $sizes)
+               <label>
+               <input type="checkbox" class="size-checkbox" value="{{ $sizes->size }}"> {{ $sizes->size }}
+               </label>
+               @endforeach
+               </div>
+               </div>
                </div>
                <!--End Size Swatches-->
                <!--Color Swatches-->
                <div class="sidebar_widget filterBox filter-widget size-swacthes">
-                  <div class="widget-title">
-                     <h2>Color</h2>
-                  </div>
-                  <div class="filter-color swacth-list">
-                        <div id="size">
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="black">
-                           <span class="swatch mr-3">Black</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="white">
-                           <span class="swatch mr-3">White</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="blue">
-                           <span class="swatch mr-3">Blue</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="pink">
-                           <span class="swatch mr-3">Pink</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="purple">
-                           <span class="swatch mr-3">Purple</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="beige">
-                           <span class="swatch mr-3">Beige</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="brown">
-                           <span class="swatch mr-3">Brown</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="gold">
-                           <span class="swatch mr-3">Gold</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="green">
-                           <span class="swatch mr-3">Green</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="grey">
-                           <span class="swatch mr-3">Grey</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="khaki">
-                           <span class="swatch mr-3">Khaki</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="maroon">
-                           <span class="swatch mr-3">Maroon</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="red">
-                           <span class="swatch mr-3">Red</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="orange">
-                           <span class="swatch mr-3">Orange</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="silver">
-                           <span class="swatch mr-3">Silver</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="yellow">
-                           <span class="swatch mr-3">Yellow</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="teal">
-                           <span class="swatch mr-3">Teal</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="wine">
-                           <span class="swatch mr-3">Wine</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="turquoise">
-                           <span class="swatch mr-3">Turquoise</span>
-                           </label>
-                           <br>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="off_white">
-                           <span class="swatch mr-3">Off White</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="multi_color">
-                           <span class="swatch mr-3">Multi Color</span>
-                           </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                     </form>
-                  </div>
+               <div class="widget-title">
+               <h2>Color</h2>
+               </div>
+               <div class="filter-color swacth-list">
+               <div id="size">
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="black">
+               <span class="swatch mr-3">Black</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="white">
+               <span class="swatch mr-3">White</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="blue">
+               <span class="swatch mr-3">Blue</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="pink">
+               <span class="swatch mr-3">Pink</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="purple">
+               <span class="swatch mr-3">Purple</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="beige">
+               <span class="swatch mr-3">Beige</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="brown">
+               <span class="swatch mr-3">Brown</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="gold">
+               <span class="swatch mr-3">Gold</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="green">
+               <span class="swatch mr-3">Green</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="grey">
+               <span class="swatch mr-3">Grey</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="khaki">
+               <span class="swatch mr-3">Khaki</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="maroon">
+               <span class="swatch mr-3">Maroon</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="red">
+               <span class="swatch mr-3">Red</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="orange">
+               <span class="swatch mr-3">Orange</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="silver">
+               <span class="swatch mr-3">Silver</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="yellow">
+               <span class="swatch mr-3">Yellow</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="teal">
+               <span class="swatch mr-3">Teal</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="wine">
+               <span class="swatch mr-3">Wine</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="turquoise">
+               <span class="swatch mr-3">Turquoise</span>
+               </label>
+               <br>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="off_white">
+               <span class="swatch mr-3">Off White</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="multi_color">
+               <span class="swatch mr-3">Multi Color</span>
+               </label>
+               </div>
+               <button type="submit" class="btn btn-primary">Filter</button>
+               </form>
+               </div>
                </div>
                <!--End Color Swatches-->
-
             </div>
          </div>
          <!--End Sidebar-->
@@ -467,7 +466,7 @@
             $('#addBtn').prop('disabled', false);
         }
     });
-});
+   });
    });
    
    

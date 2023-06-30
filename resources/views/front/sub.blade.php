@@ -64,128 +64,120 @@
                         <div class="col-6">
                            <p class="no-margin"><input id="amount" type="text"></p>
                         </div>
-                        <div class="col-6 text-right margin-25px-top">
-                           <button class="btn btn-secondary btn--small">filter</button>
-                        </div>
                      </div>
-                  </form>
                </div>
                <!--End Price Filter-->
                <!--Size Swatches-->
                <div class="sidebar_widget filterBox filter-widget size-swacthes">
-                  <div class="widget-title">
-                     <h2>Size</h2>
-                  </div>
-                  <div class="filter-color swacth-list">
-                     <form id="filter-form">
-                        <div id="size">
-                           @foreach($size as $sizes)
-                           <label>
-                           <input type="checkbox" class="size-checkbox" value="{{ $sizes->size }}"> {{ $sizes->size }}
-                           </label>
-                           @endforeach
-                        </div>
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                     </form>
-                  </div>
+               <div class="widget-title">
+               <h2>Size</h2>
+               </div>
+               <div class="filter-color swacth-list">
+               <div id="size">
+               @foreach($size as $sizes)
+               <label>
+               <input type="checkbox" class="size-checkbox" value="{{ $sizes->size }}"> {{ $sizes->size }}
+               </label>
+               @endforeach
+               </div>
+               </div>
                </div>
                <!--End Size Swatches-->
                <!--Color Swatches-->
                <div class="sidebar_widget filterBox filter-widget size-swacthes">
-                  <div class="widget-title">
-                     <h2>Color</h2>
-                  </div>
-                  <div class="filter-color swacth-list">
-                     <form id="color-form">
-                        <div id="size">
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="black">
-                           <span class="swatch mr-3">Black</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="white">
-                           <span class="swatch mr-3">White</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="blue">
-                           <span class="swatch mr-3">Blue</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="pink">
-                           <span class="swatch mr-3">Pink</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="purple">
-                           <span class="swatch mr-3">Purple</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="beige">
-                           <span class="swatch mr-3">Beige</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="brown">
-                           <span class="swatch mr-3">Brown</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="gold">
-                           <span class="swatch mr-3">Gold</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="green">
-                           <span class="swatch mr-3">Green</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="grey">
-                           <span class="swatch mr-3">Grey</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="khaki">
-                           <span class="swatch mr-3">Khaki</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="maroon">
-                           <span class="swatch mr-3">Maroon</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="red">
-                           <span class="swatch mr-3">Red</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="orange">
-                           <span class="swatch mr-3">Orange</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="silver">
-                           <span class="swatch mr-3">Silver</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="yellow">
-                           <span class="swatch mr-3">Yellow</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="teal">
-                           <span class="swatch mr-3">Teal</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="wine">
-                           <span class="swatch mr-3">Wine</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="turquoise">
-                           <span class="swatch mr-3">Turquoise</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="off_white">
-                           <span class="swatch mr-3">Off White</span>
-                           </label>
-                           <label>
-                           <input type="checkbox" class="color-checkbox mx-1" value="multi_color">
-                           <span class="swatch mr-3">Multi Color</span>
-                           </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Filter</button>
-                     </form>
-                  </div>
+               <div class="widget-title">
+               <h2>Color</h2>
+               </div>
+               <div class="filter-color swacth-list">
+               <div id="size">
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="black">
+               <span class="swatch mr-3">Black</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="white">
+               <span class="swatch mr-3">White</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="blue">
+               <span class="swatch mr-3">Blue</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="pink">
+               <span class="swatch mr-3">Pink</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="purple">
+               <span class="swatch mr-3">Purple</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="beige">
+               <span class="swatch mr-3">Beige</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="brown">
+               <span class="swatch mr-3">Brown</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="gold">
+               <span class="swatch mr-3">Gold</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="green">
+               <span class="swatch mr-3">Green</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="grey">
+               <span class="swatch mr-3">Grey</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="khaki">
+               <span class="swatch mr-3">Khaki</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="maroon">
+               <span class="swatch mr-3">Maroon</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="red">
+               <span class="swatch mr-3">Red</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="orange">
+               <span class="swatch mr-3">Orange</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="silver">
+               <span class="swatch mr-3">Silver</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="yellow">
+               <span class="swatch mr-3">Yellow</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="teal">
+               <span class="swatch mr-3">Teal</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="wine">
+               <span class="swatch mr-3">Wine</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="turquoise">
+               <span class="swatch mr-3">Turquoise</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="off_white">
+               <span class="swatch mr-3">Off White</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="multi_color">
+               <span class="swatch mr-3">Multi Color</span>
+               </label>
+               </div>
+               <button type="submit" class="btn btn-primary">Filter</button>
+               </form>
+               </div>
                </div>
                <!--End Color Swatches-->
             </div>
@@ -370,171 +362,6 @@
     window.location.href = newUrl;
    });
    
-   
-   
-   
-      $(".size-btn").click(function() {
-       $("#color-form").submit();
-     });
-     // Handle the form submission
-     $("#color-form").submit(function(e) {
-       e.preventDefault();
-       // Get the selected sizes
-       var selectedSizes = [];
-       var subid = {{ $subid }};
-       $(".color-checkbox:checked").each(function() {
-         selectedSizes.push($(this).val());
-       });
-       // Make the AJAX request to filter products
-       $.ajax({
-         url: "{{route('filter.by.color.sub')}}",
-         type: "GET",
-         data: {
-            id: subid,
-           selected_sizes: selectedSizes
-         },
-         success: function(result) {
-    let html = '<div class="grid-products grid--view-items" id="product_container">';
-    html += '<div class="row">';
-    result.forEach(function(products) {
-        url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
-        html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
-        html += '<div class="product-image">';
-        html += '<a href="' + url + '">';
-        html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.image + '" src="{{ asset('admin/color/') }}/' + products.image + '" alt="image" title="product">';
-        html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.image + '" src="{{ asset('admin/color/') }}/' + products.image + '" alt="image" title="product">';
-        html += '<div class="product-labels rectangular">';
-        // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
-        html += '<span class="lbl pr-label1">new</span>';
-        html += '</div>';
-        html += '</a>';
-        html += '<div class="button-set">';
-        html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
-        html += '<i class="icon anm anm-search-plus-r"></i>';
-        html += '</a>';
-        html += '<div class="wishlist-btn">';
-        html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
-        html += '<i class="icon anm anm-heart-l"></i>';
-        html += '</a>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '<div class="product-details text-center">';
-        html += '<div class="product-name">';
-        html += '<a href="#">' + products.proname + '</a>';
-        html += '</div>';
-        html += '<div class="product-price">';
-        html += '<span class="old-price">₹' + products.mrps + '</span>';
-        html += '<span class="price">₹' + products.discounts + '</span>';
-        html += '</div>';
-        html += '<div class="product-review">';
-   for (var i = 1; i <= 5; i++) {
-    if (i <= Math.floor('{{$avg}}')) {
-        html += '<i class="font-13 fa fa-star"></i>';
-    } else if (i === Math.ceil('{{$avg}}') && '{{$avg}}' - Math.floor('{{$avg}}') >= 0.5) {
-        html += '<i class="font-13 fa fa-star-half-o"></i>';
-    } else {
-        html += '<i class="font-13 fa fa-star-o"></i>';
-    }
-   }
-   html += '</div>';
-   
-        html += '</div>';
-        html += '</div>';
-    });
-    html += '</div>';
-    html += '</div>';
-    $('#product_container').html(html);
-   },
-         error: function(jqXHR, textStatus, errorThrown) {
-           // Handle the error
-           console.error("Error filtering products:", errorThrown);
-         }
-       });
-     });
-   
-      // Size FIlter
-         $(".size-btn").click(function() {
-       $("#filter-form").submit();
-     });
-     // Handle the form submission
-     $("#filter-form").submit(function(e) {
-       e.preventDefault();
-       // Get the selected sizes
-       var selectedSizes = [];
-       var subid = {{ $subid }};
-       $(".size-checkbox:checked").each(function() {
-         selectedSizes.push($(this).val());
-       });
-       // Make the AJAX request to filter products
-       $.ajax({
-         url: "{{route('filter.by.size.sub')}}",
-         type: "GET",
-         data: {
-            id: subid,
-           selected_sizes: selectedSizes
-         },
-         success: function(result) {
-    let html = '<div class="grid-products grid--view-items" id="product_container">';
-    html += '<div class="row">';
-    result.forEach(function(products) {
-        url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
-        html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
-        html += '<div class="product-image">';
-        html += '<a href="' + url + '">';
-        html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
-        html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
-        html += '<div class="product-labels rectangular">';
-        // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
-        html += '<span class="lbl pr-label1">new</span>';
-        html += '</div>';
-        html += '</a>';
-        html += '<div class="button-set">';
-        html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
-        html += '<i class="icon anm anm-search-plus-r"></i>';
-        html += '</a>';
-        html += '<div class="wishlist-btn">';
-        html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
-        html += '<i class="icon anm anm-heart-l"></i>';
-        html += '</a>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '<div class="product-details text-center">';
-        html += '<div class="product-name">';
-        html += '<a href="#">' + products.proname + '</a>';
-        html += '</div>';
-        html += '<div class="product-price">';
-        html += '<span class="old-price">₹' + products.mrps + '</span>';
-        html += '<span class="price">₹' + products.discounts + '</span>';
-        html += '</div>';
-        html += '<span class="price">' + products.size + '</span>';
-        html += '<div class="product-review">';
-   for (var i = 1; i <= 5; i++) {
-    if (i <= Math.floor('{{$avg}}')) {
-        html += '<i class="font-13 fa fa-star"></i>';
-    } else if (i === Math.ceil('{{$avg}}') && '{{$avg}}' - Math.floor('{{$avg}}') >= 0.5) {
-        html += '<i class="font-13 fa fa-star-half-o"></i>';
-    } else {
-        html += '<i class="font-13 fa fa-star-o"></i>';
-    }
-   }
-   html += '</div>';
-   
-        html += '</div>';
-        html += '</div>';
-    });
-    html += '</div>';
-    html += '</div>';
-    $('#product_container').html(html);
-   },
-         error: function(jqXHR, textStatus, errorThrown) {
-           // Handle the error
-           console.error("Error filtering products:", errorThrown);
-         }
-       });
-     });
-   
        // price filter
        function price_slider(){
            $("#slider-range").slider({
@@ -551,81 +378,94 @@
        }
        price_slider();
        $('#price_filter').on('submit', function(e) {
-           e.preventDefault(); // prevent default form submission
-               let min_price = $("#slider-range").slider("values", 0);
-               let max_price = $("#slider-range").slider("values", 1);
-               var subid = {{ $subid }};
-           $.ajax({
-               url: "{{ route('filter.by.price.sub') }}",
-               type: "GET",
-               data: {
-                  id: subid,
-                  min_price: min_price, max_price: max_price, _token: "{{ csrf_token() }}"},
-               dataType: 'json',
-               beforeSend: function() {
-                   $('#addBtn').prop('disabled', true);
-               },
-               success: function(result) {
-    let html = '<div class="grid-products grid--view-items" id="product_container">';
-    html += '<div class="row">';
-    result.forEach(function(products) {
-        url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.id));
-        html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
-        html += '<div class="product-image">';
-        html += '<a href="' + url + '">';
-        html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.image + '" src="{{ asset('admin/product/') }}/' + products.image + '" alt="image" title="product">';
-        html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + products.image + '" src="{{ asset('admin/product/') }}/' + products.image + '" alt="image" title="product">';
-        html += '<div class="product-labels rectangular">';
-        // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
-        html += '<span class="lbl pr-label1">new</span>';
-        html += '</div>';
-        html += '</a>';
-        html += '<div class="button-set">';
-        html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
-        html += '<i class="icon anm anm-search-plus-r"></i>';
-        html += '</a>';
-        html += '<div class="wishlist-btn">';
-        html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
-        html += '<i class="icon anm anm-heart-l"></i>';
-        html += '</a>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-        html += '<div class="product-details text-center">';
-        html += '<div class="product-name">';
-        html += '<a href="#">' + products.name + '</a>';
-        html += '</div>';
-        html += '<div class="product-price">';
-        html += '<span class="old-price">₹' + products.mrp + '</span>';
-        html += '<span class="price">₹' + products.discount + '</span>';
-        html += '</div>';
-        html += '<div class="product-review">';
-   for (var i = 1; i <= 5; i++) {
-    if (i <= Math.floor('{{$avg}}')) {
-        html += '<i class="font-13 fa fa-star"></i>';
-    } else if (i === Math.ceil('{{$avg}}') && '{{$avg}}' - Math.floor('{{$avg}}') >= 0.5) {
-        html += '<i class="font-13 fa fa-star-half-o"></i>';
-    } else {
-        html += '<i class="font-13 fa fa-star-o"></i>';
-    }
-   }
-   html += '</div>';
-   
-        html += '</div>';
-        html += '</div>';
+    e.preventDefault(); // prevent default form submission
+    let min_price = $("#slider-range").slider("values", 0);
+    let max_price = $("#slider-range").slider("values", 1);
+    var selectedSizes = [];
+    $(".size-checkbox:checked").each(function() {
+        selectedSizes.push($(this).val());
     });
-    html += '</div>';
-    html += '</div>';
-    $('#product_container').html(html);
-   },
-               error: function(jqXHR, exception) {
-                   console.log(jqXHR.responseJSON);
-               },
-               complete: function() {
-                   $('#addBtn').prop('disabled', false);
-               }
-           });
-       });
+    var selectedColors = [];
+    $(".color-checkbox:checked").each(function() {
+        selectedColors.push($(this).val());
+    });
+    var catid = {{ $subid }};
+    $.ajax({
+        url: "{{ route('filter.by.price.sub') }}",
+        type: "GET",
+        data: {
+            id: catid,
+            selected_sizes: selectedSizes,
+            selected_colors: selectedColors,
+            min_price: min_price,
+            max_price: max_price,
+            _token: "{{ csrf_token() }}"
+        },
+        dataType: 'json',
+        beforeSend: function() {
+            $('#addBtn').prop('disabled', true);
+        },
+        success: function(result) {
+            let html = '<div class="grid-products grid--view-items" id="product_container">';
+            html += '<div class="row">';
+            result.forEach(function(products) {
+                url = '{{ route("web.product.detail", ["id" => ":id"]) }}'.replace(':id', encodeURIComponent(products.proid));
+                html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
+                html += '<div class="product-image">';
+                html += '<a href="' + url + '">';
+                html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
+                html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
+                html += '<div class="product-labels rectangular">';
+                // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
+                html += '<span class="lbl pr-label1">new</span>';
+                html += '</div>';
+                html += '</a>';
+                html += '<div class="button-set">';
+                html += '<a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">';
+                html += '<i class="icon anm anm-search-plus-r"></i>';
+                html += '</a>';
+                html += '<div class="wishlist-btn">';
+                html += '<a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist">';
+                html += '<i class="icon anm anm-heart-l"></i>';
+                html += '</a>';
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+                html += '<div class="product-details text-center">';
+                html += '<div class="product-name">';
+                html += '<a href="#">' + products.proname + '</a>';
+                html += '</div>';
+                html += '<div class="product-price">';
+                html += '<span class="old-price">₹' + products.mrps + '</span>';
+                html += '<span class="price">₹' + products.discounts + '</span>  <span class="price" style="background-color:' + products.colorcode + '; display: inline-block; width: 20px; height: 20px; border-radius: 50%;"></span>';
+                html += '</div>';
+                html += '<span class="price">' + products.size + '</span>';
+                html += '<div class="product-review">';
+                for (var i = 1; i <= 5; i++) {
+                    if (i <= Math.floor('{{$avg}}')) {
+                        html += '<i class="font-13 fa fa-star"></i>';
+                    } else if (i === Math.ceil('{{$avg}}') && '{{$avg}}' - Math.floor('{{$avg}}') >= 0.5) {
+                        html += '<i class="font-13 fa fa-star-half-o"></i>';
+                    } else {
+                        html += '<i class="font-13 fa fa-star-o"></i>';
+                    }
+                }
+                html += '</div>';
+                html += '</div>';
+                html += '</div>';
+            });
+            html += '</div>';
+            html += '</div>';
+            $('#product_container').html(html);
+        },
+        error: function(jqXHR, exception) {
+            console.log(jqXHR.responseJSON);
+        },
+        complete: function() {
+            $('#addBtn').prop('disabled', false);
+        }
+    });
+   });
    });
    
    

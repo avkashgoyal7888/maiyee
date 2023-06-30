@@ -40,11 +40,7 @@ use Illuminate\Http\Request;
 
 	Route::controller(FilterController::class)->group(function(){
 		Route::get('/filterbypricecat','filterByPriceCat')->name('filter.by.price.cat');
-		Route::get('/filter-by-size','filterBySizeCat')->name('filter.by.size.cat');
-		Route::get('/filter-by-color','filterByColorCat')->name('filter.by.color.cat');
 		Route::get('/filterbypricesub','filterByPriceSub')->name('filter.by.price.sub');
-		Route::get('/filterbysizesub','filterBySizeSub')->name('filter.by.size.sub');
-		Route::get('/filterbycolorsub','filterByColorSub')->name('filter.by.color.sub');
 	});
 
 	Route::controller(ForgetPasswordController::class)->group(function(){
