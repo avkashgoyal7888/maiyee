@@ -3,7 +3,7 @@
       <div wire:loading wire:target="store">
          <x-loader/>
       </div>
-      <div wire:loading wire:target="update">
+      <div wire:loading wire:target="updatePickup">
          <x-loader/>
       </div>
       <div wire:loading wire:target="delete">
@@ -34,6 +34,7 @@
                   <th>Address</th>
                   <th>Order Value</th>
                   <th>Order Detail</th>
+                  <th>Pickup Status</th>
                   <th>Action</th>
                </tr>
             </thead>
@@ -47,6 +48,7 @@
                   <td>{{ucwords($order->address)}} {{ucwords($order->landmark)}} {{ucwords($order->state)}} {{ucwords($order->city)}} {{ucwords($order->pin_code)}}</td>
                   <td>{{ ucwords($order->payable) }}</td>
                   <td><a class="btn btn-success btn-sm" href="{{ route('admin.order.detail',$order->order_id) }}">View</a></td>
+                  <td><a href="#" class="btn btn-sm {{ $order->order_pickup == '0' ? 'btn-danger' : 'btn-success' }}"  data-bs-toggle="modal" data-bs-target="#pickupStatus" wire:click="editPickup({{$order->id}})">{{ $order->order_pickup == '0' ? 'Pending' : 'Pickup Done' }}</a></td>
                   <td><button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#view" wire:click="viewDetailProduct({{$order->id}})"><i class="fas fa-eye"></i></button></td>
                </tr>
                @empty
@@ -59,6 +61,38 @@
          <div style="margin-top: 10px">{{$data->links()}}</div>
       </div>
    </div>
+   <!--  Pickup status Modal -->
+   <div wire:ignore.self class="modal" id="pickupStatus" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myExtraLargeModalLabel">Pickup Status</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="closemodal"></button>
+            </div>
+            <div class="modal-body">
+               <form wire:submit.prevent='updatePickup()'>
+                  <div class="modal-body">
+                     <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">PickUp</label>
+                           <input type="hidden" wire:model="pick_id">
+                           <select class="form-control" wire:model="order_pickup">
+                           <option value="0">Pending</option>
+                           <option value="1">Pickup Done</option>
+                        </select>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                     <button type="submit" class="btn btn-success">Submit</button>
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- End Here -->
    <!--  Edit Supplier Modal -->
    <div wire:ignore.self class="modal" id="view" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-xl">

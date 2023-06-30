@@ -6,7 +6,7 @@ use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Exchange;
 use App\Models\Order;
-
+use Mail;
 class Returns extends Component
 {
     use WithPagination;
@@ -87,9 +87,21 @@ class Returns extends Component
     public function update()
     {
         $validatedata = $this->validate();
-        Exchange::Where('id', $this->ex_id)->update([
-            'status' => $this->status,
-        ]);
+        $exc = Exchange::Where('id', $this->ex_id)->first();
+            $exc->status = $this->status;
+            $exc->update();
+            $orderid = $exc->order_id;
+            $price = $exc->price;
+            $hsn = $exc->product->hsn_code;
+            $proname = $exc->product->name;
+            $email = $exc->user->email;
+
+        if ($this->status == '5') {
+            Mail::send('admin.email.replace', ['orderid' => $orderid,'hsn'=>$hsn,'proname'=>$proname,'price'=>$price], function ($message) use ($email) {
+            $message->to($email);
+            $message->subject('Replace/Replace Order');
+        });
+        }
 
         $this->resetinputfields();
         session()->flash('success', 'Status Updated Successfully...');

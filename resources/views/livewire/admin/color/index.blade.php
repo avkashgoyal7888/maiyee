@@ -129,6 +129,8 @@
                               <option value="teal">Teal</option>
                               <option value="wine">Wine</option>
                               <option value="turquoise">Turquoise</option>
+                              <option value="coffee">Coffee</option>
+                              <option value="peach">Peach</option>
                            </select>
                            @error('color_category')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
@@ -191,6 +193,8 @@
                               <option value="teal">Teal</option>
                               <option value="wine">Wine</option>
                               <option value="turquoise">Turquoise</option>
+                              <option value="coffee">Coffee</option>
+                              <option value="peach">Peach</option>
                            </select>
                            @error('color_category')<span class="text-danger">{{$message}}</span>@enderror
                         </div>

@@ -10,7 +10,7 @@ class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $search, $user_id,$name,$contact,$email,$order_date,$address,$landmark,$state,$city,$order_notes,$taxable,$cgst,$sgst,$igst,$total,$discount,$coupon_code,$shipping_charges,$payable,$payment_method,$order_status;
+    public $search, $user_id,$name,$contact,$email,$order_date,$address,$landmark,$state,$city,$order_notes,$taxable,$cgst,$sgst,$igst,$total,$discount,$coupon_code,$shipping_charges,$payable,$payment_method,$order_status,$pick_id,$order_pickup;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -19,6 +19,31 @@ class Index extends Component
     {
         $this->resetinputfields();
     }
+
+    public function editPickup($id)
+    {
+        $pick = Order::find($id);
+        if ($pick) {
+            $this->pick_id = $pick->id;
+            $this->order_pickup = $pick->order_pickup;
+
+        } else {
+            return redirect()->to('/admin/order');
+        }
+    }
+
+    public function updatePickup()
+    {
+        Order::Where('id', $this->pick_id)->update([
+            'order_pickup' => $this->order_pickup,
+        ]);
+
+        $this->resetinputfields();
+        session()->flash('success', 'Updated Successfully...');
+        $this->emit('closemodal');
+
+    }
+
     public function resetinputfields()
     {
         $this->order_id = '';
@@ -43,6 +68,8 @@ class Index extends Component
         $this->payable = '';
         $this->payment_method = '';
         $this->order_status = '';
+        $this->pick_id = '';
+        $this->order_pickup = '';
     }
 
     public function viewDetailProduct($id)

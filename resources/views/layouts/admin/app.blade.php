@@ -82,6 +82,7 @@
              $('#supplierfund').modal('hide');
              $('#addInventory').modal('hide');
              $('#removeInventory').modal('hide');
+             $('#pickupStatus').modal('hide');
          });
       </script>
    </body>

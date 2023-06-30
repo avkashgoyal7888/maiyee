@@ -57,6 +57,8 @@
                         <b>Dispatch</b>
                         @elseif($return->status == '4')
                         <b class="text-danger">Rejected</b>
+                        @elseif($return->status == '5')
+                        <b class="text-success">Return Recieved</b>
                       @endif</td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editState({{$return->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#view" wire:click="viewDetailProduct({{$return->id}})"><i class="fas fa-eye"></i></button>
@@ -134,6 +136,7 @@
                               <option value="2">PickUp</option>
                               <option value="3">Dispatch</option>
                               <option value="4">Reject</option>
+                              <option value="5">Return Received</option>
                            </select>
                            <input type="hidden" wire:model='ex_id'>
                            @error('status')<span class="text-danger">{{$message}}</span>@enderror

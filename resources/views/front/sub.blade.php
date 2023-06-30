@@ -171,6 +171,14 @@
                <span class="swatch mr-3">Off White</span>
                </label>
                <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="coffee">
+               <span class="swatch mr-3">Coffee</span>
+               </label>
+               <label>
+               <input type="checkbox" class="color-checkbox mx-1" value="peach">
+               <span class="swatch mr-3">Peach</span>
+               </label>
+               <label>
                <input type="checkbox" class="color-checkbox mx-1" value="multi_color">
                <span class="swatch mr-3">Multi Color</span>
                </label>
