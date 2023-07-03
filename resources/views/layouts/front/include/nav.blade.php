@@ -48,7 +48,7 @@
             <!--Desktop Logo-->
             <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
                 <a href="{{route('web.home')}}">
-                    <img src="{{asset('front/assets/images/maiyee.png')}}" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                    <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                 </a>
             </div>
             <!--End Desktop Logo-->
@@ -84,7 +84,7 @@
             <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
                 <div class="logo">
                     <a href="{{route('web.home')}}">
-                        <img src="{{asset('front/assets/images/maiyee.png')}}" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                        <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                     </a>
                 </div>
             </div>
