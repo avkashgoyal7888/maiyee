@@ -237,7 +237,7 @@
                            <!-- start product image -->
                            <a href="{{route('web.product.detail',$products->id)}}">
                               <!-- image -->
-                              <img class="primary blur-up lazyload" data-src="$products->image}}" src="{{ $products->image }}" alt="image" title="product">
+                              <img class="primary blur-up lazyload" data-src="{{$products->image}}" src="{{ $products->image }}" alt="image" title="product">
                               <!-- End image -->
                               <!-- Hover image -->
                               <img class="hover blur-up lazyload" data-src="{{$products->image }}" src="{{$products->image }}" alt="image" title="product">
