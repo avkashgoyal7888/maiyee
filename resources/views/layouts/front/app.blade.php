@@ -8,7 +8,7 @@
 <meta name="csrf-token" content="{{ csrf_token() }}">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- Favicon -->
-<link rel="shortcut icon" href="{{asset('front/assets/images/maiyee.png')}}" />
+<link rel="shortcut icon" href="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" />
 <!-- Plugins CSS -->
 <link rel="stylesheet" href="{{asset('front/assets/css/plugins.css')}}">
 <!-- Bootstap CSS -->
@@ -26,7 +26,7 @@
 <body class="template-index">
 <section class="home2-default">
 <!-- <div id="pre-loader">
-    <img src="{{asset('front/assets/images/maiyee.png')}}" alt="Loading..." />
+    <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" alt="Loading..." />
 </div> -->
 <div class="pageWrapper">
 	<!--Promotion Bar-->
@@ -116,7 +116,7 @@
 </div>
     
      <!-- Including Jquery -->
-     <script src="{{asset('front/assets/js/vendor/jquery-3.3.1.min.js')}}"></script>
+     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
      <script src="{{asset('front/assets/js/vendor/modernizr-3.6.0.min.js')}}"></script>
      <script src="{{asset('front/assets/js/vendor/jquery.cookie.js')}}"></script>
      <script src="{{asset('front/assets/js/vendor/wow.min.js')}}"></script>
