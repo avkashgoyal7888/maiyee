@@ -1,7 +1,8 @@
 <p><a href="https://maiyee.in/public/front/assets/images/maiyee.png"><img alt="" src="https://maiyee.in/public/front/assets/images/maiyee.png" style="height:38px; width:100px" /></a></p>
 <p><span style="font-size:10.5pt"><span style="font-family:&quot;Times New Roman&quot;,serif"><span style="color:#999999">Order #{{$orderid}}</span></span></span></p>
 <p><span style="font-size:16px"><span style="font-family:Calibri,sans-serif"><strong><span style="font-family:&quot;Times New Roman&quot;,serif">Returned Item(s) Received - {{$hsn}}</span></strong></span></span></p>
-<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:10.5pt"><span style="font-family:&quot;Times New Roman&quot;,serif"><span style="color:#999999">Hi {{$username}}, we have received the returned item(s) back at our warehouse and our team will complete their quality check within the next 24 hours. If the item has been returned in good condition, we&#39;ll proceed with issuing the refund / replacement. If there are any issues, we will contact you accordingly.</span></span></span></span></span></p>
+<p><span style="font-size:11pt"><span style="font-family:Calibri,sans-serif"><span style="font-size:10.5pt"><span style="font-family:&quot;Times New Roman&quot;,serif"><span style="color:#999999">You Have received a refund</span></span></span></span></span></p>
+<p><strong><span style="font-size:13.5pt"> Total amount refunded <span style="font-family:&quot;Times New Roman&quot;,serif">{{$total}}</span></span></strong></p>
 <p><strong><span style="font-size:13.5pt"><span style="font-family:&quot;Times New Roman&quot;,serif">Item(s) Received</span></span></strong></p>
 <table border="1" cellpadding="1" cellspacing="1" style="width:100%">
    <tbody>

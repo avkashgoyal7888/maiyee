@@ -11,7 +11,7 @@ class Returns extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $search, $ex_id, $status, $color;
+    public $search, $ex_id, $status, $color,$return_payment_status;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -71,7 +71,7 @@ class Returns extends Component
 
     }
 
-    public function editState($id)
+    public function editStatus($id)
     {
         $ex = Exchange::find($id);
         if ($ex) {
@@ -79,7 +79,7 @@ class Returns extends Component
             $this->status = $ex->status;
 
         } else {
-            return redirect()->to('/admin/replace');
+            return redirect()->to('/admin/return');
         }
 
     }
@@ -94,10 +94,12 @@ class Returns extends Component
             $price = $exc->price;
             $hsn = $exc->product->hsn_code;
             $proname = $exc->product->name;
+            $proimg = $exc->product->image;
             $email = $exc->user->email;
+            $username = $exc->user->name;
 
         if ($this->status == '5') {
-            Mail::send('admin.email.replace', ['orderid' => $orderid,'hsn'=>$hsn,'proname'=>$proname,'price'=>$price], function ($message) use ($email) {
+            Mail::send('admin.email.replace', ['orderid' => $orderid,'hsn'=>$hsn,'proname'=>$proname,'price'=>$price,'proimg'=>$proimg,'username'=>$username], function ($message) use ($email) {
             $message->to($email);
             $message->subject('Replace/Replace Order');
         });
@@ -108,6 +110,43 @@ class Returns extends Component
         $this->emit('closemodal');
 
     }
+
+    public function returnPayment($id)
+    {
+        $ex = Exchange::find($id);
+        if ($ex) {
+            $this->ex_id = $ex->id;
+
+        } else {
+            return redirect()->to('/admin/product');
+        }
+    }
+
+    public function returnPaymentUpdate()
+    {
+        $exc = Exchange::Where('id', $this->ex_id)->first();
+            $exc->return_payment_status = '1';
+            $exc->update();
+            $orderid = $exc->order_id;
+            $price = $exc->price;
+            $hsn = $exc->product->hsn_code;
+            $proname = $exc->product->name;
+            $proimg = $exc->product->image;
+            $email = $exc->user->email;
+            $total = $exc->total;
+            if ($exc->return_payment_status == '1') {
+            Mail::send('admin.email.refund', ['orderid' => $orderid,'hsn'=>$hsn,'proname'=>$proname,'price'=>$price,'proimg'=>$proimg,'total'=>$total], function ($message) use ($email) {
+            $message->to($email);
+            $message->subject('Refund Approved');
+        });
+        }
+
+        $this->resetinputfields();
+        session()->flash('success', 'Updated Successfully...');
+        $this->emit('closemodal');
+
+    }
+
     public function render()
     {
         $data = Exchange::where('order_id', 'like', '%'.$this->search.'%')->where('option', 'return')->orderByDesc('id')->paginate(10);

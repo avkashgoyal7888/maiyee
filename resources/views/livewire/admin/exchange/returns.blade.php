@@ -6,7 +6,7 @@
       <div wire:loading wire:target="update">
          <x-loader/>
       </div>
-      <div wire:loading wire:target="delete">
+      <div wire:loading wire:target="returnPaymentUpdate">
          <x-loader/>
       </div>
       @if (session()->has('success'))
@@ -33,6 +33,8 @@
                   <th>Size</th>
                   <th>Order Value</th>
                   <th>Status</th>
+                  <th>Return Payment</th>
+                  <th>Return Payment Status</th>
                   <th>Action</th>
                </tr>
             </thead>
@@ -60,8 +62,10 @@
                         @elseif($return->status == '5')
                         <b class="text-success">Return Recieved</b>
                       @endif</td>
+                      <td> {{$return->return_payment}} </td>
+                      <td><button type="button" class="btn btn-sm {{ $return->return_payment_status == '1' ? 'btn-success' : 'btn-warning' }}" data-bs-toggle="modal" data-bs-target="#delete" wire:click="returnPayment({{$return->id}})">{{ $return->return_payment_status == '1' ? 'Transfered' : 'Pending' }}</button></td>
                   <td style="font-size: 20px">
-                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editState({{$return->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#view" wire:click="viewDetailProduct({{$return->id}})"><i class="fas fa-eye"></i></button>
+                     <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editStatus({{$return->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;<button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#view" wire:click="viewDetailProduct({{$return->id}})"><i class="fas fa-eye"></i></button>
                   </td>
                </tr>
                @empty
@@ -117,6 +121,26 @@
       </div>
    </div>
    <!-- End Here -->
+   <!-- Delete modal -->
+   <div wire:ignore.self class="modal" id="delete" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+               <h5 class="modal-title" id="myLargeModalLabel">Return Payment Transfer</h5>
+               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+               <span aria-hidden="true">&times;</span>
+               </button>
+            </div>
+            <form wire:submit.prevent='returnPaymentUpdate()'>
+               <input type="hidden" wire:model='ex_id'>
+               <div class="modal-footer">
+                  <button type="submit" class="btn btn-outline-dark">Yes</button>
+                  <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">Close</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
    <!--  Edit State Modal -->
    <div wire:ignore.self class="modal" id="edit" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
       <div class="modal-dialog">

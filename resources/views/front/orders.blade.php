@@ -84,13 +84,32 @@
                      </div>
                      <div class="col-12 col-md-3 hidden-sm-down">
                         @php
-                        $hasExchange = $ex->contains('order_id', $od->order_id);
-                        @endphp
-                        @if ($hasExchange)
-                        <b>Request Raised</b>
-                        @else
-                        <button data-id="{{$od->id}}" data-order="{{$od->order_id}}" class="btn btn-danger w-100 mb-2 returnOrReplace" title="Remove tem">Return Item</button>
-                        @endif
+    $hasExchange = $ex->contains('order_id', $od->order_id);
+@endphp
+
+@if ($hasExchange)
+    @foreach ($ex as $exchange)
+        @if ($exchange->order_id == $od->order_id)
+            <b>@if($exchange->status == '0')
+                        <b>Status: Requested</b>
+                      @elseif($exchange->status == '1')
+                        <b class="text-success">Status: Accepted</b>
+                      @elseif($exchange->status == '2')
+                        <b>Status: Pickup</b>
+                        @elseif($exchange->status == '3')
+                        <b>Status: Dispatch</b>
+                        @elseif($exchange->status == '4')
+                        <b class="text-danger">Status: Rejected</b>
+                        @elseif($exchange->status == '5')
+                        <b class="text-success">Status: Replace Received</b>
+                      @endif
+                   </b>
+        @endif
+    @endforeach
+@else
+    <button data-id="{{$od->id}}" data-order="{{$od->order_id}}" class="btn btn-danger w-100 mb-2 returnOrReplace" title="Remove item">Return Item</button>
+@endif
+
                      </div>
                   </div>
                   @endif
@@ -118,7 +137,7 @@
                <div class="modal-body">
                   <div class="col-md-12 col-lg-12 col-xl-12 p-0">
                      <label for="nameExLarge" class="form-label">Return or Replace<span class="required-f">*</span></label>
-                     <select name="option">
+                     <select name="option" id="option">
                         <option value=""> --- Choose Option --- </option>
                         <option value="return">Return</option>
                         <option value="replace">Replace</option>
@@ -127,6 +146,10 @@
                   <div class="col-md-12 col-lg-12 col-xl-12 p-0">
                      <label for="nameExLarge" class="form-label">Reason<span class="required-f">*</span></label>
                      <textarea name="reason" class="form-control resize-both input-field" rows="3"></textarea>
+                  </div>
+                  <div class="col-md-12 col-lg-12 col-xl-12 p-0" id="return_payment" style="display:none;">
+                     <label for="nameExLarge" class="form-label">Return Payment Details<span class="required-f">*</span></label>
+                     <textarea name="return_payment" class="form-control resize-both input-field" rows="2"></textarea>
                   </div>
                   <input type="hidden" name="returnid" id="returnOrReplaceId">
                   <input type="hidden" name="order_id" id="returnOrReplaceOrderId">
@@ -144,6 +167,13 @@
 @section('js')
 <script>
    $(document).ready(function(){
+      $('#option').change(function(){
+         if ($(this).val() === 'return') {
+            $('#return_payment').show();
+         } else {
+            $('#return_payment').hide();
+         }
+      });
      $('body').on('click','.returnOrReplace',function(){
                 $('#returnModal').modal('show');
                 $('#returnOrReplaceId').val($(this).attr('data-id'));

@@ -67,6 +67,7 @@ class OrderController extends Controller
             $data->total = $order->total;
             $data->option = $req->option;
             $data->reason = $req->reason;
+            $data->return_payment = $req->return_payment;
             $return = $data->save();
 
             if ($return) {

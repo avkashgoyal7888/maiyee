@@ -95,10 +95,11 @@ class Replace extends Component
             $price = $exc->price;
             $hsn = $exc->product->hsn_code;
             $proname = $exc->product->name;
+            $proimg = $exc->product->image;
             $email = $exc->user->email;
 
         if ($this->status == '5') {
-            Mail::send('admin.email.replace', ['orderid' => $orderid,'hsn'=>$hsn,'proname'=>$proname,'price'=>$price], function ($message) use ($email) {
+            Mail::send('admin.email.replace', ['orderid' => $orderid,'hsn'=>$hsn,'proname'=>$proname,'price'=>$price,'proimg'=>$proimg], function ($message) use ($email) {
             $message->to($email);
             $message->subject('Replace/Replace Order');
         });
