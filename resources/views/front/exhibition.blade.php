@@ -15,7 +15,7 @@
       <div class="container-fluid">
           <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
               <a href="#">
-                  <img src="{{asset('admin/exhibition/'. $exh->image)}}" class="blur-up lazyload" />
+                  <img src="{{$exh->image}}" class="blur-up lazyload" />
                </a>
            </div>
        </div>

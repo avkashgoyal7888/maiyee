@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use App\Models\HomeBanner;
 use Livewire\WithFileUploads;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Home extends Component
 {
@@ -36,12 +37,14 @@ class Home extends Component
             ]);
 
             if ($this->image != '') {
-            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/banner', $image, 'real_public');
-        }
+                $imgpath = $this->image->getRealPath();
+                $image = Cloudinary::upload($imgpath, [
+                    'folder' => 'admin/banner',
+                ]);
+            }
 
             $banner = new HomeBanner;
-            $banner->image = $image;
+            $banner->image = $image->getSecurePath();
             $banner->save();
     
             $this->resetinputfields();
@@ -65,10 +68,8 @@ class Home extends Component
         $banner = HomeBanner::where('id', $this->banner_id)->first();
     
         if ($banner->image != null) {
-            $image_path = public_path('admin/banner/' . $banner->image);
-            if (file_exists($image_path)) {
-                unlink($image_path);
-            }
+            $publicId = pathinfo($banner->image)['filename'];
+                Cloudinary::destroy("admin/banner/{$publicId}");
         }
         $banner->delete();
         session()->flash('success', 'Congratulations !! Banner Deleted Successfully...');

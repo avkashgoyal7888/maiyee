@@ -16,7 +16,7 @@
    <!--Collection Banner-->
    <div class="collection-header">
       <div class="collection-hero">
-         <div class="collection-hero__image"><img class="blur-up lazyload" data-src="{{asset('admin/subcategory/' . $subimg->image)}}" src="{{asset('admin/subcategory/'.$subimg->image)}}" alt="Women" title="Women" /></div>
+         <div class="collection-hero__image"><img class="blur-up lazyload" data-src="{{$subimg->image}}" src="{{$subimg->image}}" alt="Women" title="Women" /></div>
          <div class="collection-hero__title-wrapper">
          </div>
       </div>
@@ -421,8 +421,8 @@
                 html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
                 html += '<div class="product-image">';
                 html += '<a href="' + url + '">';
-                html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
-                html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
+                html += '<img class="primary blur-up lazyload" data-src="' + products.images + '" src="' + products.images + '" alt="image" title="product">';
+                html += '<img class="hover blur-up lazyload" data-src="' + products.images + '" src="' + products.images + '" alt="image" title="product">';
                 html += '<div class="product-labels rectangular">';
                 // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
                 html += '<span class="lbl pr-label1">new</span>';

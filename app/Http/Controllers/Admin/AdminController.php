@@ -12,6 +12,8 @@ use Session;
 use Auth;
 use Hash;
 use Illuminate\Support\Facades\Artisan;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use CloudinaryLabs\CloudinaryLaravel\CloudinaryEngine;
 
 class AdminController extends Controller
 {
@@ -83,32 +85,46 @@ class AdminController extends Controller
         }
     }
 
-    public function updateImage(Request $req)
+    public function updateImage(Request $request)
     {
-        $adminId = Auth::guard('admin')->user()->id;
-        $val = Validator::make($req->all(), [
-            'image' => 'required',
+        $userId = Auth::guard('admin')->user()->id;
+        $user = Admin::find($userId);
+
+        if (!$user) {
+            return response()->json(['status' => false, 'msg' => 'User not found']);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'image' => 'required|file|image',
         ]);
 
-        if ($val->fails()) {
-            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
-        } else {
-            $image = null;
-            if ($req->hasFile('image')) {
-                $ext = $req->file('image')->getClientOriginalExtension();
-                $name = substr(uniqid(), 0, 9) . '.' . $ext;
-                $image = 'admin/profile/' . $name;
-                $req->file('image')->move(public_path() . '/admin/profile', $name);
+        if ($validator->fails()) {
+            return response()->json(['status' => false, 'msg' => $validator->errors()->first()]);
+        }
+
+        if ($request->hasFile('image')) {
+            // Delete the previous image from Cloudinary
+            if ($user->image) {
+                $publicId = pathinfo($user->image)['filename'];
+                Cloudinary::destroy("admin/profile/{$publicId}");
             }
 
-            $data = Admin::where('id', $adminId)->first();
-            $data->image = $image;
-            $up = $data->update();
+            // Upload the new image to Cloudinary
+            $result = Cloudinary::upload($request->file('image')->getRealPath(), [
+                'folder' => 'admin/profile',
+            ]);
 
-            if (!$up) {
-                return response()->json(['status' => false, 'msg' => 'Something went wrong. Try again later...']);
+            if ($result && $result->getSecurePath()) {
+                $user->image = $result->getSecurePath();
+                $up = $user->save();
+
+                if ($up) {
+                    return response()->json(['status' => true, 'msg' => 'Updated successfully']);
+                } else {
+                    return response()->json(['status' => false, 'msg' => 'Something went wrong. Please try again later.']);
+                }
             } else {
-                return response()->json(['status' => true, 'msg' => 'Profile Image Updated Successfully.....']);
+                return response()->json(['status' => false, 'msg' => 'Failed to upload image']);
             }
         }
     }

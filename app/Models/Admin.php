@@ -7,8 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use CloudinaryLabs\CloudinaryLaravel\MediaAlly;
 
 class Admin extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    use MediaAlly;
 }

@@ -22,7 +22,7 @@
       <div class="d-flex">
          <div class="dropdown d-inline-block">
             <button type="button" class="btn header-item user text-start d-flex align-items-center" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img class="rounded-circle header-profile-user" src="{{asset(Auth::guard('admin')->user()->image)}}" alt="Header Avatar">
+            <img class="rounded-circle header-profile-user" src="{{Auth::guard('admin')->user()->image}}" alt="Header Avatar">
             <span class="ms-2 d-none d-xl-inline-block user-item-desc">
             <span class="user-name">{{Auth::guard('admin')->user()->name}}<i class="mdi mdi-chevron-down"></i></span>
             </span>
@@ -146,7 +146,7 @@
              hideMethod: "fadeOut",
              tapToDismiss: 0
            });
-           $('#changePasswordForm')[0].reset();
+           $('#image')[0].reset();
          } else {
            alertify.error(result.msg, "Message", {
              timeOut: 5000,

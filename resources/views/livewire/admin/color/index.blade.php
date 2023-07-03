@@ -43,7 +43,7 @@
                         <td>{{ ucwords($pros->product->name) }}</td>
                         <td><button class="btn btn-lg" style="background-color: {{ $pros->code }};"></button></td>
                         <td> {{ $pros->color_category }} </td>
-                        <td><img src="{{ asset('admin/color/' . $pros->image) }}" width="100" height="100" /></td>
+                        <td><img src="{{ $pros->image }}" width="100" height="100" /></td>
                         <td>
                            <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editColor({{$pros->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteColor({{$pros->id}})"><i class="fas fa-trash"></i></button>

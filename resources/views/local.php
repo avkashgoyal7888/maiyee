@@ -29,6 +29,14 @@ REDIS_HOST=127.0.0.1
 REDIS_PASSWORD=null
 REDIS_PORT=6379
 
+GOOGLE_CLIENT_ID=863028700305-l80tiunlfg4cnqdoa8b3p58sshhrubsb.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+GOOGLE_REDIRECT_URI=https://maiyee.in/auth/google/callback
+
+CLOUDINARY_UPLOAD_PRESET=ldnz6nxz
+CLOUDINARY_NOTIFICATION_URL=https://maiyee.in
+CLOUDINARY_URL=cloudinary://364942454379538:aUpR_lYmTAhufpNoZ68pYDkFbVw@dzujz2mkt
+
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.hostinger.com
 MAIL_PORT=465

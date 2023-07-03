@@ -6,6 +6,7 @@ use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\exhibition;
 use Livewire\WithFileUploads;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Index extends Component
 {
@@ -49,10 +50,14 @@ class Index extends Component
             'title' => 'required',
             'ex_date' => 'required',
         ]);
-        if ($this->image != '') {
-            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/exhibition', $image, 'real_public');
-        }
+        if ($this->image != null) {
+                $imageName = substr(uniqid(), 0, 9);
+                $imgpath = $this->image->getRealPath();
+                $image = Cloudinary::upload($imgpath, [
+                    'folder' => 'admin/exhibition',
+                    'public_id' => $imageName,
+                ])->getSecurePath();
+            }
         $cat = new exhibition;
         $cat->title = $this->title;
         $cat->ex_date = $this->ex_date;
@@ -83,12 +88,16 @@ class Index extends Component
         $sub = exhibition::find($this->ex_id);
     
         if ($this->image instanceof \Illuminate\Http\UploadedFile) {
-            $ext = $this->image->getClientOriginalExtension();
-            $name = substr(uniqid(), 0, 9) . '.' . $ext;
-            $image = $name;
-            $this->image->storeAs('admin/exhibition', $name, 'real_public');
-            $image_path = public_path('admin/exhibition/' . $sub->image);
-            unlink($image_path);
+            if($sub->image) {
+                $publicId = pathinfo($sub->image)['filename'];
+                Cloudinary::destroy("admin/exhibition/{$publicId}");
+            }
+                $imageName = substr(uniqid(), 0, 9);
+                $imagepath = $this->image->getRealPath();
+                $image = Cloudinary::upload($imagepath, [
+                    'folder' => 'admin/exhibition',
+                    'public_id' => $imageName,
+                ])->getSecurePath();
         } else {
             $image = $sub->image;
         }
@@ -118,10 +127,8 @@ class Index extends Component
     {
         $exhibition = exhibition::where('id', $this->ex_id)->first();
         if ($exhibition->image != null) {
-            $image_path = public_path('admin/exhibition/' . $exhibition->image);
-            if (file_exists($image_path)) {
-                unlink($image_path);
-            }
+            $publicId = pathinfo($exhibition->image)['filename'];
+                Cloudinary::destroy("admin/exhibition/{$publicId}");
         }
         $exhibition->delete();
         session()->flash('success', 'Congratulations !! Exhibition Deleted Successfully...');

@@ -37,7 +37,7 @@
                <tr>
                   <td> {{ $key +1 }} </td>
                   <td>{{ ucwords($ex->title) }}</td>
-                  <td><img src="{{ asset('admin/exhibition/' . $ex->image) }}" width="300" height="100" /></td>
+                  <td><img src="{{ $ex->image }}" width="300" height="100" /></td>
                   <td>{{ ucwords($ex->ex_date) }}</td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editCategory({{$ex->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;

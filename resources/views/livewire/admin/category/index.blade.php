@@ -37,8 +37,8 @@
                <tr>
                   <td> {{ $key +1 }} </td>
                   <td>{{ ucwords($cats->cat_name) }}</td>
-                  <td><img src="{{ asset('admin/category/' . $cats->image) }}" width="300" height="100" /></td>
-                  <td><img src="{{ asset('admin/tile/' . $cats->tile) }}" width="300" height="100" /></td>
+                  <td><img src="{{$cats->image}}" width="300" height="100" /></td>
+                  <td><img src="{{ $cats->tile }}" width="300" height="100" /></td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editCategory({{$cats->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;
                      <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteCategory({{$cats->id}})"><i class="fas fa-trash"></i></button>

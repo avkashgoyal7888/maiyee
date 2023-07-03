@@ -16,7 +16,7 @@
    <!--Collection Banner-->
    <div class="collection-header">
       <div class="collection-hero">
-         <div class="collection-hero__image"><img class="blur-up lazyload" data-src="{{asset('admin/category/' . $catimg->image)}}" src="{{asset('admin/category/'.$catimg->image)}}" alt="Women" title="Women" /></div>
+         <div class="collection-hero__image"><img class="blur-up lazyload" data-src="{{$catimg->image}}" src="{{$catimg->image}}" alt="Women" title="Women" /></div>
          <div class="collection-hero__title-wrapper">
          </div>
       </div>
@@ -238,10 +238,10 @@
                            <!-- start product image -->
                            <a href="{{route('web.product.detail',$products->id)}}">
                               <!-- image -->
-                              <img class="primary blur-up lazyload" data-src="{{ asset('admin/product/' . $products->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product">
+                              <img class="primary blur-up lazyload" data-src="{{$products->image}}" src="{{$products->image}}" alt="image" title="product">
                               <!-- End image -->
                               <!-- Hover image -->
-                              <img class="hover blur-up lazyload" data-src="{{ asset('admin/product/' . $products->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product">
+                              <img class="hover blur-up lazyload" data-src="{{$products->image}}" src="{{$products->image}}" alt="image" title="product">
                               <!-- End hover image -->
                               <!-- product label -->
                               <!--<div class="product-labels rectangular"><span class="lbl on-sale">-16%</span> <span class="lbl pr-label1">new</span></div>-->
@@ -422,8 +422,9 @@
                 html += '<div class="col-6 col-sm-6 col-md-4 col-lg-2 item" id="price">';
                 html += '<div class="product-image">';
                 html += '<a href="' + url + '">';
-                html += '<img class="primary blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
-                html += '<img class="hover blur-up lazyload" data-src="{{ asset('admin/color/') }}/' + products.images + '" src="{{ asset('admin/color/') }}/' + products.images + '" alt="image" title="product">';
+                html += '<img class="primary blur-up lazyload" data-src="' + products.images + '" src="' + products.images + '" alt="image" title="product">';
+                html += '<img class="primary blur-up lazyload" data-src="' + products.images + '" src="' + products.images + '" alt="image" title="product">';
+
                 html += '<div class="product-labels rectangular">';
                 // html += '<span class="lbl on-sale">-' + products.discount_percentage + '%</span>';
                 html += '<span class="lbl pr-label1">new</span>';

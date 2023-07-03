@@ -38,7 +38,7 @@
                   @foreach($cart as $carts)
                   <tr class="cart__row border-bottom line1 cart-flex border-top">
                      <td class="cart__image-wrapper cart-flex-item">
-                        <a href="#"><img class="cart__image" src="{{asset('admin/color/'.$carts->color->image)}}" alt="Elastic Waist Dress - Navy / Small"></a>
+                        <a href="#"><img class="cart__image" src="{{$carts->color->image}}" alt="Elastic Waist Dress - Navy / Small"></a>
                      </td>
                      <td class="cart__meta small--text-left cart-flex-item">
                         <div class="list-view-item__title">

@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\SubCategory;
 use Auth;
 use Livewire\WithFileUploads;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Index extends Component
 {
@@ -97,10 +98,14 @@ class Index extends Component
     {
             $validatedata = $this->validate();
 
-            if ($this->image != '') {
-            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/product', $image, 'real_public');
-        }
+                if ($this->image != null) {
+                $imageName = substr(uniqid(), 0, 9);
+                $imgpath = $this->image->getRealPath();
+                $image = Cloudinary::upload($imgpath, [
+                    'folder' => 'admin/product',
+                    'public_id' => $imageName,
+                ])->getSecurePath();
+            }
             $product = new Product;
             $product->name = $this->name;
             $product->description = $this->description;
@@ -148,12 +153,16 @@ class Index extends Component
         $sub = Product::find($this->pro_id);
     
         if ($this->image instanceof \Illuminate\Http\UploadedFile) {
-            $ext = $this->image->getClientOriginalExtension();
-            $name = substr(uniqid(), 0, 9) . '.' . $ext;
-            $image = $name;
-            $this->image->storeAs('admin/product', $name, 'real_public');
-            $image_path = public_path('admin/product/' . $sub->image);
-            unlink($image_path);
+            if($sub->image) {
+                $publicId = pathinfo($sub->image)['filename'];
+                Cloudinary::destroy("admin/product/{$publicId}");
+            }
+                $imageName = substr(uniqid(), 0, 9);
+                $imagepath = $this->image->getRealPath();
+                $image = Cloudinary::upload($imagepath, [
+                    'folder' => 'admin/product',
+                    'public_id' => $imageName,
+                ])->getSecurePath();
         } else {
             $image = $sub->image;
         }
@@ -188,7 +197,12 @@ class Index extends Component
 
     public function delete()
     {
-        Product::Where('id', $this->pro_id)->delete();
+        $pro = Product::Where('id', $this->pro_id)->first();
+        if ($pro->image != null) {
+            $publicId = pathinfo($pro->image)['filename'];
+                Cloudinary::destroy("admin/product/{$publicId}");
+        }
+        $pro->delete();
         $this->resetinputfields();
         session()->flash('success', 'Product Deleted Successfully...');
         $this->emit('closemodal');

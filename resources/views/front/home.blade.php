@@ -10,7 +10,7 @@
       <div class="slide">
          <div class="blur-up lazyload">
             <a href=" {{route('front.sub',$banners->sub_id)}} ">
-            <img class="blur-up lazyload" data-src="{{ asset('admin/banner/' . $banners->image) }}" src="{{ asset('admin/banner/' . $banners->image) }}" alt="{{$banners->tag}}" title="{{$banners->tag}}" />
+            <img class="blur-up lazyload" data-src="{{ $banners->image }}" src="{{ $banners->image }}" alt="{{$banners->tag}}" title="{{$banners->tag}}" />
             </a>
          </div>
       </div>
@@ -40,13 +40,13 @@
                      <!-- start product image -->
                      <a href="{{route('web.product.detail',$products->id)}}" class="grid-view-item__link">
                         <!-- image -->
-                        <img class="primary blur-up lazyload" data-src="{{ asset('admin/product/' . $products->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product" />
+                        <img class="primary blur-up lazyload" data-src="{{$products->image}}" src="{{$products->image}}" alt="image" title="product" />
                         <!-- End image -->
                         <!-- Hover image -->
-                        <img class="hover blur-up lazyload" data-src="{{ asset('admin/product/' . $products->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product" />
+                        <img class="hover blur-up lazyload" data-src="{{$products->image}}" src="{{$products->image}}" alt="image" title="product" />
                         <!-- End hover image -->
                         <!-- Variant Image-->
-                        <img class="grid-view-item__image hover variantImg" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product">
+                        <img class="grid-view-item__image hover variantImg" src="{{$products->image}}" alt="image" title="product">
                         <!-- Variant Image-->
                      </a>
                      <div class="button-set">
@@ -111,13 +111,13 @@
                      <!-- start product image -->
                      <a href="{{route('web.product.detail',$products->product->id)}}" class="grid-view-item__link">
                         <!-- image -->
-                        <img class="primary blur-up lazyload" data-src="{{ asset('admin/product/' . $products->product->image) }}" src="{{ asset('admin/product/' . $products->product->image) }}" alt="image" title="product" />
+                        <img class="primary blur-up lazyload" data-src="{{$products->product->image}}" src="{{$products->product->image}}" alt="image" title="product" />
                         <!-- End image -->
                         <!-- Hover image -->
-                        <img class="hover blur-up lazyload" data-src="{{ asset('admin/product/' . $products->product->image) }}" src="{{ asset('admin/product/' . $products->image) }}" alt="image" title="product" />
+                        <img class="hover blur-up lazyload" data-src="{{$products->product->image}}" src="{{$products->image}}" alt="image" title="product" />
                         <!-- End hover image -->
                         <!-- Variant Image-->
-                        <img class="grid-view-item__image hover variantImg" src="{{ asset('admin/product/' . $products->product->image) }}" alt="image" title="product">
+                        <img class="grid-view-item__image hover variantImg" src="{{$products->product->image}}" alt="image" title="product">
                         <!-- Variant Image-->
                      </a>
                      <div class="button-set">
@@ -166,7 +166,7 @@
    <div class="container-fluid">
        <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
            <a href="#">
-               <img src="{{asset('admin/banner/'. $home->image)}}" class="blur-up lazyload" />
+               <img src="{{$home->image}}" class="blur-up lazyload" />
             </a>
         </div>
     </div>
@@ -193,7 +193,7 @@
                   <!-- start product image -->
                   <a href="{{route('front.sub',$subcat->id)}}">
                      <!-- image --> 
-                     <img  src="{{ asset('admin/tile/' . $subcat->tile) }}">
+                     <img  src="{{$subcat->tile}}">
                      <!-- End image -->
                      <h4 class="mt-2">{{$subcat->sub_name}}</h4>
                   </a>
@@ -311,7 +311,7 @@ $(document).ready(function(){
 for (let i = 0; i < data.size.length; i++) {
     sizeList += data.size[i].size + ' ';
 }
-               let productimage = '<img class="primary blur-up lazyload" data-src="{{ asset('admin/product/') }}/' + data.image + '" src="{{ asset('admin/product/') }}/' + data.image + '" alt="image" title="product">';
+               let productimage = '<img class="primary blur-up lazyload" data-src="' + data.image + '" src="' + data.image + '" alt="image" title="product">';
                 // Update the modal with the product data
                 $('#product-name').text(data.name);
                 $('#product-image').html(productimage);

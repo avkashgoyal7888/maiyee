@@ -39,8 +39,8 @@
                   <td> {{ $key +1 }} </td>
                   <td>{{ucwords($cats->category->cat_name)}}</td>
                   <td>{{ ucwords($cats->sub_name) }}</td>
-                  <td><img src="{{ asset('admin/subcategory/' . $cats->image) }}" width="300" height="100" /></td>
-                  <td><img src="{{ asset('admin/tile/' . $cats->tile) }}" width="300" height="100" /></td>
+                  <td><img src="{{$cats->image}}" width="300" height="100" /></td>
+                  <td><img src="{{$cats->tile}}" width="300" height="100" /></td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit" wire:click="editCategory({{$cats->id}})"><i class="fas fa-pen"></i></button>&nbsp;&nbsp;&nbsp;&nbsp;
                      <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteSub({{$cats->id}})"><i class="fas fa-trash"></i></button>

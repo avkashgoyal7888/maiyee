@@ -27,7 +27,7 @@
                @forelse($data as $key => $cats)
                <tr>
                   <td> {{ $key +1 }} </td>
-                  <td width="60%"><img src="{{ asset('admin/banner/' . $cats->image) }}" width="300" height="100" /></td>
+                  <td width="60%"><img src="{{ $cats->image }}" width="300" height="100" /></td>
                   <td style="font-size: 20px">&nbsp;&nbsp;
                      <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteBanner({{$cats->id}})"><i class="fas fa-trash"></i></button>
                   </td>

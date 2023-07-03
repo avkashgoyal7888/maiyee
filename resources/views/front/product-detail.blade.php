@@ -59,23 +59,23 @@
                   <div class="product-thumb">
                      <div id="gallery" class="product-dec-slider-2 product-tab-left">
                         @foreach($proimage as $img)
-                        <a data-color-id="{{$img->color_id}}" data-image="{{ asset('admin/color/'.$img->image) }}" data-zoom-image="{{ asset('admin/color/'.$img->image) }}" class="product-image slick-slide slick-cloned color-image" aria-hidden="true" tabindex="-1">
-                        <img class="blur-up lazyload" src="{{ asset('admin/color/'.$img->image) }}" alt="" />
+                        <a data-color-id="{{$img->color_id}}" data-image="{{$img->image }}" data-zoom-image="{{$img->image }}" class="product-image slick-slide slick-cloned color-image" aria-hidden="true" tabindex="-1">
+                        <img class="blur-up lazyload" src="{{ $img->image }}" alt="" />
                         </a>
                         @endforeach
                      </div>
                   </div>
                   <div class="zoompro-wrap product-zoom-right pl-20">
                      <div class="zoompro-span">
-                        <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ asset('admin/color/'.$proimage->where('color_id', app('request')->input('color_id', $proimage[0]->color_id))->first()->image) }}" />
+                        <img id="zoompro-image" class="blur-up lazyload zoompro" alt="" src="{{ $proimage->where('color_id', app('request')->input('color_id', $proimage[0]->color_id))->first()->image }}" />
                      </div>
                   </div>
                   <div class="lightboximages">
-                     <a href="{{asset('admin/color/'.$colorzoom->image)}}" data-size="1462x2048"></a>
+                     <a href="{{$colorzoom->image}}" data-size="1462x2048"></a>
                      @if(!is_null($proimage) && count($proimage) > 0)
                      @foreach($proimage as $img)
                      @if(!is_null($img) && property_exists($img, 'image'))
-                     <a href="{{ asset('admin/color/'.$img->image) }}" data-size="1462x2048"></a>
+                     <a href="{{ $img->image }}" data-size="1462x2048"></a>
                      @endif
                      @endforeach
                      @else

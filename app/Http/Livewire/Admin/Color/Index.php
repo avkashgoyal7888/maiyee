@@ -10,7 +10,7 @@ use App\Models\SubCategory;
 use App\Models\Product;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
-
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Index extends Component
 {
@@ -90,16 +90,17 @@ class Index extends Component
             $image = $this->image;
     
             if ($image) {
-                // Generate unique filename for each image
-                $filename = uniqid().'.'.$image->getClientOriginalExtension();
-    
-                // Store image in the same path with the unique filename
-                $image->storeAs('admin/color', $filename, 'real_public');
+                $imageName = substr(uniqid(), 0, 9);
+                $imgpath = $this->image->getRealPath();
+                $image = Cloudinary::upload($imgpath, [
+                    'folder' => 'admin/color',
+                    'public_id' => $imageName,
+                ])->getSecurePath();
     
                 $data = new Color;
                 $data->product_id = $this->product_id;
                 $data->code = $this->code;
-                $data->image = $filename;
+                $data->image = $image;
                 $data->color_category = $this->color_category;
                 $data->save();
             }
@@ -130,9 +131,14 @@ class Index extends Component
         $data = Color::find($this->color_id);
         $image = $data->image;
         if ($this->image && $this->image !== $data->image) {
-            $image = substr(uniqid(), 0, 9) . '.' . $this->image->extension();
-            $this->image->storeAs('admin/color', $image, 'real_public');
-            unlink(public_path('admin/color/' . $data->image));
+            $publicId = pathinfo($data->image)['filename'];
+                Cloudinary::destroy("admin/color/{$publicId}");
+                $imageName = substr(uniqid(), 0, 9);
+                $imagepath = $this->image->getRealPath();
+                $image = Cloudinary::upload($imagepath, [
+                    'folder' => 'admin/color',
+                    'public_id' => $imageName,
+                ])->getSecurePath();
         }
         Color::where('id', $this->color_id)->update([
             'code' => $this->code,
@@ -160,10 +166,10 @@ class Index extends Component
         $clr = Color::where('id', $this->color_id)->first();
     
         if ($clr->image != null) {
-            $image_path = public_path('admin/color/' . $clr->image);
-            if (file_exists($image_path)) {
-                unlink($image_path);
-            }
+            if ($clr->image != null) {
+            $publicId = pathinfo($clr->image)['filename'];
+                Cloudinary::destroy("admin/color/{$publicId}");
+        }
         }
     
         $clr->delete();
