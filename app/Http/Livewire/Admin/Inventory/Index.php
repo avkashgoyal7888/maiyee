@@ -21,8 +21,8 @@ class Index extends Component
 
     public function render()
     {
-        $data = Inventory::where('remarks', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
+        $data = Inventory::where('remarks', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.inventory.index', compact('data'));
     }
 }

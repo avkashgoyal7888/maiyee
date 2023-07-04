@@ -31,7 +31,7 @@ class Bashproducts extends Component
 
     public $selectedProducts = [];
     public $selectedProductNames = [];
-    
+
     public function updatedSelectedProducts()
     {
         $this->selectedProductNames = [];
@@ -40,7 +40,7 @@ class Bashproducts extends Component
             $this->selectedProductNames[] = $productName;
         }
     }
-    
+
     public function removeSelectedProduct($productName)
     {
         $key = array_search($productName, $this->selectedProductNames);
@@ -49,7 +49,7 @@ class Bashproducts extends Component
             unset($this->selectedProducts[$key]);
         }
     }
-    
+
     public function submitSelectedProducts()
     {
         // Code to store the selected products in the database goes here.
@@ -63,14 +63,14 @@ class Bashproducts extends Component
             'bash_id' => 'required',
             'selectedProducts' => 'required|array|min:1'
         ]);
-    
+
         foreach ($this->selectedProducts as $productId) {
             BadgeProduct::create([
                 'bash_id' => $this->bash_id,
                 'product_id' => $productId
             ]);
         }
-    
+
         $this->resetinputfields(['bash_id', 'selectedProducts']);
         session()->flash('success', 'Bash product added successfully.');
         $this->emit('closemodal');
@@ -98,9 +98,9 @@ class Bashproducts extends Component
 
     public function render()
     {
-        $data = BadgeProduct::where('bash_id', 'like', '%'.$this->search.'%')->orderByDesc('id')->paginate(10);
+        $data = BadgeProduct::where('bash_id', 'like', '%' . $this->search . '%')->orderByDesc('id')->paginate(10);
         $products = Product::get();
         $bash = Bash::get();
-        return view('livewire.admin.bash.bashproducts', compact('data','products','bash'));
+        return view('livewire.admin.bash.bashproducts', compact('data', 'products', 'bash'));
     }
 }

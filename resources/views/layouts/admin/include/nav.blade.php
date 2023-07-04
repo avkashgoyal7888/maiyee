@@ -33,7 +33,6 @@
                <i class="mdi mdi-account-circle text-muted font-size-16 align-middle me-1"></i> 
                <span class="align-middle">Change Profile Picture</span>
                </a>
-               <!--<a class="dropdown-item" href="#"><i class="mdi mdi-wallet text-muted font-size-16 align-middle me-1"></i> <span class="align-middle">Balance : <b>$6951.02</b></span></a>-->
                <a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#changepassword">
                <i class="mdi mdi-lock text-muted font-size-16 align-middle me-1"></i> 
                <span class="align-middle">Change Password</span>

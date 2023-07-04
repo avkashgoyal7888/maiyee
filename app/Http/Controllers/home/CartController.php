@@ -17,13 +17,13 @@ class CartController extends Controller
     public function addToWishList(Request $req)
     {
         $val = Validator::make($req->all(), [
-        'product_id' => 'required|integer|unique:wish_lists,product_id,NULL,id,user_id,' . Auth::guard('web')->user()->id,
-        ],[
-            'product_id.unique' => 'Product is already in Wish List...'
-        ]);
+            'product_id' => 'required|integer|unique:wish_lists,product_id,NULL,id,user_id,' . Auth::guard('web')->user()->id,
+        ], [
+                'product_id.unique' => 'Product is already in Wish List...'
+            ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
             $uid = Auth::guard('web')->user()->id;
 
@@ -33,9 +33,9 @@ class CartController extends Controller
             $add = $data->save();
 
             if ($add) {
-                return response()->json(['status'=>true, 'msg'=>'Congratulations | Added Successfully.....']);
+                return response()->json(['status' => true, 'msg' => 'Congratulations | Added Successfully.....']);
             } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later...']);
+                return response()->json(['status' => false, 'msg' => 'Something went wrong try again later...']);
             }
         }
     }
@@ -47,7 +47,7 @@ class CartController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
 
             $rem = WishList::findOrFail($req->id);
@@ -55,9 +55,9 @@ class CartController extends Controller
             $del = $rem->delete();
 
             if ($del) {
-                return response()->json(['status'=>true,'msg'=>'deleted Successfully.....']);
+                return response()->json(['status' => true, 'msg' => 'deleted Successfully.....']);
             } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later....']);
+                return response()->json(['status' => false, 'msg' => 'Something went wrong try again later....']);
             }
         }
     }
@@ -70,12 +70,13 @@ class CartController extends Controller
             'size_id' => 'required',
             'price' => 'required',
             'gst' => 'required',
-        ],[
-            'color_id.required' => 'Select Your Color...',
-            'size_id.required' => 'Select Your Size...']);
+        ], [
+                'color_id.required' => 'Select Your Color...',
+                'size_id.required' => 'Select Your Size...'
+            ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
 
             $uid = Auth::guard('web')->user()->id;
@@ -86,17 +87,17 @@ class CartController extends Controller
             $data->price = $req->price;
             $data->gst = $req->gst;
             $data->quantity = $req->quantity;
-            $data->total = $req->quantity*$req->price;
+            $data->total = $req->quantity * $req->price;
             $data->user_id = $uid;
 
             $ins = $data->save();
 
             if ($ins) {
-                return response()->json(['status'=>true, 'msg'=>'Added Successfully.....']);
+                return response()->json(['status' => true, 'msg' => 'Added Successfully.....']);
             } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went Wrong try again later....']);
+                return response()->json(['status' => false, 'msg' => 'Something went Wrong try again later....']);
             }
-            
+
 
         }
     }
@@ -109,12 +110,13 @@ class CartController extends Controller
             'size_id' => 'required',
             'price' => 'required',
             'gst' => 'required',
-        ],[
-            'color_id.required' => 'Select Your Color...',
-            'size_id.required' => 'Select Your Size...']);
+        ], [
+                'color_id.required' => 'Select Your Color...',
+                'size_id.required' => 'Select Your Size...'
+            ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
 
             $uid = Auth::guard('web')->user()->id;
@@ -125,17 +127,17 @@ class CartController extends Controller
             $data->price = $req->price;
             $data->gst = $req->gst;
             $data->quantity = $req->quantity;
-            $data->total = $req->quantity*$req->price;
+            $data->total = $req->quantity * $req->price;
             $data->user_id = $uid;
 
             $ins = $data->save();
 
             if ($ins) {
-                return response()->json(['status'=>true, 'msg'=>'Added Successfully.....']);
+                return response()->json(['status' => true, 'msg' => 'Added Successfully.....']);
             } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went Wrong try again later....']);
+                return response()->json(['status' => false, 'msg' => 'Something went Wrong try again later....']);
             }
-            
+
 
         }
     }
@@ -147,17 +149,17 @@ class CartController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
             $data = Cart::findOrFail($req->id);
             $data->quantity = $req->quantity;
-            $data->total = $req->quantity*$data->price;
+            $data->total = $req->quantity * $data->price;
             $up = $data->update();
 
             if ($up) {
-                return response()->json(['status'=>true, 'msg'=>'Updated Successfully....']);
+                return response()->json(['status' => true, 'msg' => 'Updated Successfully....']);
             } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later.....']);
+                return response()->json(['status' => false, 'msg' => 'Something went wrong try again later.....']);
             }
         }
     }
@@ -169,7 +171,7 @@ class CartController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
 
             $rem = Cart::findOrFail($req->id);
@@ -177,9 +179,9 @@ class CartController extends Controller
             $del = $rem->delete();
 
             if ($del) {
-                return response()->json(['status'=>true,'msg'=>'deleted Successfully.....']);
+                return response()->json(['status' => true, 'msg' => 'deleted Successfully.....']);
             } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later....']);
+                return response()->json(['status' => false, 'msg' => 'Something went wrong try again later....']);
             }
         }
     }

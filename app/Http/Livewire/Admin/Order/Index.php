@@ -10,7 +10,7 @@ class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $search, $user_id,$name,$contact,$email,$order_date,$address,$landmark,$state,$city,$order_notes,$taxable,$cgst,$sgst,$igst,$total,$discount,$coupon_code,$shipping_charges,$payable,$payment_method,$order_status,$pick_id,$order_pickup;
+    public $search, $user_id, $name, $contact, $email, $order_date, $address, $landmark, $state, $city, $order_notes, $taxable, $cgst, $sgst, $igst, $total, $discount, $coupon_code, $shipping_charges, $payable, $payment_method, $order_status, $pick_id, $order_pickup;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -98,16 +98,14 @@ class Index extends Component
             $this->payable = $order->payable;
             $this->payment_method = $order->payment_method;
             $this->order_status = $order->order_status;
-
         } else {
             return redirect()->to('/admin/order');
         }
-
     }
     public function render()
     {
-        $data = Order::where('name', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
+        $data = Order::where('name', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.order.index', compact('data'));
     }
 }

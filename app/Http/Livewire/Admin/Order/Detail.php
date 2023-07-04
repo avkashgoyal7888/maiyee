@@ -36,6 +36,6 @@ class Detail extends Component
         $igst = OrderDetail::where('order_id', $this->order_id)->sum('igst');
         $total = OrderDetail::where('order_id', $this->order_id)->sum('total');
         $orders = Order::where('order_id', $this->order_id)->first();
-        return view('livewire.admin.order.detail',compact('data', 'quantity','taxable','gst','cgst','sgst','igst','total', 'orders'));
+        return view('livewire.admin.order.detail', compact('data', 'quantity', 'taxable', 'gst', 'cgst', 'sgst', 'igst', 'total', 'orders'));
     }
 }

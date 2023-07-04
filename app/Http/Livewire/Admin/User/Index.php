@@ -13,7 +13,7 @@ class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
-    public $search,$name,$number,$email;
+    public $search, $name, $number, $email;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -21,10 +21,9 @@ class Index extends Component
 
     public function render()
     {
-        $data = User::where('name', 'like', '%'.$this->search.'%')
-                    ->orderByDesc('id')->paginate(10);
-
+        $data = User::where('name', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
         $orderTotal = Order::whereIn('user_id', $data->pluck('id'))->sum('payable');
-        return view('livewire.admin.user.index',compact('data', 'orderTotal'));
+        return view('livewire.admin.user.index', compact('data', 'orderTotal'));
     }
 }

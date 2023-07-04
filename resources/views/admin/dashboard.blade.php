@@ -113,14 +113,6 @@
 
 
 <!-- End -->
-
-<!-- <div class="col-xl-3 col-sm-6 col-md-3 col-lg-3 col-12">
-   <div class="counter">
-      <button type="button" class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit">
-            Navbar
-      </button>
-      </div>
-   </div> -->
 <!--  Edit City Modal -->
 <div class="modal" id="edit" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
    <div class="modal-dialog">

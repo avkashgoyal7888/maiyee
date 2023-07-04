@@ -22,11 +22,8 @@ class Account extends Component
 
     public function mount(Request $req, $supl_id)
     {
-
         $id = $req->id;
-
         $this->supl_id = $id;
-
     }
     public function render()
     {
@@ -36,7 +33,7 @@ class Account extends Component
                     $query->where('supplier_id', 'like', '%' . $this->search . '%');
                 }
             })
-                        ->orderByDesc('id')->paginate(10);
-        return view('livewire.admin.supplier.account',['data'=>$data]);
+            ->orderByDesc('id')->paginate(10);
+        return view('livewire.admin.supplier.account', ['data' => $data]);
     }
 }

@@ -16,7 +16,7 @@ class HomeController extends Controller
         ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
 
             $data = head::first();
@@ -27,9 +27,9 @@ class HomeController extends Controller
             $up = $data->update();
 
             if ($up) {
-                return response()->json(['status'=>true, 'msg'=>'Attorney Updated Successfully....']);
+                return response()->json(['status' => true, 'msg' => 'Attorney Updated Successfully....']);
             } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later.....']);
+                return response()->json(['status' => false, 'msg' => 'Something went wrong try again later.....']);
             }
         }
     }

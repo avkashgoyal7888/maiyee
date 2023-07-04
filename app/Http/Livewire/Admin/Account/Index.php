@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Livewire\Admin\Account;
+
 use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\Account;
@@ -7,12 +8,13 @@ use App\Models\AccountStatement;
 use App\Models\Supplier;
 use App\Models\SupplierAccount;
 use DB;
+
 class Index extends Component
 {
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search = '';
-    public $ac_id, $ac_name, $ac_no, $ifsc, $branch, $bankname, $nickname,$from,$to, $amount, $transaction_date, $perticuler;
+    public $ac_id, $ac_name, $ac_no, $ifsc, $branch, $bankname, $nickname, $from, $to, $amount, $transaction_date, $perticuler;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -54,18 +56,17 @@ class Index extends Component
             'transaction_date' => 'required',
             'perticuler' => 'required',
         ], [
-            'from.required' => 'Select Account for Send',
-            'to.required' => 'Select Supplier for Receive',
-            'amount.required' => 'Enter Amount',
-            'transaction_date.required' => 'Select Account for Receive',
-            'perticuler.required' => 'Remarks Can not be blank',
-        ]);
-
+                'from.required' => 'Select Account for Send',
+                'to.required' => 'Select Supplier for Receive',
+                'amount.required' => 'Enter Amount',
+                'transaction_date.required' => 'Select Account for Receive',
+                'perticuler.required' => 'Remarks Can not be blank',
+            ]);
         $str = Supplier::where('id', $this->to)->first();
         $acc = Account::where('id', $this->from)->first();
         if ($acc->effective_balance < $this->amount) {
-        $this->addError('amount', 'Not Enough Funds');
-        return;
+            $this->addError('amount', 'Not Enough Funds');
+            return;
         }
         $acc->effective_balance = $acc->effective_balance - $this->amount;
         $upd = $acc->update();
@@ -74,18 +75,16 @@ class Index extends Component
 
         $accdebit = DB::table("account_statements")->where('account_id', $this->from)->orderBy("id", 'DESC')->first();
         if ($accdebit) {
-        $accadd = $accdebit->effective_balance - $this->amount;
+            $accadd = $accdebit->effective_balance - $this->amount;
         } else {
-        $accadd = Account::where('id', $this->from)->value('effective_balance');
+            $accadd = Account::where('id', $this->from)->value('effective_balance');
         }
-
         $sadeb = DB::table("supplier_accounts")->where('supplier_id', $this->to)->orderBy("id", 'DESC')->first();
         if ($sadeb) {
             $saadd = $sadeb->effective_balance - $this->amount;
         } else {
             $saadd = Supplier::where('id', $this->to)->value('effective_balance');
         }
-
         // debit
         $order_id = mt_rand(11111111, 99999999);
         $debit = new AccountStatement;
@@ -121,35 +120,31 @@ class Index extends Component
             'transaction_date' => 'required',
             'perticuler' => 'required',
         ], [
-            'from.required' => 'Select Account for Send',
-            'to.required' => 'Select Account for Receive',
-            'amount.required' => 'Enter Amount',
-            'transaction_date.required' => 'Select Account for Receive',
-            'perticuler.required' => 'Remarks Can not be blank',
-        ]);
-    
+                'from.required' => 'Select Account for Send',
+                'to.required' => 'Select Account for Receive',
+                'amount.required' => 'Enter Amount',
+                'transaction_date.required' => 'Select Account for Receive',
+                'perticuler.required' => 'Remarks Can not be blank',
+            ]);
         $acc = Account::where('id', $this->from)->first();
         if ($acc->effective_balance < $this->amount) {
-        $this->addError('amount', 'Not Enough Funds');
-        return;
+            $this->addError('amount', 'Not Enough Funds');
+            return;
         }
         $acc->effective_balance = $acc->effective_balance - $this->amount;
         $upd = $acc->update();
-
         $accdebit = DB::table("account_statements")->where('account_id', $this->from)->orderBy("id", 'DESC')->first();
         if ($accdebit) {
-        $accadd = $accdebit->effective_balance - $this->amount;
+            $accadd = $accdebit->effective_balance - $this->amount;
         } else {
-        $accadd = Account::where('id', $this->from)->value('effective_balance');
+            $accadd = Account::where('id', $this->from)->value('effective_balance');
         }
-
         $acccredit = DB::table("account_statements")->where('account_id', $this->to)->orderBy("id", 'DESC')->first();
         if ($acccredit) {
-        $accmin = $acccredit->effective_balance + $this->amount;
+            $accmin = $acccredit->effective_balance + $this->amount;
         } else {
-        $accmin = Account::where('id', $this->to)->value('effective_balance') + $this->amount;
+            $accmin = Account::where('id', $this->to)->value('effective_balance') + $this->amount;
         }
-
         // debit
         $order_id = mt_rand(11111111, 99999999);
         $debit = new AccountStatement;
@@ -186,17 +181,15 @@ class Index extends Component
             'amount' => 'required',
             'perticuler' => 'required',
             'transaction_date' => 'required'
-        ],[
-            'to.required' => 'Select Account...',
-            'amount.required' => 'Enter Amount',
-            'perticuler.required' => 'Remarks can not be blank..',
-            'transaction_date.required' => 'Select Date...',
-        ]);
-
-        $account = Account::where('id',$this->to)->first();
+        ], [
+                'to.required' => 'Select Account...',
+                'amount.required' => 'Enter Amount',
+                'perticuler.required' => 'Remarks can not be blank..',
+                'transaction_date.required' => 'Select Date...',
+            ]);
+        $account = Account::where('id', $this->to)->first();
         $account->effective_balance = $account->effective_balance + $this->amount;
         $accup = $account->update();
-
         $order_id = mt_rand(11111111, 99999999);
         $store = new AccountStatement;
         $store->order_id = $order_id;
@@ -236,8 +229,8 @@ class Index extends Component
             $this->branch = $acc->branch;
             $this->bankname = $acc->bankname;
             $this->nickname = $acc->nickname;
-            } else {
-                return redirect()->to('/admin/account');
+        } else {
+            return redirect()->to('/admin/account');
         }
     }
     public function editStore($id)
@@ -251,20 +244,20 @@ class Index extends Component
             $this->branch = $acc->branch;
             $this->bankname = $acc->bankname;
             $this->nickname = $acc->nickname;
-            } else {
-                return redirect()->to('/admin/account');
+        } else {
+            return redirect()->to('/admin/account');
         }
     }
     public function updateStore()
     {
         $validatedata = $this->validate();
         Account::Where('id', $this->ac_id)->update([
-        'ac_name' => $this->ac_name,
-        'ac_no' => $this->ac_no,
-        'ifsc' => $this->ifsc,
-        'branch' => $this->branch,
-        'bankname' => $this->bankname,
-        'nickname' => $this->nickname,
+            'ac_name' => $this->ac_name,
+            'ac_no' => $this->ac_no,
+            'ifsc' => $this->ifsc,
+            'branch' => $this->branch,
+            'bankname' => $this->bankname,
+            'nickname' => $this->nickname,
         ]);
         $this->resetinputfields();
         session()->flash('success', 'Account Updated Successfully...');
@@ -291,10 +284,10 @@ class Index extends Component
     }
     public function render()
     {
-        $data = Account::where('ac_name', 'like', '%'.$this->search.'%')
-        ->orderByDesc('id')->paginate(10);
+        $data = Account::where('ac_name', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
         $acc = Account::all();
         $sup = Supplier::get();
-        return view('livewire.admin.account.index', ['data'=>$data, 'acc'=>$acc, 'sup'=>$sup]);
+        return view('livewire.admin.account.index', ['data' => $data, 'acc' => $acc, 'sup' => $sup]);
     }
 }

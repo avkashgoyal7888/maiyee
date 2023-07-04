@@ -47,8 +47,6 @@ class Index extends Component
         }
     }
 
-
-
     protected $rules = [
         'sname' => 'required',
         'name' => 'required',
@@ -94,12 +92,9 @@ class Index extends Component
     public function store()
     {
         $validatedata = $this->validate();
-
         $supplier_id = mt_rand(11111111, 99999999);
         $adminid = Auth::guard('admin')->user()->id;
-
         $supplier = new Supplier;
-
         $supplier->sname = $this->sname;
         $supplier->state_id = $this->state_id;
         $supplier->city_id = $this->city_id;
@@ -114,13 +109,10 @@ class Index extends Component
         $supplier->ifsc = $this->ifsc;
         $supplier->created_by = $adminid;
         $supplier->updated_by = $adminid;
-
         $supplier->save();
-
         $this->resetinputfields();
         session()->flash('success', 'Congratulations !! Supplier Added Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function editsupplier(int $supplier_id)
@@ -139,14 +131,11 @@ class Index extends Component
             $this->ifsc = $supplier->ifsc;
             $this->state_id = $supplier->state_id;
             $this->city_id = $supplier->city_id;
-    
             $this->viewCities(); // Update city list and pre-select city
-    
         } else {
             return redirect()->to('/admin/supplier');
         }
     }
-
 
     public function update()
     {
@@ -166,11 +155,9 @@ class Index extends Component
             'city_id' => $this->city_id,
             'updated_by' => $adminid
         ]);
-
         $this->resetinputfields();
         session()->flash('success', 'Supplier Updated Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function viewsupplier(int $supplier_id)
@@ -189,12 +176,9 @@ class Index extends Component
             $this->state_id = $supplier->state->state_name;
             $this->city_id = $supplier->city->city_name;
             $this->ifsc = $supplier->ifsc;
-
-
         } else {
             return redirect()->to('/admin/suppliers');
         }
-
     }
 
     public function deleteSupplier($id)
@@ -202,7 +186,6 @@ class Index extends Component
         $supplier = supplier::find($id);
         if ($supplier) {
             $this->supplier_id = $supplier->id;
-
         } else {
             return redirect()->to('/admin/state');
         }
@@ -221,8 +204,8 @@ class Index extends Component
 
     public function render()
     {
-        $data = supplier::where('sname', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
-        return view('livewire.admin.supplier.index', ['data'=>$data]);
+        $data = supplier::where('sname', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
+        return view('livewire.admin.supplier.index', ['data' => $data]);
     }
 }

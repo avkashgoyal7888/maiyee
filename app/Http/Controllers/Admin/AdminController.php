@@ -19,8 +19,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        if(Auth::guard('admin')->check())
-        {
+        if (Auth::guard('admin')->check()) {
             return redirect()->route('admin.dashboard');
         }
         return view('admin.auth.login');
@@ -30,26 +29,29 @@ class AdminController extends Controller
     {
         $nav = Head::first();
         $visitorCount = Visitor::sum('hits');
-        return view('admin.dashboard', compact('nav','visitorCount'));
+        return view('admin.dashboard', compact('nav', 'visitorCount'));
     }
 
     public function loginSubmit(Request $req)
     {
-        $val = Validator::make($req->all(), [
-            'adminid' => 'required',
-            'password' => 'required',
-        ],
-        [
-            'adminid.required' => 'Admin Id Field can not be blank....',
-            'password' => 'Password Can not be blank....',
-        ]);
+        $val = Validator::make(
+            $req->all(),
+            [
+                'adminid' => 'required',
+                'password' => 'required',
+            ],
+            [
+                'adminid.required' => 'Admin Id Field can not be blank....',
+                'password' => 'Password Can not be blank....',
+            ]
+        );
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         }
-        if (Auth::guard('admin')->attempt(['adminid'=>$req->adminid, 'password'=>$req->password])) {
-            return response()->json(['status'=>true, 'msg'=>'Logged in Successfully.....', 'data'=>['location'=>route('admin.dashboard')]]);
+        if (Auth::guard('admin')->attempt(['adminid' => $req->adminid, 'password' => $req->password])) {
+            return response()->json(['status' => true, 'msg' => 'Logged in Successfully.....', 'data' => ['location' => route('admin.dashboard')]]);
         } else {
-            return response()->json(['status'=>false, 'msg'=>'Invalid User Id or password.....']);
+            return response()->json(['status' => false, 'msg' => 'Invalid User Id or password.....']);
         }
     }
 
@@ -62,7 +64,7 @@ class AdminController extends Controller
         if (!$admin) {
             return response()->json(['status' => false, 'message' => "User not found"]);
         }
-    
+
         $rule = [
             'old_password' => ['required', 'min:6'],
             'new_password' => ['required', 'min:6', 'same:confirm_password']
@@ -71,7 +73,7 @@ class AdminController extends Controller
         if ($validator->fails()) {
             return response()->json(['status' => false, 'msg' => $validator->errors()->first()]);
         }
-    
+
         if (Hash::check($request->old_password, $admin->password)) {
             $admin->password = Hash::make($request->new_password);
             $chnagepassword = $admin->save();
@@ -136,7 +138,7 @@ class AdminController extends Controller
 
 
     public function logOut()
-    { 
+    {
         Auth::guard('admin')->logout();
         Session::flush();
         return redirect()->route('admin.login');

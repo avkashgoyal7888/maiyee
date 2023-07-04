@@ -21,8 +21,6 @@ use Session;
 class PaymentController extends Controller
 {
 
-
-
     public function pay()
     {
         $payment = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
@@ -39,7 +37,6 @@ class PaymentController extends Controller
         $merchantKey = 'cSATia'; // Your merchant key
         $merchantSalt = 'h4l22zSM'; // Your merchant salt
         $payuEndpoint = 'https://secure.payu.in/_payment/';
-
         $params = [
             'key' => $merchantKey,
             'txnid' => $order,
@@ -53,8 +50,6 @@ class PaymentController extends Controller
             'curl' => route('web.success'),
             'hash' => '',
         ];
-
-        // Calculate hash
         $hashSequence = $merchantKey . '|' . $params['txnid'] . '|' . $params['amount'] . '|' . $params['productinfo'] . '|' . $params['firstname'] . '|' . $params['email'] . '|||||||||||' . $merchantSalt;
         $hash = strtolower(hash('sha512', $hashSequence));
         $params['hash'] = $hash;
@@ -63,15 +58,15 @@ class PaymentController extends Controller
         $cartNav = Cart::get();
         $cartTotalnav = 0;
         $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
+        if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
         $cat = Category::get();
 
-        return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint],compact('cartNav','cartTotalnav','cartCount','nav','cat','payment'));
+        return view('front.payment', ['params' => $params, 'payuEndpoint' => $payuEndpoint], compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'payment'));
     }
 
     public function orderCancel(Request $request)
@@ -86,19 +81,19 @@ class PaymentController extends Controller
             $order->txnid = $txnid;
             $order->order_status = $status;
             $order->update();
-    
+
         }
-            $cartNav = Cart::get();
-            $cartTotalnav = 0;
-            $cartCount = 0;
-            if (Auth::guard('web')->check()) {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if (Auth::guard('web')->check()) {
             $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
             $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
             $cartTotalnav = $cartNav->sum('total');
         }
-            $nav = Head::first();
-            $cat = Category::get();
-            return view('front.cancel', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'order'));
+        $nav = Head::first();
+        $cat = Category::get();
+        return view('front.cancel', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'order'));
     }
 
     public function orderSuccess(Request $request)
@@ -113,17 +108,15 @@ class PaymentController extends Controller
             $order->txnid = $txnid;
             $order->order_status = $status;
             $order->update();
-    
         }
 
         $client = new Client([
             'base_uri' => 'https://apiv2.shiprocket.in/v1/',
             'headers' => [
                 'Content-Type' => 'application/json',
-                'Authorization' => 'Basic '.base64_encode('<tech@maiyee.in>:<Eduse@123>')
+                'Authorization' => 'Basic ' . base64_encode('<tech@maiyee.in>:<Eduse@123>')
             ]
         ]);
-
         // Authenticate the user
         $response = $client->post('external/auth/login', [
             'json' => [
@@ -138,71 +131,69 @@ class PaymentController extends Controller
             $order_details = OrderDetail::where('order_id', $ref)->get();
 
             $order_items = [];
-                foreach ($order_details as $order_detail) {
-                    $order_items[] = [
-                        'name' => $order_detail->product->name,
-                        'sku' => $order_detail->product->style_code,
-                        'units' => $order_detail->quantity,
-                        'selling_price' => $order_detail->price,
-                        'discount' => 0.00,
-                        'tax' => 0.00,
-                    ];
-                }
-
-                $orderData = [
-                    'order_id' => $order->order_id,
-                    'order_date' => $order->order_date,
-                    'billing_customer_name' => $order->name,
-                    'billing_last_name' => '',
-                    'billing_address' => $order->address,
-                    'billing_city' => $order->city,
-                    'billing_pincode' => $order->pin_code,
-                    'billing_state' => $order->state,
-                    'billing_country' => 'INDIA',
-                    'billing_email' => $order->email,
-                    'billing_phone' => $order->contact,
-                    'shipping_is_billing' => true,
-                    'order_items' => $order_items,
-                    'payment_method' => 'prepaid',
-                    'shipping_charges' => 0.00,
-                    'giftwrap_charges' => 0.00,
-                    'transaction_charges' => 0.00,
-                    'total_discount' => 0.00,
-                    'sub_total' => $order->payable,
-                    'length' => 12.00,
-                    'breadth' => 10.00,
-                    'height' => 1.00,
-                    'weight' => 0.300,
+            foreach ($order_details as $order_detail) {
+                $order_items[] = [
+                    'name' => $order_detail->product->name,
+                    'sku' => $order_detail->product->style_code,
+                    'units' => $order_detail->quantity,
+                    'selling_price' => $order_detail->price,
+                    'discount' => 0.00,
+                    'tax' => 0.00,
                 ];
-
-                $response = $client->post('external/orders/create/adhoc', [
-        'headers' => [
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Bearer ' . $access_token,
-        ],
-        'json' => $orderData,
-    ]);
-                if ($response->getStatusCode() == 200) {
-                    if ($order->buy_mode == '1' && $order->order_id == $ref) {
-                BuyNow::where('user_id', $order->user_id)->delete();
-            } elseif ($order->buy_mode == '0' && $order->order_id == $ref)    {
-                Cart::where('user_id', $order->user_id)->delete();
             }
+            $orderData = [
+                'order_id' => $order->order_id,
+                'order_date' => $order->order_date,
+                'billing_customer_name' => $order->name,
+                'billing_last_name' => '',
+                'billing_address' => $order->address,
+                'billing_city' => $order->city,
+                'billing_pincode' => $order->pin_code,
+                'billing_state' => $order->state,
+                'billing_country' => 'INDIA',
+                'billing_email' => $order->email,
+                'billing_phone' => $order->contact,
+                'shipping_is_billing' => true,
+                'order_items' => $order_items,
+                'payment_method' => 'prepaid',
+                'shipping_charges' => 0.00,
+                'giftwrap_charges' => 0.00,
+                'transaction_charges' => 0.00,
+                'total_discount' => 0.00,
+                'sub_total' => $order->payable,
+                'length' => 12.00,
+                'breadth' => 10.00,
+                'height' => 1.00,
+                'weight' => 0.300,
+            ];
+            $response = $client->post('external/orders/create/adhoc', [
+                'headers' => [
+                    'Content-Type' => 'application/json',
+                    'Authorization' => 'Bearer ' . $access_token,
+                ],
+                'json' => $orderData,
+            ]);
+            if ($response->getStatusCode() == 200) {
+                if ($order->buy_mode == '1' && $order->order_id == $ref) {
+                    BuyNow::where('user_id', $order->user_id)->delete();
+                } elseif ($order->buy_mode == '0' && $order->order_id == $ref) {
+                    Cart::where('user_id', $order->user_id)->delete();
+                }
 
             }
         }
         $cartNav = Cart::get();
         $cartTotalnav = 0;
         $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
+        if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
         $cat = Category::get();
         $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
-        return view('front.success',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
+        return view('front.success', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'order'));
     }
 
     public function orderFail(Request $request)
@@ -217,20 +208,20 @@ class PaymentController extends Controller
             $order->txnid = $txnid;
             $order->order_status = $status;
             $order->update();
-    
+
         }
         $cartNav = Cart::get();
         $cartTotalnav = 0;
         $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
+        if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
         $cat = Category::get();
         $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
-        return view('front.fail',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
+        return view('front.fail', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'order'));
     }
 
     public function orderCOD()
@@ -238,15 +229,15 @@ class PaymentController extends Controller
         $cartNav = Cart::get();
         $cartTotalnav = 0;
         $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
+        if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
         $cat = Category::get();
         $order = Order::where('user_id', Auth::guard('web')->user()->id)->orderByDesc('id')->first();
-        return view('front.cod',compact('cartNav','cartTotalnav','cartCount','nav','cat','order'));
+        return view('front.cod', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'order'));
     }
 
 }

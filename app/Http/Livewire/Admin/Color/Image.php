@@ -19,7 +19,7 @@ class Image extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $color, $product_id, $color_id,$product,$colordelete_id;
+    public $pro_id, $category_id, $subcategory_id, $subcategories, $category, $color, $product_id, $color_id, $product, $colordelete_id;
     public $image;
     public function updatingSearch()
     {
@@ -35,7 +35,7 @@ class Image extends Component
 
     public function __construct()
     {
-        $this->fields = [[ 'image' => '']];
+        $this->fields = [['image' => '']];
     }
 
     public function addField()
@@ -94,15 +94,15 @@ class Image extends Component
         'image.required' => 'color Name is required',
     ];
 
-        public function store()
-        {
-            $validatedData = $this->validate([
-                'category_id' => 'required',
-                'subcategory_id' => 'required',
-                'product_id' => 'required',
-                'color_id' => 'required',
-                'fields.*.image' => 'required|image', // limit to 1 MB
-            ], [
+    public function store()
+    {
+        $validatedData = $this->validate([
+            'category_id' => 'required',
+            'subcategory_id' => 'required',
+            'product_id' => 'required',
+            'color_id' => 'required',
+            'fields.*.image' => 'required|image', // limit to 1 MB
+        ], [
                 'category_id.required' => 'Select Category first.....',
                 'subcategory_id.required' => 'Select Sub-Category first.....',
                 'product_id.required' => 'Select Product first...',
@@ -110,32 +110,28 @@ class Image extends Component
                 'fields.*.image.required' => 'Image is required',
                 'fields.*.image.image' => 'Only image files are allowed',
             ]);
-
-            foreach ($validatedData['fields'] as $key => $value) {
-                $image = $value['image'];
-
-                if ($image) {
-                    $imageName = substr(uniqid(), 0, 9);
+        foreach ($validatedData['fields'] as $key => $value) {
+            $image = $value['image'];
+            if ($image) {
+                $imageName = substr(uniqid(), 0, 9);
                 $imgpath = $image->getRealPath();
                 $images = Cloudinary::upload($imgpath, [
                     'folder' => 'admin/color',
                     'public_id' => $imageName,
                 ])->getSecurePath();
-
-                    $data = new ProductImage;
-                    $data->product_id = $validatedData['product_id'];
-                    $data->color_id = $validatedData['color_id'];
-                    $data->image = $images;
-                    $data->save();
-                }
+                $data = new ProductImage;
+                $data->product_id = $validatedData['product_id'];
+                $data->color_id = $validatedData['color_id'];
+                $data->image = $images;
+                $data->save();
             }
-
-            $this->reset('category_id','subcategory_id','product_id','fields');
-            session()->flash('success', 'Congratulations!! Color Added Successfully...');
-            $this->emit('closemodal');
         }
+        $this->reset('category_id', 'subcategory_id', 'product_id', 'fields');
+        session()->flash('success', 'Congratulations!! Color Added Successfully...');
+        $this->emit('closemodal');
+    }
 
-        public function editColor($id)
+    public function editColor($id)
     {
         $clr = ProductImage::find($id);
         if ($clr) {
@@ -145,7 +141,6 @@ class Image extends Component
         } else {
             return redirect()->to('/admin/products');
         }
-
     }
 
     public function updateColor()
@@ -155,13 +150,13 @@ class Image extends Component
         $image = $data->image;
         if ($this->image && $this->image !== $data->image) {
             $publicId = pathinfo($data->image)['filename'];
-                Cloudinary::destroy("admin/color/{$publicId}");
-                $imageName = substr(uniqid(), 0, 9);
-                $imagepath = $this->image->getRealPath();
-                $image = Cloudinary::upload($imagepath, [
-                    'folder' => 'admin/color',
-                    'public_id' => $imageName,
-                ])->getSecurePath();
+            Cloudinary::destroy("admin/color/{$publicId}");
+            $imageName = substr(uniqid(), 0, 9);
+            $imagepath = $this->image->getRealPath();
+            $image = Cloudinary::upload($imagepath, [
+                'folder' => 'admin/color',
+                'public_id' => $imageName,
+            ])->getSecurePath();
         }
         ProductImage::where('id', $this->pro_id)->update([
             'image' => $image,
@@ -185,14 +180,13 @@ class Image extends Component
     public function delete()
     {
         $clr = ProductImage::where('id', $this->colordelete_id)->first();
-    
+
         if ($clr->image != null) {
             if ($clr->image != null) {
-            $publicId = pathinfo($clr->image)['filename'];
+                $publicId = pathinfo($clr->image)['filename'];
                 Cloudinary::destroy("admin/color/{$publicId}");
             }
         }
-    
         $clr->delete();
         $this->resetinputfields();
         session()->flash('success', 'Congratulations !! Color Deleted Successfully...');
@@ -202,9 +196,9 @@ class Image extends Component
 
     public function render()
     {
-        $data = ProductImage::whereHas('product', function($query) {
-                $query->where('name', 'like', '%'.$this->search.'%');
-            })->orderByDesc('id')->paginate(10);
+        $data = ProductImage::whereHas('product', function ($query) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        })->orderByDesc('id')->paginate(10);
         return view('livewire.admin.color.image', compact('data'));
     }
 }

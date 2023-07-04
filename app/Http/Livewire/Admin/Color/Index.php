@@ -18,7 +18,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $color_id,$category_id, $subcategory_id, $subcategories, $category, $code, $product_id, $startDate, $endDate,$product, $color_category;
+    public $color_id, $category_id, $subcategory_id, $subcategories, $category, $code, $product_id, $startDate, $endDate, $product, $color_category;
     public $image;
     public function updatingSearch()
     {
@@ -69,7 +69,7 @@ class Index extends Component
         'code.required' => 'color Name is required',
     ];
 
-       public function store()
+    public function store()
     {
         $validatedData = $this->validate([
             'category_id' => 'required',
@@ -79,32 +79,29 @@ class Index extends Component
             'image' => 'required|image',
             'color_category' => 'required',
         ], [
-            'category_id.required' => 'Select Category first.....',
-            'subcategory_id.required' => 'Select Sub-Category first.....',
-            'product_id.required' => 'Select Product first...',
-            'code.required' => 'Color Name is required',
-            'image.required' => 'Image is required',
-            'image.image' => 'Only image files are allowed',
-            'color_category.required' => 'Color Category is required....'
-        ]);
-            $image = $this->image;
-    
-            if ($image) {
-                $imageName = substr(uniqid(), 0, 9);
-                $imgpath = $this->image->getRealPath();
-                $image = Cloudinary::upload($imgpath, [
-                    'folder' => 'admin/color',
-                    'public_id' => $imageName,
-                ])->getSecurePath();
-    
-                $data = new Color;
-                $data->product_id = $this->product_id;
-                $data->code = $this->code;
-                $data->image = $image;
-                $data->color_category = $this->color_category;
-                $data->save();
-            }
-    
+                'category_id.required' => 'Select Category first.....',
+                'subcategory_id.required' => 'Select Sub-Category first.....',
+                'product_id.required' => 'Select Product first...',
+                'code.required' => 'Color Name is required',
+                'image.required' => 'Image is required',
+                'image.image' => 'Only image files are allowed',
+                'color_category.required' => 'Color Category is required....'
+            ]);
+        $image = $this->image;
+        if ($image) {
+            $imageName = substr(uniqid(), 0, 9);
+            $imgpath = $this->image->getRealPath();
+            $image = Cloudinary::upload($imgpath, [
+                'folder' => 'admin/color',
+                'public_id' => $imageName,
+            ])->getSecurePath();
+            $data = new Color;
+            $data->product_id = $this->product_id;
+            $data->code = $this->code;
+            $data->image = $image;
+            $data->color_category = $this->color_category;
+            $data->save();
+        }
         $this->resetinputfields();
         session()->flash('success', 'Congratulations!! Color Added Successfully...');
         $this->emit('closemodal');
@@ -122,7 +119,6 @@ class Index extends Component
         } else {
             return redirect()->to('/admin/products');
         }
-
     }
 
     public function updateColor()
@@ -132,13 +128,13 @@ class Index extends Component
         $image = $data->image;
         if ($this->image && $this->image !== $data->image) {
             $publicId = pathinfo($data->image)['filename'];
-                Cloudinary::destroy("admin/color/{$publicId}");
-                $imageName = substr(uniqid(), 0, 9);
-                $imagepath = $this->image->getRealPath();
-                $image = Cloudinary::upload($imagepath, [
-                    'folder' => 'admin/color',
-                    'public_id' => $imageName,
-                ])->getSecurePath();
+            Cloudinary::destroy("admin/color/{$publicId}");
+            $imageName = substr(uniqid(), 0, 9);
+            $imagepath = $this->image->getRealPath();
+            $image = Cloudinary::upload($imagepath, [
+                'folder' => 'admin/color',
+                'public_id' => $imageName,
+            ])->getSecurePath();
         }
         Color::where('id', $this->color_id)->update([
             'code' => $this->code,
@@ -164,14 +160,13 @@ class Index extends Component
     public function delete()
     {
         $clr = Color::where('id', $this->color_id)->first();
-    
+
         if ($clr->image != null) {
             if ($clr->image != null) {
-            $publicId = pathinfo($clr->image)['filename'];
+                $publicId = pathinfo($clr->image)['filename'];
                 Cloudinary::destroy("admin/color/{$publicId}");
+            }
         }
-        }
-    
         $clr->delete();
         $this->resetinputfields();
         session()->flash('success', 'Congratulations !! Color Deleted Successfully...');
@@ -180,9 +175,9 @@ class Index extends Component
 
     public function render()
     {
-        $data = Color::whereHas('product', function($query) {
-                $query->where('name', 'like', '%'.$this->search.'%');
-            })->orderByDesc('id')->paginate(10);
-        return view('livewire.admin.color.index', ['data'=>$data]);
+        $data = Color::whereHas('product', function ($query) {
+            $query->where('name', 'like', '%' . $this->search . '%');
+        })->orderByDesc('id')->paginate(10);
+        return view('livewire.admin.color.index', ['data' => $data]);
     }
 }

@@ -44,20 +44,11 @@ class Replace extends Component
         $this->address = '';
     }
 
-//     return and exchange page date->Order_datefromorders->username->product->order_valuewillbetotal->status->
-
-
-// status->0 requested 1 accepted 2 pickup 3 dispatch 4 reject ->action view and edit -
-
-// view -> order_id order_data-> exchange_date->name->product->value
-// textare->address
-//  edit-> change status
-
     public function viewDetailProduct($id)
     {
         $order = Exchange::find($id);
         if ($order) {
-            $address = order::where('order_id',$order->order_id)->first();
+            $address = order::where('order_id', $order->order_id)->first();
             $this->order_id = $order->order_id;
             $this->product_id = $order->product->name;
             $this->size_id = $order->size->size;
@@ -69,7 +60,6 @@ class Replace extends Component
         } else {
             return redirect()->to('/admin/replace');
         }
-
     }
 
     public function editState($id)
@@ -78,43 +68,39 @@ class Replace extends Component
         if ($ex) {
             $this->ex_id = $ex->id;
             $this->status = $ex->status;
-
         } else {
             return redirect()->to('/admin/replace');
         }
-
     }
 
     public function update()
     {
         $validatedata = $this->validate();
         $exc = Exchange::Where('id', $this->ex_id)->first();
-            $exc->status = $this->status;
-            $exc->update();
-            $orderid = $exc->order_id;
-            $price = $exc->price;
-            $hsn = $exc->product->hsn_code;
-            $proname = $exc->product->name;
-            $proimg = $exc->product->image;
-            $email = $exc->user->email;
+        $exc->status = $this->status;
+        $exc->update();
+        $orderid = $exc->order_id;
+        $price = $exc->price;
+        $hsn = $exc->product->hsn_code;
+        $proname = $exc->product->name;
+        $proimg = $exc->product->image;
+        $email = $exc->user->email;
 
         if ($this->status == '5') {
-            Mail::send('admin.email.replace', ['orderid' => $orderid,'hsn'=>$hsn,'proname'=>$proname,'price'=>$price,'proimg'=>$proimg], function ($message) use ($email) {
-            $message->to($email);
-            $message->subject('Replace/Replace Order');
-        });
+            Mail::send('admin.email.replace', ['orderid' => $orderid, 'hsn' => $hsn, 'proname' => $proname, 'price' => $price, 'proimg' => $proimg], function ($message) use ($email) {
+                $message->to($email);
+                $message->subject('Replace/Replace Order');
+            });
         }
-
         $this->resetinputfields();
         session()->flash('success', 'Status Updated Successfully...');
         $this->emit('closemodal');
-
     }
     public function render()
     {
-        $data = Exchange::where('order_id', 'like', '%'.$this->search.'%')->where('option', 'replace')->orderByDesc('id')->paginate(10);
+        $data = Exchange::where('order_id', 'like', '%' . $this->search . '%')->where('option', 'replace')->orderByDesc('id')->paginate(10);
         $order = Order::where('order_id', $data->pluck('order_id')->toArray())
-        ->first();
-        return view('livewire.admin.exchange.replace',compact('data','order'));
+            ->first();
+        return view('livewire.admin.exchange.replace', compact('data', 'order'));
     }
 }

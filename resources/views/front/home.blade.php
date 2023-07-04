@@ -15,11 +15,6 @@
          </div>
       </div>
       @endforeach
-      <!-- <div class="slide">
-         <div class="blur-up lazyload">
-             <img class="blur-up lazyload" data-src="{{asset('front/assets/images/logo.png')}}" src="{{asset('front/assets/images/logo.png')}}" alt="Summer Bikini Collection" title="Summer Bikini Collection" />
-         </div>
-         </div> -->
    </div>
 </div>
 <!--End Home slider-->
@@ -50,9 +45,6 @@
                         <!-- Variant Image-->
                      </a>
                      <div class="button-set">
-                        <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview" data-products-id="{{$products->id}}">
-                        <i class="icon anm anm-search-plus-r"></i>
-                        </a>
                         <div class="wishlist-btn">
     @auth
         <a href="#" data-product-id="{{$products->id}}" class="wishlist add-to-wishlist">
@@ -121,9 +113,6 @@
                         <!-- Variant Image-->
                      </a>
                      <div class="button-set">
-                        <a href="javascript:void(0)" title="Quick View" class="quick-view-popup quick-view" data-toggle="modal" data-target="#content_quickview">
-                        <i class="icon anm anm-search-plus-r"></i>
-                        </a>
                         <div class="wishlist-btn">
                            <a class="wishlist add-to-wishlist" href="#" data-product-id="{{$products->product->id}}"><i class="icon anm anm-heart-l"></i></a>
 
@@ -202,132 +191,11 @@
       @endforeach
    </div>
 </div>
-<!--Quick View popup-->
-<div class="modal fade quick-view-popup" id="content_quickview">
-   <div class="modal-dialog">
-      <div class="modal-content">
-         <div class="modal-body">
-            <div id="ProductSection-product-template" class="product-template__container prstyle1">
-               <div class="product-single">
-                  <!-- Start model close -->
-                  <a href="javascript:void()" data-dismiss="modal" class="model-close-btn pull-right" title="close"><span class="icon icon anm anm-times-l"></span></a>
-                  <!-- End model close -->
-                  <div class="row">
-                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="product-details-img">
-                           <div class="pl-20" id="product-image">
-                              <img src="{{asset('front/assets/images/product-detail-page/camelia-reversible-big1.jpg')}}" alt="" />
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-lg-6 col-md-6 col-sm-12 col-12">
-                        <div class="product-single__meta">
-                           <h2 class="product-single__title" id="product-name"></h2>
-                           <div class="prInfoRow">
-                              <div class="product-stock"> <span class="instock ">In Stock</span> <span class="outstock hide">Unavailable</span> </div>
-                              <div class="product-sku">SKU: <span class="variant-sku">19115-rdxs</span></div>
-                           </div>
-                           <p class="product-single__price product-single__price-product-template">
-                              <span class="visually-hidden">Regular price</span>
-                              <s id="ComparePrice-product-template"><span class="money" id="product-mrp"></span></s>
-                              <span class="product-price__price product-price__price-product-template product-price__sale product-price__sale--single">
-                              <span id="ProductPrice-product-template"><span class="money" id="product-discount"></span></span>
-                              </span>
-                           </p>
-                           <div class="product-single__description rte" id="product-desc"></div>
-                           <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
-                              <div class="swatch clearfix swatch-0 option1" data-option-index="0">
-                                 <div class="product-form__item">
-                                    <label class="header">Color: <span class="slVariant" id="product-code"></span></label>
-                                    <div class="swatch-element">
-                                       <input class="swatchInput" id="swatch-0-red" type="radio" name="option-0" value="Red">
-                                       <label class="swatchLbl color medium rectangle" id="color-image"></label>
-                                    </div>
-                                 </div>
-                              </div>
-                              <div class="swatch clearfix swatch-1 option2" data-option-index="1">
-                                 <div class="product-form__item">
-    <label class="header">Size: </label>
-    <div data-value="XS" class="swatch-element xs available">
-        <input class="swatchInput" id="swatch-1-xs" type="radio" name="option-1" value="XS">
-        <label class="swatchLbl medium rectangle" id="product-size-list"></label>
-    </div>
-</div>
-
-
-                              </div>
-                              <!-- Product Action -->
-                              <div class="product-action clearfix">
-                                 <div class="product-form__item--quantity">
-                                    <div class="wrapQtyBtn">
-                                       <div class="qtyField">
-                                          <a class="qtyBtn minus" href="javascript:void(0);"><i class="fa anm anm-minus-r" aria-hidden="true"></i></a>
-                                          <input type="text" id="Quantity" name="quantity" value="1" class="product-form__input qty">
-                                          <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
-                                       </div>
-                                    </div>
-                                 </div>
-                                 <div class="product-form__item--submit">
-                                    <button type="button" name="add" class="btn product-form__cart-submit">
-                                    <span>Add to cart</span>
-                                    </button>
-                                 </div>
-                              </div>
-                              <!-- End Product Action -->
-                           </form>
-                           <div class="display-table shareRow">
-                              <div class="display-table-cell">
-                                 <div class="wishlist-btn">
-                                    <a class="wishlist add-to-wishlist" href="#" title="Add to Wishlist"><i class="icon anm anm-heart-l" aria-hidden="true"></i> <span>Add to Wishlist</span></a>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-                  <!--End-product-single-->
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
-<!--End Quick View popup--> 
 @stop
 @section('js')
 
 <script>
 $(document).ready(function(){
-   $('.quick-view').click(function() {
-        // Get the product ID from the button's data attribute
-        var productId = $(this).data('products-id');
-
-        // Send an AJAX request to get the product data
-        $.ajax({
-            url: "{{ route('web.product.data', ':id') }}".replace(':id', productId),
-            type: 'GET',
-            success: function(data) {
-                let sizeList = '';
-for (let i = 0; i < data.size.length; i++) {
-    sizeList += data.size[i].size + ' ';
-}
-               let productimage = '<img class="primary blur-up lazyload" data-src="' + data.image + '" src="' + data.image + '" alt="image" title="product">';
-                // Update the modal with the product data
-                $('#product-name').text(data.name);
-                $('#product-image').html(productimage);
-                $('#product-mrp').text('₹' + data.mrp);
-                $('#product-discount').text('₹' + data.discount);
-                $('#product-desc').text(data.description);
-                $('#product-size-list').text(sizeList);
-                // $('#product-size').text(data.colors[0].code);
-                $('#color-image').html(colorimage);
-                $('#content_quickview').modal('show');
-            },
-            error: function() {
-                alert('Error fetching product data.');
-            }
-        });
-    });
     $('.add-to-wishlist').on('click', function(e) {
         e.preventDefault(); // prevent default form submission
         let product_id = $(this).data('product-id');

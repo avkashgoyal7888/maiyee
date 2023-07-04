@@ -47,14 +47,10 @@ class Index extends Component
     public function store()
     {
         $validatedata = $this->validate();
-
         $city = new City;
-
         $city->state_id = $this->state_id;
         $city->city_name = $this->city_name;
-
         $city->save();
-
         $this->resetinputfields();
         session()->flash('success', 'City Added Successfully...');
         $this->emit('closemodal');
@@ -71,7 +67,6 @@ class Index extends Component
         } else {
             return redirect()->to('/admin/city');
         }
-
     }
 
     public function update()
@@ -81,11 +76,9 @@ class Index extends Component
             'state_id' => $this->state_id,
             'city_name' => $this->city_name,
         ]);
-
         $this->resetinputfields();
         session()->flash('success', 'City Updated Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function deleteCity($id)
@@ -109,9 +102,9 @@ class Index extends Component
 
     public function render()
     {
-        $data = City::where('city_name', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
-                        $state = State::all();
-        return view('livewire.admin.city.index', ['data'=>$data, 'state'=>$state]);
+        $data = City::where('city_name', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
+        $state = State::all();
+        return view('livewire.admin.city.index', ['data' => $data, 'state' => $state]);
     }
 }

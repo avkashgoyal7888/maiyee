@@ -14,7 +14,7 @@ class Detail extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category,$product_id,$ideal,$length_type,$brand_color,$ocassion,$pattern,$type,$fabric,$neck,$sleeve,$sale_package,$fabric_care;
+    public $pro_id, $category_id, $subcategory_id, $subcategories, $category, $product_id, $ideal, $length_type, $brand_color, $ocassion, $pattern, $type, $fabric, $neck, $sleeve, $sale_package, $fabric_care;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -42,8 +42,13 @@ class Detail extends Component
     public function viewSubcategories()
     {
         $this->subcategories = SubCategory::where('cat_id', $this->category_id)->get();
-        if (!$this->category_id || ($this->subcategories->count() > 0 && !$this->subcategories->contains('id', 
-            $this->subcategory_id))) {
+        if (
+            !$this->category_id || ($this->subcategories->count() > 0 && !$this->subcategories->contains(
+                'id',
+                $this->subcategory_id
+            )
+            )
+        ) {
             $this->subcategory_id = null;
         }
     }
@@ -54,9 +59,6 @@ class Detail extends Component
             $this->product = Product::where('sub_id', $this->subcategory_id)->get();
         }
     }
-
-
-
 
     public function resetinputfields()
     {
@@ -109,26 +111,24 @@ class Detail extends Component
 
     public function store()
     {
-            $validatedata = $this->validate();
-
-            $product = new ProductDetail;
-            $product->product_id = $this->product_id;
-            $product->ideal = $this->ideal;
-            $product->length_type = $this->length_type;
-            $product->brand_color = $this->brand_color;
-            $product->ocassion = $this->ocassion;
-            $product->pattern = $this->pattern;
-            $product->type = $this->type;
-            $product->fabric = $this->fabric;
-            $product->neck = $this->neck;
-            $product->sleeve = $this->sleeve;
-            $product->sale_package = $this->sale_package;
-            $product->fabric_care = $this->fabric_care;
-            $product->save();
-
-            $this->resetinputfields();
-            session()->flash('success', 'Congratulations !! Product Added Successfully...');
-            $this->emit('closemodal');
+        $validatedata = $this->validate();
+        $product = new ProductDetail;
+        $product->product_id = $this->product_id;
+        $product->ideal = $this->ideal;
+        $product->length_type = $this->length_type;
+        $product->brand_color = $this->brand_color;
+        $product->ocassion = $this->ocassion;
+        $product->pattern = $this->pattern;
+        $product->type = $this->type;
+        $product->fabric = $this->fabric;
+        $product->neck = $this->neck;
+        $product->sleeve = $this->sleeve;
+        $product->sale_package = $this->sale_package;
+        $product->fabric_care = $this->fabric_care;
+        $product->save();
+        $this->resetinputfields();
+        session()->flash('success', 'Congratulations !! Product Added Successfully...');
+        $this->emit('closemodal');
     }
 
     public function viewDetailProduct($id)
@@ -152,7 +152,6 @@ class Detail extends Component
         } else {
             return redirect()->to('/admin/product-detail');
         }
-
     }
 
     public function editProduct($id)
@@ -172,11 +171,9 @@ class Detail extends Component
             $this->sleeve = $product->sleeve;
             $this->sale_package = $product->sale_package;
             $this->fabric_care = $product->fabric_care;
-
         } else {
             return redirect()->to('/admin/product-detail');
         }
-
     }
 
     public function updateProduct()
@@ -195,11 +192,9 @@ class Detail extends Component
             'sale_package' => $this->sale_package,
             'fabric_care' => $this->fabric_care,
         ]);
-
         $this->resetinputfields();
         session()->flash('success', 'Details Updated Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function deleteProduct($id)
@@ -207,7 +202,6 @@ class Detail extends Component
         $product = ProductDetail::find($id);
         if ($product) {
             $this->pro_id = $product->id;
-
         } else {
             return redirect()->to('/admin/product');
         }
@@ -223,8 +217,8 @@ class Detail extends Component
 
     public function render()
     {
-        $data = ProductDetail::where('fabric_care', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
+        $data = ProductDetail::where('fabric_care', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.product.detail', compact('data'));
     }
 }

@@ -29,6 +29,6 @@ class Address extends Component
     public function render()
     {
         $data = UserAddress::where('user_id', $this->user_id)->orderByDesc('id')->paginate(10);
-        return view('livewire.admin.user.address',compact('data'));
+        return view('livewire.admin.user.address', compact('data'));
     }
 }

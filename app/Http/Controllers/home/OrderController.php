@@ -21,18 +21,18 @@ class OrderController extends Controller
         $cartNav = Cart::get();
         $cartTotalnav = 0;
         $cartCount = 0;
-        if(Auth::guard('web')->check()) {
-        $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
-        $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
-        $cartTotalnav = $cartNav->sum('total');
+        if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
         }
         $nav = Head::first();
         $cat = Category::get();
-        $order = Order::where(['user_id' => Auth::guard('web')->user()->id, 'order_status'=>'success'])->orderByDesc('id')->get();
+        $order = Order::where(['user_id' => Auth::guard('web')->user()->id, 'order_status' => 'success'])->orderByDesc('id')->get();
         $orderdetail = OrderDetail::get();
         $ex = Exchange::whereIn('order_id', $orderdetail->pluck('order_id'))
-        ->get();
-        return view('front.orders',compact('cartNav','cartTotalnav','cartCount','nav','cat','order', 'orderdetail','ex'));
+            ->get();
+        return view('front.orders', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'order', 'orderdetail', 'ex'));
     }
 
     public function returnOrReplace(Request $req)
@@ -42,13 +42,13 @@ class OrderController extends Controller
             'reason' => 'required',
             'order_id' => 'unique:exchanges,order_id',
         ], [
-            'option.required' => 'Select One Return or Replace...',
-            'reason.required' => 'Reason is Required...',
-            'order_id.unique' => 'Request Already Raised wait for response...'
-        ]);
+                'option.required' => 'Select One Return or Replace...',
+                'reason.required' => 'Reason is Required...',
+                'order_id.unique' => 'Request Already Raised wait for response...'
+            ]);
 
         if ($val->fails()) {
-            return response()->json(['status'=>false, 'msg'=>$val->errors()->first()]);
+            return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
         } else {
             $order = orderdetail::where('id', $req->returnid)->first();
             $data = new Exchange();
@@ -71,9 +71,9 @@ class OrderController extends Controller
             $return = $data->save();
 
             if ($return) {
-                return response()->json(['status'=>true, 'msg'=>'Success...']);
+                return response()->json(['status' => true, 'msg' => 'Success...']);
             } else {
-                return response()->json(['status'=>false, 'msg'=>'Something went wrong try again later...']);
+                return response()->json(['status' => false, 'msg' => 'Something went wrong try again later...']);
             }
 
         }

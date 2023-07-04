@@ -38,13 +38,9 @@ class Index extends Component
     public function store()
     {
         $validatedata = $this->validate();
-
         $state = new Bash;
-
         $state->name = $this->name;
-
         $state->save();
-
         $this->resetinputfields();
         session()->flash('success', 'Bash Added Successfully...');
         $this->emit('closemodal');

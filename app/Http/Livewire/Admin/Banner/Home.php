@@ -29,27 +29,24 @@ class Home extends Component
     }
 
     public function store()
-    {   
-            $validatedata = $this->validate([   
-                'image' => 'required|image|mimes:jpeg,png,jpg,gif',
-            ],[
+    {
+        $validatedata = $this->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif',
+        ], [
                 'image.required' => 'Image can not be blank...',
             ]);
-
-            if ($this->image != '') {
-                $imgpath = $this->image->getRealPath();
-                $image = Cloudinary::upload($imgpath, [
-                    'folder' => 'admin/banner',
-                ]);
-            }
-
-            $banner = new HomeBanner;
-            $banner->image = $image->getSecurePath();
-            $banner->save();
-    
-            $this->resetinputfields();
-            session()->flash('success', 'Congratulations !! Banner Added Successfully...');
-            $this->emit('closemodal');
+        if ($this->image != '') {
+            $imgpath = $this->image->getRealPath();
+            $image = Cloudinary::upload($imgpath, [
+                'folder' => 'admin/banner',
+            ]);
+        }
+        $banner = new HomeBanner;
+        $banner->image = $image->getSecurePath();
+        $banner->save();
+        $this->resetinputfields();
+        session()->flash('success', 'Congratulations !! Banner Added Successfully...');
+        $this->emit('closemodal');
     }
 
     public function deleteBanner($id)
@@ -61,15 +58,14 @@ class Home extends Component
         } else {
             return redirect()->to('/admin/banner');
         }
-
     }
     public function delete()
     {
         $banner = HomeBanner::where('id', $this->banner_id)->first();
-    
+
         if ($banner->image != null) {
             $publicId = pathinfo($banner->image)['filename'];
-                Cloudinary::destroy("admin/banner/{$publicId}");
+            Cloudinary::destroy("admin/banner/{$publicId}");
         }
         $banner->delete();
         session()->flash('success', 'Congratulations !! Banner Deleted Successfully...');
@@ -77,8 +73,8 @@ class Home extends Component
     }
     public function render()
     {
-        $data = HomeBanner::where('image', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
+        $data = HomeBanner::where('image', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.banner.home', compact('data'));
     }
 }

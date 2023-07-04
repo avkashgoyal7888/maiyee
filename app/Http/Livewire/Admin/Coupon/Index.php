@@ -13,7 +13,7 @@ class Index extends Component
     use WithPagination;
     protected $paginationTheme = 'bootstrap';
     public $search = '';
-    public $ac_id, $coupon_code, $coupon_value, $coupon_type, $user_id, $quantity,$exp_date,$order_value,$type;
+    public $ac_id, $coupon_code, $coupon_value, $coupon_type, $user_id, $quantity, $exp_date, $order_value, $type;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -115,8 +115,8 @@ class Index extends Component
 
     public function render()
     {
-        $data = Coupon::where('coupon_code', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
+        $data = Coupon::where('coupon_code', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.coupon.index', compact('data'));
     }
 }

@@ -17,7 +17,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $pro_id,$category_id, $subcategory_id, $subcategories, $category, $name, $description, $mrp, $hsn_code, $gst_rate, $adminid, $discount, $style_code,$image;
+    public $pro_id, $category_id, $subcategory_id, $subcategories, $category, $name, $description, $mrp, $hsn_code, $gst_rate, $adminid, $discount, $style_code, $image;
     public function updatingSearch()
     {
         $this->resetPage();
@@ -33,7 +33,6 @@ class Index extends Component
         $this->category = Category::all();
         $this->subcategories = collect();
         $category_id = $this->category_id;
-
     }
 
     public function updateSubcategories()
@@ -44,8 +43,13 @@ class Index extends Component
     public function viewSubcategories()
     {
         $this->subcategories = SubCategory::where('cat_id', $this->category_id)->get();
-        if (!$this->category_id || ($this->subcategories->count() > 0 && !$this->subcategories->contains('id', 
-            $this->subcategory_id))) {
+        if (
+            !$this->category_id || ($this->subcategories->count() > 0 && !$this->subcategories->contains(
+                'id',
+                $this->subcategory_id
+            )
+            )
+        ) {
             $this->subcategory_id = null;
         }
     }
@@ -96,32 +100,31 @@ class Index extends Component
 
     public function store()
     {
-            $validatedata = $this->validate();
+        $validatedata = $this->validate();
 
-                if ($this->image != null) {
-                $imageName = substr(uniqid(), 0, 9);
-                $imgpath = $this->image->getRealPath();
-                $image = Cloudinary::upload($imgpath, [
-                    'folder' => 'admin/product',
-                    'public_id' => $imageName,
-                ])->getSecurePath();
-            }
-            $product = new Product;
-            $product->name = $this->name;
-            $product->description = $this->description;
-            $product->cat_id = $this->category_id;
-            $product->sub_id = $this->subcategory_id;
-            $product->mrp = $this->mrp;
-            $product->hsn_code = $this->hsn_code;
-            $product->gst_rate = $this->gst_rate;
-            $product->discount = $this->discount;
-            $product->style_code = $this->style_code;
-            $product->image = $image;
-            $product->save();
-
-            $this->resetinputfields();
-            session()->flash('success', 'Congratulations !! Product Added Successfully...');
-            $this->emit('closemodal');
+        if ($this->image != null) {
+            $imageName = substr(uniqid(), 0, 9);
+            $imgpath = $this->image->getRealPath();
+            $image = Cloudinary::upload($imgpath, [
+                'folder' => 'admin/product',
+                'public_id' => $imageName,
+            ])->getSecurePath();
+        }
+        $product = new Product;
+        $product->name = $this->name;
+        $product->description = $this->description;
+        $product->cat_id = $this->category_id;
+        $product->sub_id = $this->subcategory_id;
+        $product->mrp = $this->mrp;
+        $product->hsn_code = $this->hsn_code;
+        $product->gst_rate = $this->gst_rate;
+        $product->discount = $this->discount;
+        $product->style_code = $this->style_code;
+        $product->image = $image;
+        $product->save();
+        $this->resetinputfields();
+        session()->flash('success', 'Congratulations !! Product Added Successfully...');
+        $this->emit('closemodal');
     }
 
     public function editProduct($id)
@@ -140,33 +143,30 @@ class Index extends Component
             $this->style_code = $product->style_code;
             $this->image = $product->image;
             $this->viewSubcategories();
-
         } else {
             return redirect()->to('/admin/products');
         }
-
     }
 
     public function updateProduct()
     {
         $validatedata = $this->validate();
         $sub = Product::find($this->pro_id);
-    
+
         if ($this->image instanceof \Illuminate\Http\UploadedFile) {
-            if($sub->image) {
+            if ($sub->image) {
                 $publicId = pathinfo($sub->image)['filename'];
                 Cloudinary::destroy("admin/product/{$publicId}");
             }
-                $imageName = substr(uniqid(), 0, 9);
-                $imagepath = $this->image->getRealPath();
-                $image = Cloudinary::upload($imagepath, [
-                    'folder' => 'admin/product',
-                    'public_id' => $imageName,
-                ])->getSecurePath();
+            $imageName = substr(uniqid(), 0, 9);
+            $imagepath = $this->image->getRealPath();
+            $image = Cloudinary::upload($imagepath, [
+                'folder' => 'admin/product',
+                'public_id' => $imageName,
+            ])->getSecurePath();
         } else {
             $image = $sub->image;
         }
-
         $sub->name = $this->name;
         $sub->description = $this->description;
         $sub->cat_id = $this->category_id;
@@ -178,7 +178,6 @@ class Index extends Component
         $sub->style_code = $this->style_code;
         $sub->image = $image;
         $sub->update();
-    
         $this->resetinputfields();
         session()->flash('success', 'Product Updated Successfully...');
         $this->emit('closemodal');
@@ -189,7 +188,6 @@ class Index extends Component
         $product = Product::find($id);
         if ($product) {
             $this->pro_id = $product->id;
-
         } else {
             return redirect()->to('/admin/product');
         }
@@ -200,7 +198,7 @@ class Index extends Component
         $pro = Product::Where('id', $this->pro_id)->first();
         if ($pro->image != null) {
             $publicId = pathinfo($pro->image)['filename'];
-                Cloudinary::destroy("admin/product/{$publicId}");
+            Cloudinary::destroy("admin/product/{$publicId}");
         }
         $pro->delete();
         $this->resetinputfields();
@@ -210,8 +208,8 @@ class Index extends Component
 
     public function render()
     {
-        $data = Product::where('name', 'like', '%'.$this->search.'%')->orWhere('style_code','like','%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
-        return view('livewire.admin.product.index', ['data'=>$data]);
+        $data = Product::where('name', 'like', '%' . $this->search . '%')->orWhere('style_code', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
+        return view('livewire.admin.product.index', ['data' => $data]);
     }
 }

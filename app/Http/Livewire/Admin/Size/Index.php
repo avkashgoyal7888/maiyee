@@ -18,7 +18,7 @@ class Index extends Component
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';
     public $search;
-    public $size_id,$category_id, $subcategory_id, $subcategories, $category, $size, $product_id,$product, $color, $color_id,$quantity, $remarks;
+    public $size_id, $category_id, $subcategory_id, $subcategories, $category, $size, $product_id, $product, $color, $color_id, $quantity, $remarks;
     public $fields = [
         ['size' => ''],
     ];
@@ -101,30 +101,27 @@ class Index extends Component
             'product_id' => 'required',
             'color_id' => 'required',
             'fields.*.size' => 'required',
-        ],[
-            'category_id.required' => 'Select Category first.....',
-            'color_id.required' => 'Select Color first.....',
-            'subcategory_id.required' => 'Select Sub-Category first.....',
-            'product_id.required' => 'Select Product first.....',
-            'fields.*.size.required' => 'Size Name is required',
-        ]);
-    
+        ], [
+                'category_id.required' => 'Select Category first.....',
+                'color_id.required' => 'Select Color first.....',
+                'subcategory_id.required' => 'Select Sub-Category first.....',
+                'product_id.required' => 'Select Product first.....',
+                'fields.*.size.required' => 'Size Name is required',
+            ]);
+
         foreach ($validatedData['fields'] as $key => $value) {
-                $data = [
-                    'product_id' => $validatedData['product_id'],
-                    'color_id' => $validatedData['color_id'],
-                    'size' => $value['size'],
-                ];
-                Size::create($data);
-            }
-    
+            $data = [
+                'product_id' => $validatedData['product_id'],
+                'color_id' => $validatedData['color_id'],
+                'size' => $value['size'],
+            ];
+            Size::create($data);
+        }
+
         $this->resetInputFields();
         session()->flash('success', 'Congratulations !! Size Added Successfully...');
         $this->emit('closemodal');
     }
-
-
-
 
     public function editSize($id)
     {
@@ -132,11 +129,9 @@ class Index extends Component
         if ($store) {
             $this->size_id = $store->id;
             $this->size = $store->size;
-
         } else {
             return redirect()->to('/admin/size');
         }
-
     }
 
     public function addInventoryData($id)
@@ -147,7 +142,6 @@ class Index extends Component
         } else {
             return redirect()->to('/admin/size');
         }
-
     }
 
     public function addInventory()
@@ -156,7 +150,7 @@ class Index extends Component
             'quantity' => 'required',
             'remarks' => 'required',
         ]);
-        $size = Size::where('id',$this->size_id)->first();
+        $size = Size::where('id', $this->size_id)->first();
         $data = new Inventory();
         $data->product_id = $size->product_id;
         $data->color_id = $size->color_id;
@@ -178,7 +172,7 @@ class Index extends Component
             'quantity' => 'required',
             'remarks' => 'required',
         ]);
-        $size = Size::where('id',$this->size_id)->first();
+        $size = Size::where('id', $this->size_id)->first();
         $data = new Inventory();
         $data->product_id = $size->product_id;
         $data->color_id = $size->color_id;
@@ -210,7 +204,6 @@ class Index extends Component
         $size = Size::find($id);
         if ($size) {
             $this->size_id = $size->id;
-
         } else {
             return redirect()->to('/admin/size');
         }
@@ -227,9 +220,9 @@ class Index extends Component
 
     public function render()
     {
-        $data = Size::whereHas('product', function($query){
-            $query->where('name','like','%'.$this->search.'%');
+        $data = Size::whereHas('product', function ($query) {
+            $query->where('name', 'like', '%' . $this->search . '%');
         })->orderByDesc('id')->paginate(10);
-        return view('livewire.admin.size.index', ['data'=>$data]);
+        return view('livewire.admin.size.index', ['data' => $data]);
     }
 }

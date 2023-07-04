@@ -37,13 +37,9 @@ class Index extends Component
     public function store()
     {
         $validatedata = $this->validate();
-
         $state = new State;
-
         $state->state_name = $this->state_name;
-
         $state->save();
-
         $this->resetinputfields();
         session()->flash('success', 'State Added Successfully...');
         $this->emit('closemodal');
@@ -55,11 +51,9 @@ class Index extends Component
         if ($state) {
             $this->state_id = $state->id;
             $this->state_name = $state->state_name;
-
         } else {
             return redirect()->to('/admin/states');
         }
-
     }
 
     public function update()
@@ -68,11 +62,9 @@ class Index extends Component
         State::Where('id', $this->state_id)->update([
             'state_name' => $this->state_name,
         ]);
-
         $this->resetinputfields();
         session()->flash('success', 'State Updated Successfully...');
         $this->emit('closemodal');
-
     }
 
     public function deleteState($id)
@@ -80,7 +72,6 @@ class Index extends Component
         $state = State::find($id);
         if ($state) {
             $this->state_id = $state->id;
-
         } else {
             return redirect()->to('/admin/state');
         }
@@ -96,8 +87,8 @@ class Index extends Component
     }
     public function render()
     {
-        $data = State::where('state_name', 'like', '%'.$this->search.'%')
-                        ->orderByDesc('id')->paginate(10);
-        return view('livewire.admin.state.index', ['data'=>$data]);
+        $data = State::where('state_name', 'like', '%' . $this->search . '%')
+            ->orderByDesc('id')->paginate(10);
+        return view('livewire.admin.state.index', ['data' => $data]);
     }
 }
