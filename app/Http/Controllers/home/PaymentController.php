@@ -17,6 +17,11 @@ use Auth;
 use Validator;
 use DB;
 use Session;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Mail;
+use PDF;
 
 class PaymentController extends Controller
 {
@@ -47,7 +52,7 @@ class PaymentController extends Controller
             'phone' => $phone,
             'surl' => route('web.success'),
             'furl' => route('web.fail'),
-            'curl' => route('web.success'),
+            'curl' => route('web.cancel'),
             'hash' => '',
         ];
         $hashSequence = $merchantKey . '|' . $params['txnid'] . '|' . $params['amount'] . '|' . $params['productinfo'] . '|' . $params['firstname'] . '|' . $params['email'] . '|||||||||||' . $merchantSalt;
@@ -180,6 +185,40 @@ class PaymentController extends Controller
                     Cart::where('user_id', $order->user_id)->delete();
                 }
 
+                $orderCoupon = Order::where('order_id', $ref)->first();
+                $invoice = mt_rand(11111111, 99999999);
+                if ($orderCoupon->coupon_code != '') {
+                    Coupon::where('coupon_code', $orderCoupon->coupon_code)->delete();
+                }
+                $orderCoupon->invoice_num = $invoice;
+                $orderCoupon->update();
+                $orderd = OrderDetail::where('order_id', $orderCoupon->order_id)->get();
+                $pdf = PDF::loadView('front.billing.invoice', ['orderCoupon' => $orderCoupon->toArray(), 'orderd' => $orderd]);
+                $pdf->setPaper('A4', 'portrait');
+                $filename = 'tutsmake.pdf';
+                $directory = storage_path('app/temp');
+                if (!File::exists($directory)) {
+                    File::makeDirectory($directory, 0755, true);
+                }
+                $tempFilePath = storage_path('app/temp/' . $filename);
+                $pdf->save($tempFilePath);
+                $cloudinaryUpload = Cloudinary::upload($tempFilePath, [
+                    'folder' => 'pdfs',
+                    'public_id' => 'order_' . $orderCoupon->order_id,
+                ]);
+                $pdfUrl = $cloudinaryUpload->getSecurePath();
+                $orderCoupon->invoice_file = $pdfUrl;
+                $orderCoupon->invoice_num = $invoice;
+                $orderCoupon->update();
+                $email = 'kumaraneesh600@gmail.com';
+                $subject = 'Order Invoice';
+                $data = ['orderCoupon' => $orderCoupon->toArray()];
+                Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
+                    $message->to($email)
+                        ->subject($subject)
+                        ->attach($tempFilePath, ['as' => 'invoice.pdf']);
+                });
+                File::delete($tempFilePath);
             }
         }
         $cartNav = Cart::get();

@@ -14,6 +14,11 @@ use App\Models\Coupon;
 use Auth;
 use Validator;
 use DB;
+use PDF;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
+use Mail;
 
 class ShiprocketController extends Controller
 {
@@ -298,9 +303,54 @@ class ShiprocketController extends Controller
                 if ($response->getStatusCode() == 200) {
                     Cart::where('user_id', Auth::guard('web')->user()->id)->delete();
                     $orderCoupon = Order::where('order_id', $order->order_id)->first();
+                    $invoice = mt_rand(11111111, 99999999);
                     if ($orderCoupon->coupon_code != '') {
                         Coupon::where('coupon_code', $orderCoupon->coupon_code)->delete();
                     }
+                    $orderCoupon->invoice_num = $invoice;
+                    $orderCoupon->update();
+                    $orderd = OrderDetail::where('order_id', $orderCoupon->order_id)->get();
+                    $pdf = PDF::loadView('front.billing.invoice', ['orderCoupon' => $orderCoupon->toArray(), 'orderd' => $orderd]);
+                    $pdf->setPaper('A4', 'portrait');
+                    $filename = 'tutsmake.pdf';
+
+                    // Create the directory if it doesn't exist
+                    $directory = storage_path('app/temp');
+                    if (!File::exists($directory)) {
+                        File::makeDirectory($directory, 0755, true);
+                    }
+
+                    // Generate the PDF and save it to a file
+                    $tempFilePath = storage_path('app/temp/' . $filename);
+                    $pdf->save($tempFilePath);
+
+                    // Upload the PDF file to Cloudinary
+                    $cloudinaryUpload = Cloudinary::upload($tempFilePath, [
+                        'folder' => 'pdfs',
+                        'public_id' => 'order_' . $orderCoupon->order_id,
+                    ]);
+
+                    // Retrieve the Cloudinary URL of the uploaded PDF
+                    $pdfUrl = $cloudinaryUpload->getSecurePath();
+
+                    // Update the order with the PDF URL
+                    $orderCoupon->invoice_file = $pdfUrl;
+                    $orderCoupon->invoice_num = $invoice;
+                    $orderCoupon->update();
+
+                    $email = 'kumaraneesh600@gmail.com';
+                    $subject = 'Order Invoice';
+                    $data = ['orderCoupon' => $orderCoupon->toArray()];
+
+                    Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
+                        $message->to($email)
+                            ->subject($subject)
+                            ->attach($tempFilePath, ['as' => 'invoice.pdf']);
+                    });
+
+                    // Delete the temporary file
+                    File::delete($tempFilePath);
+
                     return response()->json(['status' => true, 'msg' => 'Order Successfully....']);
                 } else {
                     return response()->json(['status' => false, 'msg' => 'Something went wrong, try again later.....']);
@@ -584,13 +634,42 @@ class ShiprocketController extends Controller
                     ],
                     'json' => $orderData,
                 ]);
-
                 if ($response->getStatusCode() == 200) {
                     BuyNow::where('user_id', Auth::guard('web')->user()->id)->delete();
                     $orderCoupon = Order::where('order_id', $order->order_id)->first();
+                    $invoice = mt_rand(11111111, 99999999);
                     if ($orderCoupon->coupon_code != '') {
                         Coupon::where('coupon_code', $orderCoupon->coupon_code)->delete();
                     }
+                    $orderCoupon->invoice_num = $invoice;
+                    $orderCoupon->update();
+                    $orderd = OrderDetail::where('order_id', $orderCoupon->order_id)->get();
+                    $pdf = PDF::loadView('front.billing.invoice', ['orderCoupon' => $orderCoupon->toArray(), 'orderd' => $orderd]);
+                    $pdf->setPaper('A4', 'portrait');
+                    $filename = 'tutsmake.pdf';
+                    $directory = storage_path('app/temp');
+                    if (!File::exists($directory)) {
+                        File::makeDirectory($directory, 0755, true);
+                    }
+                    $tempFilePath = storage_path('app/temp/' . $filename);
+                    $pdf->save($tempFilePath);
+                    $cloudinaryUpload = Cloudinary::upload($tempFilePath, [
+                        'folder' => 'pdfs',
+                        'public_id' => 'order_' . $orderCoupon->order_id,
+                    ]);
+                    $pdfUrl = $cloudinaryUpload->getSecurePath();
+                    $orderCoupon->invoice_file = $pdfUrl;
+                    $orderCoupon->invoice_num = $invoice;
+                    $orderCoupon->update();
+                    $email = 'kumaraneesh600@gmail.com';
+                    $subject = 'Order Invoice';
+                    $data = ['orderCoupon' => $orderCoupon->toArray()];
+                    Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
+                        $message->to($email)
+                            ->subject($subject)
+                            ->attach($tempFilePath, ['as' => 'invoice.pdf']);
+                    });
+                    File::delete($tempFilePath);
                     return response()->json(['status' => true, 'msg' => 'Order Successfully....']);
                 } else {
                     return response()->json(['status' => false, 'msg' => 'Something went wrong, try again later.....']);
