@@ -44,7 +44,7 @@
                         <td> {{ $key +1 }} </td>
                         <td>{{ ucwords($pros->product->style_code) }}</td>
                         <td><button class="btn btn-lg" style="background-color: {{ $pros->color->code }};"></button></td>
-                        <td><img src="{{ asset('admin/color/' . $pros->color->image) }}" width="100" height="100" /></td>
+                        <td><img src="{{ $pros->color->image }}" width="100" height="100" /></td>
                         <td>{{ strtoupper($pros->size) }}</td>
                         <td>{{ strtoupper($pros->quantity) }}</td>
                         <td><button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addInventory" wire:click="addInventoryData({{$pros->id}})">++</button>&nbsp;&nbsp; <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#removeInventory" wire:click="addInventoryData({{$pros->id}})">--</button></td>
