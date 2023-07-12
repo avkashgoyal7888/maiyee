@@ -98,7 +98,9 @@ class Bashproducts extends Component
 
     public function render()
     {
-        $data = BadgeProduct::where('bash_id', 'like', '%' . $this->search . '%')->orderByDesc('id')->paginate(10);
+        $data = BadgeProduct::whereHas('product', function ($query) {
+            $query->where('style_code', 'like', '%' . $this->search . '%');
+        })->orderByDesc('id')->paginate(10);
         $products = Product::get();
         $bash = Bash::get();
         return view('livewire.admin.bash.bashproducts', compact('data', 'products', 'bash'));

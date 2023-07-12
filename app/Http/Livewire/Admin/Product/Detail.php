@@ -217,8 +217,9 @@ class Detail extends Component
 
     public function render()
     {
-        $data = ProductDetail::where('fabric_care', 'like', '%' . $this->search . '%')
-            ->orderByDesc('id')->paginate(10);
+        $data = ProductDetail::whereHas('product', function ($query) {
+            $query->where('style_code', 'like', '%' . $this->search . '%');
+        })->orderByDesc('id')->paginate(10);
         return view('livewire.admin.product.detail', compact('data'));
     }
 }

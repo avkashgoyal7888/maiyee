@@ -176,7 +176,7 @@ class Index extends Component
     public function render()
     {
         $data = Color::whereHas('product', function ($query) {
-            $query->where('name', 'like', '%' . $this->search . '%');
+            $query->where('style_code', 'like', '%' . $this->search . '%');
         })->orderByDesc('id')->paginate(10);
         return view('livewire.admin.color.index', ['data' => $data]);
     }

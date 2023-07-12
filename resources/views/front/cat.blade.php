@@ -40,7 +40,7 @@
                            <a href="#;" class="site-nav">{{$categories->cat_name}}</a>
                            <ul class="sublinks">
                               @foreach($sub->where('cat_id', $categories->id) as $subs)
-                              <li class="level2"><a href="{{route('front.cat',$subs->id)}}" class="site-nav">{{$subs->sub_name}}</a></li>
+                              <li class="level2"><a href="{{route('front.sub',$subs->id)}}" class="site-nav">{{$subs->sub_name}}</a></li>
                               @endforeach
                            </ul>
                         </li>

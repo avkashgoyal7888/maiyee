@@ -38,7 +38,7 @@
                <tr>
                   <td>{{ $key + 1 }}</td>
                   <td>{{ ucwords($product->bash->name) }}</td>
-                  <td>{{ ucwords($product->product->name) }}</td>
+                  <td>{{ ucwords($product->product->style_code) }}</td>
                   <td style="font-size: 20px">
                      <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete" wire:click="deleteBashProduct({{$product->id}})"><i class="fas fa-trash"></i></button>
                   </td>

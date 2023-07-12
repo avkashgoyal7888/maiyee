@@ -202,6 +202,7 @@
                                     <option value="2XL">2XL</option>
                                     <option value="3XL">3XL</option>
                                     <option value="4XL">4XL</option>
+                                    <option value="5XL">5XL</option>
                                  </select>
                               </div>
                               <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
@@ -212,11 +213,6 @@
                            </div>
                            @error('size')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <!-- <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Image</label>
-                           <input type="file" class="form-control" placeholder="Enter Size" wire:model='image' accept="image/*">
-                           @error('image')<span class="text-danger">{{$message}}</span>@enderror
-                           </div> -->
                      </div>
                   </div>
                   <div class="modal-footer">
@@ -254,14 +250,10 @@
                               <option value="2XL">2XL</option>
                               <option value="3XL">3XL</option>
                               <option value="4XL">4XL</option>
+                              <option value="5XL">5XL</option>
                            </select>
                            @error('size')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
-                        <!-- <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Image</label>
-                           <input type="file" class="form-control" wire:model='image'>
-                           @error('image')<span class="text-danger">{{$message}}</span>@enderror
-                           </div> -->
                      </div>
                   </div>
                   <div class="modal-footer">

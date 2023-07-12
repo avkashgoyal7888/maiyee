@@ -46,7 +46,7 @@
    <!--Breadcrumb-->
    <div class="bredcrumbWrap">
       <div class="container breadcrumbs">
-         <a href="index.html" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Product Details</span>
+         <a href="{{route('web.home')}}" title="Back to the home page">Home</a><span aria-hidden="true">›</span><span>Product Details</span>
       </div>
    </div>
    <!--End Breadcrumb-->
@@ -86,7 +86,7 @@
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                <div class="product-single__meta">
-                  <h1 class="product-single__title">{{$product->name}} <a href="#" class="float-right" onclick="copyToClipboard('{{ route('web.product.detail', $product->id) }}')"><i class="fas fa-copy"></a></h1>
+                  <h1 class="product-single__title">{{$product->name}} <a href="#" class="float-right" onclick="copyToClipboard('{{ route('web.product.detail', $product->id) }}')">Copy Link</a></h1>
                   <div class="prInfoRow">
                      <div class="product-sku">SKU: <span class="variant-sku">{{$product->style_code}}</span></div>
                      <div class="product-review">

@@ -208,7 +208,8 @@ class Index extends Component
 
     public function render()
     {
-        $data = Product::where('name', 'like', '%' . $this->search . '%')->orWhere('style_code', 'like', '%' . $this->search . '%')
+        $data = Product::where('name', 'like', '%' . $this->search . '%')
+        ->orWhere('style_code', 'like', '%' . $this->search . '%')
             ->orderByDesc('id')->paginate(10);
         return view('livewire.admin.product.index', ['data' => $data]);
     }

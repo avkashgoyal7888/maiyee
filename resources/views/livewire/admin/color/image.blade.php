@@ -39,7 +39,7 @@
                      @forelse($data as $key => $pros)
                      <tr>
                         <td> {{ $key +1 }} </td>
-                        <td>{{ ucwords($pros->product->name) }}</td>
+                        <td>{{ ucwords($pros->product->style_code) }}</td>
                         <td><button class="btn btn-lg" style="background-color: {{ $pros->color->code }};"></button></td>
                         <td width="60%"><img src="{{$pros->image}}" width="300" height="100" /></td>
                         <td>

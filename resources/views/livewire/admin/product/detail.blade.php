@@ -39,7 +39,7 @@
                      @forelse($data as $key => $pros)
                      <tr>
                         <td> {{ $key +1 }} </td>
-                        <td>{{ ucwords($pros->product->name) }}</td>
+                        <td>{{ ucwords($pros->product->style_code) }}</td>
                         <td>{{ ucwords($pros->ideal) }}</td>
                         <td> {{ ucwords($pros->brand_color) }} </td>
                         <td>
