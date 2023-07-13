@@ -59,6 +59,7 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::get('/inventory', function(){ return view('admin.inventory.index'); })->name('admin.inventory');
 	Route::get('/return', function(){ return view('admin.exchange.return'); })->name('admin.return');
 	Route::get('/replace', function(){ return view('admin.exchange.replace'); })->name('admin.replace');
+	Route::get('/wardrobe', function(){ return view('admin.wardrobe.index'); })->name('admin.wardrobe');
 });
 
 

@@ -25,6 +25,7 @@ use App\Models\exhibition;
 use App\Models\WishList;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Wardrobe;
 use App\Models\Visitor;
 use Validator;
 use Hash;
@@ -83,8 +84,6 @@ class HomeController extends Controller
         $product->size = $size;
         return response()->json($product);
     }
-
-
 
     public function register()
     {
@@ -160,6 +159,22 @@ class HomeController extends Controller
         $cat = Category::get();
         $ex = exhibition::get();
         return view('front.exhibition', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'ex'));
+    }
+
+    public function wardrobe()
+    {
+        $cartNav = Cart::get();
+        $cartTotalnav = 0;
+        $cartCount = 0;
+        if (Auth::guard('web')->check()) {
+            $cartNav = Cart::where('user_id', Auth::guard('web')->user()->id)->latest()->limit(2)->get();
+            $cartCount = Cart::where('user_id', Auth::guard('web')->user()->id)->count();
+            $cartTotalnav = $cartNav->sum('total');
+        }
+        $nav = Head::first();
+        $cat = Category::get();
+        $wardrobes = Wardrobe::get();
+        return view('front.wardrobe', compact('cartNav', 'cartTotalnav', 'cartCount', 'nav', 'cat', 'wardrobes'));
     }
 
     public function refund()

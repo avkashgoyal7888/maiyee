@@ -25,6 +25,7 @@ use Illuminate\Http\Request;
 		Route::get('/about-us', 'about')->name('web.about');
 		Route::get('/policy', 'policy')->name('web.policy');
 		Route::get('/exhibition', 'exhibition')->name('web.exhibition');
+		Route::get('/wardrobe', 'wardrobe')->name('web.wardrobe');
 		Route::get('/refund', 'refund')->name('web.refund');
 		Route::get('/shipping', 'shipping')->name('web.shipping');
 		Route::get('/product-detail/{id}', 'productDetail')->name('web.product.detail');

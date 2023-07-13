@@ -46,6 +46,12 @@
                </ul>
             </li>
             <li>
+               <a href="{{route('admin.wardrobe')}}">
+               <i class="bx bx-home-circle nav-icon"></i>
+               <span class="menu-item" data-key="t-dashboard">Wardrobe</span>
+               </a>
+            </li>
+            <li>
                <a href="{{route('admin.coupon')}}">
                <i class="bx bx-home-circle nav-icon"></i>
                <span class="menu-item" data-key="t-dashboard">Coupon</span>
