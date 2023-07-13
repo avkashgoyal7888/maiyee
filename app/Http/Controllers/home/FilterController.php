@@ -8,9 +8,21 @@ use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
 use DB;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class FilterController extends Controller
 {
+    public function generate() {
+        $qrCodes = [];
+        $qrCodes['simple'] = QrCode::size(120)->generate('https://www.maiyee.in/');
+        $qrCodes['changeColor'] = QrCode::size(120)->color(255, 0, 0)->generate('https://www.maiyee.in/');
+        $qrCodes['changeBgColor'] = QrCode::size(120)->backgroundColor(255, 0, 0)->generate('https://www.maiyee.in/');
+         
+        $qrCodes['styleDot'] = QrCode::size(120)->style('dot')->generate('https://www.maiyee.in/');
+        $qrCodes['styleSquare'] = QrCode::size(120)->style('square')->generate('https://www.maiyee.in/');
+        $qrCodes['styleRound'] = QrCode::size(120)->style('round')->generate('https://www.maiyee.in/');
+        return view('qr-codes', $qrCodes);
+    }
 
     public function filterByPriceCat(Request $request)
     {

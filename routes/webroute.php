@@ -41,6 +41,7 @@ use Illuminate\Http\Request;
 	Route::controller(FilterController::class)->group(function(){
 		Route::get('/filterbypricecat','filterByPriceCat')->name('filter.by.price.cat');
 		Route::get('/filterbypricesub','filterByPriceSub')->name('filter.by.price.sub');
+		Route::get('/qrcode','generate');
 	});
 
 	Route::controller(ForgetPasswordController::class)->group(function(){
