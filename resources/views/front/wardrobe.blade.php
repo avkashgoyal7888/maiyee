@@ -37,7 +37,7 @@
    cursor: pointer;
    border: 2px solid #a64dff;
    position: fixed
-   z-index: 99;
+   z-index: 1;
 
 }
 
