@@ -19,7 +19,7 @@
    <div class="home-slideshow">
       <div class="slide">
          <div class="blur-up lazyload">
-            <img class="blur-up lazyload" src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" />
+            <img class="blur-up lazyload" src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1689315182/Untitled_design-removebg-preview_1.png" />
          </div>
       </div>
    </div>
@@ -48,9 +48,9 @@
          @foreach($wardrobes as $wardrobes)
          <div class="col-lg-2 col-md-3 col-sm-6 col-6">
             <div class="product-image" style="text-align: center; position: relative;">
-               <p class="style-code"></p>
+               <p class="style-code" style="font-weight: bold; color:black">{{$wardrobes->style_code}}</p>
                <img src="{{$wardrobes->image}}" class="h-50 wardrobe-image">
-               <h4 class="mt-2">{{$wardrobes->style_code}}</h4>
+               <h4 class="mt-2">{{$wardrobes->remark}}</h4>
             </div>
          </div>
          @endforeach
