@@ -11,6 +11,16 @@
    font-weight: bold;
 }
 
+.wardrobe-image:hover{
+   transition: transform .2s;
+   transform: scale(1.8);
+   cursor: pointer;
+   border: 2px solid #a64dff;
+   position: relative;
+   z-index: 1;
+
+}
+
 </style>
 @stop
 @section('content')
@@ -30,18 +40,7 @@
             </div>
         </div>
 <!-- Parallax Section -->
-<style>
-.wardrobe-image:hover{
-   transition: transform .2s;
-   transform: scale(1.8);
-   cursor: pointer;
-   border: 2px solid #a64dff;
-   position: relative;
-   z-index: 1;
 
-}
-
-</style>
 <div class="container">
    <div class="grid-products">
       <div class="row">
