@@ -31,9 +31,7 @@
         </div>
 <!-- Parallax Section -->
 <style>
-.wardrobe-image{
-   z-index: -1;
-}
+
 .wardrobe-image:hover{
    position: absolute;
    transition: transform .2s;
