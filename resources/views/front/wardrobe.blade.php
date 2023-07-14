@@ -35,7 +35,7 @@
    transition: transform .2s;
    transform: scale(1.2);
    cursor: pointer;
-   border: 2px solid #000;
+   border: 2px solid #a64dff;
 
 }
 
