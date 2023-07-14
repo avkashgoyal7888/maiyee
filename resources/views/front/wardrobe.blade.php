@@ -35,6 +35,7 @@
    z-index: -1;
 }
 .wardrobe-image:hover{
+   position: absolute;
    transition: transform .2s;
    transform: scale(1.8);
    cursor: pointer;
