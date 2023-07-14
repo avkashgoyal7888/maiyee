@@ -36,7 +36,7 @@
    transform: scale(1.8);
    cursor: pointer;
    border: 2px solid #a64dff;
-   z-index: 999;
+   z-index: 1;
 
 }
 
