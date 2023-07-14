@@ -33,8 +33,9 @@
 <style>
 .wardrobe-image:hover{
    transition: transform .2s;
-   transform: scale(1.1);
+   transform: scale(1.2);
    cursor: pointer;
+   border: 2px solid #000;
 
 }
 
