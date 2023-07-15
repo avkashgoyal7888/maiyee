@@ -47,8 +47,7 @@
          @foreach($wardrobes as $wardrobes)
          <div class="col-lg-2 col-md-3 col-sm-6 col-6">
             <div class="product-image" style="text-align: center; position: relative;">
-               <p class="style-code" style="font-weight: bold; color:black; writing-mode: vertical-rl;">{{$wardrobes->style_code}}</p>
-               <p>1<br>Z<br>T<br>L<br>0</p>
+               <p class="style-code" style="font-weight: bold; color:black; position:absolute; bottom:10;">{{$wardrobes->style_code}}</p>
                <img src="{{$wardrobes->image}}" class="h-50 wardrobe-image">
                <h4 class="mt-2">{{$wardrobes->remarks}}</h4>
             </div>
