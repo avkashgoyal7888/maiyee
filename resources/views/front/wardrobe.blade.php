@@ -49,7 +49,7 @@
             <div class="product-image" style="text-align: center; position: relative;">
                <p class="style-code" style="font-weight: bold; color:black">{{$wardrobes->style_code}}</p>
                <img src="{{$wardrobes->image}}" class="h-50 wardrobe-image">
-               <h4 class="mt-2">{{$wardrobes->remark}}</h4>
+               <h4 class="mt-2">{{$wardrobes->remarks}}</h4>
             </div>
          </div>
          @endforeach

@@ -102,10 +102,10 @@ class ForgetPasswordController extends Controller
             $err = curl_error($curl);
             curl_close($curl);
 
-            Mail::send('front.auth.forgetemail', ['token' => $token], function ($message) use ($req, $user) {
-                $message->to($user->email);
-                $message->subject('Reset Password');
-            });
+            // Mail::send('front.auth.forgetemail', ['token' => $token], function ($message) use ($req, $user) {
+            //     $message->to($user->email);
+            //     $message->subject('Reset Password');
+            // });
 
             if ($pass) {
                 session()->put(['user_id' => $user->id, 'email' => $emailOrContact, 'token' => $token]);

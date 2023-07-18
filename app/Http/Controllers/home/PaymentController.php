@@ -213,11 +213,11 @@ class PaymentController extends Controller
                 $email = 'kumaraneesh600@gmail.com';
                 $subject = 'Order Invoice';
                 $data = ['orderCoupon' => $orderCoupon->toArray()];
-                Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
-                    $message->to($email)
-                        ->subject($subject)
-                        ->attach($tempFilePath, ['as' => 'invoice.pdf']);
-                });
+                // Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
+                //     $message->to($email)
+                //         ->subject($subject)
+                //         ->attach($tempFilePath, ['as' => 'invoice.pdf']);
+                // });
                 File::delete($tempFilePath);
             }
         }

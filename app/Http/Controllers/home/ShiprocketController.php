@@ -342,11 +342,11 @@ class ShiprocketController extends Controller
                     $subject = 'Order Invoice';
                     $data = ['orderCoupon' => $orderCoupon->toArray()];
 
-                    Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
-                        $message->to($email)
-                            ->subject($subject)
-                            ->attach($tempFilePath, ['as' => 'invoice.pdf']);
-                    });
+                    // Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
+                    //     $message->to($email)
+                    //         ->subject($subject)
+                    //         ->attach($tempFilePath, ['as' => 'invoice.pdf']);
+                    // });
 
                     // Delete the temporary file
                     File::delete($tempFilePath);
@@ -664,11 +664,11 @@ class ShiprocketController extends Controller
                     $email = 'kumaraneesh600@gmail.com';
                     $subject = 'Order Invoice';
                     $data = ['orderCoupon' => $orderCoupon->toArray()];
-                    Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
-                        $message->to($email)
-                            ->subject($subject)
-                            ->attach($tempFilePath, ['as' => 'invoice.pdf']);
-                    });
+                    // Mail::send('admin.email.order-invoice', $data, function ($message) use ($email, $subject, $tempFilePath) {
+                    //     $message->to($email)
+                    //         ->subject($subject)
+                    //         ->attach($tempFilePath, ['as' => 'invoice.pdf']);
+                    // });
                     File::delete($tempFilePath);
                     return response()->json(['status' => true, 'msg' => 'Order Successfully....']);
                 } else {
