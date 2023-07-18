@@ -15,7 +15,6 @@
    transition: transform .2s;
    transform: scale(1.8);
    cursor: pointer;
-   border: 2px solid #a64dff;
    position: relative;
    z-index: 1;
 
@@ -36,7 +35,7 @@
 </div>
         <div class="page section-header text-center">
             <div class="page-title">
-                <div class="wrapper"><h1 class="page-width">Wardrobe</h1></div>
+                <div class="wrapper"><h1 class="page-width">Maiyee Wardrobe</h1></div>
             </div>
         </div>
 <!-- Parallax Section -->
@@ -47,7 +46,7 @@
          @foreach($wardrobes as $wardrobes)
          <div class="col-lg-2 col-md-3 col-sm-6 col-6">
             <div class="product-image" style="text-align: center; position: relative;">
-               <p class="style-code" style="font-weight: bold; color:black">{{$wardrobes->style_code}}</p>
+               <p class="style-code" style="font-weight: bold; color:black; margin-top:190px;">{{$wardrobes->style_code}}</p>
                <img src="{{$wardrobes->image}}" class="h-50 wardrobe-image">
                <h4 class="mt-2">{{$wardrobes->remarks}}</h4>
             </div>
