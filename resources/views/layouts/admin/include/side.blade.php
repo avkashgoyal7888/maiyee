@@ -35,6 +35,16 @@
             </li>
             <li>
                <a href="javascript: void(0);" class="has-arrow">
+               <i class="bx bxl-product-hunt nav-icon"></i>
+               <span class="menu-item" data-key="t-ecommerce">My Links</span>
+               </a>
+               <ul class="sub-menu" aria-expanded="false">
+                  <li><a href="{{route('admin.linkcategory')}}" data-key="t-category"><i class="bx bx-hash nav-icon"></i>Link Category</a></li>
+                  <li><a href="{{route('admin.linkproduct')}}" data-key="t-category"><i class="bx bx-hash nav-icon"></i>Link Product</a></li>
+               </ul>
+            </li>
+            <li>
+               <a href="javascript: void(0);" class="has-arrow">
                <i class="bx bx-home-circle nav-icon"></i>
                <span class="menu-item" data-key="t-ecommerce">Banner</span>
                </a>

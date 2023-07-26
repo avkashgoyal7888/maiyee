@@ -10,7 +10,6 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class Index extends Component
 {
-
     use WithPagination;
     use WithFileUploads;
     protected $paginationTheme = 'bootstrap';

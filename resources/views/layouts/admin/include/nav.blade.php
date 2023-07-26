@@ -145,7 +145,7 @@
              hideMethod: "fadeOut",
              tapToDismiss: 0
            });
-           $('#image')[0].reset();
+           window.location.reload();
          } else {
            alertify.error(result.msg, "Message", {
              timeOut: 5000,

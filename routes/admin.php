@@ -60,6 +60,8 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::get('/return', function(){ return view('admin.exchange.return'); })->name('admin.return');
 	Route::get('/replace', function(){ return view('admin.exchange.replace'); })->name('admin.replace');
 	Route::get('/wardrobe', function(){ return view('admin.wardrobe.index'); })->name('admin.wardrobe');
+	Route::get('/link-category', function(){ return view('admin.linkcategory.index'); })->name('admin.linkcategory');
+	Route::get('/link-product', function(){ return view('admin.linkcategory.product'); })->name('admin.linkproduct');
 });
 
 
