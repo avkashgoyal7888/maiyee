@@ -134,37 +134,56 @@
    <!-- Add Modal end-->
    <!--  Edit Supplier Modal -->
    <div wire:ignore.self class="modal" id="edit" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-lg">
+      <div class="modal-dialog modal-xl">
          <div class="modal-content">
             <div class="modal-header">
                <h5 class="modal-title" id="myExtraLargeModalLabel">Edit Size</h5>
                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" wire:click="closemodal"></button>
             </div>
             <div class="modal-body">
-               <form wire:submit.prevent='updateSize()'>
+                              <form wire:submit.prevent='update()'>
                   <div class="modal-body">
                      <div class="row">
-                        <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
-                           <label for="nameExLarge" class="form-label">Size</label>
-                           <input type="hidden" wire:model='size_id'>
-                           <select class="form-control" wire:model="size">
-                              <option>Select A Size</option>
-                              <option value="XS">XS</option>
-                              <option value="S">S</option>
-                              <option value="M">M</option>
-                              <option value="L">L</option>
-                              <option value="XL">XL</option>
-                              <option value="2XL">2XL</option>
-                              <option value="3XL">3XL</option>
-                              <option value="4XL">4XL</option>
-                              <option value="5XL">5XL</option>
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Categories</label>
+                           <input type="hidden" wire:model='sub_id'>
+                           <select class="form-control" wire:model='link_id'>
+                              <option value="">Select Category</option>
+                              @foreach($category as $categ)
+                              <option value="{{$categ->id}}">{{$categ->name}}</option>
+                              @endforeach
                            </select>
-                           @error('size')<span class="text-danger">{{$message}}</span>@enderror
+                           @error('link_id')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Product Name</label>
+                                 <input type="text" class="form-control" wire:model="product_name">
+                           @error('product_name')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Style Code</label>
+                                 <input type="text" class="form-control" wire:model="style_code">
+                           @error('style_code')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">MRP</label>
+                                 <input type="text" class="form-control" wire:model="mrp">
+                           @error('mrp')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Selling Price</label>
+                                 <input type="text" class="form-control" wire:model="selling_price">
+                           @error('selling_price')<span class="text-danger">{{$message}}</span>@enderror
+                        </div>
+                        <div class="col-md-12 col-lg-6 col-sm-12 col-12 mb-3">
+                           <label for="nameExLarge" class="form-label">Image</label>
+                           <input type="file" class="form-control" wire:model='image'>
+                           @error('image')<span class="text-danger">{{$message}}</span>@enderror
                         </div>
                      </div>
                   </div>
                   <div class="modal-footer">
-                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal" wire:click="closemodal">Close</button>
                      <button type="submit" class="btn btn-success">Submit</button>
                   </div>
                </form>

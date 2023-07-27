@@ -110,7 +110,7 @@ class Products extends Component
                 $data->save();
         }
         $this->reset('link_id', 'product_name', 'style_code','mrp','selling_price','image', 'fields');
-        session()->flash('success', 'Sub-Category Added Successfully...');
+        session()->flash('success', 'Congratulations !! Added Successfully...');
         $this->emit('closemodal');
     }
 
@@ -156,7 +156,7 @@ class Products extends Component
         $link->image = $image;
         $link->update();
         $this->resetinputfields();
-        session()->flash('success', 'Sub-Category Updated Successfully...');
+        session()->flash('success', 'Congratulations !! Updated Successfully...');
         $this->emit('closemodal');
     }
 
