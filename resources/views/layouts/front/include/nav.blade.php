@@ -1,9 +1,9 @@
 <!--Promotion Bar-->
-<style>
+<!--<style>
     body  {
       background-image: linear-gradient(to right, rgba(166, 77, 255,0), rgba(146, 101, 191, 0.2));
     }
-    </style>
+    </style>-->
 <div class="notification-bar mobilehide">
     <a href="#" class="notification-bar__message">{{$nav->code}}</a>
     <span class="close-announcement">×</span>
