@@ -10,6 +10,7 @@ use App\Http\Controllers\home\ShiprocketController;
 use App\Http\Controllers\home\PaymentController;
 use App\Http\Controllers\home\OrderController;
 use App\Http\Controllers\home\FilterController;
+use App\Http\Controllers\home\LinkController;
 use Illuminate\Http\Request;
 	Route::controller(HomeController::class)->group(function(){
 		Route::get('/', 'index')->name('web.home');
@@ -93,6 +94,16 @@ use Illuminate\Http\Request;
 			Route::post('/apply-coupon-buy', 'applyCouponBuy')->name('web.apply.coupon.buy');
 			Route::get('/download-pdf', 'download')->name('download');
 		});
+	});
+
+	Route::controller(LinkController::class)->group(function(){
+		Route::get('/link-product', 'index')->name('link.home');
+		Route::get('/link-user/{id}','linkUserView')->name('link.user.view');
+		Route::get('/user-products/{id}','linkUserProductView')->name('link.user.product.view');
+		Route::post('/session', 'storeSelectedProducts')->name('store.product.session');
+		Route::get('/session-data', 'sessionData');
+		Route::get('/clear','clearSelectedProducts');
+		Route::post('/link-user-submit','linkUserSubmit')->name('link.user.submit');
 	});
 
 
