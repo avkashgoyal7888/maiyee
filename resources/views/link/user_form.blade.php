@@ -89,7 +89,7 @@ $(document).ready(function(){
                         progressBar: true,
                         closeButton: true
                     });
-                    window.location.href=result.data.location;
+                    // window.location.href=result.data.location;
                 }
             },
             error: function(jqXHR, exception) {

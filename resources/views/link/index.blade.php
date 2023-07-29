@@ -3,6 +3,17 @@
 <title>Link Product</title>
 @stop
 @section('content')
+<div class="slideshow slideshow-wrapper pb-section">
+   <div class="home-slideshow">
+      @foreach($banner as $banners)
+      <div class="slide">
+         <div class="blur-up lazyload">
+            <img class="blur-up lazyload" data-src="{{ $banners->image }}" src="{{ $banners->image }}" title="{{$banners->title}}" />
+         </div>
+      </div>
+      @endforeach
+   </div>
+</div>
 <div class="pb-section">
     <form id="session" action="{{ route('store.product.session') }}" method="POST">
         @csrf

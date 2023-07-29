@@ -62,6 +62,9 @@ use App\Http\Controllers\Admin\HomeController;
 	Route::get('/wardrobe', function(){ return view('admin.wardrobe.index'); })->name('admin.wardrobe');
 	Route::get('/link-category', function(){ return view('admin.linkcategory.index'); })->name('admin.linkcategory');
 	Route::get('/link-product', function(){ return view('admin.linkcategory.product'); })->name('admin.linkproduct');
+	Route::get('/link-banner', function(){ return view('admin.linkcategory.banner'); })->name('admin.linkbanner');
+	Route::get('/link-user', function(){ return view('admin.linkcategory.user'); })->name('admin.linkuser');
+	Route::get('/link-order/{id}', function(){ return view('admin.linkcategory.order'); })->name('admin.linkorder');
 });
 
 
