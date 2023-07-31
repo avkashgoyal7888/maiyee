@@ -43,7 +43,6 @@ use Illuminate\Http\Request;
 	Route::controller(FilterController::class)->group(function(){
 		Route::get('/filterbypricecat','filterByPriceCat')->name('filter.by.price.cat');
 		Route::get('/filterbypricesub','filterByPriceSub')->name('filter.by.price.sub');
-		Route::get('/qrcode','generate');
 	});
 
 	Route::controller(ForgetPasswordController::class)->group(function(){
@@ -104,6 +103,7 @@ use Illuminate\Http\Request;
 		Route::get('/session-data', 'sessionData');
 		Route::get('/clear','clearSelectedProducts');
 		Route::post('/link-user-submit','linkUserSubmit')->name('link.user.submit');
+		Route::get('/qrcode','generate');
 	});
 
 

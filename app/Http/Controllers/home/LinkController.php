@@ -12,9 +12,15 @@ use App\Models\LinkBanner;
 use Illuminate\Support\Str;
 use Session;
 use Validator;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class LinkController extends Controller
 {
+    public function generate() {
+        $qrCodes = QrCode::size(150)->generate('https://maiyee.in/link-product');
+        return $qrCodes;
+    }
+
     public function index(Request $request)
     {
         $cat = LinkCategory::get();
