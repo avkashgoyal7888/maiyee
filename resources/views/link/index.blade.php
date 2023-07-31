@@ -15,7 +15,7 @@
    </div>
 </div>
 <div class="pb-section">
-    <form id="session" action="{{ route('store.product.session') }}" method="POST">
+    <form id="session">
         @csrf
         @foreach($cat as $cats)
         <div class="">
@@ -32,9 +32,12 @@
                     @if($product->link_id == $cats->id)
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
                         <div class="product-image" style="text-align: center; position: relative;">
-                            <p class="style-code" style="font-weight: bold; color:black; margin-top:190px;">{{$product->style_code}}</p>
                             <img src="{{$product->image}}" class="h-50 wardrobe-image">
-                            <h4 class="mt-2">{{$product->product_name}}</h4>
+                            <h4 class="mt-2">
+    {{$product->product_name}}
+    <span class="style-code" style="font-weight: bold; color: black; margin-top: 190px;">({{$product->style_code}})</span>
+</h4>
+
                             <div class="product-price">
                                 <span class="old-price">₹{{$product->mrp}}</span>
                                 <span class="price">₹{{$product->selling_price}}</span>
@@ -56,10 +59,59 @@
             </div>
         </div>
     </form>
+    <div id="error-message" style="color: red;"></div>
 </div>
 @stop
 @section('js')
 <script>
-// Remove the previous JavaScript code since we no longer need it.
+$(document).ready(function(){
+    $('#session').on('submit', function(e) {
+        e.preventDefault(); // prevent default form submission
+        let fd = new FormData(this);
+        fd.append('_token', "{{ csrf_token() }}");
+ 
+        $.ajax({
+            url: "{{ route('store.product.session') }}",
+            type: "POST",
+            data: fd,
+            dataType: 'json',
+            processData: false,
+            contentType: false,
+            beforeSend: function() {
+                $('#addBtn').prop('disabled', true)
+                $('#loader').show();
+            },
+            success: function(result) {
+                if (result.status === false) {
+                    toastr.error(result.msg, 'Error', {
+                        timeOut: 1500,
+                        progressBar: true,
+                        closeButton: true
+                    });
+                } else if (result.status === true) {
+                    toastr.success(result.msg, 'Success', {
+                        timeOut: 500,
+                        progressBar: true,
+                        closeButton: true
+                    });
+                    window.location.href = result.redirectTo; // Update this line
+                }
+            },
+            error: function(jqXHR, exception) {
+                console.log(jqXHR.responseJSON);
+                toastr.error(result.msg, 'Error', {
+                    timeOut: 500,
+                    progressBar: true,
+                    closeButton: true
+                });
+            },
+            complete: function() {
+                $('#addBtn').prop('disabled', false);
+                $('#loader').hide();
+            }
+        });
+    });
+});
 </script>
+
 @stop

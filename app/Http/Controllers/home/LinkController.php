@@ -59,23 +59,27 @@ class LinkController extends Controller
         $val = Validator::make($request->all(), [
             'selected_products' => 'array|min:3|max:45',
             'selected_products.*' => 'exists:link_products,id',
-        ]);
-    
+        ],[
+            'selected_products.min' => 'Please select at least three products.',
+            'selected_products.max' => 'Please select at most forty-five products.',]);
+
         if ($val->fails()) {
             return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
-        } else {
-            $uniqueId = $request->input('uniqueId');
-            if ($uniqueId && $uniqueId === Session::get('selectedProducts.uniqueId')) {
-                return redirect()->route('link.user.view', ['uniqueId' => $uniqueId]);
-            }
-            $uniqueId = Str::uuid()->toString();
-            $selectedProducts = $request->input('selected_products', []);
-            Session::put('selectedProducts', $selectedProducts);
-            Session::put('selectedProducts.uniqueId', $uniqueId);
-    
-            return redirect()->route('link.user.view', ['id' => $uniqueId]);
         }
+
+        $selectedProducts = $request->input('selected_products', []);
+
+        if (empty($selectedProducts)) {
+            return response()->json(['status' => false, 'msg' => 'Please select at least three product.']);
+        }
+
+        $uniqueId = Str::uuid()->toString();
+        Session::put('selectedProducts', $selectedProducts);
+        Session::put('selectedProducts.uniqueId', $uniqueId);
+
+        return response()->json(['status' => true,'msg'=>'Added Successfully....', 'redirectTo' => route('link.user.view', ['id' => $uniqueId])]);
     }
+
 
 
     public function sessionData(Request $request)
