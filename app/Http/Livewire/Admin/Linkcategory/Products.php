@@ -87,6 +87,8 @@ class Products extends Component
             'fields.*.mrp' => 'required',
             'fields.*.selling_price' => 'required',
             'fields.*.image' => 'required|file|max:600',
+        ],[
+            'fields.*.image.max'=>'Image Size can not be more then 600kb',
         ]);
 
         foreach ($validatedData['fields'] as $key => $value) {

@@ -95,22 +95,27 @@
                               <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                                 <label for="nameExLarge" class="form-label">Product Name</label>
                                  <input type="text" class="form-control" wire:model="fields.{{ $index }}.product_name">
+                                 @error('link_id')<span class="text-danger">{{$message}}</span>@enderror
                               </div>
                               <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                                 <label for="nameExLarge" class="form-label">Style Code</label>
                                  <input type="text" class="form-control" wire:model="fields.{{ $index }}.style_code">
+                                 @error('link_id')<span class="text-danger">{{$message}}</span>@enderror
                               </div>
                               <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                                 <label for="nameExLarge" class="form-label">MRP</label>
                                  <input type="text" class="form-control" wire:model="fields.{{ $index }}.mrp">
+                                 @error('link_id')<span class="text-danger">{{$message}}</span>@enderror
                               </div>
                               <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                                 <label for="nameExLarge" class="form-label">Selling Price</label>
                                  <input type="text" class="form-control" wire:model="fields.{{ $index }}.selling_price">
+                                 @error('link_id')<span class="text-danger">{{$message}}</span>@enderror
                               </div>
                               <div class="col-md-12 col-lg-12 col-sm-12 col-12 mb-3">
                                 <label for="nameExLarge" class="form-label">Image</label>
                                  <input type="file" class="form-control" wire:model="fields.{{ $index }}.image">
+                                 @error('fields.*.image')<span class="text-danger">{{$message}}</span>@enderror
                               </div>
                               <div class="col-md-6 col-lg-6 col-sm-12 col-12 mb-3">
                                  <button class="btn btn-danger float-right" type="button" wire:click="removeField({{ $index }})">-</button>

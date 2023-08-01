@@ -15,6 +15,9 @@
    </div>
 </div>
 <div class="pb-section">
+    <div id="loader" style="display:none;">
+    @include('components.loader')
+   </div>
     <form id="session">
         @csrf
         @foreach($cat as $cats)
@@ -54,6 +57,7 @@
 
         <!-- Submit Button -->
         <div class="container">
+            <p class="text-center text-danger" id="error"></p>
             <div class="text-center mt-4">
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
@@ -83,6 +87,7 @@ $(document).ready(function(){
             },
             success: function(result) {
                 if (result.status === false) {
+                    $('#error').text(result.msg);
                     toastr.error(result.msg, 'Error', {
                         timeOut: 1500,
                         progressBar: true,
