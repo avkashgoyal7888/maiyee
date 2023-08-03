@@ -29,6 +29,11 @@ class LinkController extends Controller
         return view('link.index', compact('cat', 'products', 'banner'));
     }
 
+    public function orderPlaced(Request $request)
+    {
+        return view('link.success');
+    }
+
     public function linkUserView(Request $request)
     {
         $requestUniqueId = $request->id;
@@ -57,10 +62,10 @@ class LinkController extends Controller
     public function storeSelectedProducts(Request $request)
     {
         $val = Validator::make($request->all(), [
-            'selected_products' => 'array|min:3|max:45',
+            'selected_products' => 'array|min:36|max:45',
             'selected_products.*' => 'exists:link_products,id',
         ],[
-            'selected_products.min' => 'Please select at least three products.',
+            'selected_products.min' => 'Please select at least 36 products.',
             'selected_products.max' => 'Please select at most forty-five products.',]);
 
         if ($val->fails()) {
@@ -70,7 +75,7 @@ class LinkController extends Controller
         $selectedProducts = $request->input('selected_products', []);
 
         if (empty($selectedProducts)) {
-            return response()->json(['status' => false, 'msg' => 'Please select at least three product.']);
+            return response()->json(['status' => false, 'msg' => 'Please select at least 36 product.']);
         }
 
         $uniqueId = Str::uuid()->toString();
@@ -141,7 +146,7 @@ class LinkController extends Controller
                 }
             }
     
-            return response()->json(['status' => true, 'msg' => 'Registered successfully']);
+            return response()->json(['status' => true, 'msg' => 'Order successfully Placed...']);
         } else {
             return response()->json(['status' => false, 'msg' => 'Something went wrong. Please try again later.']); 
         }

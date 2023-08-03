@@ -97,6 +97,7 @@ use Illuminate\Http\Request;
 
 	Route::controller(LinkController::class)->group(function(){
 		Route::get('/link-product', 'index')->name('link.home');
+		Route::get('/order-placed', 'orderPlaced')->name('link.order.placed');
 		Route::get('/link-user/{id}','linkUserView')->name('link.user.view');
 		Route::get('/user-products/{id}','linkUserProductView')->name('link.user.product.view');
 		Route::post('/session', 'storeSelectedProducts')->name('store.product.session');
