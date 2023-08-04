@@ -62,7 +62,7 @@ class LinkController extends Controller
     public function storeSelectedProducts(Request $request)
     {
         $val = Validator::make($request->all(), [
-            'selected_products' => 'array|min:36|max:45',
+            'selected_products' => 'array|min:3|max:45',
             'selected_products.*' => 'exists:link_products,id',
         ],[
             'selected_products.min' => 'Please select at least 36 products.',
@@ -107,12 +107,16 @@ class LinkController extends Controller
                 "number" => "required",
                 "size" => "required",
                 "address" => "required",
+                "delivery_date" => "required|date_format:Y-m-d",
+                "time" => "required",
             ],
             [
                 "name.required" => "Name cannot be blank",
                 "number.required" => "Contact number cannot be blank",
                 "size.required" => "Size cannot be blank",
                 "address.required" => "Address cannot be blank",
+                "delivery_date.required" => "Select Deliver Date...",
+                "time.required" => "Select Time Slot...",
             ]
         );
     
@@ -123,14 +127,32 @@ class LinkController extends Controller
                 "numberError" => $validator->errors()->first('number'),
                 "sizeError" => $validator->errors()->first('size'),
                 "addressError" => $validator->errors()->first('address'),
+                "deliveryError" => $validator->errors()->first('delivery_date'),
+                "timeError" => $validator->errors()->first('time'),
             ]);
         }
     
         $data = new LinkUser;
+        $start = null;
+        $end = null;
+        if ($req->time == 1) {
+            $start = '10:00:00';
+            $end = '12:00:00';
+        } elseif ($req->time == 2) {
+            $start = '13:00:00';
+            $end = '15:00:00';
+        } elseif ($req->time == 3) {
+            $start = '16:00:00';
+            $end = '20:00:00';
+        }
+
         $data->name = $req->name;
         $data->number = $req->number;
         $data->size = $req->size;
         $data->address = $req->address;
+        $data->delivery_date = $req->delivery_date;
+        $data->start_time = $start;
+        $data->end_time = $end;
         $reg = $data->save();
         if ($reg) {
             $linkUser = $data; // Store the LinkUser instance, not just the ID
@@ -145,7 +167,7 @@ class LinkController extends Controller
                     ]);
                 }
             }
-    
+            session()->flush();
             return response()->json(['status' => true, 'msg' => 'Order successfully Placed...']);
         } else {
             return response()->json(['status' => false, 'msg' => 'Something went wrong. Please try again later.']); 

@@ -94,6 +94,7 @@ $(document).ready(function(){
                         closeButton: true
                     });
                 } else if (result.status === true) {
+                    $('#session')[0].reset();
                     toastr.success(result.msg, 'Success', {
                         timeOut: 500,
                         progressBar: true,

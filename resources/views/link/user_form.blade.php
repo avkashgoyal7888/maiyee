@@ -51,6 +51,21 @@
                <input type="text" name="address">
             </div>
             <div class="inputBx">
+               <span>Delivery Date</span>
+               <div id="delivery" class="text-danger error-message my-2"></div>
+               <input type="date" name="delivery_date">
+            </div>
+            <div class="inputBx">
+               <span>Time Slot</span>
+               <div id="time" class="text-danger error-message my-2"></div>
+                                <select name="time">
+                                    <option value="">Select Delivery Time</option>
+                                    <option value="1">10:00 am. - 12:00 pm</option>
+                                    <option value="2">1:00 pm - 3:00 pm</option>
+                                    <option value="3">4:00 pm - 8:00 pm</option>
+                                 </select>
+            </div>
+            <div class="inputBx">
                <button class="btn btn-primary" type="submit">Submit</button>
             </div>
          </form>
@@ -83,7 +98,10 @@ $(document).ready(function(){
                     $('#number').text(result.numberError);
                     $('#size').text(result.sizeError);
                     $('#address').text(result.addressError);
+                    $('#delivery').text(result.deliveryError);
+                    $('#time').text(result.timeError);
                 } else if (result.status === true) {
+                  $('#register_user')[0].reset();
                     toastr.success(result.msg, 'Success', {
                         timeOut: 500,
                         progressBar: true,

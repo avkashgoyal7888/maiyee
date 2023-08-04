@@ -36,7 +36,6 @@
                @endforelse
             </tbody>
          </table>
-         <div style="margin-top: 10px">{{$data->links()}}</div>
       </div>
    </div>
 </div>

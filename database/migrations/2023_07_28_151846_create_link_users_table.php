@@ -17,6 +17,10 @@ return new class extends Migration
             $table->string('number');
             $table->enum('size', ['XS', 'S', 'M', 'L', 'XL','2XL','3XL','4XL','5XL']);
             $table->string('address');
+            $table->enum('status', ['0', '1', '2'])->default(0);
+            $table->date('delivery_date');
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }

@@ -192,6 +192,7 @@ class Products extends Component
           ->orWhere('mrp', 'like', '%' . $this->search . '%')
           ->orWhere('selling_price', 'like', '%' . $this->search . '%');
         })->orderByDesc('id')->paginate(10);
-        return view('livewire.admin.linkcategory.products',compact('data'));
+        $count = LinkProduct::count();
+        return view('livewire.admin.linkcategory.products',compact('data','count'));
     }
 }

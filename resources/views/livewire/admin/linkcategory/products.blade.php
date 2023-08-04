@@ -27,6 +27,7 @@
             <div class="table-responsive" style="margin-top: 20px;">
                <table class="table table-sm table-bordered border-dark mb-0 text-center">
                   <thead>
+                     <h5>All Products = {{ $count }}</h5>
                      <tr>
                         <th>S. No.</th>
                         <th>Category</th>

@@ -52,7 +52,7 @@ class Order extends Component
         }
     })
     ->orderByDesc('id')
-    ->paginate(10);
+    ->get();
         return view('livewire.admin.linkcategory.order',compact('data'));
     }
 }
