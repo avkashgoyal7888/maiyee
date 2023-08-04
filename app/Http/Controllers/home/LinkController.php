@@ -62,7 +62,7 @@ class LinkController extends Controller
     public function storeSelectedProducts(Request $request)
     {
         $val = Validator::make($request->all(), [
-            'selected_products' => 'array|min:3|max:45',
+            'selected_products' => 'array|min:36|max:45',
             'selected_products.*' => 'exists:link_products,id',
         ],[
             'selected_products.min' => 'Please select at least 36 products.',
