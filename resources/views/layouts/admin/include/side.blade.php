@@ -42,7 +42,7 @@
                   <li><a href="{{route('admin.linkcategory')}}" data-key="t-category"><i class="bx bx-hash nav-icon"></i>Link Category</a></li>
                   <li><a href="{{route('admin.linkproduct')}}" data-key="t-category"><i class="bx bx-hash nav-icon"></i>Link Product</a></li>
                   <li><a href="{{route('admin.linkbanner')}}" data-key="t-category"><i class="bx bx-hash nav-icon"></i>Link Banner</a></li>
-                  <li><a href="{{route('admin.linkuser')}}" data-key="t-category"><i class="bx bx-hash nav-icon"></i>Link User</a></li>
+                  <li><a href="{{route('admin.linkuser')}}" data-key="t-category"><i class="bx bx-hash nav-icon"></i>Link Orders</a></li>
                </ul>
             </li>
             <li>
