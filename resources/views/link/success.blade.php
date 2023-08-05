@@ -23,18 +23,11 @@
 
           </div>
               <div class="order-detail">
-          <span class="d-block order-summery">Your order has been placed. we will deliver your order as soon as possible. Your order invoice has been sent to your email.</span>
+          <span class="d-block order-summery">Your order has been placed. we will deliver your order as soon as possible.</span>
               </div>
           <hr>
           <div class="text">
-        <span class="d-block new mb-1" >order->name</span>
          </div>
-        <span class="d-block address mb-3">Address</span>
-          <div class="  money d-flex flex-row mt-2 align-items-center">
-            <img src="https://i.imgur.com/ppwgjMU.png" width="20" />
-            <span class="ml-2">Amount to be paid (Cash on Delivery)</span> 
-            <span class="ml-2">Paable paid</span> 
-               </div>
                <div class="last d-flex align-items-center mt-3">
                 <span class="address-line">Enjoy Shopping With Us!!</span>
 
