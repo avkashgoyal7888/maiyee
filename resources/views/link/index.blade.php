@@ -1,5 +1,5 @@
 @extends('layouts.link.app')
-@section('css')
+@section('css') 
 <title>Link Product</title>
 @stop
 @section('content')
