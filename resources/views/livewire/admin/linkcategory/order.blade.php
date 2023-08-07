@@ -12,6 +12,18 @@
                   <td colspan="3">Name</td>
                   <td colspan="3">UsrrName</td>
                </tr>
+               <tr>
+                  <td colspan="3">Number</td>
+                  <td colspan="3">9999999999</td>
+               </tr>
+               <tr>
+                  <td colspan="3">Address</td>
+                  <td colspan="3">3006 Shree Kuberji Empire, Kadodara Road,Saroli, Surat Gujrat (395010)</td>
+               </tr>
+               <tr>
+                  <td colspan="3">Slot</td>
+                  <td colspan="3">Date : 01/01/2023 Time: 12:00-2:00</td>
+               </tr>
             </tbody>
          </tbody>
                <tr>
