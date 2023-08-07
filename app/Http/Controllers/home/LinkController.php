@@ -62,7 +62,7 @@ class LinkController extends Controller
     public function storeSelectedProducts(Request $request)
     {
         $val = Validator::make($request->all(), [
-            'selected_products' => 'array|min:36|max:45',
+            'selected_products' => 'array|min:3|max:45',
             'selected_products.*' => 'exists:link_products,id',
         ],[
             'selected_products.min' => 'Please select at least 36 products.',
@@ -168,6 +168,35 @@ class LinkController extends Controller
                 }
             }
             session()->flush();
+            $fields = array(
+                "sender_id" => "TXTIND",
+                "message" => "Congratulations!! " . $data->name . " We're glad you found what you were looking for!! We contact you for delivery details soon.. Feel free to contact our Customer Care executive for your queries : +91-9904141427 ",
+                "route" => "v3",
+                "numbers" => $data->number,
+            );
+            $curl = curl_init();
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2",
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_ENCODING => "",
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_TIMEOUT => 30,
+                CURLOPT_SSL_VERIFYHOST => 0,
+                CURLOPT_SSL_VERIFYPEER => 0,
+                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST => "POST",
+                CURLOPT_POSTFIELDS => json_encode($fields),
+                CURLOPT_HTTPHEADER => array(
+                    "authorization: 4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ",
+                    "accept: /",
+                    "cache-control: no-cache",
+                    "content-type: application/json"
+                ),
+            )
+            );
+            $response = curl_exec($curl);
+            $err = curl_error($curl);
+            curl_close($curl);
             return response()->json(['status' => true, 'msg' => 'Order successfully Placed...']);
         } else {
             return response()->json(['status' => false, 'msg' => 'Something went wrong. Please try again later.']); 
