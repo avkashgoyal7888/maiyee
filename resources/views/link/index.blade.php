@@ -6,11 +6,8 @@
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%;">
-        <div class="logo" style="margin: auto; display:flex;">
-            <a href="#">
-                <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
-            </a>
-            <p class="site-cart" style="text-align: right;"><a href="#" class="site-header__cart" title="Cart">
+        <div class="site-cart"> 
+            <p style="text-align: right;"><a href="#" class="site-header__cart" title="Cart">
                 <i class="icon anm anm-bag-l"></i>
                 <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">1</span>
             </a></p>
