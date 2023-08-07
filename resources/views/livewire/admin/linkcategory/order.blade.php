@@ -10,7 +10,6 @@
             <thead>
                <tr>
                   <th>S. No.</th>
-                  <th>User</th>
                   <th>Category</th>
                   <th>Product Name</th>
                   <th>Style Code</th>
@@ -22,7 +21,6 @@
                @forelse($data as $key => $order)
                <tr>
                   <td>{{ $key + 1 }}</td>
-                  <td>{{ ucwords($order->user->name) }}</td>
                   <td>{{ ucwords($order->product->cat->name) }}</td>
                   <td>{{ ucwords($order->product->product_name) }}</td>
                   <td>{{ ucwords($order->product->style_code) }}</td>
