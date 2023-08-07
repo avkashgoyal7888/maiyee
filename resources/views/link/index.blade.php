@@ -8,15 +8,15 @@
     <div class="container-fluid" style="width:100%">
         <div class="row align-items-center">
             <!--Desktop Logo-->
-            <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+            <div class="logo" style="margin: auto; transform: translateX(50%);">
                 <a href="#">
                     <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
                 </a>
             </div>
             <!--End Desktop Logo-->
             <!--Mobile Logo-->
-            <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
-                <div class="logo">
+            <div class="mobile-logo">
+                <div class="logo" style="margin: auto; transform: translateX(50%);">
                     <a href="#">
                         <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
                     </a>
