@@ -5,7 +5,7 @@
 @section('content')
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
-    <div class="container-fluid" style="width:100%; height:80px;">
+    <div class="container-fluid" style="width:100%; height:80px; padding:25px;">
         <a href="#" style="margin: auto; margin-top:50px;">
             <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
         </a>
