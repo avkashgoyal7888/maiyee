@@ -9,6 +9,16 @@
             <button type="button" class="btn btn-sm btn-success" wire:click="exportExcel"><i class='bx bxs-file-export'></i>Excel</button>
             <thead>
                <tr>
+                  <th>Name</th>
+                  <th>{{ ucwords($order->user->name) }}</th>
+                  <th>Contact Number</th>
+                  <th>{{ ucwords($order->user->number) }}</th>
+                  <th>MRP</th>
+                  <th>Selling Price</th>
+               </tr>
+            </thead>
+            <thead>
+               <tr>
                   <th>S. No.</th>
                   <th>Category</th>
                   <th>Product Name</th>
