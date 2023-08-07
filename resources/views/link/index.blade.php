@@ -6,7 +6,7 @@
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%; height:80px;">
-        <a href="#" style="margin: auto;">
+        <a href="#" style="margin: auto; margin-top:25px;">
             <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
         </a>
         <div class="site-cart"> 
