@@ -7,16 +7,12 @@
       <div class="table-responsive" style="margin-top: 20px;">
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <button type="button" class="btn btn-sm btn-success" wire:click="exportExcel"><i class='bx bxs-file-export'></i>Excel</button>
-            <thead>
+            <tbody>
                <tr>
-                  <th>Name</th>
-                  <th>UsrrName</th>
-                  <th>Contact Number</th>
-                  <th>9999999999</th>
-                  <th>MRP</th>
-                  <th>Selling Price</th>
+                  <td colspan="3">Name</td>
+                  <td colspan="3">UsrrName</td>
                </tr>
-            </thead>
+            </tbody>
             <thead>
                <tr>
                   <th>S. No.</th>
