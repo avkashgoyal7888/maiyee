@@ -6,7 +6,7 @@
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%">
-        <div class="align-items-center">
+        <div class="align-items-center" style="display: flex; justify-content: space-around;">
             <!--Desktop Logo-->
             <div class="logo d-none d-lg-block">
                 <a href="#">
