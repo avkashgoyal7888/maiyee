@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin\Linkcategory;
 use Livewire\WithPagination;
 use Livewire\Component;
 use App\Models\LinkUserProduct;
+use App\Models\LinkUser;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Facades\Excel;
@@ -37,8 +38,9 @@ class Order extends Component
                     ->orWhere('style_code', 'like', $searchTerm);
             }
                 })->orderByDesc('id')->get();
+        $user = LinkUser::where('id',$this->user_id)->first();
 
-        return Excel::download(new LinkUserOrderExport($data), 'accountstatement.xlsx');
+        return Excel::download(new LinkUserOrderExport($data,$user), 'accountstatement.xlsx');
     }
 
     public function render()
@@ -53,6 +55,7 @@ class Order extends Component
     })
     ->orderByDesc('id')
     ->get();
-        return view('livewire.admin.linkcategory.order',compact('data'));
+    $user = LinkUser::where('id',$this->user_id)->first();
+        return view('livewire.admin.linkcategory.order',compact('data','user'));
     }
 }

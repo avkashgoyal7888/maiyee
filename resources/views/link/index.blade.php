@@ -12,7 +12,7 @@
         <div class="site-cart"> 
             <p style="text-align: right; margin-top:25px;"><a href="#" class="site-header__cart" title="Cart">
                 <i class="icon anm anm-bag-l"></i>
-                <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">1</span>
+                <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
             </a></p>
         </div>
     </div>
@@ -84,6 +84,18 @@
 @section('js')
 <script>
 $(document).ready(function(){
+    function updateCartCount() {
+            var selectedProductsCount = $("input[name='selected_products[]']:checked").length;
+            $("#CartCount").text(selectedProductsCount);
+        }
+
+        // Call the function on page load
+        updateCartCount();
+
+        // Call the function whenever a checkbox is clicked
+        $("input[name='selected_products[]']").on("change", function () {
+            updateCartCount();
+        });
     $('#session').on('submit', function(e) {
         e.preventDefault(); // prevent default form submission
         let fd = new FormData(this);

@@ -10,19 +10,19 @@
             <tbody>
                <tr>
                   <td colspan="3">Name</td>
-                  <td colspan="3">UsrrName</td>
+                  <td colspan="3">{{$user->name}}</td>
                </tr>
                <tr>
                   <td colspan="3">Number</td>
-                  <td colspan="3">9999999999</td>
+                  <td colspan="3">{{$user->number}}</td>
                </tr>
                <tr>
                   <td colspan="3">Address</td>
-                  <td colspan="3">3006 Shree Kuberji Empire, Kadodara Road,Saroli, Surat Gujrat (395010)</td>
+                  <td colspan="3">{{$user->address}}</td>
                </tr>
                <tr>
                   <td colspan="3">Slot</td>
-                  <td colspan="3">Date : 01/01/2023 Time: 12:00-2:00</td>
+                  <td colspan="3">Date : {{$user->delivery_date}} Time: {{$user->start_time}}-{{$user->end_time}}</td>
                </tr>
                <tr>
                   <td colspan="6"></td>
