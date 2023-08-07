@@ -10,7 +10,7 @@
             <thead>
                <tr>
                   <th>Name</th>
-                  <th>Name</th>
+                  <th>UsrrName</th>
                   <th>Contact Number</th>
                   <th>9999999999</th>
                   <th>MRP</th>
