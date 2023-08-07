@@ -7,22 +7,41 @@
       <div class="table-responsive" style="margin-top: 20px;">
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
             <button type="button" class="btn btn-sm btn-success" wire:click="exportExcel"><i class='bx bxs-file-export'></i>Excel</button>
-            <thead>
+            <tbody>
                <tr>
-                  <th>S. No.</th>
-                  <th>User</th>
-                  <th>Category</th>
-                  <th>Product Name</th>
-                  <th>Style Code</th>
-                  <th>MRP</th>
-                  <th>Selling Price</th>
+                  <td colspan="3">Name</td>
+                  <td colspan="3">UsrrName</td>
                </tr>
-            </thead>
+               <tr>
+                  <td colspan="3">Number</td>
+                  <td colspan="3">9999999999</td>
+               </tr>
+               <tr>
+                  <td colspan="3">Address</td>
+                  <td colspan="3">3006 Shree Kuberji Empire, Kadodara Road,Saroli, Surat Gujrat (395010)</td>
+               </tr>
+               <tr>
+                  <td colspan="3">Slot</td>
+                  <td colspan="3">Date : 01/01/2023 Time: 12:00-2:00</td>
+               </tr>
+               <tr>
+                  <td colspan="6"></td>
+               </tr>
+            </tbody>
+         </tbody>
+               <tr>
+                  <td>S. No.</td>
+                  <td>Category</td>
+                  <td>Product Name</td>
+                  <td>Style Code</td>
+                  <td>MRP</td>
+                  <td>Selling Price</td>
+               </tr>
+            </tbody>
             <tbody>
                @forelse($data as $key => $order)
                <tr>
                   <td>{{ $key + 1 }}</td>
-                  <td>{{ ucwords($order->user->name) }}</td>
                   <td>{{ ucwords($order->product->cat->name) }}</td>
                   <td>{{ ucwords($order->product->product_name) }}</td>
                   <td>{{ ucwords($order->product->style_code) }}</td>
