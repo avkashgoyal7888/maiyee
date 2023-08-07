@@ -6,31 +6,16 @@
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%">
-        <div class="align-items-center" style="display: flex; justify-content: space-around;">
-            <!--Desktop Logo-->
-            <div class="logo d-none d-lg-block">
-                <a href="#">
-                    <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
-                </a>
-            </div>
-            <!--End Desktop Logo-->
-            <!--Mobile Logo-->
-            <div class="mobile-logo">
-                <div class="logo">
-                    <a href="#">
-                        <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
-                    </a>
-                </div>
-            </div>
-            <!--Mobile Logo-->
-            <div class="col-3 col-sm-3 col-md-3 col-lg-2">
-                <div class="site-cart"> 
-                    <a href="#" class="site-header__cart" title="Cart">
-                        <i class="icon anm anm-bag-l"></i>
-                        <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">1</span>
-                    </a>
-                </div>
-            </div>
+        <div class="logo">
+            <a href="#">
+                <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
+            </a>
+        </div>
+        <div class="site-cart"> 
+            <a href="#" class="site-header__cart" title="Cart">
+                <i class="icon anm anm-bag-l"></i>
+                <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">1</span>
+            </a>
         </div>
     </div>
 </div>
