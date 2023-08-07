@@ -10,7 +10,7 @@
             <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
         </a>
         <div class="site-cart"> 
-            <p style="text-align: right;"><a href="#" class="site-header__cart" title="Cart">
+            <p style="text-align: right; margin-top:25px;"><a href="#" class="site-header__cart" title="Cart">
                 <i class="icon anm anm-bag-l"></i>
                 <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count">1</span>
             </a></p>
