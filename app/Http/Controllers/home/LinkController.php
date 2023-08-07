@@ -26,6 +26,7 @@ class LinkController extends Controller
         $cat = LinkCategory::get();
         $products = LinkProduct::get();
         $banner = LinkBanner::get();
+        $request->session()->forget('selectedProducts');
         return view('link.index', compact('cat', 'products', 'banner'));
     }
 
@@ -62,11 +63,11 @@ class LinkController extends Controller
     public function storeSelectedProducts(Request $request)
     {
         $val = Validator::make($request->all(), [
-            'selected_products' => 'array|min:36|max:46',
+            'selected_products' => 'array|min:30|max:45',
             'selected_products.*' => 'exists:link_products,id',
         ],[
-            'selected_products.min' => 'Please select at least 36 products.',
-            'selected_products.max' => 'Please select at most 46 products.',]);
+            'selected_products.min' => 'Please select at least 30 products.',
+            'selected_products.max' => 'Please select at most 45 products.',]);
 
         if ($val->fails()) {
             return response()->json(['status' => false, 'msg' => $val->errors()->first()]);
