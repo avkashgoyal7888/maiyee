@@ -13,16 +13,16 @@
                   <td colspan="3">UsrrName</td>
                </tr>
             </tbody>
-            <thead>
+         </tbody>
                <tr>
-                  <th>S. No.</th>
-                  <th>Category</th>
-                  <th>Product Name</th>
-                  <th>Style Code</th>
-                  <th>MRP</th>
-                  <th>Selling Price</th>
+                  <td>S. No.</td>
+                  <td>Category</td>
+                  <td>Product Name</td>
+                  <td>Style Code</td>
+                  <td>MRP</td>
+                  <td>Selling Price</td>
                </tr>
-            </thead>
+            </tbody>
             <tbody>
                @forelse($data as $key => $order)
                <tr>
