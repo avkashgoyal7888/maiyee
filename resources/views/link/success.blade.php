@@ -23,7 +23,8 @@
 
           </div>
               <div class="order-detail">
-          <span class="d-block order-summery">Your order has been placed. we will deliver your order as soon as possible.</span>
+          <span class="d-block order-summery">We're glad you found what you were looking for!! We contact you for delivery details soon..
+            Feel free to contact our Customer Care executive for your queries : +91-9904141427</span>
               </div>
           <hr>
           <div class="text">
