@@ -24,6 +24,9 @@
                   <td colspan="3">Slot</td>
                   <td colspan="3">Date : 01/01/2023 Time: 12:00-2:00</td>
                </tr>
+               <tr>
+                  <td colspan="6">Slot</td>
+               </tr>
             </tbody>
          </tbody>
                <tr>
