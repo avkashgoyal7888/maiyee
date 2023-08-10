@@ -105,7 +105,7 @@ class LinkController extends Controller
             $req->all(),
             [
                 "name" => "required",
-                "number" => "required",
+                "number" => "required|min:10|max:10",
                 "size" => "required",
                 "address" => "required",
                 "delivery_date" => "required|date_format:Y-m-d",
@@ -114,6 +114,8 @@ class LinkController extends Controller
             [
                 "name.required" => "Name cannot be blank",
                 "number.required" => "Contact number cannot be blank",
+                "number.min" => "Contact number cannot be less then 10 digits",
+                "number.max" => "Contact number cannot be more then 10 digits",
                 "size.required" => "Size cannot be blank",
                 "address.required" => "Address cannot be blank",
                 "delivery_date.required" => "Select Deliver Date...",
