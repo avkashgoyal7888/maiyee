@@ -14,7 +14,6 @@
           <div class="first d-flex justify-content-between align-items-center mb-3">
             <div class="order-info">
                 <span class="d-block order-name">Thank you!! </span>
-                <span class="order-order">Order Id - </span>
                  
             </div>
            

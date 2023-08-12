@@ -53,7 +53,7 @@
             <div class="inputBx">
                <span>Delivery Date</span>
                <div id="delivery" class="text-danger error-message my-2"></div>
-               <input type="date" name="delivery_date">
+               <input type="date" name="delivery_date" min="<?php echo date('Y-m-d'); ?>">
             </div>
             <div class="inputBx">
                <span>Time Slot</span>
