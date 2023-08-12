@@ -6,21 +6,21 @@
         width: 100%; /* Adjust this as needed */
         height: auto; /* This maintains the aspect ratio */
         max-width: 100%;
-        transition: transform .2s;
-        cursor: pointer;
-        position: relative;
-        z-index: 1;
     }
 
     .wardrobe-image:hover {
+        transition: transform .2s;
         transform: scale(1.8);
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
     }
 </style>
 
 @stop
 @section('content')
 <!--Header-->
-<div class="header-wrap animated d-flex border-bottom">
+<div class="header-wrap animated d-flex border-bottom" style="position: fixed; background-color:#fff; position:fixed; z-index:2; width:100%;">
     <div class="container-fluid" style="width:100%; padding:25px;">
         <a href="#" style="margin: auto; margin-top:50px;">
             <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
