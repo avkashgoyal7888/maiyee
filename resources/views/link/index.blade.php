@@ -2,27 +2,23 @@
 @section('css')
 <title>Link Product</title>
 <style>
-    .style-code {
-   position: absolute;
-   top: 10px;
-   left: 10px;
-   color: #ffffff;
-   padding: 5px;
-   font-weight: bold;
-}
+    .wardrobe-image {
+        width: 100%; /* Adjust this as needed */
+        height: auto; /* This maintains the aspect ratio */
+        max-width: 100%;
+        transition: transform .2s;
+        cursor: pointer;
+        position: relative;
+        z-index: 1;
+    }
 
-.wardrobe-image:hover{
-   transition: transform .2s;
-   transform: scale(1.8);
-   cursor: pointer;
-   position: relative;
-   z-index: 1;
-}
-
+    .wardrobe-image:hover {
+        transform: scale(1.8);
+    }
 </style>
+
 @stop
 @section('content')
-<div class="pageWrapper">
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%; padding:25px;">
@@ -38,8 +34,6 @@
     </div>
 </div>
 <!--End Header-->
-<div id="page-content">
-
 <div class="slideshow slideshow-wrapper pb-section">
    <div class="home-slideshow">
       @foreach($banner as $banners)
@@ -72,7 +66,7 @@
                     @if($product->link_id == $cats->id)
                     <div class="col-lg-2 col-md-3 col-sm-6 col-6">
                         <div class="product-image" style="text-align: center; position: relative;">
-                            <img src="{{$product->image}}" class="h-50 wardrobe-image">
+                            <img src="{{$product->image}}" class="wardrobe-image" alt="Product Image">
                             <h4 class="mt-2">
     {{$product->product_name}}
     <span class="style-code" style="font-weight: bold; color: black; margin-top: 190px;">({{$product->style_code}})</span>
@@ -101,8 +95,6 @@
         </div>
     </form>
     <div id="error-message" style="color: red;"></div>
-</div>
-</div>
 </div>
 @stop
 @section('js')

@@ -25,12 +25,17 @@
 </head>
 <body class="template-index">
 <section class="home2-default">
+<div class="pageWrapper">
+<div id="page-content">
     <!--Home slider-->
     @yield('content') 
     <!--End Featured Product-->
+    
+</div>
     <!--Scoll Top-->
     <span id="site-scroll"><i class="icon anm anm-angle-up-r"></i></span>
     <!--End Scoll Top-->
+</div>
 </div>
 </div>
     
