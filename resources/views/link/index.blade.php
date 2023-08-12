@@ -6,10 +6,6 @@
         width: 100%; /* Adjust this as needed */
         height: auto; /* This maintains the aspect ratio */
         max-width: 100%;
-        transition: transform .2s;
-        cursor: pointer;
-        position: relative; 
-        z-index: 1;
     }
 
     .wardrobe-image:hover {
