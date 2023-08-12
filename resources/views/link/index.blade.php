@@ -35,10 +35,10 @@
 </div>
 <!--End Header-->
 <div class="slideshow slideshow-wrapper pb-section">
-   <div class="home-slideshow mt-5">
+   <div class="home-slideshow">
       @foreach($banner as $banners)
       <div class="slide">
-         <div class="blur-up lazyload">
+         <div class="blur-up lazyload mt-5">
             <img class="blur-up lazyload" data-src="{{ $banners->image }}" src="{{ $banners->image }}" title="{{$banners->title}}" />
          </div>
       </div>
