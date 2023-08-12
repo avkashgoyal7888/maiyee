@@ -1,6 +1,26 @@
 @extends('layouts.link.app')
 @section('css')
 <title>Link Product</title>
+<style>
+    .style-code {
+   position: absolute;
+   top: 10px;
+   left: 10px;
+   color: #ffffff;
+   padding: 5px;
+   font-weight: bold;
+}
+
+.wardrobe-image:hover{
+   transition: transform .2s;
+   transform: scale(1.8);
+   cursor: pointer;
+   position: relative;
+   z-index: 1;
+
+}
+
+</style>
 @stop
 @section('content')
 <!--Header-->
