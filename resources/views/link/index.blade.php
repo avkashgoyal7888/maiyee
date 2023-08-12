@@ -35,7 +35,7 @@
 </div>
 <!--End Header-->
 <div class="slideshow slideshow-wrapper pb-section">
-   <div class="home-slideshow">
+   <div class="home-slideshow mt-5">
       @foreach($banner as $banners)
       <div class="slide">
          <div class="blur-up lazyload">
