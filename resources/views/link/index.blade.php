@@ -34,7 +34,7 @@
     </div>
 </div>
 <!--End Header-->
-<div class="slideshow slideshow-wrapper pb-section" style="margin-top:50px;">
+<div class="slideshow slideshow-wrapper pb-section">
    <div class="home-slideshow">
       @foreach($banner as $banners)
       <div class="slide">
