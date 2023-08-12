@@ -20,8 +20,8 @@
 @stop
 @section('content')
 <!--Header-->
-<div class="header-wrap animated d-flex border-bottom" style="position: fixed; background-color:#fff; position:fixed; z-index:2; width:100%;">
-    <div class="container-fluid" style="width:100%; padding:5px; margin-bottom:50px;">
+<div class="header-wrap animated d-flex border-bottom" style="position: fixed; background-color:#fff; position:fixed; z-index:2; width:100%; margin-bottom:50px;">
+    <div class="container-fluid" style="width:100%; padding:15px;">
         <a href="#" style="margin: auto; margin-top:50px;">
             <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
         </a>
