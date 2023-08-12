@@ -17,12 +17,12 @@
    cursor: pointer;
    position: relative;
    z-index: 1;
-
 }
 
 </style>
 @stop
 @section('content')
+<div class="pageWrapper">
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%; padding:25px;">
@@ -38,6 +38,8 @@
     </div>
 </div>
 <!--End Header-->
+<div id="page-content">
+
 <div class="slideshow slideshow-wrapper pb-section">
    <div class="home-slideshow">
       @foreach($banner as $banners)
@@ -99,6 +101,8 @@
         </div>
     </form>
     <div id="error-message" style="color: red;"></div>
+</div>
+</div>
 </div>
 @stop
 @section('js')
