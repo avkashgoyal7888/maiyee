@@ -33,19 +33,6 @@
         </div>
     </div>
 </div>
-<div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
-    <div class="container-fluid" style="width:100%; padding:25px;">
-        <a href="#" style="margin: auto; margin-top:50px;">
-            <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
-        </a>
-        <div class="site-cart"> 
-            <p style="text-align: right; margin-top:25px;"><a href="#" class="site-header__cart" title="Cart">
-                <i class="icon anm anm-bag-l"></i>
-                <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
-            </a></p>
-        </div>
-    </div>
-</div>
 <!--End Header-->
 <div class="slideshow slideshow-wrapper pb-section">
    <div class="home-slideshow">
