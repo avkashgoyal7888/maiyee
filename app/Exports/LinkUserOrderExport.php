@@ -23,6 +23,7 @@ class LinkUserOrderExport implements FromCollection, WithHeadings
             ['Name', $this->user->name],
             ['Number', $this->user->number],
             ['Address', $this->user->address],
+            ['Size', $this->user->size],
             ['Slot', "Date : {$this->user->delivery_date} Time: {$this->user->start_time}-{$this->user->end_time}"],
         ]);
 

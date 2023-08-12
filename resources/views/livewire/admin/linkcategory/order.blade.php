@@ -21,6 +21,10 @@
                   <td colspan="3">{{$user->address}}</td>
                </tr>
                <tr>
+                  <td colspan="3">Size</td>
+                  <td colspan="3">{{$user->size}}</td>
+               </tr>
+               <tr>
                   <td colspan="3">Slot</td>
                   <td colspan="3">Date : {{$user->delivery_date}} Time: {{$user->start_time}}-{{$user->end_time}}</td>
                </tr>
