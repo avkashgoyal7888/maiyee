@@ -20,7 +20,7 @@
 @stop
 @section('content')
 <!--Header-->
-<div class="header-wrap animated d-flex border-bottom" style="position: fixed; z-idex:5;">
+<div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%">
         <div class="row align-items-center">
             <!--Desktop Logo-->
@@ -31,7 +31,7 @@
             </div>
             <!--End Desktop Logo-->
             <!--Mobile Logo-->
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6 d-block d-lg-none mobile-logo">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 d-block d-lg-none mobile-logo" style="position: fixed; z-index:10; background-color:#fff;">
                 <div class="logo">
                     <a href="{{route('web.home')}}">
                         <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
