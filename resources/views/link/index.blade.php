@@ -34,11 +34,11 @@
     </div>
 </div>
 <!--End Header-->
-<div class="slideshow slideshow-wrapper pb-section">
+<div class="slideshow slideshow-wrapper pb-section mt-5">
    <div class="home-slideshow">
       @foreach($banner as $banners)
       <div class="slide">
-         <div class="blur-up lazyload mt-50">
+         <div class="blur-up lazyload">
             <img class="blur-up lazyload" data-src="{{ $banners->image }}" src="{{ $banners->image }}" title="{{$banners->title}}" />
          </div>
       </div>
