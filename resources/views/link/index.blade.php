@@ -21,7 +21,7 @@
 @section('content')
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
-    <div class="container-fluid" style="position: fixed; z-index:10; background-color:#fff;">
+    <div class="container-fluid mb-10" style="position: fixed; z-index:10; background-color:#fff;">
         <div class="row align-items-center">
             <!--Desktop Logo-->
             <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
