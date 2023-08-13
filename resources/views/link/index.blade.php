@@ -39,9 +39,9 @@
                 </div>
             </div>
             <!--Mobile Logo-->
-            <div class="col-6 col-sm-6 col-md-6 col-lg-6" style="text-align: right">
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
                 <div class="site-cart">
-                    <a href="#" class="site-header__cart" title="Cart"><i class="icon anm anm-bag-l"></i>
+                    <a href="#" class="site-header__cart" title="Cart" style="text-align: right"><i class="icon anm anm-bag-l"></i>
                         <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
                     </a>
                 </div>
