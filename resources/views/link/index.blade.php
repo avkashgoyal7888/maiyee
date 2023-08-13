@@ -22,31 +22,32 @@
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%">
-        <div class="row align-items-around">
-        <!--Desktop Logo-->
-        <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
-            <a href="{{route('web.home')}}">
-                <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
-            </a>
-        </div>
-        <!--End Desktop Logo-->
-        <!--Mobile Logo-->
-        <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
-            <div class="logo">
-                <a href="{{route('web.home')}}">
+        <div class="row align-items-center">
+            <!--Desktop Logo-->
+            <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+                <a href="#">
                     <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                 </a>
             </div>
-        </div>
-        <!--Mobile Logo-->
-        <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block site-cart" style="text-align: right"> 
-            <p style="text-align: right; margin-top:25px;"><a href="#" class="site-header__cart" title="Cart">
-                <i class="icon anm anm-bag-l"></i>
-                <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
-            </a></p>
+            <!--End Desktop Logo-->
+            <!--Mobile Logo-->
+            <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
+                <div class="logo">
+                    <a href="{{route('web.home')}}">
+                        <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                    </a>
+                </div>
+            </div>
+            <!--Mobile Logo-->
+            <div class="col-3 col-sm-3 col-md-3 col-lg-2">
+                <div class="site-cart">
+                    <a href="#" class="site-header__cart" title="Cart"><i class="icon anm anm-bag-l"></i>
+                        <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 </div>
 <!--End Header-->
 <div class="slideshow slideshow-wrapper pb-section">
