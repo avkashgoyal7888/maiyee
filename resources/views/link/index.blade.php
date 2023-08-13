@@ -22,7 +22,7 @@
 <!--Header-->
 <div class="header-wrap animated d-flex border-bottom">
     <div class="container-fluid" style="width:100%">
-        <div class="row align-items-center">
+        <div class="row align-items-around">
         <!--Desktop Logo-->
         <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
             <a href="{{route('web.home')}}">
