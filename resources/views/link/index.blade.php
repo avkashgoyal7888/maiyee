@@ -20,7 +20,7 @@
 @stop
 @section('content')
 <!--Header-->
-<div class="header-wrap animated d-flex border-bottom">
+<div class="header-wrap animated d-flex border-bottom" style="position: fixed">
     <div class="container-fluid" style="width:100%">
         <div class="row align-items-center">
             <!--Desktop Logo-->
