@@ -22,29 +22,29 @@
   <body>
   	<div class="table-responsive" style="margin-top: 20px;">
          <table>
-            <tbody style="WI">
+            <tbody>
                <tr>
                   <td colspan="3">Name</td>
-                  <td colspan="4">{{$user->name}}</td>
+                  <td colspan="3">{{$user->name}}</td>
                </tr>
                <tr>
                   <td colspan="3">Number</td>
-                  <td colspan="4">{{$user->number}}</td>
+                  <td colspan="3">{{$user->number}}</td>
                </tr>
                <tr>
                   <td colspan="3">Address</td>
-                  <td colspan="4">{{$user->address}}</td>
+                  <td colspan="3">{{$user->address}}</td>
                </tr>
                <tr>
                   <td colspan="3">Size</td>
-                  <td colspan="4">{{$user->size}}</td>
+                  <td colspan="3">{{$user->size}}</td>
                </tr>
                <tr>
                   <td colspan="3">Slot</td>
-                  <td colspan="4">Date : {{$user->delivery_date}} Time: {{$user->start_time}}-{{$user->end_time}}</td>
+                  <td colspan="3">Date : {{$user->delivery_date}} Time: {{$user->start_time}}-{{$user->end_time}}</td>
                </tr>
                <tr>
-                  <td colspan="7"></td>
+                  <td colspan="6"></td>
                </tr>
             </tbody>
          </tbody>
@@ -55,7 +55,6 @@
                   <td>Style Code</td>
                   <td>MRP</td>
                   <td>Selling Price</td>
-                  <th>Remarks</th>
                </tr>
             </tbody>
             <tbody>
@@ -67,13 +66,20 @@
                   <td>{{ ucwords($order->product->style_code) }}</td>
                   <td>{{ ucwords($order->product->mrp) }}</td>
                   <td>{{ ucwords($order->product->selling_price) }}</td>
-                  <td>  </td>
                </tr>
                @empty
                <tr>
                   <td colspan="3">No Record Found</td>
                </tr>
                @endforelse
+            </tbody>
+            <tbody>
+               <tr>
+               	<td colspan="6" style="text-align:center;">Remarks </td>
+               </tr>
+               <tr>
+               	<td colspan="6" height="100px"></td>
+               </tr>
             </tbody>
          </table>
       </div>

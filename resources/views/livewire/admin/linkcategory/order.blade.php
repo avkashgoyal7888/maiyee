@@ -6,7 +6,7 @@
       </div>
       <div class="table-responsive" style="margin-top: 20px;">
          <table class="table table-sm table-bordered border-dark mb-0 text-center">
-            <button type="button" class="btn btn-sm btn-success" wire:click="exportExcel"><i class='bx bxs-file-export'></i>Excel</button>
+            <button type="button" class="btn btn-sm btn-success" wire:click="exportExcel"><i class='bx bxs-file-export'></i>Excel</button>&nbsp;&nbsp;
             <button type="button" class="btn btn-sm btn-success" wire:click="exportPDF"><i class='bx bxs-file-export'></i>PDF</button>
             <tbody>
                <tr>
