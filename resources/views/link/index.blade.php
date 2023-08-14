@@ -20,21 +20,37 @@
 @stop
 @section('content')
 <!--Header-->
-<div class="header-wrap animated d-flex border-bottom" style="position: fixed; background-color:#fff; position:fixed; z-index:2; width:100%;">
-    <div class="container-fluid" style="width:100%; padding:25px;">
-        <a href="#" style="margin: auto; margin-top:50px;">
-            <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110">
-        </a>
-        <div class="site-cart"> 
-            <p style="text-align: right; margin-top:25px;"><a href="#" class="site-header__cart" title="Cart">
-                <i class="icon anm anm-bag-l"></i>
-                <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
-            </a></p>
+<div class="header-wrap animated d-flex border-bottom">
+    <div class="container-fluid" style="position: fixed; z-index:10; background-color:#fff;">
+        <div class="row align-items-center">
+            <!--Desktop Logo-->
+            <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
+                <a href="#">
+                    <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                </a>
+            </div>
+            <!--End Desktop Logo-->
+            <!--Mobile Logo-->
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6 d-block d-lg-none mobile-logo">
+                <div class="logo">
+                    <a href="{{route('web.home')}}">
+                        <img src="https://res.cloudinary.com/dzujz2mkt/image/upload/v1688378123/maiyee.png" height="55" width="110" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
+                    </a>
+                </div>
+            </div>
+            <!--Mobile Logo-->
+            <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="site-cart">
+                    <a href="#" class="site-header__cart" title="Cart" style="text-align: right"><i class="icon anm anm-bag-l"></i>
+                        <span id="CartCount" class="site-header__cart-count" data-cart-render="item_count"></span>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <!--End Header-->
-<div class="slideshow slideshow-wrapper pb-section">
+<div class="slideshow slideshow-wrapper pb-section" style="margin-top: 100px">
    <div class="home-slideshow">
       @foreach($banner as $banners)
       <div class="slide">
