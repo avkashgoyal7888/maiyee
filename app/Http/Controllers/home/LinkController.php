@@ -63,7 +63,7 @@ class LinkController extends Controller
     public function storeSelectedProducts(Request $request)
     {
         $val = Validator::make($request->all(), [
-            'selected_products' => 'array|min:30|max:45',
+            'selected_products' => 'array|min:3|max:45',
             'selected_products.*' => 'exists:link_products,id',
         ],[
             'selected_products.min' => 'Please select at least 30 products.',
@@ -173,30 +173,40 @@ class LinkController extends Controller
             session()->flush();
             $d = $data->name;
             $n = $data->number;
-            $url = "https://www.fast2sms.com/dev/dlt?authorization=4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ&sender_id=EDUSEM&message=" . urlencode(158854) . "&route=dlt&numbers=" . urlencode($n) . "&&variables_values=" . urlencode("$d");
+           $fields = array(
+    "sender_id" => "EDUSEM",
+    "message" => "158854",
+    "variables_values" => $d,
+    "route" => "dlt",
+    "numbers" => $n,
+);
 
-                $curl = curl_init();
+$curl = curl_init();
 
-                curl_setopt_array($curl, array(
-                    CURLOPT_URL => $url,
-                    CURLOPT_RETURNTRANSFER => true,
-                    CURLOPT_ENCODING => "",
-                    CURLOPT_MAXREDIRS => 10,
-                    CURLOPT_TIMEOUT => 30,
-                    CURLOPT_SSL_VERIFYHOST => 0,
-                    CURLOPT_SSL_VERIFYPEER => 0,
-                    CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                    CURLOPT_CUSTOMREQUEST => "GET",
-                    CURLOPT_HTTPHEADER => array(
-                        "cache-control: no-cache"
-                    ),
-                )
-                );
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://www.fast2sms.com/dev/bulkV2",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_SSL_VERIFYHOST => 0,
+  CURLOPT_SSL_VERIFYPEER => 0,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "POST",
+  CURLOPT_POSTFIELDS => json_encode($fields),
+  CURLOPT_HTTPHEADER => array(
+    "authorization: 4OTtNOKY3Sh7bZb20tc4wfQmNUj7GQqkpHUl7khxmo9whfuGjHYb6aGEekLJ",
+    "accept: */*",
+    "cache-control: no-cache",
+    "content-type: application/json"
+  ),
+));
 
-                $response = curl_exec($curl);
-                $err = curl_error($curl);
+$response = curl_exec($curl);
+$err = curl_error($curl);
 
-                curl_close($curl);
+
+curl_close($curl);
             return response()->json(['status' => true, 'msg' => 'Order successfully Placed...']);
         } else {
             return response()->json(['status' => false, 'msg' => 'Something went wrong. Please try again later.']); 
